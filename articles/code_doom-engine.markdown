@@ -8,11 +8,13 @@ category: pages
 
 id Software have released most of their game's core engine code under the GPL. This provides a great opportunity to take a look at how things were done 'back in the day' - even though I'm sure some concepts still apply today. I have cherry-picked a few areas of interest.
 
-Fixed-point arithmetic
+#### Fixed-point arithmetic ####
 
 Back in day (he says) it seems floating point operations weren't terribly efficient and it was much faster to use integers (so I'm told). To get around those limitations, developers came up with the concept of fixed-point arithmetic. Instead of having, say, a 32bit int representing an integer, it was divided in x.y parts with x representing the integer portion and y the floating one. Doom used a 16.16 format. So that meant having an integer range of +/- 32767/8 respectively (2^15 + 1 bit for sign), and floating point accuracy of 1/65536 (~0.000015).
 
 So let's take the signed 16.16 case and how it might work in practice:
+
+{% highlight c %}
 
     #include <stdio.h>
     
@@ -37,7 +39,8 @@ So let's take the signed 16.16 case and how it might work in practice:
       printf("integer part:%d \t\n", k >> 16);
       printf("floating part:%u \t\n", k & 0x0000ffff);
     }
-    
+{% endhighlight %}    
+
     ...
     hexadecimal:80010000 
     unsigned int:2147549184 
@@ -47,6 +50,7 @@ So let's take the signed 16.16 case and how it might work in practice:
 
 Let's lump the above into some macros instead and *write some tests*!
 
+{% highlight c %}
     #include <stdio.h>
     #include <assert.h>
     
@@ -82,6 +86,7 @@ Let's lump the above into some macros instead and *write some tests*!
     
       return 0;
     }
+{% endhighlight %}    
 
 Quick note: if you're having issues with macros, try compiling using `gcc -save-temps` and look at the .i file generated - it will show you how macros have been replaced in your code.
 
@@ -89,6 +94,7 @@ Now that we're satisfied the macros work as expected, we can take a look at oper
 
 Providing we're dealing with the same fixed point format (eg, 16.16 vs 16.16), addition and subtraction work as expected:
 
+{% highlight c %}
     fixed_t a1 = FLOAT_TO_FP(100.123) - FLOAT_TO_FP(0.123);
     fixed_t a2 = FLOAT_TO_FP(100.123) + FLOAT_TO_FP(-0.123);
   
@@ -96,6 +102,7 @@ Providing we're dealing with the same fixed point format (eg, 16.16 vs 16.16), a
     assert( 0.00016 > FP_DECIMAL(a1) );
     assert( 100 == FP_INTEGER(a2) );
     assert( 0.00016 > FP_DECIMAL(a2) );
+{% endhighlight %}    
 
 Again, note the loss of precision - this is because the fractional part is not a multiple of 2^n - if we used 100.128 instead, we'd see what we expect.
 
