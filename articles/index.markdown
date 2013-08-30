@@ -10,7 +10,8 @@ I often find trying to explain a topic is one of the best way to learn about it.
 
 I primarily code in Python. It's fun, readable, and the possibilities are endless!
 
-  - [`with` statement](code_python-with.html)
+*   [`with` statement](code_python-with.html)
+*   [debugging from the interpreter](code_python-debug.html)
 
 ### Misc ###
 
