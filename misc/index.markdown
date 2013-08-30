@@ -4,7 +4,7 @@ title: misc
 category: pages
 ---
 
-### ICNA Notes ###
+### CCNA Notes ###
 
 I am thinking about taking the CCNA exam so I started drawing up some notes. Here are some of my notes/mindmaps:
 
