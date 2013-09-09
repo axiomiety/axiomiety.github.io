@@ -38,16 +38,28 @@ A vault has now been created in the region specified - but we now need to set up
 *   Under 'Access Keys', press the 'Create access keys' button
 *   Download your access keys
 
-At this point it's probably worth putting those on paper. This is the only opportunity you have to view your keys and once lost, you will be locked out of your domain.
+At this point it's probably worth putting those on paper. This is the only opportunity you have to view your keys.
 
 This conclude setting things up - we now have all the tools we need to start using the `boto` module.
 TODO: look into MFA (multi factor auth)
 TODO: look into SNS, as they can be delivered over a variety of protocols (including email)
 TODO: look into root account/multiple users
 
-
 ### Using `boto` ###
 
 {% highlight python %}
+>>> import boto
+>>> AWSAccessKeyId='your_key_id'
+>>> AWSSecretKey='your_secret_key'
+>>> glacier = boto.connect_glacier(aws_access_key_id=AWSAccessKeyId, aws_secret_access_key=AWSSecretKey, region_name='eu-west-1')
+>>> vault = glacier.get_vault('my_vault')
+>>> archive_id = vault.upload_archive('/path/to/archive', description='something useful')
 {% endhighlight %}
 
+The upload will block until complete, and will return the archive id. Amazon expects us to keep those safe, so do. I tend to keep it along some extra pieces of information (like md5sum) in a Dropbox folder.
+
+TODO: that's raw. add content.
+
+### Wrapper ###
+
+I wrote a very rough wrapper for the above but it's still very much work in progress. I have only used it to upload files.
