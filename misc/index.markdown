@@ -4,9 +4,9 @@ title: misc
 category: pages
 ---
 
-### CCNA Notes ###
+### CENT/CCNA Notes ###
 
-I am thinking about taking the CCNA exam so I started drawing up some notes. Here are some of my notes/mindmaps:
+I am thinking about taking the CENT/CCNA exam so I started drawing up some notes. Here are some of my notes/mindmaps:
 
  * <a href="http://www.mindmup.com/map/a198cf0740db7f0130957a7a2d07b81bd2" data-role="mindmup-embed" title="Ethernet LANs" data-width="90%" data-height="500" data-style="border:1px solid black;margin-bottom:5px;">Ethernet LANs</a>
   
@@ -26,7 +26,7 @@ I am looking at adding an exit point in North America and potentially one in Fra
 
 ### Matasano Crypto Challenge ###
 
-Currently on set 3 - finished the 17th problem. The terms of the challenge prohibit me from sharing solutions/doing write-ups but I'd like to expand on some of the topics covered at some point. Take a look at `crypto_utils` in my [crashburn repo](http://www.github.com/axiomiety)
+Currently on set 3 - finished the 17th problem. The terms of the challenge prohibit me from sharing solutions/doing write-ups but I'd like to expand on some of the topics covered at some point. Take a look at [`crypto_utils` in my crashburn repo](https://github.com/axiomiety/crashburn/blob/master/crypto_utils.py).
 
 ### Code ###
 

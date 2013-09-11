@@ -41,9 +41,11 @@ A vault has now been created in the region specified - but we now need to set up
 At this point it's probably worth putting those on paper. This is the only opportunity you have to view your keys.
 
 This conclude setting things up - we now have all the tools we need to start using the `boto` module.
-TODO: look into MFA (multi factor auth)
-TODO: look into SNS, as they can be delivered over a variety of protocols (including email)
-TODO: look into root account/multiple users
+
+TODO:
+*   look into MFA (multi factor auth)
+*   look into SNS, as they can be delivered over a variety of protocols (including email)
+*   look into root account/multiple users
 
 ### Using `boto` ###
 
@@ -62,4 +64,4 @@ TODO: that's raw. add content.
 
 ### Wrapper ###
 
-I wrote a very rough wrapper for the above but it's still very much work in progress. I have only used it to upload files.
+I'm in the process of writing a wrapper to abstract some of the record-keeping (`boto` makes the communication with Glacier dead easy - it's already abstracted). You can find the [work in progress here](https://github.com/axiomiety/crashburn/blob/master/glacier_wrapper.py).
