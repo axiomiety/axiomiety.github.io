@@ -14,7 +14,7 @@ Most home users have a lot of static files - things like music, little Tommy's 1
 
 *   `archive`: a block of data (a single file, a zip/tar archive, anything)
 *   `vault`: a logical container for `archives` (such that each `archive` belongs to a `vault`
-*   `job`: a action, often asynchronous
+*   `job`: an action, often asynchronous
 
 It's worth noting you can have as many achives as you want per `vault`, but the number of `vaults` is limited to 1,000 (though this can be increased, but you've got to get in touch with Amazon).
 
