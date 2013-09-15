@@ -10,27 +10,26 @@ When I started looking at financial products, the FX Forward was one of those bu
 
 ### Forward Rate ###
 
-The formula for an forward exchange rate is pretty simple
-\\[ F = S\frac{1+r_d}{1+r_f} \\]
+For simplicity, let's assume we're trying to lock in the exchange rate between USD and JPY one year for now. Now each currency has a risk-free one year rate which we denote $$r_{usd}$$ and $$r_{jpy}$$ respectively. 
+ 
+So if we put away a certain amount of dollars for one year, at the end we will get $$\text{USD}(1+r_{usd})=\text{USD'}$$. If we now put an equivalent amount of yen away today, in one year we will get $$\text{JPY}(1+r_{jpy})=\text{JPY'}$$. Under no arbitrage (ie, no free money), as the amounts were equivalent at the start, they must also be equivalent at the end. Let us define $$S_t=\frac{\text{USD}}{\text{JPY}}$$ as today's exchange rate between dollars and yen, and the forward exchange rate (one year from now) *decided today* as $$F_t=\frac{\text{USD'}}{\text{JPY'}}$$.
 
-Where F is the forward exchange rate, S the spot one
+Substituting for USD' and JPY', we have:
 
-Imagine you have a certain amount of cash in USD and that the risk-free interest rate for USD is \\(r_d\\). In other words if you were to put the cash in a savings account, at the end of one year you'd have \\(USD(1+r_d)=USD'\\). Now assume with have an equivalent amount in JPY, and that the interest rate for that currency is \\(r_f\\). At the end of one year we'd have \\(JPY(1+r_f)=JPY'\\).
+$$F_t=\frac{\text{USD}(1+r_{usd})}{\text{JPY}(1+r_{jpy})}$$
 
-We generally assume there is no arbitrage opportunity - that is you can't make 'free' money. If you could buy an item for $100 and immediately sell it for $110, you would have found a way to make $10 risk-free. But whoever was selling you the item for $100 would quickly become suspicious and start increasing his sale price until it reaches equilibrium $110. It's similar with interest rate. If the risk-free rate for USD was higher than that for JPY and the exchange rate didn't reflect that, you'd have arbitrage.
+Now we know that $$S_t=\frac{\text{USD}}{\text{JPY}}$$ so $$\text{USD}=S_t\text{JPY}$$. Plugging this in for USD,
 
-Going back to our example, at the end of year one we have USD' on one hand and JPY' on the other. In this no-arbitrage world, it means those two amounts must be equal. So we have that \\(USD'=S_TJPY'\\) - that is, the USD' is equal to the JPY' amount times the exchange rate for 1 year from now (also known as the forward rate). So substituting in the above:
+$$F_t=\frac{S_t\text{JPY}}{\text{JPY}}\frac{(1+r_{usd})}{(1+r_{jpy})}$$
 
-\\[ USD(1+r_{usd})=S_fJPY(1+r_{jpy}) \\]
+$$F_t=S_t\frac{(1+r_{usd})}{(1+r_{jpy})}$$
 
-\\[ \frac{USD(1+r_{usd})}{JPY(1+r_{jpy})} \\]
+We can take it one step further and generalise for the continuous case and any time period:
 
-But \\(\frac{USD}{JPY}\\) is nothing more than today's exchange rate, which we denote by \\(S_0\\). Re-arranging, we get:
+$$S_t\frac{e^{r_{usd}T}}{e^{r_{jpy}T}}=F_t$$
 
-\\[ S_0\frac{1+r_{usd}}{1+r_{jpy}}=S_T \\]
+$$S_te^{(r_{usd}-r_{jpy})T}=F_t$$
 
-Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
-\\[ \frac{1_a}{n^{2}} \\]
+This is the equation you'll find in many sources but hopefully it will no longer appear to have been plucked out of thin air.
 
-but:
-\\[ \frac{r_{usd}}{n^{2}r^{jpy}} \\]
+I am indebted to Lucy Park for providing the [snippet](http://www.lucypark.kr/blog/2013/02/25/mathjax-kramdown-and-octopress/) that makes Latex play nice with github pages & markdown.
