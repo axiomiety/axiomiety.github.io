@@ -8,7 +8,7 @@ category: pages
 
 The first time I used 'with', I didn't think twice about it. It seemed like such a natural thing to do. But curiosity got the better of me and I had to look it up. Python does a great job at providing powerful idioms, but makes it just as easy to look under the covers.
 
-If you're familiar with python, you probably came across the with statement when dealing with files:
+If you're familiar with python, you probably came across the `with` statement when dealing with files:
 
 {% highlight python %}
     with open('some_file', 'r') as f:
@@ -56,4 +56,50 @@ Which will print:
 
 Now how cool is that?
 
-Todo: find the source for open - somewhere like http://hg.python.org/cpython/file/c6880edaf6f3/Modules/_io/fileio.c
+But just to show there's no magic happening, you can replicate the above like such:
+
+{% highlight python %}
+    >>> import reverso
+    >>> tm = reverso.ThingyMajig()
+    >>> print tm
+    m-a-j-i-g
+    >>> r = reverso.Reverso()
+    >>> r.__enter__()
+    >>> print tm
+    g-i-j-a-m
+    >>> import sys
+    >>> r.__exit__(*sys.exc_info())
+    >>> print tm
+    m-a-j-i-g
+{% endhighlight %}
+
+Which really is nothing more than how `with` works.
+
+As a quick aside, it's also worth quickly looking at the `contextlib` library, which allows you to essentially add a decorator to a function to make 'with-able'. It goes like this:
+
+{% highlight python %}
+    from contextlib import contextmanager
+    @contextmanager
+    def clear_path():
+      orig = sys.path
+      sys.path = []
+      yield
+      sys.path = orig
+{% endhighlight %}
+
+Which runs like such:
+
+{% highlight python %}
+    >>> print len(sys.path)
+    11
+    >>> with reverso.clear_path():
+    ...     print len(sys.path)
+    ... 
+    0
+    >>> print len(sys.path)
+    11
+{% endhighlight %}
+
+This is particularly handy when you want to switch the context in which you might execute some code. Neat heh?
+
+TODO: find the source for open - somewhere like http://hg.python.org/cpython/file/c6880edaf6f3/Modules/_io/fileio.c

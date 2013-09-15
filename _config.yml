@@ -1,2 +1,3 @@
 destination:  /var/tmp/axiomiety.github.io
 pygments:     true
+markdown:     kramdown
