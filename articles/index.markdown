@@ -13,9 +13,9 @@ I primarily code in Python. It's fun, readable, and the possibilities are endles
 *   [`with` statement](code_python-with.html)
 *   [debugging from the interpreter](code_python-debug.html)
 
-### Misc ###
+### Tech ###
 
-Random stuff I found of interest.
+Random tech-related stuff I found of interest.
 
 *   [Doom Engine](code_doom-engine.html):
     I first came across those while scanning through the source code for [doom](http://www.github.com/id). It highlights some of the technical limitations at the time, and how people got around them.
@@ -24,6 +24,6 @@ Random stuff I found of interest.
 
 ### Finance ###
 
-I currently work in the Finance industry and here are some notes on some (semi) random topics.
+I currently work in the Finance Industry and here are some rough bits and pieces.
 
 *   [FX Forward](finance_fx-forward.html)
