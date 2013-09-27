@@ -8,6 +8,8 @@ category: pages
 
 Source available [here](https://github.com/axiomiety/crashburn/blob/master/snake_js.html), explanations to follow!
 
+The game is also available [here](snake_js.html)
+
 {% highlight javascript %}
 ut.grid_coordinate_to_cartesian = function (g) { 
         col = Math.floor(g/ut.grid_width); 
