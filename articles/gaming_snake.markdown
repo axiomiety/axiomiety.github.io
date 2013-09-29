@@ -4,8 +4,6 @@ title: articles/gaming-snake
 category: pages
 ---
 
-__IN PROGRESS__
-
 I've been writing software for years but it always bugged me I never wrote a game. So this was me rectifying that.
 
 __Disclaimer__: Prior to this I hadn't written any javascript. While I did make an effort to make the code clean and easy to read, let's just say it can most certainly be improved.
