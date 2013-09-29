@@ -37,7 +37,19 @@ That is, my world is a single-dimensional array. Walls would occupy coordiates 0
     for (var i = 0; i <= Utils.grid_width; i++) { walls.push(Utils.grid_length-i); };
 {% endhighlight %}
 
-If you think of the player as occupying a single coordinate, it also makes it easy to determine collisions. It's just a case of checking if the player's position matches that of the walls (later we'll expand to check the tail coordinates too).
+If you think of the player as occupying a single coordinate, it also makes it easy to determine collisions. It's just a case of checking if the player's position matches that of the walls (later we'll expand to check the tail coordinates too). It also makes it really easy to move the player from one direction to another. Indeed, left/right are -1/+1 and up/down are -/+ the grid width (6 in the example above). With this out of the way, let's look at the game loop.
+
+Now this new coordinate system is all easy and simple to use, but it won't help us much when it comes to drawing shapes on a cartesian graph. To help this process, I have a small utility function which does just that:
+
+{% highlight javascript %}
+      ut.grid_coordinate_to_cartesian = function (g) {
+        col = Math.floor(g/ut.grid_width);
+        row = g % ut.grid_width;
+        return {x: row*CONSTS.grid_square_width, y: col*CONSTS.grid_square_width};
+      };
+{% endhighlight %}
+
+In a nutshell, the x coordinate is obtained by finding out how far along the width we are. This is achieved using the modulo operator. For the y coordinate we see check how many full widths fit our current coordinate. We finish off my multiplying this by the width of the grid's square width (remember that our grid is made out of identical and adjacent unit squares).
 
 ### Game loop ###
 
@@ -49,7 +61,7 @@ For Snake, updating the game state essentially means:
    * Check if we've just eaten an apple (and increase the tail length accordingly)
    * Check for collisions and end the game if there's one
 
-In javascript it's like this:
+In code it's like this:
 
 {% highlight javascript %}
       update: function() {
@@ -88,7 +100,6 @@ With this in mind, this is what an iteration (frame?) of the game looks like:
 
 {% highlight javascript %}
     function game_iteration() {
-      player.update();
       canvas.clearRect(0, 0, CONSTS.canvas_width, CONSTS.canvas_height);
       draw_walls();
       if (apple == null) {
@@ -100,11 +111,16 @@ With this in mind, this is what an iteration (frame?) of the game looks like:
       }
       apple.draw();
       player.draw();
+      player.update();
     }
 {% endhighlight %}
 
+You'll note that for every frame we clear the entire screen. That's rather heavy handed and we could clear out the last tail position instead - but it's simple and it works.
+
+And this gets repeated for ever until the player collides with an object. Game. On.
+
 ### References  ###
 
-Source available [here](https://github.com/axiomiety/crashburn/blob/master/snake_js.html), explanations to follow!
+Source available [here](https://github.com/axiomiety/crashburn/blob/master/snake_js.html), with comments.
 
 The game is also available [here](snake_js.html).
