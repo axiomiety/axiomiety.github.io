@@ -22,10 +22,10 @@ Random tech-related stuff I found of interest.
 *   [AWS Glacier](proj_aws-glacier.html):
     A quick introduction to Amazon's Glacier service.
 *   [Snake in JS](gaming_snake.html):
-    __In progress__ A quick introduction to the 'gaming loop' by building a snake clone using JavaScript
+    A quick introduction to the critical 'gaming loop' by building a snake clone using JavaScript
 
 ### Finance ###
 
-I currently work in the Finance Industry and here are some rough bits and pieces.
+Some bits and pieces - mainly due to people asking me and not being able to give them a satisfying answer.
 
 *   [FX Forward](finance_fx-forward.html)
