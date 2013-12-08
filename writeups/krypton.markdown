@@ -48,6 +48,12 @@ Obtaining such a key is straight-forward. Applying the key in reverse order on t
 
 Just when I thought we were done with polyalphabetic ciphers, here comes another. This time the length of the key is unknown - and so is the cipher.
 
+So I finally came back to this months later. I ended up looking for the index of coincidence. The suggested key length was 9 - and then it became a case of decrypting BELOSZ against likely keys. It was a *pain* and took much more manual work than anticipated but it's finally done.
+
+This is clearly a stub. I'll need to get this written up properly and clean up my code.
+
+## Level 6 ##
+
 ### TAKEAWAY NOTES ###
 
-Stuck. It doesn't look to be a Vigenere cipher. Doing FA leads to nothing - even when trying all combinations of the 2 or 3 highest ranking letters for various lengths. Will need to write up some more, and probably start looking for things like repeated patterns etc...
+Build tooking from the ground up. It really helps...

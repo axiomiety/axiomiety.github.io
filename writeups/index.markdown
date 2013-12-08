@@ -10,20 +10,20 @@ I'm a big fan of wargames - they always strike me as a great way to build up kno
 
 OverTheWire provides a variety of wargames for all abilities. They are listed here in alphabetical order, not in order of difficulty.
 
-  - [Bandit](bandit.html)
-    An introduction to wargames with a very flat learning curve.
+[Bandit](bandit.html)
+An introduction to wargames with a very flat learning curve.
 
-  - [Krypton](krypton.html)
-    Crypto-based wargame
+[Krypton](krypton.html)
+Crypto-based wargame
 
-  - [Leviathan](leviathan.html)
-    Reverse engineering - mainly using `gdb`
+[Leviathan](leviathan.html)
+Reverse engineering - mainly using `gdb`
 
-  - [Natas](natas.html)
-    Web-based wargame
+[Natas](natas.html)
+Web-based wargame
 
-  - [Semtex](semtex.html)
-    A mixed bag. Hard
+[Semtex](semtex.html)
+A mixed bag. Hard
 
-  - [Vortex](vortex.html)
-    Another mixed bag. Harder
+[Vortex](vortex.html)
+Another mixed bag. Harder
