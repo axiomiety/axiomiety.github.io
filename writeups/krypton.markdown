@@ -4,6 +4,8 @@ title: writeups/krypton
 category: pages
 ---
 
+[overthewire / krypton](http://www.overthewire.org/wargames/krypton/)
+
 ## Level 0 ##
 
 Straight-forward - the string 'S1JZUFRPTklTR1JFQVQ=' has been encoded in base 64. For the eager ones, just head to http://www.base64decode.org/ and decode it and connect to the krypton box as krypton1.

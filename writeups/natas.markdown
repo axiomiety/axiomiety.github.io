@@ -4,6 +4,8 @@ title: writeups/natas
 category: pages
 ---
 
+[overthewire / natas](http://www.overthewire.org/wargames/natas/)
+
 ## Level 0 ##
 
 View source

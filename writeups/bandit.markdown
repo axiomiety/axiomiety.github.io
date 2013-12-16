@@ -3,6 +3,9 @@ layout: default
 title: writeups/bandit
 category: pages
 ---
+
+[overthewire / bandit](http://www.overthewire.org/wargames/bandit/)
+
 When I first took a look at bandit, I thought it'd be too easy. But I didn't want to miss out on the opportunity to (re)learn a thing or two, so there it is.
 
 ## Level 0 ##

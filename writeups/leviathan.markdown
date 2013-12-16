@@ -4,6 +4,8 @@ title: writeups/leviathan
 category: pages
 ---
 
+[overthewire / leviathan](http://www.overthewire.org/wargames/leviathan/)
+
 Those write-ups don't assume much, if any, prior knowledge (I certainly didn't have much to go on when I started leviathan). So if gdb and assembly is something you're familiar with, there's much you can skip.
 
 ## Level 0 ##

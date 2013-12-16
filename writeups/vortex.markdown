@@ -4,6 +4,8 @@ title: writeups/vortex
 category: pages
 ---
 
+[overthewire / vortex](http://www.overthewire.org/wargames/vortex/)
+
 ## Level 0 ##
 
 The aim of level 0 is to add up 4 unsigned ints recv'ed by the server, send the total, and read back the credentials for level 1. Fairly straight forward, though I did get caught out by the uint32 overflow (the server expects an unsigned int back, even if the sum overflows).
