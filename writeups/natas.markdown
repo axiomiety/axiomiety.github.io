@@ -98,3 +98,17 @@ The answer lies in what extensions mean not to your browser, but to the web serv
 What we're provided with is essentially a way to store, and execute, code on the server. By crafting a simple file containing `<? system('cat /etc/natas_webpass/natas13') ?>` we can get the server to execute this for us, and show us what the password for the next level
 
 ## Level 13 ##
+
+This is very similar to the previous level. However we see that before copying the file to `target`, the code uses `exif_imagetype` to validate the file is a picture. A quick look on the [php doc](http://www.php.net/manual/en/function.exif-imagetype.php) for this function tells us it only checks the header. So all we need to do is to make sure our file can mascarade as a picture. There are a variety of picture formats, but I picked GIF. A quick search reveals the required [header](http://www.matthewflickinger.com/lab/whatsinagif/bits_and_bytes.asp). A file with `GIF89a <? system('cat /etc/natas_webpass/natas14') ?>` does the trick.
+
+## Level 14 ##
+
+SQL injection at last! This is pretty straight forward. The sql being run is defined as:
+
+    $query = "SELECT * from users where username=\"".$_REQUEST["username"]."\" and password=\"".$_REQUEST["password"]."\"";
+
+User input is passed straight in. Putting `" or "1"="1` forces the statement to always be true and yields the required result.
+
+## Level 15 ##
+
+
