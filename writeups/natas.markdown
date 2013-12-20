@@ -89,3 +89,12 @@ For Step 2, we simply need to save the following by using `qw8J` instead of `<ce
     ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
 
 in the data section of the natas11 cookie. Refreshing the natas11 landing page shows the password
+
+## Level 12 ##
+
+This level is about seeing the forest from the trees. Viewing the source, there's a lot in there that's irrelevant. It's easy to get hung up on the random string generation (that's what I did). Taking a step back, we see that the only input we can control is just the extension (we can tamper with the POST data). However there doesn't seem to be much we can do with that - it's not passed to `eval` or anything. So how does this benefit us? 
+
+The answer lies in what extensions mean not to your browser, but to the web server. When I used to set mess around with Apache years back, I remember associating extensions to certain processors - like cgi, php, ...
+What we're provided with is essentially a way to store, and execute, code on the server. By crafting a simple file containing `<? system('cat /etc/natas_webpass/natas13') ?>` we can get the server to execute this for us, and show us what the password for the next level
+
+## Level 13 ##
