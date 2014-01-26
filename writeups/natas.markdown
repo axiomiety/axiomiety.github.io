@@ -65,12 +65,27 @@ That one is more interesting. The source gives us a hint by saying Google won't 
 
 ## Level 4 ##
 
+Hint 1:
+<span class="spoiler">
+What does our browser send to make the server thing we are coming from the wrong page?
+</span>
+
+Hint 2:
+<span class="spoiler">
+Check out the 'Referer' tag in the headers
+</span>
+
 {::options parse_block_html="true" /}
 <div class="writeup">
 The landing page for this level tells us we are being referred from the wrong page (natas4 instead of natas5). But we do not have access to natas5 yet. What index.php is doing is checking the Referer tag in the headers. This can easily be tweaked by using the 'Modify Headers' addon for Firefox. Just set the 'Referer' tag to http://natas5.natas.labs.overthewire.org, start the addon and refresh the page. It will now give us the next password.
 </div>
 
 ## Level 5 ##
+
+Hint 1:
+<span class="spoiler">
+What do you feed the cookie monster?
+</span>
 
 {::options parse_block_html="true" /}
 <div class="writeup">
@@ -93,12 +108,22 @@ So we're looking for the value of $secret. By accessing the [include file](http:
 
 ## Level 7 ##
 
+Hint 1:
+<span class="spoiler">
+Notice anything different about the url?
+</span>
+
 {::options parse_block_html="true" /}
 <div class="writeup">
 The hint in the page's source tells us the password is located in /etc/natas_webpass/natas8. We also see the index.php page takes an argument referencing a section (home, about), which could well be a path on the file system. And indeed referencing the [password file](http://natas7.natas.labs.overthewire.org/index.php?page=/etc/natas_webpass/natas8) above gets us in.
 </div>
 
 ## Level 8 ##
+
+Hint 1:
+<span class="spoiler">
+List out the steps taken to transform the user input, and reverse them
+</span>
 
 {::options parse_block_html="true" /}
 <div class="writeup">
@@ -126,6 +151,11 @@ Very similar to the previous level. However this time characters like ';' and '&
 </div>
 
 ## Level 11 ##
+
+Hint 1:
+<span class="spoiler">
+XOR encryption is symmetric - such that (Plaintext) XOR (Ciphertext) = (Key)
+</span>
 
 {::options parse_block_html="true" /}
 <div class="writeup">
@@ -157,6 +187,16 @@ in the data section of the natas11 cookie. Refreshing the natas11 landing page s
 
 ## Level 12 ##
 
+Hint 1:
+<span class="spoiler">
+The answer is not in your browser, but on the server
+</span>
+
+Hint 2:
+<span class="spoiler">
+Think about how the web server will interpret files of various extensions
+</span>
+
 {::options parse_block_html="true" /}
 <div class="writeup">
 This level is about seeing the forest from the trees. Viewing the source, there's a lot in there that's irrelevant. It's easy to get hung up on the random string generation (that's what I did). Taking a step back, we see that the only input we can control is just the extension (we can tamper with the POST data). However there doesn't seem to be much we can do with that - it's not passed to `eval` or anything. So how does this benefit us? 
@@ -166,6 +206,11 @@ What we're provided with is essentially a way to store, and execute, code on the
 </div>
 
 ## Level 13 ##
+
+Hint 1:
+<span class="spoiler">
+Forget file extensions - think headers
+</span>
 
 {::options parse_block_html="true" /}
 <div class="writeup">
@@ -184,6 +229,16 @@ User input is passed straight in. Putting `" or "1"="1` forces the statement to 
 </div>
 
 ## Level 15 ##
+
+Hint 1:
+<span class="spoiler">
+This is like a binary switch that tells you whether your statement executed successfully or not
+</span>
+
+Hint 2:
+<span class="spoiler">
+When in doubt, use brute force
+</span>
 
 {::options parse_block_html="true" /}
 <div class="writeup">
@@ -256,10 +311,14 @@ Hint 1:
 </span>
 
 Hint 2:
-<span class="spoiler">This is called a Blind SQL injection</span>
+<span class="spoiler">
+Look up blind SQL injection
+</span>
 
 Hint 3:
-<span class="spoiler">Insert a statement that, if the previous leg of the and statement is true, will delay the response from coming back</span>
+<span class="spoiler">
+Insert a statement that, if the previous leg of the and statement is true, will delay the response from coming back
+</span>
 
 {::options parse_block_html="true" /}
 <div class="writeup">
