@@ -6,11 +6,16 @@ category: pages
 
 [overthewire / krypton](http://www.overthewire.org/wargames/krypton/)
 
+<a href="#" onclick="toggle_writeups();">Toggle writeups (hints will remain)</a>
+
 ## Level 0 ##
 
 We need to open a connection to the given host:port (for your current architecture) - and discard every second byte. That's about 10 lines of python (see semtex0.py in /otw/scratch).
 
 ## Level 1 ##
+
+{::options parse_block_html="true" /}
+<div class="writeup">
 I wish I could say there was some consistent approach but it was a lot of trial and error. Using the `-v` flag I noticed the chain is always 100 repetitions long. And that by changing a single letter in the plaintext, a single letter in the ciphertext changed. However the position at which it changed differed depending on the length of the input. And clearly the encryption wasn't symmetric (encrypting the resulting ciphertext did not yield the plaintext - had to try...).first
 
 I then tried encrypting a string of 10 characters composed of the same letter ('AAAAAAAAAA'). Using the verbose input, some sort of pattern emerged. The chain was repeated every 10 blocks, with the ciphertext/plaintext following one another. And if encrypted the corresponding ciphertext ('AZZZYYXWVT'), the verbose output would display the plaintext periodically. And somehow the intermediary results (`-v`) seemed to match. That's when it struck me that it might simply be some sort of iterative process.
@@ -25,9 +30,22 @@ However for the length of the given encrypted text (13 chars), it was harder to 
     364:AAAAAAAAAAAAA
 
 Trying with different plaintexts always led to those being repeated on the same line (520 = 26\*20 - an educated guess as to the maximum number of iterations needed before the plaintext shows itself in the chain). Repeating the procedure above with a='HRXDZNWEAWWCP' and grabbing line 364 of the output gave me the required result.
+</div>
 
 ## Level 2 ##
 
+Hint 1:
+<span class="spoiler" tabindex="0">
+There's a very useful environment variable called LD_PRELOAD
+</span>
+
+Hint 2:
+<span class="spoiler" tabindex="0">
+getuid32 is not a 64bit call
+</span>
+
+{::options parse_block_html="true" /}
+<div class="writeup">
 It looks like we need to change our EUID to 666. A quick look at `semtex2` through `strace`:
 
     munmap(0xf7fd8000, 20942)               = 0
@@ -59,9 +77,17 @@ One thing to note however (which delayed me for a while) is that this is a *32bi
     export LD_PRELOAD=/var/tmp/ss2.so; ./semtex2
 
 And voila.
+</div>
 
 ## Level 3 ##
 
+Hint 1:
+<span class="spoiler" tabindex="0">
+Don't think code - think simultaneous equations
+</span>
+
+{::options parse_block_html="true" /}
+<div class="writeup">
 Right - not so much a wargame as much as a maths one (or something you might get in some annoying RPG). Pressing 1-8 changes locks L1-L5 by a particular amount:
 
     #| L1| L2|L3|L4| L5
@@ -84,5 +110,6 @@ We notice some somehow be added to either negate or magnify some changes. For in
     5*a+ 5*b -4*c-13*d+24*e+14*f+ 3*g- 7*h=100
 
 and online simultaneous equations solvers didn't yield much. So instead I wrote a quick brute force solver under certain assumptions (eg, each lock needs to be activated at most 9 times). It's not efficient at all but it took me 2mns to write and got me a solution while I was making a cup of tea, so time well spent. Head over to `otw/scratch` for the source (I should note the solver gives the number of times each lock should be activated).
+</div>
 
 ## Level 4 ##

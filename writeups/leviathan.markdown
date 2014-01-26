@@ -6,6 +6,8 @@ category: pages
 
 [overthewire / leviathan](http://www.overthewire.org/wargames/leviathan/)
 
+<a href="#" onclick="toggle_writeups();">Toggle writeups (hints will remain)</a>
+
 Those write-ups don't assume much, if any, prior knowledge (I certainly didn't have much to go on when I started leviathan). So if gdb and assembly is something you're familiar with, there's much you can skip.
 
 ## Level 0 ##
@@ -14,13 +16,18 @@ Bootstrap
 
 ## Level 1 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 Now that's interesting! In the other wargames (certainly bandit/krypton/vortex) each level is accompanied with some sort of description - a hint of sorts to put you in the right direction. No such luck here! We lend in a seemingly empty directory.
 A quick 'ls -l' shows a .backup directory, containing a file called bookmarks.html. A quick look through the file reveals a whole bunch of links - too many to sort through manually. Thankfully a search for leviathan reveals the password to the next level.
 
 TODO: take a closer look at the bookmarks - there might be something interesting!
+</div>
 
 ## Level 2 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 Another 'no info' level - somehow I think this will be the norm from now on : ) We're given a binary called 'check', which asks for password. Giving the wrong password terminates the program - but there are no hints as to what the passwords might be. Passing the binary through 'strings' doesn't reveal much either. Strace is equally silent. But ltrace (library trace) opens the door for us:
 
     leviathan1@melissa:~$ ltrace ./check 
@@ -41,9 +48,12 @@ So it compares the first 3 characters to the word 'sex'. And sure enough:
     password: sex
     $ id
     uid=12001(leviathan1) gid=12001(leviathan1) euid=12002(leviathan2) groups=12002(leviathan2),12001(leviathan1)
+</div>
     
 ## Level 3 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 We are given a single binary that seemingly prints a file. Looking at the attributes, it's privilege escalation:
 
     leviathan2@melissa:~$ ls -l
@@ -71,9 +81,12 @@ So even though it's using snprintf (safe print), it does a call to system with w
 (The line about the directory is a red herring - it was probably put there by another player)
 
 TODO: What about using symlinks??
+</div>
 
 ## Level 4 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 That one was a rather large step above the previous level. Using ltrace didn't show any strcmp calls:
 
     leviathan3@melissa:~$ ltrace ./level3 
@@ -155,9 +168,12 @@ Aha - we're getting closer. It sounds like if the 'repz cmps' is not successful,
     0xffffd5fc:      "blah\n"
     
 So what I mistook for some sort of function call is actually the password? And sure enough it is!
+</div>
 
 ## Level 4 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 A quick look through the directory reveals a hidden trash directory, containing a binary that yields what seems like a binary representation of the password (we count 10 groups, and passwords have all been 10 characters so far):
 
     leviathan4@melissa:~$ ls -la
@@ -202,9 +218,12 @@ Exit code 0377? Looking at the manual for 'exit(3)', we see this function return
     0x8048614:       "/etc/leviathan_pass/leviathan5"
     
 Okay - so it opens up the password for level 5. So far so good.
+</div>
 
 ## Level 5 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 The binary given seems to expect a file named '/tmp/file.log'. A quick go at creating a file shows the program just outputs its content (echo 'yo' > /tmp/file.log) and then deletes the file. So why not create a symlink to the next level?
 
     leviathan5@melissa:~$ ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log
@@ -212,9 +231,12 @@ The binary given seems to expect a file named '/tmp/file.log'. A quick go at cre
     UgaoFee4li
 
 Mmm. Is that really it?
+</div>
 
 ## Level 6 ##
 
+{::options parse_block_html="true" /}
+<div class="writeup">
 This level has a very easy solution. But after disassembling binaries for most of this game, the 'simpler' solution only came to me after spending longer than I feel comfortable admitting. My first point of call was to fire up gdb (bad habit)... The disassembly for the whole binary is actually quite small:
 
     Breakpoint 1, 0x080484b7 in main ()
@@ -279,5 +301,6 @@ Taking a step back however, it's just a case of brute-forcing the binary - and a
     leviathan7
     
 So trying the simplest solution first would have saved me some time. Heh...
+</div>
 
 And this is the last of leviathan. To be fair though, I would have liked to spend more time understanding the assembly code itself. And I think some basic understanding is definitely required. But if I were to do this full time, I'd invest some serious money into getting a license for IDAPro. Some compilers will re-arrange expressions to optimise code - and that would probably lead to even more obfuscated code. But as a starting point, this challenge has proved to be very educational and I wouldn't hesitate to whip out gdb again.
