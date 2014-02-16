@@ -22,7 +22,9 @@ Random tech-related stuff I found of interest.
 *   [AWS Glacier](proj_aws-glacier.html):
     A quick introduction to Amazon's Glacier service.
 *   [Snake in JS](gaming_snake.html):
-    A quick introduction to the critical 'gaming loop' by building a snake clone using JavaScript
+    A quick introduction to the critical 'gaming loop' by building a snake clone using JavaScript.
+*   [FreeBSD 9.1 on budget VPS](misc_freebsd-vm128.html):
+    FreeBSD is a great OS - but getting this installed on a KVM VPS with 128MB of RAM wasn't as straightforward as I expected.
 
 ### Finance ###
 
