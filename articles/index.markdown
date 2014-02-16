@@ -15,7 +15,7 @@ I primarily code in Python. It's fun, readable, and the possibilities are endles
 
 ### Tech ###
 
-Random tech-related stuff I found of interest.
+Random tech-related stuff I found of interest and wrote about.
 
 *   [Doom Engine](code_doom-engine.html):
     I first came across those while scanning through the source code for [doom](http://www.github.com/id). It highlights some of the technical limitations at the time, and how people got around them.
@@ -23,7 +23,7 @@ Random tech-related stuff I found of interest.
     A quick introduction to Amazon's Glacier service.
 *   [Snake in JS](gaming_snake.html):
     A quick introduction to the critical 'gaming loop' by building a snake clone using JavaScript.
-*   [FreeBSD 9.1 on budget VPS](misc_freebsd-vm128.html):
+*   [FreeBSD 9.1 on a budget VPS](misc_freebsd-vm128.html):
     FreeBSD is a great OS - but getting this installed on a KVM VPS with 128MB of RAM wasn't as straightforward as I expected.
 
 ### Finance ###
