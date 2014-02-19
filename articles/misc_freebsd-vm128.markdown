@@ -36,6 +36,13 @@ Finish off by enabling the swap parition:
 
     # swapon /dev/gpt/gptswap
     
-and voila! The installer will continue and use the swap partition as and when required.
+and voila! The installer will continue and use the swap partition as and when required (yep, that was the tricky bit).
+
+Once the install is complete you will be ask whether you want to be dropped into a shell. Again the answer is yes - this time because `/etc/fstab` hasn't been created for you. Just open up `vi` and:
+
+    /dev/gpt/gptswap        none    swap    sw      0       0
+    /dev/gpt/gptroot        /       ufs     rw      1       1
+
+Type `exit` once done and restart. all done!
 
 _`gpart` help found from [wonkity](http://www.wonkity.com/~wblock/docs/html/disksetup.html)_
