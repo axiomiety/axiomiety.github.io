@@ -26,8 +26,9 @@ Random tech-related stuff I found of interest and wrote about.
 *   [FreeBSD 9.1 on a budget VPS](misc_freebsd-vm128.html):
     FreeBSD is a great OS - but getting this installed on a KVM VPS with 128MB of RAM wasn't as straightforward as I expected.
 
-### Finance ###
+### Misc ###
 
-Some bits and pieces - mainly due to people asking me and not being able to give them a satisfying answer.
-
-*   [FX Forward](finance_fx-forward.html)
+*   [Singapore vs United Kingdom](misc_sg_vs_uk.html):
+    I relocated to Singapore from the UK. How certain things (banking/mobile/transport/...) differ.
+*   [FX Forward](finance_fx-forward.html):
+    Because a colleague asked me and I couldn't give a satisfying answer. Though I'm not sure that one is satisfying either!
