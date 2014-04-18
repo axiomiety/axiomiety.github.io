@@ -12,7 +12,7 @@ Forget free banking - that doesn't quite exist in SG. Note that to sign up for m
 
 ### Current account
 
-Current accounts are most commonly known as Savings account. It's important not to get mixed up - there are accounts called 'current' but those usually give you access to things like cheque books and require you to maintain a balance of $3000 so as not to pay a (daily) fee.
+Current accounts are most commonly known as Savings account. It's important not to get mixed up - there are accounts called 'current' but those usually give you access to things like cheque books and require you to maintain a balance of \$3000 so as not to pay a (daily) fee.
 
 ### ATMs
 
@@ -36,17 +36,17 @@ Registration
 : You will need to provide your passport when registering. Yes - pre-paid plan require you to register.
 
 Topping up
-: You can buy top-up cards from a number of retails but those offer specific services. So even though you might top up $18, the credit will be used straight away to give you X minutes, Y SMS and Z data. To top up raw credit value (and then use this to the services you actually need, like data), you can top up online or using ATMs/machines. I used a [SAM](../images/singpost_SAM.jpg) from SingPost - such a handy thing! And just like in the UK topping up certain amounts can give you freebies - like *actually* free incoming calls for 20 days.
+: You can buy top-up cards from a number of retails but those offer specific services. So even though you might top up \$18, the credit will be used straight away to give you X minutes, Y SMS and Z data. To top up raw credit value (and then use this to the services you actually need, like data), you can top up online or using ATMs/machines. I used a [SAM](../images/singpost_SAM.jpg) from SingPost - such a handy thing! And just like in the UK topping up certain amounts can give you freebies - like *actually* free incoming calls for 20 days.
 
 ## Public transport
 
 ### Taxis
 
-Are much cheaper than their UK counterparts. However note that there are some extra charges you should be aware of - like after midnight the fare will be 50% more expensive. Booking a cab (ie, calling for one to pick you up) is chargeable. Even flagging one down usually incurs a $3.X charge. Saying that a 30mns trip might only set you back $20.
+Are much cheaper than their UK counterparts. However note that there are some extra charges you should be aware of - like after midnight the fare will be 50% more expensive. Booking a cab (ie, calling for one to pick you up) is chargeable. Even flagging one down usually incurs a \$3 something charge. 
 
 ### MRT
 
-MRT is what the Tube could have been had it kept up with times. The Oyster equivalent is called EZ-Link. You can obtain a card from any station for $12 (that's $7 credit and $5 non-refundable for the RFID card). Topping up the card is straight forward and can be done in a variety of places.
+MRT is what the Tube could have been had it kept up with times. The Oyster equivalent is called EZ-Link. You can obtain a card from any station for \$12 (that's 7 dollars worth of credit and a 5 dollars non-refundable for the RFID card). Topping up the card is straight forward and can be done in a variety of places.
 
 If your debit card has the '~' MRT symbol, you can top it up independently via the machines (it's entirely separate from your bank account).
 
