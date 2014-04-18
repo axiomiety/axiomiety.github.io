@@ -8,7 +8,7 @@ I have lived in a handful of countries but prior to relocating to Singapore I on
 
 ## Banking
 
-Forget free banking - that doesn't quite exist in SG.
+Forget free banking - that doesn't quite exist in SG. Note that to sign up for most banks, you will need your passport, work/employment pass/IPA letter and residential address. It seems DBS (set up by the Government of Singapore) is pretty okay with just an IPA and a passport. Other banks can be more strict (like UOB).
 
 ### Current account
 
@@ -38,29 +38,30 @@ Registration
 Topping up
 : You can buy top-up cards from a number of retails but those offer specific services. So even though you might top up $18, the credit will be used straight away to give you X minutes, Y SMS and Z data. To top up raw credit value (and then use this to the services you actually need, like data), you can top up online or using ATMs/machines. I used a [SAM](../images/singpost_SAM.jpg) from SingPost - such a handy thing! And just like in the UK topping up certain amounts can give you freebies - like *actually* free incoming calls for 20 days.
 
-!  
-
 ## Public transport
 
 ### Taxis
 
-Are much cheaper than their UK counterparts. However note that there are some extra charges you should be aware of - like after midnight the fare will be 50% more expensive. Booking a cab (ie, calling for one to pick you up) is chargeable.
+Are much cheaper than their UK counterparts. However note that there are some extra charges you should be aware of - like after midnight the fare will be 50% more expensive. Booking a cab (ie, calling for one to pick you up) is chargeable. Even flagging one down usually incurs a $3.X charge. Saying that a 30mns trip might only set you back $20.
 
 ### MRT
 
 MRT is what the Tube could have been had it kept up with times. The Oyster equivalent is called EZ-Link. You can obtain a card from any station for $12 (that's $7 credit and $5 non-refundable for the RFID card). Topping up the card is straight forward and can be done in a variety of places.
 
-If your debit card has the following symbol, you can top it up independently via the machines (it's entirely separate from your bank account).
+If your debit card has the '~' MRT symbol, you can top it up independently via the machines (it's entirely separate from your bank account).
 
 ## Food
 
 Food courts/hawker stores will give you the best value for money. Forget sandwiches, forget pizzas, ... There are generally 3 kinds of food courts - from more expensive to least expensive:
-*  Modern with air-con
-*  Not so modern with air-con
-*  No air-con (eg, around HDBs)
 
-Price - reason for it
+* Modern with air-con
+* Not so modern with air-con
+* No air-con (eg, around HDBs)
+
+Essentially you pay for air-con and modern settings. But keep in mind the older food courts (HDB ones) are usually more established and individually owned (hence the longer in business, the better the food). Some of the modern ones are simply staffed by the food court owner, which can (not always) lead to a drop in quality.
 
 ### Walking
 
-Umbrella, don't walk like a Londoner - aim to go through shopping malls
+Due to the heat, you might find yourself walking differently. It's no longer the shortest path between two points but the one that overs the most shade/cool. That might mean walking through malls, shops etc... And the pace will be different - it's certainly a lot slower than you'd see in say, London. And for good reason, because at this speed you'll drench your shirt in no time.
+
+Carrying an umbrella is also a must. Rain can start falling at moments' notice. 
