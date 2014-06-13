@@ -32,3 +32,5 @@ Random tech-related stuff I found of interest and wrote about.
     I relocated to Singapore from the UK. How certain things (banking/mobile/transport/...) differ.
 *   [FX Forward](finance_fx-forward.html):
     Because a colleague asked me and I couldn't give a satisfying answer. Though I'm not sure that one is satisfying either!
+*   [Fitness events](misc_fitness-events.html):
+    Fitness events I participated in, with some tips for people thinking of joining up.

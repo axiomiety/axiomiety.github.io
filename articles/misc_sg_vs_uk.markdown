@@ -64,4 +64,4 @@ Essentially you pay for air-con and modern settings. But keep in mind the older 
 
 Due to the heat, you might find yourself walking differently. It's no longer the shortest path between two points but the one that overs the most shade/cool. That might mean walking through malls, shops etc... And the pace will be different - it's certainly a lot slower than you'd see in say, London. And for good reason, because at this speed you'll drench your shirt in no time.
 
-Carrying an umbrella is also a must. Rain can start falling at moments' notice. 
+Carrying an umbrella is also a must. Rain can start falling at a moment's notice. 
