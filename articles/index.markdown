@@ -25,6 +25,8 @@ Random tech-related stuff I found of interest and wrote about.
     A quick introduction to the critical 'gaming loop' by building a snake clone using JavaScript.
 *   [FreeBSD 9.1 on a budget VPS](misc_freebsd-vm128.html):
     FreeBSD is a great OS - but getting this installed on a KVM VPS with 128MB of RAM wasn't as straightforward as I expected.
+*   [OpenWRT on a TP-WR710N](misc_openwrt-wr710n.html):
+    Because I can?
 
 ### Misc ###
 
