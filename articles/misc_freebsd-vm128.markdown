@@ -38,7 +38,7 @@ Finish off by enabling the swap parition:
     
 and voila! The installer will continue and use the swap partition as and when required (yep, that was the tricky bit).
 
-Once the install is complete you will be ask whether you want to be dropped into a shell. Again the answer is yes - this time because `/etc/fstab` hasn't been created for you. Just open up `vi` and:
+Once the install is complete you will be asked whether you want to be dropped into a shell. Again the answer is yes - this time because `/etc/fstab` hasn't been created for you. Just open up `vi` and:
 
     /dev/gpt/gptswap        none    swap    sw      0       0
     /dev/gpt/gptroot        /       ufs     rw      1       1

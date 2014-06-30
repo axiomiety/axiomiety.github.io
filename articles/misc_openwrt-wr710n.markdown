@@ -62,7 +62,7 @@ Type in `passwd` as suggested. This will do two things - disable telnet access a
 
 Use `ssh root@192.168.1.1` with your newly set password to log back in.
 
-We now need to enable wirless. Let's have a look:
+We now need to enable wireless. Let's have a look:
 
     root@OpenWrt:~# uci show wireless
     wireless.radio0=wifi-device
@@ -97,6 +97,31 @@ Log back on, and let's have a look at the list of connected clients:
     TX: 65.0 MBit/s, MCS 6, 20MHz, short GI         1084 Pkts.
 
 And there we are! 
+
+### Security ###
+
+So for now this is wide open. Just for fun (not really for security), let's enable MAC filtering.
+
+    root@OpenWrt:~# uci set wireless.@wifi-iface[0].maclist=60:67:20:ac:aa:30
+    root@OpenWrt:~# uci set wireless.@wifi-iface[0].macfilter=allow
+    root@OpenWrt:~# uci commit
+    root@OpenWrt:~# uci show wireless
+    wireless.radio0=wifi-device
+    wireless.radio0.type=mac80211
+    wireless.radio0.channel=11
+    wireless.radio0.hwmode=11g
+    wireless.radio0.path=platform/ar933x_wmac
+    wireless.radio0.htmode=HT20
+    wireless.radio0.disabled=0
+    wireless.@wifi-iface[0]=wifi-iface
+    wireless.@wifi-iface[0].device=radio0
+    wireless.@wifi-iface[0].network=lan
+    wireless.@wifi-iface[0].mode=ap
+    wireless.@wifi-iface[0].ssid=OpenWrt
+    wireless.@wifi-iface[0].encryption=none
+    wireless.@wifi-iface[0].maclist=60:67:20:XX:XX:XX
+    wireless.@wifi-iface[0].macfilter=allow
+    root@OpenWrt:~# wifi
 
 ### Taking it for a spin ###
 

