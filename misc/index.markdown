@@ -4,9 +4,11 @@ title: misc
 category: pages
 ---
 
+<!-- dead - VPS coudn't run python3, never fixed it
 ### Bixi ###
 
 _IN FLIGHT_ Toolset to handle [bixi](https://toronto.bixi.com/), a data feed for Toronto that gives status updates on the biking stations around the city.
+-->
 
 ### CENT/CCNA Notes ###
 

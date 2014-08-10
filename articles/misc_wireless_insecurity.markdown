@@ -200,4 +200,4 @@ Clearly if the AP had no client connected to it, it wouldn't be particularly eff
 
 ### Level 0x2 ###
 
-Let's up things up a bit by enabling WEP on the router. And we'll leave the SSID hidden too.
+Let's up the ante a bit by enabling WEP on the router. And we'll leave the SSID hidden too.
