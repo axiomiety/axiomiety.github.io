@@ -51,12 +51,6 @@ I wanted to learn more about the web's infrastructure, and decided to draw some 
 
 MindMup is a really cool tool. Highly recommended.
 
-### Proxy ###
-
-I run an ssh tunneling service for `http` and `https` _only_. Get in touch if you'd like access. Please note that this service is currently offered on a pro-bono basis. I reserve the right to terminate access at any time for whatever reason I deem appropriate. The idea is to allow you to feel somewhat more secure about using public WiFi services (eg from an airport, hotel, cafe, ...).
-
-I am looking at adding an exit point in North America and potentially one in France (though Asia would be great).
-
 ### Matasano Crypto Challenge ###
 
 _ON HOLD_ Currently on set 3 - finished the 17th problem. The terms of the challenge prohibit me from sharing solutions/doing write-ups but I'd like to expand on some of the topics covered at some point. Take a look at [`crypto_utils` in my crashburn repo](https://github.com/axiomiety/crashburn/blob/master/crypto_utils.py).
