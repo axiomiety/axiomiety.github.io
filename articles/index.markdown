@@ -28,7 +28,7 @@ Random tech-related stuff I found of interest and wrote about.
 *   [OpenWRT on a TP-WR710N](misc_openwrt-wr710n.html):
     Wireless freedom!
 *   [Wireless (in)Security](misc_wireless_insecurity.html):
-    Musings...
+    Fun with MAC filtering, hidden SSID and WEP.
 
 ### Misc ###
 
