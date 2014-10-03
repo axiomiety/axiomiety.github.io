@@ -128,7 +128,7 @@ Beauty is on the router's side, there's still only one client connected:
     RX: 58.5 MBit/s, MCS 6, 20MHz                     91 Pkts.
     TX: 43.3 MBit/s, MCS 4, 20MHz, short GI           43 Pkts.
 
-### Level 0x1 ###
+### Level 0x1: Hidden SSID ###
 
 Let's step things up a very small notch by hiding the SSID on the router.
 
@@ -198,7 +198,7 @@ All is not lost however and there's a way to speed this up. We can use `aireplay
 
 Clearly if the AP had no client connected to it, it wouldn't be particularly effective. But then again it all depends on what you're trying to achieve - and whether you have time on your side.
 
-### Level 0x2 ###
+### Level 0x2: WEP encryption ###
 
 Let's up the ante a bit by enabling WEP on the router. And we'll leave the SSID hidden too.
 
