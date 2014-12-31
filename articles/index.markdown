@@ -32,6 +32,8 @@ Random tech-related stuff I found of interest and wrote about.
 
 ### Misc ###
 
+*   [Languages](lang_all.html):
+    Not the programming kind.
 *   [Singapore vs United Kingdom](misc_sg_vs_uk.html):
     I relocated to Singapore from the UK. How certain things (banking/mobile/transport/...) differ.
 *   [Fitness events](misc_fitness-events.html):

@@ -12,6 +12,8 @@ _IN FLIGHT_ Toolset to handle [bixi](https://toronto.bixi.com/), a data feed for
 
 ### CENT/CCNA Notes ###
 
+_UNMAINTAINED_ Had to put that on ice
+
 I wanted to learn more about the web's infrastructure, and decided to draw some notes based on the CENT/CCNA exam. Here are some of my notes/mindmaps (based on the excellent book titled 'Cisco CCENT/CCNA ICND1 100-101 Official Cert Guide'):
 
 <!--
