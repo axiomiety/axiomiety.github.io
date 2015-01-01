@@ -150,6 +150,44 @@ Which yields:
 
 Indicating the key is of length 29.
 
+We now need to transpose each block (so 29 blocks all of the same length, apart potentially from the last one), and find the single character XOR key that yields the best 'English-looking' histogram. In other words, we'll gather 29 samples of what an english text should look like - where the byte which occurs the most often in each sample should match that which would occur the most often in an english text.
+
+Most people (myself included) automatically think that 'e' is the most common letter - and that's true. But it isn't the most frequent character. According to [this page](http://mdickens.me/typing/letter_frequency.html) it's actually space. So by property of XOR, xor'ing the most frequent byte in the chunk with space should give us the character the chunk was encrypted with.
+
+{% highlight python %}
+    n = 29
+    transposed_chunks = [raw[i::n] for i in range(n)]
+    most_common_char = ord(' ') # space is the most common character in English
+    candidate = bytearray()
+    for tchunk in transposed_chunks:
+      c = Counter(tchunk) # from collections import Counter
+      char, _ = c.most_common()[0]
+      candidate.append(char^most_common_char)
+    print(candidate)
+{% endhighlight %}
+
+Yielding:
+
+    bytearray(b'Terminator X: Bring the noise')
+
 ### 7. AES in ECB mode ###
+
+We're not re-implementing AES - just looking at the ECB mode.
+
+{% highlight python %}
+    def mc_part7():
+      with open('p7.txt', 'rU') as f:
+        lines = f.readlines()
+    
+      data = bytes(''.join([l.strip() for l in lines]), 'ascii')
+      raw = base64.b64decode(data)
+      from Crypto.Cipher import AES
+      mode = AES.MODE_ECB
+      decryptor = AES.new('YELLOW SUBMARINE', mode)
+      plaintext = decryptor.decrypt(raw)
+      print(plaintext)
+{% endhighlight %}
+
+Which will give you the lyrics to "Play That Funky Music" by Vanilla Ice.
 
 ### 8. Detect AES in ECB mode ###
