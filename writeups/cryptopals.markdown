@@ -13,13 +13,11 @@ Language of choice for this is Python. Probably not everyone's first choice but 
 ### 1. Convert hex to base64 ###
 
 {% highlight python %}
-
     def mc_part1():
       h = '49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d'
       hh = bytes.fromhex(h)
       b64_expected = b'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
       assert (b64_expected == base64.b64encode(hh))
-
 {% endhighlight %}
 
 That one was easy - just remember that `base64.b64encode` returns something of type byte, not str.
@@ -29,7 +27,6 @@ As a bit of trivia `h` is the hex representation of "I'm killing your brain like
 ### 2. Fixed XOR ###
 
 {% highlight python %}
-
     def mc_part2():
       a = '1c0111001f010100061a024b53535009181c'
       b = '686974207468652062756c6c277320657965'
@@ -38,7 +35,6 @@ As a bit of trivia `h` is the hex representation of "I'm killing your brain like
       a_xor_b = bytes.fromhex('746865206b696420646f6e277420706c6179')
       xored = bytes([x^y for (x,y) in zip(aa,bb)])
       assert( xored == a_xor_b )
-
 {% endhighlight %}
 
 Nothing much here either, apart that `a_xor_b` is "the kid don't play".
@@ -48,7 +44,6 @@ Nothing much here either, apart that `a_xor_b` is "the kid don't play".
 This one is a little more tricky. We're given a piece of ciphertext encrypted with a single character but not told what the character is. The instructions suggest using frequency analysis - but I think the ciphertext is too small. Instead I opted for a brute force approach : )
 
 {% highlight python %}
-
     def mc_part3(idx=15):
       h = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
       hh = bytes.fromhex(h)
@@ -56,7 +51,6 @@ This one is a little more tricky. We're given a piece of ciphertext encrypted wi
       for k in string.ascii_letters:
         print(k)
         print(bytes([a^b for (a,b) in zip(hh,bytes(k*len(hh),'ascii'))]))
-
 {% endhighlight %}
 
 And we quickly see that when `k` is `X` the ciphertext decrypts to "Cooking MC's like a pound of bacon".
@@ -68,7 +62,6 @@ This makes it a little harder to brute force - instead of having a single string
 We know one of those strings will decode to something from "Ice Ice Baby" - which means it'll be ASCII. Specifically, all characters should be printable. Behold `string.printable`. Except if we did that it'd generate too much noise. We certainly don't expect digits or non-standard symbols like `(` or `%` to be present. We this we can create a filter that will discard anything that doesn't match the given criteria.
 
 {% highlight python %}
-
     def mc_part4(f='p4.txt'):
       with open(f, 'rU') as d:
         lines = d.readlines() # it's a small file
@@ -84,7 +77,79 @@ We know one of those strings will decode to something from "Ice Ice Baby" - whic
           if all(map(lambda c: chr(c) in valid_characters, xored)):
             candidates.append((k, xored))
       print(candidates)
-
 {% endhighlight %}
 
 Running this quickly isolates the string in question, which decodes to "Now that the party is jumping".
+
+### 5. Implement repeating-key XOR ###
+
+To get our repeating key, it's probably easiest to use a generator.
+
+{% highlight python %}
+    def mc_part5():
+      
+      def cycle_key(key):
+        idx = 0
+        while True:
+          yield ord(key[idx%len(key)])
+          idx += 1
+    
+      g = cycle_key('ICE')
+      s = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
+      hh = bytes(s,'ascii')
+      xored = bytes([a^b for (a,b) in zip(hh, g)])
+    
+      c = '0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f'
+      expected = bytes.fromhex(c)
+      assert( xored == expected )
+{% endhighlight %}
+
+### 6. Break repeating-key XOR ###
+
+To get this under way we need to do a little prep work. The first is being able to compute the hamming distance between two *lists* of bytes:
+
+{% highlight python %}
+    >>> a=bytes('this is a test','ascii')
+    >>> b=bytes('wokka wokka!!!','ascii')
+    >>> xored=bytes([x^y for (x,y) in zip(a,b)])
+    >>> sum( (xored[j] >> i) & 1 for i in range(8) for j in range(len(xored)) )
+    37
+{% endhighlight %}
+
+Which is expected (as per the instructions). We hardcode 8 because that's how long a byte it. Wrapping the above in a method yields:
+
+{% highlight python %}
+    def hamming_dist(a,b):
+      xored = bytes([x^y for (x,y) in zip(a,b)])
+      return sum( (xored[j] >> i) & 1 for i in range(8) for j in range(len(xored)) )
+{% endhighlight %}
+
+We also need something that allows us to divide a list into chunks. Note we only want complete chunks... I think (?).
+
+{% highlight python %}
+    def get_avg_hamming_dist(raw, chunk_size):
+      chunks = get_chunks(raw, chunk_size)
+      return sum(hamming_dist(c1,c2)/chunk_size for c1,c2 in zip(chunks,chunks[1:]))/len(chunks[1:])
+{% endhighlight %}
+
+It's not magic - we could have done the same thing with `range` but this is a little neater.
+
+Next up we need to compute the hamming distance between each block.
+
+{% highlight python %}
+    dists = list()
+    for chunk_size in range(2,40):
+      dists.append( (chunk_size, get_avg_hamming_dist(raw, chunk_size)) )
+    dists = sorted(dists, key=lambda x: x[1])
+    print('smallest distance {1} was found with chunk size {0}'.format(*dists[0]))
+{% endhighlight %}
+
+Which yields:
+
+    smallest distance 2.7593244194229416 was found with chunk size 29
+
+Indicating the key is of length 29.
+
+### 7. AES in ECB mode ###
+
+### 8. Detect AES in ECB mode ###
