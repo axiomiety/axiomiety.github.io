@@ -53,10 +53,6 @@ I wanted to learn more about the web's infrastructure, and decided to draw some 
 
 MindMup is a really cool tool. Highly recommended.
 
-### Matasano Crypto Challenge ###
-
-_ON HOLD_ Currently on set 3 - finished the 17th problem. The terms of the challenge prohibit me from sharing solutions/doing write-ups but I'd like to expand on some of the topics covered at some point. Take a look at [`crypto_utils` in my crashburn repo](https://github.com/axiomiety/crashburn/blob/master/crypto_utils.py).
-
 ### Code ###
 
 You can find me on [github](http://www.github.com/axiomiety).
