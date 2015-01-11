@@ -127,6 +127,86 @@ Though that's cheating a little : )
 
 ### 12. Byte-at-a-time ECB decryption (Simple) ###
 
+This is where things start to become interesting, and fun (and a bit more complicated)!
+
+We will be exploiting a weakness in ECB to decrypt a piece of cyphertext for which we do not have the key.
+
+   * Create a function that returns `AES-128-ECB(your-string || unknown-string, random-key)`
+{% highlight python %}
+    RANDOM_AES_KEY = b'\xaf\x19\x9cB;\xd5aoo\xc7\x86\xb2\xf0\xef\xbb\xa1'
+    
+    def oracle(someinput, key=RANDOM_AES_KEY):
+      txt = 'Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg'
+      txt += 'aGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBq'
+      txt += 'dXN0IHRvIHNheSBoaQpEaWQgeW91IHN0b3A/IE5vLCBJIGp1c3QgZHJvdmUg'
+      txt += 'YnkK'
+      txt = base64.b64decode(bytes(txt, 'ascii'))
+      plaintext = someinput + txt
+    
+      from Crypto.Cipher import AES
+      cr = AES.new(key, AES.MODE_ECB)
+      enc = cr.encrypt(crypto_utils.pad(plaintext))
+    
+      return enc 
+{% endhighlight %}
+
+1. Guess the block size (which we know, but we do this for good measure). Since we're using ECB, encrypting the same bytes in two different blocks will lead to identical blocks - we just need to find which number of bytes it takes before a repeat occurs.
+
+{% highlight python %}
+    blocksize = None
+    for bs in range(12,17):
+      plaintext = b'A'*bs*2 # we want to see repeats
+      enc = oracle(plaintext)
+      block = enc[bs:2*bs]
+      if enc[:bs] == block:
+        blocksize = bs
+        break
+
+    print('guessing blocksize is %s' % blocksize if blocksize else 'no blocksize found')
+    if blocksize is None: return # no point continuing
+{% endhighlight %}
+
+2. Check whether this uses ECB (we know it does, but we're being asked to do this anyway)
+
+{% highlight python %}
+    plaintext = b'A'*blocksize*2
+    usingECB = crypto_utils.is_using_ECB(oracle(plaintext), blocksize)
+    print('using ECB? %s' % usingECB)
+{% endhighlight %}
+
+3. Craft an input that's 1 byte short of the block size, and create a table for all possible combinations. Say our plaintext was 'YELLOW SUBMARINE' and block size is 8 - by crafting a plaintext that will be 7 bytes, the 8th byte will be 'Y' (`b'AAAAAAAY'`). If we didn't know what what the 8th byte would be, we would cycle through all possible bytes until the encrypted block matched the one with our unknown byte. ECB allows us to do that because each block is encrypted independently of the previous one.
+
+{% highlight python %}
+    inputblock = bytearray(b'A'*(blocksize-1))
+
+    # there are up to 255 possible bytes
+    rbt = dict()
+    #TODO: this might not be a 1-1 mapping - multiple keys might map to the same chr
+    for i in range(256):
+      t = bytes([i])
+      e = oracle(bytes(inputblock+t))[:blocksize]
+      rbt[e] = t
+
+    print(rbt[oracle(bytes(inputblock))[:blocksize]]) # the last byte will be that of the unknown plaintext
+{% endhighlight %}
+
+4. Lather, rinse, repeat. We essentially repeat the above but instead of using `b'AAAAAAAY'`, we now use `b'AAAAAAY?'` - we keep shifting left until we have decrypted all the plaintext.
+
+{% highlight python %}
+  found = bytearray()
+  bs = 128 # how much we want to decrypt - this needs to be more or less equal to the length of the plaintext
+  for idx in range(bs-1, 0, -1): # we go backwards, shifting left
+    rbt = dict()
+    inputblock = b'A'*idx
+    for i in range(256):
+      t = bytes([i])
+      rbt[oracle(inputblock + found + t)[:bs]] = t
+    found += rbt[oracle(inputblock)[:bs]]
+  print(bytes(found))
+{% endhighlight %}
+
+Putting the snippets above together, we find that the plaintext is `b"Rollin' in my 5.0\nWith my rag-top down so my hair...` - all without knowing the actual encryption key, but just being provided a function that encrypts arbitrary plaintext.
+
 ### 13. ECB cut-and-paste ###
 
 ### 14. Byte-at-a-time ECB decryption (Harder) ###
