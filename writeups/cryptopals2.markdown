@@ -276,6 +276,76 @@ How cool is that?
 
 ### 14. Byte-at-a-time ECB decryption (Harder) ###
 
+This is essentially `12` but harder. The oracle is now defined as `AES-128-ECB(random-prefix || attacker-controlled || target-bytes, random-key)` where random-prefix is constant but of unknown length.
+
+The first thing we need to do is figure out the length of the `random-prefix`. Again this is using ECB so if we send between 32 and 48 bytes of a repeating string we should see a (consecutively placed) duplicate block somewhere:
+
+{% highlight python %}
+    prefix_length = 0
+    for i in range(32, 48):
+      t = b'A'*i
+      enc = encryption_oracle3(t)
+      num_blocks = len(enc)//16
+      for j in range(1,num_blocks):
+        if enc[j*16:(j+1)*16] == enc[(j+1)*16:(j+2)*16]:
+          prefix_length = 48 - i
+          prefix_span_size = j # how many blocks does the prefix span
+          print('length of prefix for block: %s' % prefix_length)
+          break
+      if prefix_length: break # break out of the 2nd loop
+{% endhighlight %}
+
+Now we need to so the same thing we did with `12` but take the padding into account. So instead if the block size was 8, instead of calling the oracle with `b'AAAAAAA?'` we need to call it with enough data to complete the unknown prefix into a full block.
+
+{% highlight python %}
+    padding = 16 - prefix_length
+    found = b''
+    bs = 128 # increase this to the estimated length of the target bytes
+    for idx in range(bs-1, 0, -1):
+      rbt = dict()
+      inputblock = b'A'*(idx+padding) # so we get an even block
+      for i in range(256):
+        t = bytes([i])
+        rbt[oracle(inputblock + found + t)[prefix_span_size*16:bs+padding]] = t
+      found += rbt[oracle(inputblock)[prefix_span_size*16:bs+padding]]
+    print(found)
+{% endhighlight %}
+
+Going back to our `YELLOW SUBMARINE` example, in ascii this gives:
+
+    1. |random-prefix + padding (say AAA)|AAAAAAAY|ELLOWSUBM|ARINE + PKCS#7 padding|
+    2. |random-prefix + padding (say AAA)|AAAAAAYE|LLOWSUBMA|RINE + PKCS#7 padding|
+    2. |random-prefix + padding (say AAA)|AAAAAYEL|LOWSUBMAR|INE + PKCS#7 padding|
+
+Yielding the same lyrics. The only tricky bit was accounting for `random-prefix`.
+
 ### 15. PKCS#7 padding validation ###
 
+Heh. We already did this as part of `9` - `unpad`.
+
 ### 16. CBC bitflipping attacks ###
+
+For this, we are asked to create another oracle:
+
+{% highlight python %}
+    def enc_userdata(u, key=RANDOM_AES_KEY):
+      prefix = b'comment1=cooking%20MCs;userdata='
+      postfix = b';comment2=%20like%20a%20pound%20of%20bacon'
+      # quote out/remove ; and = in user input
+      u = u.replace(';', '')
+      u = u.replace('=', '')
+      plaintext = prefix + bytes(u, 'ascii') + postfix
+    
+      from Crypto.Cipher import AES
+      cr = AES.new(key, AES.MODE_CBC, b'\x00'*16) # 0'ed IV
+      print(plaintext)
+      return cr.encrypt(crypto_utils.pad(plaintext))
+    
+    def validate_admin(u, key=RANDOM_AES_KEY):
+      from Crypto.Cipher import AES
+      cr = AES.new(key, AES.MODE_CBC, b'\x00'*16)
+      dec = crypto_utils.unpad(cr.decrypt(u)).decode('cp437')
+      return b';admin=true;' in dec # let's not worry about splitting etc...
+{% endhighlight %}
+
+
