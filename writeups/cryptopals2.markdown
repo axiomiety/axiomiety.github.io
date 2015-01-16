@@ -314,8 +314,8 @@ Now we need to so the same thing we did with `12` but take the padding into acco
 Going back to our `YELLOW SUBMARINE` example, in ascii this gives:
 
     1. |random-prefix + padding (say AAA)|AAAAAAAY|ELLOWSUBM|ARINE + PKCS#7 padding|
-    2. |random-prefix + padding (say AAA)|AAAAAAYE|LLOWSUBMA|RINE + PKCS#7 padding|
-    2. |random-prefix + padding (say AAA)|AAAAAYEL|LOWSUBMAR|INE + PKCS#7 padding|
+    2. |random-prefix + padding (say AAA)|AAAAAAYE|LLOWSUBMA|RINE  + PKCS#7 padding|
+    2. |random-prefix + padding (say AAA)|AAAAAYEL|LOWSUBMAR|INE   + PKCS#7 padding|
 
 Yielding the same lyrics. The only tricky bit was accounting for `random-prefix`.
 
@@ -345,7 +345,46 @@ For this, we are asked to create another oracle:
       from Crypto.Cipher import AES
       cr = AES.new(key, AES.MODE_CBC, b'\x00'*16)
       dec = crypto_utils.unpad(cr.decrypt(u)).decode('cp437')
-      return b';admin=true;' in dec # let's not worry about splitting etc...
+      return ';admin=true;' in dec # let's not worry about splitting etc...
 {% endhighlight %}
 
+We need to craft `userdata` such that it contains `;admin=true' - but we can't use `;` or `=`. What we'll do is send some input like `:admin@true' and flip bits on the cyphertext until, when decrypting, `:` becomes `;` and `@` becomes `=`. It will mangle the data in the previous block but we don't care since we also control that.
 
+The length of the prefix is exactly 32 bytes:
+
+    >>> len("comment1=cooking%20MCs;userdata=")
+    32
+
+So we're at a block boundary. Let's start with:
+
+    000000000000000000000:admin@true
+    0123456789ABCDEF0123456789ABCDEF
+
+Which is exactly 32 bytes - and we need to flip bytes 5 and 11. Let's remember - this is akin to a website sending us an encrypted cookie. We don't control encryption itself, but we can modify the encrypted data such that when decrypted, it gives us the desired result.
+
+For AES, the decryption process will decrypt the 3rd block and XOR it with the encrypted 2nd block. By calling `enc_userdata('000000000000000000000:admin@true')`, we find that our 3rd block is:
+
+    o = b'Z\x93\xd28\xfa\xd9G\xbex\xe7\xda\x0f=.\xf9\xec'
+
+We now just need to xor the 5th and 11th byte such that:
+
+    o[5] ^ ? = ';'
+    o[11] ^ ? = '='
+
+Which we can easily get by setting the bytes to `o[5] ^ ord(';') ^ ord(':')` and `o[11] ^ ord('=') ^ ord('@')` respectively.
+
+{% highlight python %}
+    u = '000000000000000000000:admin@true' # 32 byteso
+    #    0123456789ABCDEF0123456789ABCDEF
+
+    ba = bytearray(enc_userdata(u))
+    abs_pos1 = 32 + 5 # 0-indexed array
+    abs_pos2 = 32 + 11
+
+    ba[abs_pos1] = ba[abs_pos1] ^ ord(';') ^ ord(':')
+    ba[abs_pos2] = ba[abs_pos2] ^ ord('=') ^ ord('@')
+
+    print(validate_admin(bytes(ba)))
+{% endhighlight %}
+
+(For a much better explanation of the above, see [here](http://resources.infosecinstitute.com/cbc-byte-flipping-attack-101-approach/))
