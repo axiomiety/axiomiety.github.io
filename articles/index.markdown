@@ -30,16 +30,16 @@ Random tech-related stuff I found of interest and wrote about.
 *   [Wireless (in)Security](misc_wireless_insecurity.html):
     Fun with MAC filtering, hidden SSID and WEP.
 
-### Misc ###
+<!-- this needs further editing and should probably live in the misc section!
 
-*   [Languages](lang_all.html):
-    Not the programming kind.
+### Non-technical ###
+
 *   [Singapore vs United Kingdom](misc_sg_vs_uk.html):
     I relocated to Singapore from the UK. How certain things (banking/mobile/transport/...) differ.
+*   [Languages](lang_all.html):
+    Not the programming kind.
 *   [Fitness events](misc_fitness-events.html):
     Fitness events I participated in, with some tips for people thinking of joining up.
-
-<!-- this needs further editing
 *   [FX Forward](finance_fx-forward.html):
     Because a colleague asked me and I couldn't give a satisfying answer. Though I'm not sure that one is satisfying either!
 -->
