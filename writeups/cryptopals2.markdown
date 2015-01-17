@@ -366,12 +366,15 @@ For AES, the decryption process will decrypt the 3rd block and XOR it with the e
 
     o = b'Z\x93\xd28\xfa\xd9G\xbex\xe7\xda\x0f=.\xf9\xec'
 
-We now just need to xor the 5th and 11th byte such that:
+For CBC, the decryption mechanism is such that `P2 = C1 ^ D(C2)` - that is, the plaintext for the 2nd block is the ciphertext of block 1 xor'ed with the decryption of block 2's ciphertext.
 
-    o[5] ^ ? = ';'
-    o[11] ^ ? = '='
+Anything xor'ed with itself is zero so `0 = P2 ^ C1 ^ D(C2)` - if we define `P'2` as our tampered plaintext for block 2, we have:
 
-Which we can easily get by setting the bytes to `o[5] ^ ord(';') ^ ord(':')` and `o[11] ^ ord('=') ^ ord('@')` respectively.
+    P'2 = P'2 ^ P2 ^ C1 ^ D(C2)
+
+What does that mean? We don't know what `D(C2)` decrypts to - but we know it will get xor'ed with `C1` - and that if we replace `C1` with `C'1 = P'2 ^ P2 ^ C1`, then `P'2 = C'1 ^ D(C2)`.
+
+Which we can easily get by setting the relevant bytes to `o[5] ^ ord(';') ^ ord(':')` and `o[11] ^ ord('=') ^ ord('@')` respectively.
 
 {% highlight python %}
     u = '000000000000000000000:admin@true' # 32 byteso
@@ -387,4 +390,4 @@ Which we can easily get by setting the bytes to `o[5] ^ ord(';') ^ ord(':')` and
     print(validate_admin(bytes(ba)))
 {% endhighlight %}
 
-(For a much better explanation of the above, see [here](http://resources.infosecinstitute.com/cbc-byte-flipping-attack-101-approach/))
+And voila - we don't know the key and yet managed to modify the plaintext.
