@@ -29,3 +29,7 @@ I started on the 23rd of November 2014. The first lessons are a lot of random vo
 As of the end of December 2014, I'm pretty much done with the first handful of lessons (A through to 4). I have reached the point where I can greet/thank people, ask what this/that is and answer accordingly (like 아니요.사과예요 - no, it's an apple) but not much else. Vocabulary-wise I am around ~250 words though not all useful in day to day conversation (like tail - 꼬리, or landmine - 지뢰). Some of those are also compound words so it doesn't count as much (like America/American - 미국/미국 사람). But the method is good and the daily vocab reviews with Anki really help.
 
 ### Navier Stokes ###
+
+http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/
+
+

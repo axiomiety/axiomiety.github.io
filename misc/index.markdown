@@ -8,7 +8,6 @@ category: pages
 ### Bixi ###
 
 _IN FLIGHT_ Toolset to handle [bixi](https://toronto.bixi.com/), a data feed for Toronto that gives status updates on the biking stations around the city.
--->
 
 ### CENT/CCNA Notes ###
 
@@ -16,9 +15,7 @@ _UNMAINTAINED_ Had to put that on ice
 
 I wanted to learn more about the web's infrastructure, and decided to draw some notes based on the CENT/CCNA exam. Here are some of my notes/mindmaps (based on the excellent book titled 'Cisco CCENT/CCNA ICND1 100-101 Official Cert Guide'):
 
-<!--
   * <a href="" data-role="mindmup-embed" title="" data-width="90%" data-height="500" data-style="border:1px solid black;margin-bottom:5px;"></a>
--->
 
   * The TCP/IP and OSI Networking Models
   * <a href="http://www.mindmup.com/map/a1af923b10db7f0130957a7a2d07b81bd2" data-role="mindmup-embed" title="TCP/IP Architectural Model" data-width="90%" data-height="500" data-style="border:1px solid black;margin-bottom:5px;">TCP/IP Architectural Model</a>
@@ -53,6 +50,13 @@ I wanted to learn more about the web's infrastructure, and decided to draw some 
 
 MindMup is a really cool tool. Highly recommended.
 
+-->
+
 ### Code ###
 
 You can find me on [github](http://www.github.com/axiomiety).
+
+### Random ###
+
+  * [Singapore vs United Kingdom](misc_sg_vs_uk.html):
+    I relocated to Singapore from the UK. How certain things (banking/mobile/transport/...) differ.

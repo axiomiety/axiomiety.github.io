@@ -12,11 +12,11 @@ Those marked with `*` have been completed fully.
 
 #### [CryptoPals](http://www.cryptopals.com/) ####
 
-This was a challenge started by [Matasano](http://matasano.com/) which started back in April 2013. The terms of the challenge meant writeups weren't possible - but this has since been relaxed once solutions were published by Matasano. Where possible I have tried to localise helper functions. But after Set 1 it became apparent that wasn't going to be manageable. Those have been collated in [`crypto_utils` in my crashburn repo](https://github.com/axiomiety/crashburn/blob/master/crypto_utils.py).
+This was a set of challenges by [Matasano](http://matasano.com/) which started back in April 2013. The terms of the challenge meant writeups weren't possible - but this has since been relaxed once solutions were published by Matasano. Where possible I have tried to localise helper functions. But after Set 1 it became apparent that wasn't going to be manageable. Those have been collated in [`crypto_utils` in my crashburn repo](https://github.com/axiomiety/crashburn/blob/master/crypto_utils.py).
 
    * [Set 1*](cryptopals1.html)
    * [Set 2*](cryptopals2.html)
-   * [Set 2](cryptopals3.html)
+   * [Set 3](cryptopals3.html)
 
 #### [OverTheWire](http://www.overthewire.org/) ####
 
