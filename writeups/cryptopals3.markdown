@@ -67,9 +67,44 @@ For simplicity, the above only takes the first 2 blocks into account. Expanding 
 [skullsecurity](https://blog.skullsecurity.org/2013/a-padding-oracle-example) and Robert Heaton's [blog](http://robertheaton.com/2013/07/29/padding-oracle-attack/). This small article on [padbuster](http://blog.gdssecurity.com/labs/2010/9/14/automated-padding-oracle-attacks-with-padbuster.html) is neat too.
 
 ### 18. Implement CTR, the stream cipher mode ###
+
+CTR mode isn't particularly complex, but we need to be careful about padding (or lack of). With CTR we essentially end up xor'ing a stream of data with our plaintext to generate ciphertext (or vice versa for decryption).
+
+The following snippet illustrates how to do this as a standalone function. It's a little counter-intuitive but we don't use AES on the ciphertext itself - instead we use it on this incrementing counter function and only *then* do we xor it with the ciphertext.
+
+{% highlight python %}
+  def mc_part18():
+    s = base64.b64decode(b'L77na/nrFsKvynd6HzOoG7GHTLXsTVu9qvY/2syLXzhPweyyMTJULu/6/kXX0KSvoOLSFQ==')
+    counter = 0
+    
+    def fn():
+      import struct
+      nonlocal counter
+      ret = struct.pack('<QQ', 0, counter) # 2x64b -> 128b, little-endian
+      counter += 1
+      return ret
+  
+    from Crypto.Cipher import AES
+    cr = AES.new(b'YELLOW SUBMARINE', AES.MODE_ECB)
+  
+    r = bytearray()
+    for i in range(len(s)//16+1):
+      block = s[i*16:(i+1)*16] 
+      r.extend( crypto_utils.xor_bytearrays(cr.encrypt(fn()), block) )
+  
+    print(bytes(r))
+{% endhighlight %}
+
+Which yields `b"Yo, VIP Let's kick it Ice, Ice, baby Ice, Ice, baby "`.
+
 ### 19. Break fixed-nonce CTR mode using substitions ###
+
 ### 20. Break fixed-nonce CTR statistically ###
+
 ### 21. Implement the MT19937 Mersenne Twister RNG ###
+
 ### 22. Crack an MT19937 seed ###
+
 ### 23. Clone an MT19937 RNG from its output ###
+
 ### 24. Create the MT19937 stream cipher and break it ###
