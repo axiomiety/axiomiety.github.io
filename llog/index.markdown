@@ -24,11 +24,23 @@ The only downside right now is that my setup is geared towards reading and liste
 
 #### Pace ####
 
-I started on the 23rd of November 2014. The first lessons are a lot of random vocabulary used to teach you how to read Hangul. I can't stress how important it is to be comfortable reading Hangul, even if you don't get the pronunciation right (I know I don't). Romanisation doesn't do Hangul any justice, and being able to read means you can access a ton of native material.
+I started on the 23rd of November 2014. The first lessons are composed of lot of random vocabulary used to teach you how to read Hangul. I can't stress how important it is to be comfortable reading Hangul, even if you don't get the pronunciation right (I know I don't). Romanisation doesn't do Hangul any justice, and being able to read means you can access a ton of native material.
+
+##### Dec 2014 #####
 
 As of the end of December 2014, I'm pretty much done with the first handful of lessons (A through to 4). I have reached the point where I can greet/thank people, ask what this/that is and answer accordingly (like 아니요.사과예요 - no, it's an apple) but not much else. Vocabulary-wise I am around ~250 words though not all useful in day to day conversation (like tail - 꼬리, or landmine - 지뢰). Some of those are also compound words so it doesn't count as much (like America/American - 미국/미국 사람). But the method is good and the daily vocab reviews with Anki really help.
 
+##### Apr 2015 #####
+
+I finished the first half (A through to 10) and spent 2 weeks in Korea. So how helpful was 4 months' worth of Korean? Well. The hard truth is not *that* useful. Apart from asking what's good, where the bathroom is and where was the bus, it's been rather tough. What helped most was being able to read Hangul. Many signs aren't translated into English and unless you can read Hangul (phonetically), it's easy to get lost. 
+
+In retrospective it might have been wiser to spend more time learning pre-canned sentences given the time-frame. However the grammar came in handy when I ended up picking up new words and managed to form sentences on the fly.
+
+I am adding a dumping ground with a couple of things I picked up [here](korean.html)
+
 ### Navier Stokes ###
+
+Once this takes shape it should be some sort of intro to the Navier Stokes equation. Once...
 
 http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/
 
