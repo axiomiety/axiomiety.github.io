@@ -54,6 +54,7 @@ In a nutshell, the x coordinate is obtained by finding out how far along the wid
 The core of this game (and most games actually) is the game loop. This is a loop that runs continuously and generally does two things. Update the game state (based on user inputs, collisions etc...) and redraws the scenes. And that's pretty much 'it'.
 
 For Snake, updating the game state essentially means:
+
    * Update the list of coordinates occupied by the tail
    * Update the head's position based on user input
    * Check if we've just eaten an apple (and increase the tail length accordingly)

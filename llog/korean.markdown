@@ -96,7 +96,8 @@ I don't know Korean - 한국말 몰라요
 Where is the bathroom? 화장실이 어디에요?
 
 ## Misc words
-한글|Numeral
+
+한글|English
 :---|:------
 공항|airport
 병원|hospital
@@ -151,8 +152,19 @@ The (native) numbers 1, 2, 3, 4 and 20 change when adding a counter:
 20 = 스물 -> 스무
 
 ## Fun with Hangul
-* Movie titles (Midnight in Paris, Timer, ...)
-* Change phone language to target
+
+### Movie titles ###
+
+I find Koreans don't tend to translate the titles of English movies. Instead they write the phonetic 'equivalent' in 한글.
+
+   * 트랜스포터 (Transporter)
+   * 미드나잇 인 파리 (Midnight in Paris)
+   * 데몰리션 맨(Demolition Man)
+   * 데어데블 (Daredevil)
+
+### Phone language ###
+
+Setting your phone in your target language can be a way to 'use' it every day.
 
 ## Gotchas
 * Good, cold

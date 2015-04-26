@@ -168,12 +168,12 @@ em {
 }
 
 table {
-  width: 100%;
+  width: 50%;
   border: 1px solid #ebebeb;
 }
 
 th {
-  font-weight: 500;
+  font-weight: bold;
 }
 
 td {
