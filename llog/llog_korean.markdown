@@ -1,6 +1,6 @@
 ---
 layout: default
-title: languages
+title: llog - korean
 category: pages
 ---
 
@@ -36,4 +36,4 @@ I finished the first half (A through to 10) and spent 2 weeks in Korea. So how h
 
 In retrospective it might have been wiser to spend more time learning pre-canned sentences given the time-frame. However the grammar came in handy when I ended up picking up new words and managed to form sentences on the fly.
 
-I am adding a dumping ground with a couple of things I picked up [here](korean.html)
+I am adding a dumping ground with a couple of things I picked up [here](korean.html).

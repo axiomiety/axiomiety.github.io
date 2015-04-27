@@ -8,14 +8,10 @@ Dumping ground for some bits and bobs regarding Korean and 한글.
 
 This won't be of much help if you don't have a rudimentary understanding of Hangul (the Korean writing system). To be fair it should probably one of the first thing you learn - if only because romanisation doesn't seem to make Korean any favours. It's phonetic and relatively simple to learn (really!). Now being able to pronounce syllables doesn't mean words will be pronounced right, but you'll be more than half-way there.
 
-
-
 #### References
    * [howtostudykorean](http://www.howtostudykorean.com/unit1/unit-1-lessons-1-8/unit-1-lesson-3/)
    * [talktomeinkorean](http://www.talktomeinkorean.com/curriculum/)
    * [koreanfromzero](http://www.koreanfromzero.com)
-
-
 
 ## Numbers
 Zero - 공 as in for phone numbers
@@ -150,6 +146,10 @@ The (native) numbers 1, 2, 3, 4 and 20 change when adding a counter:
 3 = 셋 -> 세
 4 = 넷 -> 네
 20 = 스물 -> 스무
+
+## Apologising
+
+For "I apologise/I should not have done that", use 죄송합니다. To get someone's attention (a waiter for instance), use 저기요. When passing through a crowd, it translates as "Just a moment/Just a second": 잠시만요/잠깐만요. "I'm sorry to hear that" is usually something like 오 진짜? 어떻게요? (which translates roughly into "Really? What to do?"). 
 
 ## Fun with Hangul
 
