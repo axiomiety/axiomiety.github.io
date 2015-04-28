@@ -11,6 +11,8 @@ Learning Log
 I have a thing for languages. I only speak French and English fluently but I have high hopes to expand on that.
 
    * [Korean learning log](llog_korean.html)
+   * [Mandarin learning log](llog_mandarin.html)
+   * [Cantonese learning log](llog_cantonese.html)
 
 ## Technical Concepts ##
 
