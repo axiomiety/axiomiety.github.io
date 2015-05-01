@@ -29,6 +29,8 @@ Random tech-related stuff I found of interest and wrote about.
     Wireless freedom!
 *   [Wireless (in)Security](misc_wireless_insecurity.html):
     Fun with MAC filtering, hidden SSID and WEP.
+*   [Getting started with J](code_j-intro.html):
+    J is a programming language with roots in the likes of APL
 
 <!-- this needs further editing and should probably live in the misc section!
 

@@ -73,8 +73,6 @@ Time: 2시30분 (두 시 삼십 분) = 2:30 (+words for hour and minute)
 * Which floor
 * Where are you
 * That's right, that's good
-I don't know - 몰라요
-I don't know Korean - 한국말 몰라요
 * I do not understand
 * I don't speak Korean!
 * Can you please repeat/say that one more time?
@@ -89,7 +87,14 @@ I don't know Korean - 한국말 몰라요
 * How far?
 * Now, later, after
 * What time do you open? What time does it open?
-Where is the bathroom? 화장실이 어디에요?
+
+English|한글
+:------|:---
+How much is it?|얼마에요?
+Where is the bathroom?|화장실이 어디에요?
+I don't know|몰라요
+I don't know Korean|한국말 몰라요
+This is delicious|맛이 있어요
 
 ## Misc words
 
@@ -125,31 +130,37 @@ Bus terminal = 버스 터미널
 Example - I ate a dog, a dog ate me (swap the markers?) @italki
 
 ### Location
-안 = inside
-위 = on top
-밑 = below
-옆 = beside
-뒤 = behind
-앞 = in front
-여기 = here
+
+  * 안 = inside
+  * 위 = on top - 'o' on top of 't' (t,o in top)
+  * 밑 = below
+  * 옆 = beside
+  * 뒤 = behind - is facing the wall
+  * 앞 = in front
+  * 여기 = here
 
 I'm in dire need of some mnemonics...
 
 ## Counters
-개 = counter for things
-명 = counter for people
-번 = counter for behaviors/actions (how many times something was done - like watching a movie)
+
+  * 개 = counter for things
+  * 명 = counter for people
+  * 번 = counter for behaviors/actions (how many times something was done - like watching a movie)
 
 The (native) numbers 1, 2, 3, 4 and 20 change when adding a counter:
-1 = 하나 -> 한
-2 = 둘 -> 두
-3 = 셋 -> 세
-4 = 넷 -> 네
-20 = 스물 -> 스무
+
+  * 1 = 하나 -> 한
+  * 2 = 둘 -> 두
+  * 3 = 셋 -> 세
+  * 4 = 넷 -> 네
+  * 20 = 스물 -> 스무
 
 ## Apologising
 
-For "I apologise/I should not have done that", use 죄송합니다. To get someone's attention (a waiter for instance), use 저기요. When passing through a crowd, it translates as "Just a moment/Just a second": 잠시만요/잠깐만요. "I'm sorry to hear that" is usually something like 오 진짜? 어떻게요? (which translates roughly into "Really? What to do?"). 
+  * For "I apologise/I should not have done that", use 죄송합니다. 
+  * To get someone's attention (a waiter for instance), use 저기요. 
+  * When passing through a crowd, it translates as "Just a moment/Just a second": 잠시만요/잠깐만요. 
+  * "I'm sorry to hear that" is usually something like 오 진짜? 어떻게요? (which translates roughly into "Really? What to do?"). 
 
 ## Fun with Hangul
 
