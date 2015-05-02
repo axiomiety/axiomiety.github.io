@@ -67,7 +67,7 @@ We're now at the very top of the program. Before continuing, let's set a breakpo
 We can set we hit the breakpoint (denoted by 'B'), and we use `l` to list the current source. Now that we're in a debug session, let's make `l` an actual list.
 
 {% highlight python %}
-    (Pdb) l=[1,2,3,4]V
+    (Pdb) l=[1,2,3,4]
     *** Error in argument: '=[1,2,3,4]'
 {% endhighlight %}
 
