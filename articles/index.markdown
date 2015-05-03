@@ -4,33 +4,35 @@ title: articles
 category: pages
 ---
 
-I often find trying to explain a topic is one of the best way to learn about it. Here are some things I wanted to learn about, and the notes I made in the process.
+I often find trying to explain a topic is one of the best way to learn about it. Here are some things I wanted to learn about, and the notes I made in the process. Newer items are at the top of each section.
 
 ### Python ###
 
 I primarily code in Python. It's fun, readable, and the possibilities are endless!
 
-*   [`with` statement](code_python-with.html)
 *   [debugging from the interpreter](code_python-debug.html)
+*   [`with` statement](code_python-with.html)
 
 ### Tech ###
 
 Random tech-related stuff I found of interest and wrote about.
 
-*   [Doom Engine](code_doom-engine.html):
-    I first came across those while scanning through the source code for [doom](http://www.github.com/id). It highlights some of the technical limitations at the time, and how people got around them.
-*   [AWS Glacier](proj_aws-glacier.html):
-    A quick introduction to Amazon's Glacier service.
-*   [Snake in JS](gaming_snake.html):
-    A quick introduction to the critical 'gaming loop' by building a snake clone using JavaScript.
-*   [FreeBSD 9.1 on a budget VPS](misc_freebsd-vm128.html):
-    FreeBSD is a great OS - but getting this installed on a KVM VPS with 128MB of RAM wasn't as straightforward as I expected.
-*   [OpenWRT on a TP-WR710N](misc_openwrt-wr710n.html):
-    Wireless freedom!
-*   [Wireless (in)Security](misc_wireless_insecurity.html):
-    Fun with MAC filtering, hidden SSID and WEP.
+*   [A quick intro to Vagrant](misc_vagrant-intro.html):
+    Vagrant is a very handy way to set up dev VMs.
 *   [Getting started with J](code_j-intro.html):
     J is a programming language with roots in the likes of APL
+*   [Wireless (in)Security](misc_wireless_insecurity.html):
+    Fun with MAC filtering, hidden SSID and WEP.
+*   [OpenWRT on a TP-WR710N](misc_openwrt-wr710n.html):
+    Wireless freedom!
+*   [FreeBSD 9.1 on a budget VPS](misc_freebsd-vm128.html):
+    FreeBSD is a great OS - but getting this installed on a KVM VPS with 128MB of RAM wasn't as straightforward as I expected.
+*   [Snake in JS](gaming_snake.html):
+    A quick introduction to the critical 'gaming loop' by building a snake clone using JavaScript.
+*   [AWS Glacier](proj_aws-glacier.html):
+    A quick introduction to Amazon's Glacier service.
+*   [Doom Engine](code_doom-engine.html):
+    How the id guys worked around floating-point numbers when those weren't supported by the underlying architecture.
 
 <!-- this needs further editing and should probably live in the misc section!
 
