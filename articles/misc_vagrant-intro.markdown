@@ -90,3 +90,45 @@ And voila - you're in!
      Welcome to your Vagrant-built virtual machine.
      Last login: Fri Sep 14 06:23:18 2012 from 10.0.2.2
      vagrant@precise64:~$
+
+### Building something useful
+
+We can now everything we need to do to turn this fresh VM into a useable machine - like installing packages, setting up dot files etc... and package it up with `vagrant package --base my-cool-new-machine`. This will essentially turn what we did into a template. We are now free to use the box as we see fit. Let's give this a try by installing `git` on the box (via `sudo apt-get install git`).
+
+To package a box, we only need to run `vagrant package --base <box_name>`. The trouble I had was that `<box_name>` wasn't what I thought it was. It's actually the name virtualbox gives the VM. So how do we get hold of that? `VBoxManage` to the rescue:
+
+    c:\Program Files\Oracle\VirtualBox>VBoxManage list vms
+    "vagrant_default_1430691171637_21594" {1a7089f0-fd7e-49c3-9744-443ef261edc0}
+
+(`VBoxManage.exe` is probably not in your path - just go to the virtualbox install directory and it should be there)
+
+Shut down your VM (or vagrant will do it for you) and run:
+
+    U:\virt\vagrant>vagrant package --base vagrant_default_1430691171637_21594
+    ==> vagrant_default_1430691171637_21594: Attempting graceful shutdown of VM...
+    vagrant_default_1430691171637_21594: Guest communication could not be established! This is usually because
+    vagrant_default_1430691171637_21594: SSH is not running, the authentication information was changed,
+    vagrant_default_1430691171637_21594: or some other networking issue. Vagrant will force halt, if
+    vagrant_default_1430691171637_21594: capable.
+    ==> vagrant_default_1430691171637_21594: Forcing shutdown of VM...
+    ==> vagrant_default_1430691171637_21594: Clearing any previously set forwarded ports...
+    ==> vagrant_default_1430691171637_21594: Exporting VM...
+    ==> vagrant_default_1430691171637_21594: Compressing package to: U:/virt/vagrant/package.box
+
+And you'll see a `package.box` file in the local directory.
+
+So now what? We first need to register it with vargant:
+
+    U:\virt\vagrant>vagrant box add box_with_git package.box
+    ==> box: Adding box 'box_with_git' (v0) for provider:
+        box: Downloading: file://U:/virt/vagrant/package.box
+        box: Progress: 0% (Rate: 0/s, Estimated time remaining
+        box: Progress: 25% (Rate: 227M/s, Estimated time remaining
+        box: Progress: 41% (Rate: 58.1M/s, Estimated time remaining
+        box: Progress: 98% (Rate: 130M/s, Estimated time remaining
+        box: Progress: 100% (Rate: 118M/s, Estimated time remaining
+        box: :--:--)
+    ==> box: Successfully added box 'box_with_git' (v0) for 'virtualbox'!
+
+### Automata Extraordinaire
+
