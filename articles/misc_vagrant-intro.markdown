@@ -130,5 +130,62 @@ So now what? We first need to register it with vargant:
         box: :--:--)
     ==> box: Successfully added box 'box_with_git' (v0) for 'virtualbox'!
 
+We can confirm this was successful via:
+
+    U:\virt\vagrant>vagrant box list
+    box_with_git (virtualbox, 0)
+    precise64    (virtualbox, 0)
+
+Create a directory where vagrant will store all the related information, and do a `vagrant init box_with_git`.
+
+    U:\virt\vagrant>mkdir project_a
+    
+    U:\virt\vagrant>cd project_a
+    
+    U:\virt\vagrant\project_a>vagrant init box_with_git
+    A `Vagrantfile` has been placed in this directory. You are now
+    ready to `vagrant up` your first virtual environment! Please read
+    the comments in the Vagrantfile as well as documentation on
+    `vagrantup.com` for more information on using Vagrant.
+    
+It's worth remembering that the Vagrantfile which has just been created in `project_a` is pretty bare - just like we had to change the amount of memory etc... above, we need to do the same thing here (I'm sure there must be a better way!).
+
+Bringing it up (note the cwd):
+
+    U:\virt\vagrant\project_a>vagrant up
+    Bringing machine 'default' up with 'virtualbox' provider...
+    ==> default: Clearing any previously set forwarded ports...
+    ==> default: Clearing any previously set network interfaces...
+    ==> default: Preparing network interfaces based on configuration...
+        default: Adapter 1: nat
+    ==> default: Forwarding ports...
+        default: 22 => 2222 (adapter 1)
+    ==> default: Running 'pre-boot' VM customizations...
+    ==> default: Booting VM...
+    ==> default: Waiting for machine to boot. This may take a few minutes...
+        default: SSH address: 127.0.0.1:2222
+        default: SSH username: vagrant
+        default: SSH auth method: private key
+        default: Warning: Connection timeout. Retrying...
+        default: Warning: Authentication failure. Retrying...
+
+Woops. What just happened? Press `ctrl-c` to get out of that. Running `vagrant ssh-config` gives us a clue:
+
+    U:\virt\vagrant\project_a>vagrant ssh-config
+    Host default
+      HostName 127.0.0.1
+      User vagrant
+      Port 2222
+      UserKnownHostsFile /dev/null
+      StrictHostKeyChecking no
+      PasswordAuthentication no
+      IdentityFile U:/virt/vagrant/insecure_private_key
+      IdentitiesOnly yes
+      LogLevel FATAL
+
+Aha - the `IdentityFile` isn't right. On the default box this is defined as:
+
+    IdentityFile U:/virt/vagrant/.vagrant/machines/default/virtualbox/private_key
+
 ### Automata Extraordinaire
 
