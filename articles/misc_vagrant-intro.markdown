@@ -183,9 +183,16 @@ Woops. What just happened? Press `ctrl-c` to get out of that. Running `vagrant s
       IdentitiesOnly yes
       LogLevel FATAL
 
-Aha - the `IdentityFile` isn't right. On the default box this is defined as:
+Aha - `IdentityFile` isn't right. On the default box this is defined as:
 
     IdentityFile U:/virt/vagrant/.vagrant/machines/default/virtualbox/private_key
 
+Open up Vagrantfile in project_a, and tell vagrant to use this instead:
+
+    config.ssh.private_key_path = "U:/virt/vagrant/.vagrant/machines/default/virtualbox/private_key"
+
+Re-run `vagrant up` and the error is gone (we'll walk through how to create 'proper' pairs later). Note you could also specify a password login, but you'd need to make sure it was set up correctly on the box first.
+
 ### Automata Extraordinaire
 
+Puppet!
