@@ -57,11 +57,16 @@ Python|J
 `math.log(math.exp(1))`|`^.^1`
 `sum(range(5))`|`+/i.5`
 `[a+b for (a,b) in zip([1,3,5],[2,4,6])]`|`1 3 5 + 2 4 6`
+`[0,1,2,3][-1]`|_1{i.4`
+`math.sqrt(2)`|`%:2`
+`lambda x: x+x`|`+:`
+`[1,2,3].append(4)`|`1 2 3, 4`
+`len([1,2])`|`# 1 2`
 
 
 ### Cool examples
 
-Stuff for which there isn't much of a direct equivalent.
+SI first came across rethose while scanning through the source code for [doom](http://www.github.com/id). It highlights some of the technical limitations at the time, and how people got around them.tuff for which there isn't much of a direct equivalent.
 
       12 10 +. 8 8 NB. GCD
     3 2
@@ -102,3 +107,38 @@ Okay now for some cool*er* stuff!
       avg=: +/ % # NB. read the next line for this to make sense!
       avg 1 2 3 NB. this gets executed as (+/ 1 2 3) % (# 1 2 3) - so sum / number of elements
     2
+
+
+### Before I forget...
+
+no verb precedence and right-to-left evaluation
+
+[insert example with mult]
+
+scope - =: vs =. (global vs local - can define global inside a fn), primarily used for debugging it seems
+
+When defining in a script, use =: otherwise =. would make them local to the `load` verb
+
+#### Locale & Scope
+
+I think J uses the name locale for what some people might consider to be namespaces (that's the way it makes sense to me).
+
+a_p_ =: 0 NB. global a in namespace p has value 0
+names_p_ 0 NB. lists the variables in namespace p
+
+0 defines nouns, 3 defines verbs and 6 locale names (lists namespaces)
+
+names has dyadic definition - 'n' names_z_ 3
+
+### Sample programs
+
+    adda =: dyad : 0
+    r =. ''
+    count =. # x
+    i =. 0
+    while. i < count do.
+     r =. r , (i { x) + (i { y)
+     i =. i + 1
+    end.
+    r
+    )
