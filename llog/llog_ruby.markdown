@@ -1,0 +1,113 @@
+---
+layout: default
+title: llog - ruby
+category: pages
+---
+
+#### E
+
+The syntax is funky. What do you mean everything is an object?
+
+    irb(main):001:0> 3.class
+    => Fixnum
+
+Ah.
+
+#### E
+
+So to define a *class* method, I need to preface the name with `self.`?
+
+    class Foo
+      def self.bar
+
+Coming from Python, that's very unintutive.
+
+#### E
+
+I'm not sure I get the fuss about `do` and `end`. It's a little annoying to remember to close blocks/methods/classes. I guess that's the kind of thing a decent IDE would help with.
+Saying that I'm getting the hang of code blocks - and they rock!
+
+#### E
+
+There's no built-in unittest framework it seems. I had to get something called `minitest`, but it wasn't readily compatible with the tests on [exercism.io](http://www.exercism.io). I had to change `Minitest::Test` to `MiniTest::Unit::TestCase`.
+
+#### E
+
+So strings aren't lists of chars. `'foo'.respond_to?('each')` is false, unlike `['f','o','o'].respond_to?('each')`.
+
+But help's around the corner:
+
+    irb(main):009:0> 'fOo'.each_char { |c| puts c.swapcase }
+    F
+    o
+    O
+    => "fOo"
+
+Sounds like half the battle is knowing what's available.
+
+#### E
+
+The support for hashes is really neat. And iteration is guaranteed to be in the order inserted (as of 1.9 onwards I think). And you have to love the `invert` method - that's so hacky!
+
+#### E
+
+Concatenation in place using `#<<` - that's neat and it works for strings.
+
+#### E
+
+Symbols - funky little things. I particularly like the way you get to use them in hashes.
+
+#### E
+
+Inclusive ranges! Via `(1..10)` or exclusive like `(1...10)`. And `find`/`find_all` - more fun with code blocks
+
+    irb(main):017:0> (1..10).find_all { |i| i%2 == 0}
+    => [2, 4, 6, 8, 10]
+
+#### E
+
+Turning a range into an array:
+
+    irb(main):018:0> (1..10).class
+    => Range
+    irb(main):019:0> [*1..10].class
+    => Array
+
+We can also remove in-place:
+
+    irb(main):025:0> a.delete_if{|i| i % 2 == 0}
+    => [1, 3, 5, 7, 9]
+
+#### E
+
+What's this `merge` on hashes? It take a *code block* to handle conflicts? Now *that* is cool.
+
+    >> h1 = {:toast => 'nutella', :oats => 'honey'}
+    => {:toast=>"nutella", :oats=>"honey"}
+    >> h2 = {:fruit => 'apple', :oats => 'jam'}
+    => {:fruit=>"apple", :oats=>"jam"}
+    >> h1.merge(h2) { |k,from_h1, from_h2| [from_h1, from_h2] } 
+    => {:toast=>"nutella", :oats=>["honey", "jam"], :fruit=>"apple"}
+
+If I had any doubts now, they're gone! Though note that this returns a *new* hash. To merge `h1` in-place, we need to call `merge!`.
+
+#### E
+
+`collect` and `map` - number of items in = number of items out. They're not funky list comprehensions.
+
+#### E
+
+The spaceship operator: `<=>`, which is short-hand for `cmp` in other languages. 
+
+    >> a=[8,1,4,3,7]
+    => [8, 1, 4, 3, 7]
+    >> a.sort {|a1, a2| a1 <=> a2}
+    => [1, 3, 4, 7, 8]
+    >> a
+    => [8, 1, 4, 3, 7]
+    >> a.sort! {|a1, a2| a1 <=> a2}
+    => [1, 3, 4, 7, 8]
+    >> a
+    => [1, 3, 4, 7, 8]
+
+There's also a `sort_by` method - which helps us define an item's property to sort by. And note that for hashes, Ruby first converts the hash into an array (so the values that get passed down are themselves `(k,v)` arrays (if only there were tuples!).

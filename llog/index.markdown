@@ -14,6 +14,10 @@ I have a thing for languages. I only speak French and English fluently but I hav
    * [Mandarin learning log](llog_mandarin.html)
    * [Cantonese learning log](llog_cantonese.html)
 
+## Techy stuff ##
+
+   * [Ruby learning log](llog_ruby.html)
+
 ## Maths-y stuff ##
 
 ### Bites
