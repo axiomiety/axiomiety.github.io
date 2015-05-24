@@ -111,3 +111,19 @@ The spaceship operator: `<=>`, which is short-hand for `cmp` in other languages.
     => [1, 3, 4, 7, 8]
 
 There's also a `sort_by` method - which helps us define an item's property to sort by. And note that for hashes, Ruby first converts the hash into an array (so the values that get passed down are themselves `(k,v)` arrays (if only there were tuples!).
+
+#### E
+
+No kw arguments? Back to using the hash workaround just like with perl5. That's a shame... Still have defaults though.
+
+#### E
+
+No tuples and you can only return a single object. Thankfully Ruby can do multiple assignment in-place - so `x,y = get_point`, assuming `get_point` returns an array with 2 values. We can even leave out the square brackets, which *almost* makes it look like we tuples!
+
+#### E
+
+Looks like there isn't unpacking by default. The below is a little ugly - I would have much preferred for Ruby to pass in `|memo,s1,s2|`
+
+    seq1.each_char.zip(seq2.each_char).inject(0) { |memo, s| s[0] == s[1] ? memo : memo+1 }
+
+#### E
