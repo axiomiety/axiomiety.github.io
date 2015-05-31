@@ -127,3 +127,9 @@ Looks like there isn't unpacking by default. The below is a little ugly - I woul
     seq1.each_char.zip(seq2.each_char).inject(0) { |memo, s| s[0] == s[1] ? memo : memo+1 }
 
 #### E
+
+Instance variables can't be accessed directly. At all. Ever. Instead access needs to be done via getters setters. Not sure how I feel about that, but `attr_reader`,`attr_writer` and `attr_accessor` do make it easier (and they take symbols!). *However* those don't work with *class* variables (though it seems Ruby On Rails has a custom `cattr` method to do just that).
+
+#### E
+
+`self` can represent both the instance or the class. I guess using `cls` in Python is more convention than anything else.

@@ -67,9 +67,8 @@ Time: 2시30분 (두 시 삼십 분) = 2:30 (+words for hour and minute)
 * TV! (On, power, off, agree, disagree, back, ...)
 * Is it spicy?
 * Take me to... (taxi)
-* How much, where is
+* Where is?
 * Can I use...
-* Where is the bathroom
 * Which floor
 * Where are you
 * That's right, that's good
@@ -77,7 +76,6 @@ Time: 2시30분 (두 시 삼십 분) = 2:30 (+words for hour and minute)
 * I don't speak Korean!
 * Can you please repeat/say that one more time?
 * I am English/French/Chinese/...
-* Can I have more?
 * Two people
 * Do you have water?
 * A latte please
@@ -95,6 +93,7 @@ Where is the bathroom?|화장실이 어디에요?
 I don't know|몰라요
 I don't know Korean|한국말 몰라요
 This is delicious|맛이 있어요
+Can I have more of this?|이것 좀 더 주세요?
 
 ## Misc words
 
@@ -131,12 +130,12 @@ Example - I ate a dog, a dog ate me (swap the markers?) @italki
 
 ### Location
 
-  * 안 = inside
+  * 안 = inside - 'o' is falling inside the box
   * 위 = on top - 'o' on top of 't' (t,o in top)
-  * 밑 = below
-  * 옆 = beside
-  * 뒤 = behind - is facing the wall
-  * 앞 = in front
+  * 밑 = below - 
+  * 옆 = beside - 'o' is squeezed between 'y' and 'p'
+  * 뒤 = behind - facing the wall
+  * 앞 = in front - ball bouncing
   * 여기 = here
 
 I'm in dire need of some mnemonics...
