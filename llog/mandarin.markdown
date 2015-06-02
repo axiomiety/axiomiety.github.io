@@ -74,4 +74,4 @@ Character|Sentence|Translation
 相||
 使||
 向||
-总||
+总|我总是带着一把雨伞|I always carry an umbrella.
