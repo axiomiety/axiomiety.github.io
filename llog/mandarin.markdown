@@ -22,7 +22,7 @@ Characters|Mnemonic
 
 ### HSK 3
 
-First 50
+#### 1-50
 
 Character|Sentence|Translation
 :--------|:-------|:----------
@@ -70,8 +70,23 @@ Character|Sentence|Translation
 安|这条街道很安静。|This sreet is very quiet.
 只||
 赛|这是在与时间赛跑！|This is a race against time!
-世||
-相||
+世|世界末日很将近|
+相|因为他总是吹牛皮，所以没人相信他|Nobody belives him because he always boasts.
 使||
-向||
+向|地铁站在哪个方向|Which direction to the (metro) station?
 总|我总是带着一把雨伞|I always carry an umbrella.
+
+#### 51-100
+
+Character|Sentence|Translation
+:--------|:-------|:----------
+物||
+己||
+数||
+解||
+该||
+界||
+周||
+接||
+近||
+城||
