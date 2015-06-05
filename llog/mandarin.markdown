@@ -26,6 +26,7 @@ Characters|Mnemonic
 
 Character|Sentence|Translation
 :--------|:-------|:----------
+?|?|? (missing number 1...)
 市|我每天早上都会去市场买菜。|I go to the market every day to buy vegetables.
 地|请打扫你的卧室，地上很脏。|Please sweep your room, the floor is very dirty.
 要||
@@ -34,6 +35,7 @@ Character|Sentence|Translation
 业|i我已经毕业很久了。|I graduated a long time ago.
 成|成功需要努力和毅力。|Success requires effort and perseverance.
 后|因为是我做饭，所以以后吃饭你就得洗盘子。|You have to clean the dishes after dinner because I cooked.
+10||
 于|在爬了三天山之后，她终于到达了山顶。|After climbing the mountain for 3 days, she finally reached the summit.
 方|住在火车站附近很方便。|Living near the train station is very convenient.
 用|亚洲人常用筷子吃饭。|Asians often use chopsticks to eat.
@@ -44,6 +46,7 @@ Character|Sentence|Translation
 记||
 主|新加坡的天气主要是潮湿的。|Singapore's weather is mostly humid.
 实|我丈夫不实在。怎么办呢？|My husband isn't honest. What to do?
+20||
 定|你想瘦身？那么你一定得锻炼。|You want to lose weight? You should exercise.
 其||
 文||
@@ -54,6 +57,7 @@ Character|Sentence|Translation
 通||
 位||
 道|这问题太难了，我不知道答案。|This problem is too hard, I don't know the answer.
+30||
 如|如果他不能来，我就跟他分手。|If he cannot come I'll break up with him.
 种||
 重||
@@ -65,6 +69,7 @@ Character|Sentence|Translation
 提||
 平|因为我水平有限，所以我可能不会做得很好。|I don't know how to do this well due to my limited abilities.
 网|你真不忙啊！你总是挂在网上|You're not busy! You're often on the internet!
+40||
 万||
 据|据说她很漂亮而且很丰富 。|It is said she is both beautiful and rich.
 安|这条街道很安静。|This sreet is very quiet.
