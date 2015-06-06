@@ -53,13 +53,13 @@ Character|Sentence|Translation
 心||
 目||
 力||
-当||
+当|当然我原谅你！|Of course I forgive you!
 通||
 位||
 道|这问题太难了，我不知道答案。|This problem is too hard, I don't know the answer.
 30||
 如|如果他不能来，我就跟他分手。|If he cannot come I'll break up with him.
-种||
+种|公园里种了很多花。|There are many flowers in the park.
 重||
 加||
 然||
@@ -85,13 +85,17 @@ Character|Sentence|Translation
 
 Character|Sentence|Translation
 :--------|:-------|:----------
-物||
-己||
-数||
-解||
-该||
+物|上个礼拜天，我们去了动物园。|Last Sundary we went to the zoo.
+己|上个礼拜天/日，我们/地都去了/佐动物园。|I taught myself how to cook. (though 自学 might be more appropriate?)
+数|这个数学作业很容易-我已经做完了。|This maths homework is very easy - I'm already done.
+解|这个蛋糕可以分解成4份|We can divide this cake in four.
+该|你应该小心点儿。这里有点儿危险。|You should be a little careful. It's dangerous here.
 界||
 周||
 接||
 近||
 城||
+
+### Random sentences (to be added to Anki)
+
+我一直很好奇
