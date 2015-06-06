@@ -142,3 +142,50 @@ names has dyadic definition - 'n' names_z_ 3
     end.
     r
     )
+ 
+### Debugging
+
+First thing is to load the debug library - `load'debug'`. You enable debugging using `dbr 1` (and `dbr 0` to turn it off). Taking the 'wrong' definition of `centigrade` as per [the primer](http://www.jsoftware.com/help/primer/debug_error.htm), you can see that when set to 1 `J` drops us straight in debug mode:
+    
+       dbr 0
+       centigrade 212
+    |domain error: centigrade
+    |   t2=.t1    *5
+       dbr 1
+       centigrade 212
+    |domain error: centigrade
+    |   t2=.t1    *5
+    |centigrade[2]
+          t1
+    y - 32
+          dblocals ''
+    ┌──────────┬───────────┐
+    │centigrade│┌──┬──────┐│
+    │          ││t1│y - 32││
+    │          │├──┼──────┤│
+    │          ││y │212   ││
+    │          │└──┴──────┘│
+    └──────────┴───────────┘
+      
+There's also `dbstack`, which spits out the below. No idea what it means, but I'm sure that if I did it'd be mildly helpful!
+
+          dbstack
+    3 : 0
+    hdr=. ;:'name en ln nc args locals susp'
+    stk=. }. 13!:13''
+    if. #y do.
+      if. 2=3!:0 y do.
+        stk=. stk #~ (<y)={."1 stk
+      else.
+        stk=. ((#stk)<.,y){.stk
+      end.
+    end.
+    stk=. 1 1 1 1 0 0 1 1 1 #"1 stk
+    stk=. hdr, ": &.> stk
+    wds=. ({:@$@":@,.)"1 |: stk
+    len=. 20 >.<.-:({.wcsize'') - +/8, 4 {. wds
+    tc=. (len+1)&<.@$ {.!.'.' ({.~ len&<.@$)
+    tc@": each stk
+    )
+
+All debug methods are defined [here](http://www.jsoftware.com/help/user/lib_debug.htm). Just for kicks, once loaded those functions will be available under the `z` local - so `names_z_ 3` will list `db*`.
