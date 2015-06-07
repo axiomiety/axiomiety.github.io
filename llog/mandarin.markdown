@@ -50,7 +50,7 @@ Character|Sentence|Translation
 定|你想瘦身？那么你一定得锻炼。|You want to lose weight? You should exercise.
 其||
 文||
-心||
+心|你有健康。担心什么？|You are healthy. What are you worried about?
 目||
 力||
 当|当然我原谅你！|Of course I forgive you!
@@ -90,12 +90,14 @@ Character|Sentence|Translation
 数|这个数学作业很容易-我已经做完了。|This maths homework is very easy - I'm already done.
 解|这个蛋糕可以分解成4份|We can divide this cake in four.
 该|你应该小心点儿。这里有点儿危险。|You should be a little careful. It's dangerous here.
-界||
-周||
-接||
-近||
-城||
+界|网络没有国界。|The internet has no borders.
+周|我每周末都去跑步。|I run every weekend.
+接|i昨天晚上我接到了他的电话。|He called me late last night.
+近|最近我感觉不舒服。|I have been feeling uncomfortable lately.
+城|因为我去城外，所以路上的通勤时间很多。|I have a long commute because I live outside the city.
 
 ### Random sentences (to be added to Anki)
 
-我一直很好奇
+我一直很好奇 ()
+我经常四处奔走。(I'm often on the move)
+太棒了(that's great!)
