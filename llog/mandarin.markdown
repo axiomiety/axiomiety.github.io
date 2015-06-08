@@ -96,7 +96,27 @@ Character|Sentence|Translation
 近|最近我感觉不舒服。|I have been feeling uncomfortable lately.
 城|因为我去城外，所以路上的通勤时间很多。|I have a long commute because I live outside the city.
 
+<dl>
+  <dt>物</dt>
+  <dd>上个礼拜天，我们去了动物园。</dd>
+  <dd>Last Sundary we went to the zoo.</dd>
+  <dt>己</dt>
+  <dd>上个礼拜天/日，我们/地都去了/佐动物园。</dd>
+  <dd>I taught myself how to cook. (though 自学 might be more appropriate?)</dd>
+  <dt>数</dt>
+  <dd>这个数学作业很容易-我已经做完了。</dd>
+  <dd>This maths homework is very easy - I'm already done.</dd>
+  <dt>解</dt>
+  <dd>这个蛋糕可以分解成4份</dd>
+  <dd>We can divide this cake in four.</dd>
+  <dt>该</dt>
+  <dd>你应该小心点儿。这里有点儿危险。</dd>
+  <dd>You should be a little careful. It's dangerous here.</dd>
+
+</dl>
+
 ### Random sentences (to be added to Anki)
+
 
 我一直很好奇 ()
 我经常四处奔走。(I'm often on the move)
