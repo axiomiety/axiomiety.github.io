@@ -70,31 +70,41 @@ Character|Sentence|Translation
 平|因为我水平有限，所以我可能不会做得很好。|I don't know how to do this well due to my limited abilities.
 网|你真不忙啊！你总是挂在网上|You're not busy! You're often on the internet!
 40||
-万||
-据|据说她很漂亮而且很丰富 。|It is said she is both beautiful and rich.
-安|这条街道很安静。|This sreet is very quiet.
-只||
-赛|这是在与时间赛跑！|This is a race against time!
-世|世界末日很将近|
-相|因为他总是吹牛皮，所以没人相信他|Nobody belives him because he always boasts.
-使||
-向|地铁站在哪个方向|Which direction to the (metro) station?
-总|我总是带着一把雨伞|I always carry an umbrella.
+
+<dl>
+  <dt>万</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>据</dt>
+  <dd>据说她很漂亮而且很丰富 。</dd>
+  <dd>It is said she is both beautiful and rich.</dd>
+  <dt>安</dt>
+  <dd>这条街道很安静。</dd>
+  <dd>This sreet is very quiet.</dd>
+  <dt>只</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>赛</dt>
+  <dd>这是在与时间赛跑！</dd>
+  <dd>This is a race against time!</dd>
+  <dt>世</dt>
+  <dd>世界末日很将近</dd>
+  <dd></dd>
+  <dt>相</dt>
+  <dd>因为他总是吹牛皮，所以没人相信他</dd>
+  <dd>Nobody belives him because he always boasts.</dd>
+  <dt>使</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>向</dt>
+  <dd>地铁站在哪个方向</dd>
+  <dd>Which direction to the (metro) station?</dd>
+  <dt>总</dt>
+  <dd>我总是带着一把雨伞</dd>
+  <dd>I always carry an umbrella.</dd>
+</dl>
 
 #### 51-100
-
-Character|Sentence|Translation
-:--------|:-------|:----------
-物|上个礼拜天，我们去了动物园。|Last Sundary we went to the zoo.
-己|上个礼拜天/日，我们/地都去了/佐动物园。|I taught myself how to cook. (though 自学 might be more appropriate?)
-数|这个数学作业很容易-我已经做完了。|This maths homework is very easy - I'm already done.
-解|这个蛋糕可以分解成4份|We can divide this cake in four.
-该|你应该小心点儿。这里有点儿危险。|You should be a little careful. It's dangerous here.
-界|网络没有国界。|The internet has no borders.
-周|我每周末都去跑步。|I run every weekend.
-接|i昨天晚上我接到了他的电话。|He called me late last night.
-近|最近我感觉不舒服。|I have been feeling uncomfortable lately.
-城|因为我去城外，所以路上的通勤时间很多。|I have a long commute because I live outside the city.
 
 <dl>
   <dt>物</dt>
