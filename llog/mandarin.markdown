@@ -122,7 +122,15 @@ Character|Sentence|Translation
   <dt>该</dt>
   <dd>你应该小心点儿。这里有点儿危险。</dd>
   <dd>You should be a little careful. It's dangerous here.</dd>
-
+  <dt>记</dt>
+  <dd>对不起。我忘记你的名字。</dd>
+  <dd>I’m sorry. I forgot your name.</dd>
+  <dt>要</dt>
+  <dd>饭前要洗手。</dd>
+  <dd>You should wash your hands before eating.</dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
 </dl>
 
 ### Random sentences (to be added to Anki)
