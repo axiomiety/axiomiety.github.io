@@ -24,6 +24,7 @@ Characters|Mnemonic
 
 #### 1-50
 
+
 Character|Sentence|Translation
 :--------|:-------|:----------
 ?|?|? (missing number 1...)
