@@ -4,6 +4,7 @@ title: mandarin
 category: pages
 ---
 
+
 ## Tough Characters ##
 
 Because they look awfully alike to me, I tend to get them wrong quite often.
@@ -24,23 +25,60 @@ Characters|Mnemonic
 
 #### 1-50
 
+<dl>
+  <dt>市</dt>
+  <dd>我每天早上都会去市场买菜。</dd>
+  <dd>I go to the market every day to buy vegetables.</dd>
+  <dt>地</dt>
+  <dd>请打扫你的卧室，地上很脏。</dd>
+  <dd>Please sweep your room, the floor is very dirty.</dd>
+  <dt>要</dt>
+  <dd>吃饭前要洗手。</dd>
+  <dd>You should wash your hands before eating.</dd>
+  <dt>发</dt>
+  <dd>在我到达飞机场的时候，我才发现我忘了带我的护照。</dd>
+  <dd></dd>
+  <dt>者</dt>
+  <dd>他是一个咖啡爱好者</dd>
+  <dd>He is a coffee enthusiast!</dd>
+  <dt>业</dt>
+  <dd>i我已经毕业很久了。</dd>
+  <dd>I graduated a long time ago.</dd>
+  <dt>成</dt>
+  <dd>成功需要努力和毅力。</dd>
+  <dd>Success requires effort and perseverance.</dd>
+  <dt>后</dt>
+  <dd>因为是我做饭，所以以后吃饭你就得洗盘子。</dd>
+  <dd>You have to clean the dishes after dinner because I cooked.</dd>
+</dl>
+
+<dl>
+  <dt>于</dt>
+  <dd>在爬了三天山之后，她终于到达了山顶。</dd>
+  <dd>After climbing the mountain for 3 days, she finally reached the summit.</dd>
+  <dt>方</dt>
+  <dd>住在火车站附近很方便。</dd>
+  <dd>Living near the train station is very convenient.</dd>
+  <dt>用</dt>
+  <dd>亚洲人常用筷子吃饭。</dd>
+  <dd>Asians often use chopsticks to eat.</dd>
+  <dt>而</dt>
+  <dd>她年轻而美丽。</dd>
+  <dd>She is young and beautiful.</dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+
 
 Character|Sentence|Translation
 :--------|:-------|:----------
-?|?|? (missing number 1...)
-市|我每天早上都会去市场买菜。|I go to the market every day to buy vegetables.
-地|请打扫你的卧室，地上很脏。|Please sweep your room, the floor is very dirty.
-要||
-发|在我到达飞机场的时候，我才发现我忘了带我的护照。|
-者||
-业|i我已经毕业很久了。|I graduated a long time ago.
-成|成功需要努力和毅力。|Success requires effort and perseverance.
-后|因为是我做饭，所以以后吃饭你就得洗盘子。|You have to clean the dishes after dinner because I cooked.
-10||
-于|在爬了三天山之后，她终于到达了山顶。|After climbing the mountain for 3 days, she finally reached the summit.
-方|住在火车站附近很方便。|Living near the train station is very convenient.
-用|亚洲人常用筷子吃饭。|Asians often use chopsticks to eat.
-而|她年轻而美丽|She is young and beautiful.
 法|法律公平吗？有人不觉得。|Is the law fair? Some people don't think so.
 理|这个公司经理太多，工人太少。|This company has too many managers and not enough workers.
 事|有什么事吗？|What's up?
@@ -58,19 +96,42 @@ Character|Sentence|Translation
 通||
 位||
 道|这问题太难了，我不知道答案。|This problem is too hard, I don't know the answer.
-30||
-如|如果他不能来，我就跟他分手。|If he cannot come I'll break up with him.
-种|公园里种了很多花。|There are many flowers in the park.
-重||
-加||
-然||
-情|女人的柔情似水。|Women's feelings are like water.
-化||
-特||
-提||
-平|因为我水平有限，所以我可能不会做得很好。|I don't know how to do this well due to my limited abilities.
-网|你真不忙啊！你总是挂在网上|You're not busy! You're often on the internet!
-40||
+
+<dl>
+  <dt>如</dt>
+  <dd>如果他不能来，我就跟他分手。</dd>
+  <dd>If he cannot come I'll break up with him.</dd>
+  <dt>种</dt>
+  <dd>公园里种了很多花。</dd>
+  <dd>There are many flowers in the park.</dd>
+  <dt>重</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>加</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>然</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>情</dt>
+  <dd>女人的柔情似水。</dd>
+  <dd>Women's feelings are like water.</dd>
+  <dt>化</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>特</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>提</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>平</dt>
+  <dd>因为我水平有限，所以我可能不会做得很好。</dd>
+  <dd>I don't know how to do this well due to my limited abilities.</dd>
+  <dt>网</dt>
+  <dd>你真不忙啊！你总是挂在网上</dd>
+  <dd>You're not busy! You're often on the internet!</dd>
+</dl>
 
 <dl>
   <dt>万</dt>
@@ -83,8 +144,8 @@ Character|Sentence|Translation
   <dd>这条街道很安静。</dd>
   <dd>This sreet is very quiet.</dd>
   <dt>只</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我只在周末有时间。</dd>
+  <dd>I only have time at weekends.</dd>
   <dt>赛</dt>
   <dd>这是在与时间赛跑！</dd>
   <dd>This is a race against time!</dd>
@@ -106,6 +167,8 @@ Character|Sentence|Translation
 </dl>
 
 #### 51-100
+
+50
 
 <dl>
   <dt>物</dt>
@@ -134,6 +197,13 @@ Character|Sentence|Translation
   <dd></dd>
 </dl>
 
+60
+
+<dl>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 ### Random sentences (to be added to Anki)
 
 
