@@ -3,7 +3,7 @@ layout: default
 title: mandarin
 category: pages
 ---
- 
+
 
 ## Tough Characters ##
 
@@ -50,38 +50,35 @@ Characters|Mnemonic
   <dt>后</dt>
   <dd>因为是我做饭，所以以后吃饭你就得洗盘子。</dd>
   <dd>You have to clean the dishes after dinner because I cooked.</dd>
-</dl>
-
-<dl>
   <dt>于</dt>
   <dd>在爬了三天山之后，她终于到达了山顶。</dd>
   <dd>After climbing the mountain for 3 days, she finally reached the summit.</dd>
   <dt>方</dt>
   <dd>住在火车站附近很方便。</dd>
   <dd>Living near the train station is very convenient.</dd>
+</dl>
+
+<dl>
   <dt>用</dt>
   <dd>亚洲人常用筷子吃饭。</dd>
   <dd>Asians often use chopsticks to eat.</dd>
   <dt>而</dt>
   <dd>她年轻而美丽。</dd>
   <dd>She is young and beautiful.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>法</dt>
+  <dd>法律公平吗？有人不觉得。</dd>
+  <dd>Is the law fair? Some people don't think so.</dd>
+  <dt>理</dt>
+  <dd>这个公司经理太多，工人太少。</dd>
+  <dd>This company has too many managers and not enough workers.</dd>
+  <dt>事</dt>
+  <dd>有什么事吗？</dd>
+  <dd>What's up?</dd>
 </dl>
 
 
 Character|Sentence|Translation
 :--------|:-------|:----------
-法|法律公平吗？有人不觉得。|Is the law fair? Some people don't think so.
-理|这个公司经理太多，工人太少。|This company has too many managers and not enough workers.
-事|有什么事吗？|What's up?
 记||
 主|新加坡的天气主要是潮湿的。|Singapore's weather is mostly humid.
 实|我丈夫不实在。怎么办呢？|My husband isn't honest. What to do?
@@ -168,7 +165,7 @@ Character|Sentence|Translation
 
 #### 51-100
 
-50
+51
 
 <dl>
   <dt>物</dt>
@@ -197,13 +194,76 @@ Character|Sentence|Translation
   <dd></dd>
 </dl>
 
-60
+61
 
 <dl>
-  <dt></dt>
+  <dt>调</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>几</dt>
+  <dd>经过多年的艰苦工作，他几近成功。</dd>
+  <dd>After many years of difficult work, he was on the verge of success.</dd>
+  <dt>办</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>把</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>结</dt>
+  <dd>如今人们不早结婚。</dd>
+  <dd>Nowadays people don't marry early anymore.</dd>
+  <dt>演</dt>
+  <dd>那是他们最好的表演！</dd>
+  <dd>That was their best performance!</dd>
+  <dt>感</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>又</dt>
+  <dd>新加坡又热又潮湿。</dd>
+  <dd>Singapore is not only hot, but humid too.</dd>
+  <dt>选</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>选</dt>
   <dd></dd>
   <dd></dd>
 </dl>
+
+71
+
+<dl>
+  <dt>决</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>示</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>节</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>空</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>头</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>口</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>放</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>求</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>直</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>单</dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+
 ### Random sentences (to be added to Anki)
 
 
