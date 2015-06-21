@@ -186,10 +186,19 @@ Character|Sentence|Translation
   <dt>记</dt>
   <dd>对不起。我忘记你的名字。</dd>
   <dd>I’m sorry. I forgot your name.</dd>
-  <dt>要</dt>
-  <dd>饭前要洗手。</dd>
-  <dd>You should wash your hands before eating.</dd>
-  <dt></dt>
+  <dt>界</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>周</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>接</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>近</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>城</dt>
   <dd></dd>
   <dd></dd>
 </dl>
@@ -222,11 +231,11 @@ Character|Sentence|Translation
   <dd>新加坡又热又潮湿。</dd>
   <dd>Singapore is not only hot, but humid too.</dd>
   <dt>选</dt>
-  <dd></dd>
-  <dd></dd>
-  <dt>选</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>在澳大利亚，每个人必要去选举</dd>
+  <dd>It is mandatory for people to vote in Australia.</dd>
+  <dt>闻</dt>
+  <dd>这是已经昨天的新闻。</dd>
+  <dd>This is already yesterday's news.</dd>
 </dl>
 
 71
@@ -239,11 +248,11 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>节</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>下个星期，有一个电影节。</dd>
+  <dd>There is a film festival next week.</dd>
   <dt>空</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这个巧克力盒是空的！</dd>
+  <dd>This box of chocolate is empty!</dd>
   <dt>头</dt>
   <dd></dd>
   <dd></dd>
