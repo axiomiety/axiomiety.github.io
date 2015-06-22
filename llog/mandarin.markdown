@@ -187,20 +187,20 @@ Character|Sentence|Translation
   <dd>对不起。我忘记你的名字。</dd>
   <dd>I’m sorry. I forgot your name.</dd>
   <dt>界</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>网络没有国界。</dd>
+  <dd>The internet has no borders.</dd>
   <dt>周</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我每周末都去跑步。</dd>
+  <dd>I run every weekend.</dd>
   <dt>接</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>昨天晚上我接到了他的电话。</dd>
+  <dd>He called me late last night.</dd>
   <dt>近</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我最近感觉不舒服。</dd>
+  <dd>I have been feeling uncomfortable recently.</dd>
   <dt>城</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>因为我住在城外，所以我通勤的时间很长。</dd>
+  <dd>I have a long commute because I live outside of the city.</dd>
 </dl>
 
 61
@@ -266,11 +266,11 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>直</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>直接回你的房间去！</dd>
+  <dd>Go straight to your room!</dd>
   <dt>单</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这家饭店没有酒水单。</dd>
+  <dd>This restaurant does not have a wine list.</dd>
 </dl>
 
 ### Random sentences (to be added to Anki)
