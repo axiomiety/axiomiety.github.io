@@ -254,17 +254,17 @@ Character|Sentence|Translation
   <dd>这个巧克力盒是空的！</dd>
   <dd>This box of chocolate is empty!</dd>
   <dt>头</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我的头儿总是第一个上班的人。</dd>
+  <dd>My boss is always the first in the office.</dd>
   <dt>口</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你喜欢什么口味的冰淇淋?</dd>
+  <dd>What flavour ice-cream do you like?</dd>
   <dt>放</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>别担心。我们快回来了。</dd>
+  <dd>Don't worry. We're almost back.</dd>
   <dt>求</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>为什么问我？ 向你的朋友求助！</dd>
+  <dd>Why do you ask me? Ask your friends!</dd>
   <dt>直</dt>
   <dd>直接回你的房间去！</dd>
   <dd>Go straight to your room!</dd>
