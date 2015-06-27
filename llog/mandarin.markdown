@@ -273,6 +273,40 @@ Character|Sentence|Translation
   <dd>This restaurant does not have a wine list.</dd>
 </dl>
 
+##### 81
+
+<dl>
+  <dt>风</dt>
+  <dd>一路顺风!</dd>
+  <dd>Have a safe trip!</dd>
+  <dt>南</dt>
+  <dd>南方口音和北方口音不一样。</dd>
+  <dd>Southern and northern accents are different.</dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 ### Random sentences (to be added to Anki)
 
 
