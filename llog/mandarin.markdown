@@ -165,7 +165,7 @@ Character|Sentence|Translation
 
 #### 51-100
 
-51
+##### 51
 
 <dl>
   <dt>物</dt>
@@ -203,7 +203,7 @@ Character|Sentence|Translation
   <dd>I have a long commute because I live outside of the city.</dd>
 </dl>
 
-61
+##### 61
 
 <dl>
   <dt>调</dt>
@@ -238,7 +238,7 @@ Character|Sentence|Translation
   <dd>This is already yesterday's news.</dd>
 </dl>
 
-71
+##### 71
 
 <dl>
   <dt>决</dt>
@@ -282,15 +282,15 @@ Character|Sentence|Translation
   <dt>南</dt>
   <dd>南方口音和北方口音不一样。</dd>
   <dd>Southern and northern accents are different.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>哦</dt>
+  <dd>哦，对不起。这是你的吗?</dd>
+  <dd>Oh I'm sorry. Is this yours?</dd>
+  <dt>才</dt>
+  <dd>我不会唱歌，没有音乐的才华。</dd>
+  <dd>I can't sing, I have no musical talent.</dd>
+  <dt>变</dt>
+  <dd>她有了身孕？她的生活要改变了！</dd>
+  <dd>She's pregnant? Her life will change!</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
@@ -307,6 +307,7 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
 </dl>
+
 ### Random sentences (to be added to Anki)
 
 
