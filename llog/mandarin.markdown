@@ -273,7 +273,7 @@ Character|Sentence|Translation
   <dd>This restaurant does not have a wine list.</dd>
 </dl>
 
-##### 81
+#### 81
 
 <dl>
   <dt>风</dt>
@@ -291,21 +291,21 @@ Character|Sentence|Translation
   <dt>变</dt>
   <dd>她有了身孕？她的生活要改变了！</dd>
   <dd>She's pregnant? Her life will change!</dd>
-  <dt></dt>
+  <dt>查</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>或</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>育</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>议</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>带</dt>
+  <dd>别忘了带相机！</dd>
+  <dd>Don't forget to bring the camera!</dd>
 </dl>
 
 ### Random sentences (to be added to Anki)
