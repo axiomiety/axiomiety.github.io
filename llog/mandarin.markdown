@@ -292,14 +292,14 @@ Character|Sentence|Translation
   <dd>她有了身孕？她的生活要改变了！</dd>
   <dd>She's pregnant? Her life will change!</dd>
   <dt>查</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你查看过你电子邮箱的收件箱了吗？</dd>
+  <dd>Have you checked your inbox?</dd>
   <dt>或</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>明天或许会下雨。</dd>
+  <dd>It will probably rain tomorrow.</dd>
   <dt>育</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>现今教育是一个赚钱的生意。</dd>
+  <dd>Nowadays education is a lucrative business.</dd>
   <dt>议</dt>
   <dd></dd>
   <dd></dd>
