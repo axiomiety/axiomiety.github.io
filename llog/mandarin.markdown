@@ -314,18 +314,18 @@ Character|Sentence|Translation
   <dt>参</dt>
   <dd>我们都参加了学</dd>
   <dd>We all participate in the school's music competition.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>较</dt>
+  <dd>他跟他的弟弟，谁的力气比较大？</dd>
+  <dd>Between his brother and him, who is the strongest?</dd>
+  <dt>片</dt>
+  <dd>请告诉我，这片蛋糕，太大了吗？</dd>
+  <dd>Tell me - is this slice of cake too big?</dd>
+  <dt>环</dt>
+  <dd>你环视一周。你在看什么？</dd>
+  <dd>Look around you. What do you reckon?</dd>
+  <dt>山</dt>
+  <dd>爬上山以后，我休息了一点会。</dd>
+  <dd>I took a small break after hiking up the mountain.</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
