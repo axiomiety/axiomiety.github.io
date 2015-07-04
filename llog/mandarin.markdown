@@ -308,6 +308,42 @@ Character|Sentence|Translation
   <dd>Don't forget to bring the camera!</dd>
 </dl>
 
+#### 91
+
+<dl>
+  <dt>参</dt>
+  <dd>我们都参加了学</dd>
+  <dd>We all participate in the school's music competition.</dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+
+
 ### Random sentences (to be added to Anki)
 
 
