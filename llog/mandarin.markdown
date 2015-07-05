@@ -23,7 +23,9 @@ Characters|Mnemonic
 
 ### HSK 3
 
-#### 1-50
+<!--list wasn't 0-indexed. need to fill in the gaps >_< -->
+
+#### 1
 
 <dl>
   <dt>市</dt>
@@ -58,6 +60,8 @@ Characters|Mnemonic
   <dd>Living near the train station is very convenient.</dd>
 </dl>
 
+#### 11
+
 <dl>
   <dt>用</dt>
   <dd>亚洲人常用筷子吃饭。</dd>
@@ -76,6 +80,7 @@ Characters|Mnemonic
   <dd>What's up?</dd>
 </dl>
 
+#### 21
 
 Character|Sentence|Translation
 :--------|:-------|:----------
@@ -93,6 +98,8 @@ Character|Sentence|Translation
 通||
 位||
 道|这问题太难了，我不知道答案。|This problem is too hard, I don't know the answer.
+
+#### 31
 
 <dl>
   <dt>如</dt>
@@ -130,6 +137,8 @@ Character|Sentence|Translation
   <dd>You're not busy! You're often on the internet!</dd>
 </dl>
 
+#### 41
+
 <dl>
   <dt>万</dt>
   <dd></dd>
@@ -163,9 +172,7 @@ Character|Sentence|Translation
   <dd>I always carry an umbrella.</dd>
 </dl>
 
-#### 51-100
-
-##### 51
+#### 51
 
 <dl>
   <dt>物</dt>
@@ -203,7 +210,7 @@ Character|Sentence|Translation
   <dd>I have a long commute because I live outside of the city.</dd>
 </dl>
 
-##### 61
+#### 61
 
 <dl>
   <dt>调</dt>
@@ -238,7 +245,7 @@ Character|Sentence|Translation
   <dd>This is already yesterday's news.</dd>
 </dl>
 
-##### 71
+#### 71
 
 <dl>
   <dt>决</dt>
@@ -326,9 +333,9 @@ Character|Sentence|Translation
   <dt>山</dt>
   <dd>爬上山以后，我休息了一点会。</dd>
   <dd>I took a small break after hiking up the mountain.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>条</dt>
+  <dd>这条裤子太紧身了！</dd>
+  <dd>Those pants are too tight!</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
