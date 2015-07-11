@@ -336,6 +336,41 @@ Character|Sentence|Translation
   <dt>条</dt>
   <dd>这条裤子太紧身了！</dd>
   <dd>Those pants are too tight!</dd>
+  <dt>级</dt>
+  <dd>汉语水平考试三级。</dd>
+  <dd>HSK Level 3.</dd>
+  <dt>易</dt>
+  <dd>你的外国客人平易近人。</dd>
+  <dd>Your foreign guests are very approachable.</dd>
+  <dt>需</dt>
+  <dd>学习外语需要自律。</dd>
+  <dd>Studying foreign languages requires a lot of self-discipline.</dd>
+  <dt>举</dt>
+  <dd>举重的物品需要注意。</dd>
+  <dd>Lifting heavy items needs to be done carefully.</dd>
+</dl>
+
+#### 101
+
+<dl>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
@@ -350,10 +385,12 @@ Character|Sentence|Translation
   <dd></dd>
 </dl>
 
-
 ### Random sentences (to be added to Anki)
-
 
 我一直很好奇 ()
 我经常四处奔走。(I'm often on the move)
 太棒了(that's great!)
+
+### Scratch pad
+
+品目 is rarely used except for industry. 物品 is more common in daily life.
