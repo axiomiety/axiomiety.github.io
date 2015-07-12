@@ -353,19 +353,19 @@ Character|Sentence|Translation
 #### 101
 
 <dl>
-  <dt></dt>
+  <dt>音</dt>
+  <dd>睡觉之前听了古典音乐。</dd>
+  <dd>I listen to classical music before going to bed.</dd>
+  <dt>李</dt>
+  <dd>李子酒很好喝。</dd>
+  <dd>Plum wine is great to drink.</dd>
+  <dt>清</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>注</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
+  <dt>越</dt>
   <dd></dd>
   <dd></dd>
   <dt></dt>
