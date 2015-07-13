@@ -368,19 +368,19 @@ Character|Sentence|Translation
   <dt>越</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>居</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>低</dt>
+  <dd>她的工资很低。</dd>
+  <dd>Her salary is very low.</dd>
+  <dt>包</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>且</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
+  <dt>容</dt>
   <dd></dd>
   <dd></dd>
 </dl>
