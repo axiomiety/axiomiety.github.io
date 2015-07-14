@@ -369,20 +369,20 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>居</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我楼上的邻居很吵。</dd>
+  <dd>My upstairs neighbours are very noisy.</dd>
   <dt>低</dt>
   <dd>她的工资很低。</dd>
   <dd>Her salary is very low.</dd>
   <dt>包</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>别忘了包裹你的圣诞礼物！</dd>
+  <dd>Don't forget to wrap you Christmas presents!</dd>
   <dt>且</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>现在天气很冷，而且多雨。</dd>
+  <dd>Today's weather is cold and wet.</dd>
   <dt>容</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我的历史考试很容易。</dd>
+  <dd>My history exam was very easy.</dd>
 </dl>
 
 ### Random sentences (to be added to Anki)
