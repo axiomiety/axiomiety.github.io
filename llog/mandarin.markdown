@@ -360,14 +360,14 @@ Character|Sentence|Translation
   <dd>李子酒很好喝。</dd>
   <dd>Plum wine is great to drink.</dd>
   <dt>清</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这个事情你清楚吗？</dd>
+  <dd>Do you understand this thing?</dd>
   <dt>注</dt>
   <dd></dd>
   <dd></dd>
   <dt>越</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这匹马，越过了大门。</dd>
+  <dd>The horse jumped over the gate.</dd>
   <dt>居</dt>
   <dd>我楼上的邻居很吵。</dd>
   <dd>My upstairs neighbours are very noisy.</dd>
