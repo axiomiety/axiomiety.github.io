@@ -385,6 +385,49 @@ Character|Sentence|Translation
   <dd>My history exam was very easy.</dd>
 </dl>
 
+#### 111
+
+<dl>
+  <dt>图</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>花</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>根</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>历</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>响</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>段</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>必</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>声</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>园</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>超</dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+
+<!--
+<dl>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+-->
+
 ### Random sentences (to be added to Anki)
 
 我一直很好奇 ()
