@@ -389,8 +389,8 @@ Character|Sentence|Translation
 
 <dl>
   <dt>图</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我去图书馆找资料</dd>
+  <dd>I went to the library to look for information.</dd>
   <dt>花</dt>
   <dd></dd>
   <dd></dd>
@@ -398,11 +398,11 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>历</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我的妹妹在大学修历史。</dd>
+  <dd>My (younger) sister is studying history at university.</dd>
   <dt>响</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>如果有人来，发出响声！</dd>
+  <dd>Make a noise if someone comes!</dd>
   <dt>段</dt>
   <dd></dd>
   <dd></dd>
