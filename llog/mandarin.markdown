@@ -404,20 +404,20 @@ Character|Sentence|Translation
   <dd>如果有人来，发出响声！</dd>
   <dd>Make a noise if someone comes!</dd>
   <dt>段</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我需要你的一段时间。/ 我得占用你的一段时间。</dd>
+  <dd>I need some of your time.</dd>
   <dt>必</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>现在晚了。我必须得走了。</dd>
+  <dd>It's late. I must get going.</dd>
   <dt>声</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>请说大声一点！</dd>
+  <dd>Please speak a little louder!</dd>
   <dt>园</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>伦敦郊区有很多公园。</dd>
+  <dd>There are many parks in London's suburbs.</dd>
   <dt>超</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>超过一千人参加示威。</dd>
+  <dd>More than a thousand people participated in the demonstration.</dd>
 </dl>
 
 <!--
