@@ -175,14 +175,34 @@ Movement without regard to direction - potential range (up/down).
 
 ### How Price Change
 
-Call vs Puts - there's an interest rate component in the call which is not present in the put.
+Calls vs Puts - there's an interest rate component in the call which is not present in the put.
 
-Change in:
+Increase in:
 
-   * *strike price* - similar to changing the deductible of an insurance policy. Raising the deductible decreases the price (for calls).
-   * *days to expiry* - reducing the number of days by `X%` reduces the price of the calls and puts by < `X%` (time decay is non-linear).
-   * *interest rates*- seldom looked at due to the short-term view most take, but impact can be significant for long-dated options. This is because compared with owning the stock outright, it's still cheaper than owning the option. This is because the call buyer can invest the difference.
-   * *dividend yield* - when it increases, calls go down and puts go up. This is because dividends impact the underlier.
-   * *volatility* - both calls and puts go up (risk goes up)
+   * underlier - price of the calls go up, price of the puts go down
+   * strike price - similar to changing the deductible of an insurance policy. Raising the deductible decreases the price (for calls).
+   * days to expiry - reducing the number of days by X% reduces the price of the calls and puts by < X% (time decay is non-linear).
+   * interest rates - seldom looked at due to the short-term view most take, but impact can be significant for long-dated options. This is because compared with owning the stock outright, it's still cheaper than owning the option. This is because the call buyer can invest the difference.
+   * dividend yield - when it increases, calls go down and puts go up. This is because dividends impact the underlier (inverse of underlier)
+   * volatility - both calls and puts go up (risk goes up)
 
 ### Delta and Time Decay
+
+Delta is dynamic - it changes as the price of the underlier changes and time changes. It can also be viewed (practically) as the "share equivalency" of an option.
+
+Call & Put deltas
+
+Type|OTM|ATM|ITM
+:---|:--|:--|:--
+Call|`0:+0.5`|`+0.5`|`+0.5:+1`
+Put|`-0.5:0`|`-0.5`|`-1:-0.5`
+
+Call vs put values: same strike/expiry, calls will be more expensive than puts because of the interest component. To illustrate this, note that a long call can be replicated with a long stock + long put position. Money spent for the long stock posn (whether outright or borrowed) could be earning interest instead - hence calls should be more expensive than the equivalent put.
+
+Time Decay is non-linear. Most of the decay happens ~1/3 of the remaining life of an option.
+
+Implied volatility - out of all the inputs, volatility is the only which cannot be obtained objectively. We 'back it out' from our option pricing formula. It is both the market consensus of future volatility as well as the volatility that produces the market price of the option.
+
+## Spreading - I
+
+
