@@ -392,11 +392,11 @@ Character|Sentence|Translation
   <dd>我去图书馆找资料</dd>
   <dd>I went to the library to look for information.</dd>
   <dt>花</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>每个早上我在花园里散步。</dd>
+  <dd>I take a stroll in my garden every morning.</dd>
   <dt>根</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我们的晚餐是荷花根汤。(莲藕 in everyday Chinese)</dd>
+  <dd>We're having lotus root soup for dinner.</dd>
   <dt>历</dt>
   <dd>我的妹妹在大学修历史。</dd>
   <dd>My (younger) sister is studying history at university.</dd>
@@ -420,6 +420,40 @@ Character|Sentence|Translation
   <dd>More than a thousand people participated in the demonstration.</dd>
 </dl>
 
+#### 121
+
+<dl>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 <!--
 <dl>
   <dt></dt>
