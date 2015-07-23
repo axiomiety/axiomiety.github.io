@@ -205,4 +205,40 @@ Implied volatility - out of all the inputs, volatility is the only which cannot 
 
 ## Spreading - I
 
+4 basic (vertical) spreads.
+
+### Bull Call Spread
+
+  * Purchase a call option at strike A, and sell another at strike B where B > A
+  * Number of options is identical
+  * Same expiry
+  * Debit spread
+  * Characteristics
+    * Maximum Profit: difference in strike - debit paid
+    * Maximum Loss: debit paid
+    * Break-Even Point: lower strike + debit paid
+  * Notes
+    * better suited for underliers with higher volatility
+    * give up 'unlimited' potential for lower BEP
+    * value changes slowly, maximum ontol at or close to expiry
+    * picking the strike - 'selling' the target price (since you don't think it'll go any higher than that)
+
+When legging out - entering a spread order to close, it is more prudent to buy back the short before liquidating the long - to avoid having an uncovered short call with unlimited downside.
+
+## Bear Put Spread
+
+  * Purchase a put at strike A, and sell another at strike B where A > B
+  * Number of options is identical
+  * Same expiry
+  * Debit spread
+  * Considered covered for margin purposes
+  * Characteristics
+    * Maximum Profit: difference in strike - debit paid
+    * Maximum Loss: debit paid
+    * Break-Even Point: higher strike - debit paid
+  * Notes
+    * Can be used to offset time value
+
+## Bear Call Spread
+
 
