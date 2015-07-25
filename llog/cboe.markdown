@@ -241,4 +241,16 @@ When legging out - entering a spread order to close, it is more prudent to buy b
 
 ## Bear Call Spread
 
+Margin requirements for uncovered calls (for CBOE) is proceeds from sale + 10% of underlier.
 
+  * Buy a call at strike A, sell a call at strike B where A > B
+  * Number of options is identical
+  * Same expiry
+  * Credit spread (+ive on initialisation)
+  * Margin requirement will be difference between strikes - proceeds from short call sales
+  * Characteristics
+    * Maximum Profit: credit received (underlier < B)
+    * Maximum Loss: difference in strike price - credit received
+    * Break-Even Point: higher strike - debit paid
+
+## Bull Put Spread
