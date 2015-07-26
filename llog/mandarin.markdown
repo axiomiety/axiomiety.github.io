@@ -423,21 +423,21 @@ Character|Sentence|Translation
 #### 121
 
 <dl>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>盘</dt>
+  <dd>这家饭店的盘子常常是脏的。</dd>
+  <dd>The dishes in this restaurant are often dirty.</dd>
+  <dt>护</dt>
+  <dd>军队是 保护平民的。</dd>
+  <dd>The army protects civilians.</dd>
+  <dt>照</dt>
+  <dd>请出示你的护照！</dd>
+  <dd>Please show me your passport!</dd>
+  <dt>终</dt>
+  <dd>半个小时以后，火车终于来了。</dd>
+  <dd>The train finally came half an hour later.</dd>
+  <dt>除</dt>
+  <dd>除了汉语，你还会说别的语言吗？</dd>
+  <dd>Can you speak any other languages apart from Chinese?</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
