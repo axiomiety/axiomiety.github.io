@@ -203,9 +203,17 @@ Time Decay is non-linear. Most of the decay happens ~1/3 of the remaining life o
 
 Implied volatility - out of all the inputs, volatility is the only which cannot be obtained objectively. We 'back it out' from our option pricing formula. It is both the market consensus of future volatility as well as the volatility that produces the market price of the option.
 
-## Spreading - I
+## Spreading I
 
 4 basic (vertical) spreads.
+
+<dl>
+  <dt>Debit Spread</dt>
+  <dl>Total cash amount paid out for long option > total cash amount received for the short option</dl>
+  <dt>Debit Spread</dt>
+  <dl>Total cash amount received for the short option > total cash amount paid out for the long option</dl>
+</dl>
+
 
 ### Bull Call Spread
 
@@ -225,7 +233,7 @@ Implied volatility - out of all the inputs, volatility is the only which cannot 
 
 When legging out - entering a spread order to close, it is more prudent to buy back the short before liquidating the long - to avoid having an uncovered short call with unlimited downside.
 
-## Bear Put Spread
+### Bear Put Spread
 
   * Purchase a put at strike A, and sell another at strike B where A > B
   * Number of options is identical
@@ -239,7 +247,7 @@ When legging out - entering a spread order to close, it is more prudent to buy b
   * Notes
     * Can be used to offset time value
 
-## Bear Call Spread
+### Bear Call Spread
 
 Margin requirements for uncovered calls (for CBOE) is proceeds from sale + 10% of underlier.
 
@@ -253,4 +261,35 @@ Margin requirements for uncovered calls (for CBOE) is proceeds from sale + 10% o
     * Maximum Loss: difference in strike price - credit received
     * Break-Even Point: higher strike - debit paid
 
-## Bull Put Spread
+### Bull Put Spread
+
+Writing uncovered puts, just like writing uncovered calls, has high margin requirements. This spread has a static margin required at initialisation but no ongoing margin requirement (vs an uncovered put).
+
+  * Buy a put a strike A, sell a put at strike B where A < B
+  * Number of options is identical
+  * Same expiry
+  * Credit spread (+ive on initialisation)
+  * Characteristics
+      * Maximum Profit: credit received (underlier > B)
+      * Maximum Loss: difference in strike price - credit received
+      * Break-Even Point: higher strike - credit received
+
+### Debit or Credit Spreads
+
+Scenario: bullish on short term - bull call or bull put spread?
+
+Any trader would rather receive money than pay it out. Also, the cost of exiting a put spread is nil - but the call spread isn't (and will require transaction costs).
+
+The difference is based on the possibility of early assignment (not applicable with European-style options). Worst scenario is when assignment happens at a price between A and B.
+
+## Basic of Spread: Straddles and Strangles
+
+### Short Straddles
+
+Holder expects decreased volatility.
+
+  * Constructed by writing a call and a put
+  * Same strike
+  * Same expiry
+  * 1:1 ratio
+  * Credit spread
