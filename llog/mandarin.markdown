@@ -438,21 +438,21 @@ Character|Sentence|Translation
   <dt>除</dt>
   <dd>除了汉语，你还会说别的语言吗？</dd>
   <dd>Can you speak any other languages apart from Chinese?</dd>
+  <dt>极</dt>
+  <dd>极少人活到100岁以上。</dd>
+  <dd>Very few people live more than a 100 years.</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>楼</dt>
   <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>This factory's products are exported.</dd>
+  <dt>满</dt>
+  <dd>他对生活很满足。</dd>
+  <dd>He is satisfied with his life.</dd>
 </dl>
 <!--
 <dl>
@@ -471,3 +471,7 @@ Character|Sentence|Translation
 ### Scratch pad
 
 品目 is rarely used except for industry. 物品 is more common in daily life.
+
+楼下 downstairs。 下楼 go downstairs
+
+
