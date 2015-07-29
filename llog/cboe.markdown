@@ -284,12 +284,79 @@ The difference is based on the possibility of early assignment (not applicable w
 
 ## Basic of Spread: Straddles and Strangles
 
-### Short Straddles
+### Short Straddle
 
-Holder expects decreased volatility.
+Holder expects decreased volatility but neutral - neither bullish nor bearish. An increase in volatility has a negative effect on the short straddle (while a decrease has a positive effect). Time decay has a positive effect too.
 
   * Constructed by writing a call and a put
   * Same strike
   * Same expiry
   * 1:1 ratio
   * Credit spread
+  * Characteristics
+    * Maximum Profit: limited to total credit received (underlying at strike at expiry)
+    * Maximum Loss: unlimited
+    * Break-Even Point: two of them
+      * Upside BEP: strike price + credit received
+      * Downside BEP: strike price - credit received
+
+As always, there is a risk of early assignment with equity options or American-style index options.
+
+### Long Straddle
+
+Holder has a neutral position, but expects increased volatility (a large move either up or down by expiration). Time decay has a negative effect.
+
+  * Constructed by buying a call and a put
+  * Same strike
+  * Same expiry
+  * 1:1 ratio
+  * Debit spread
+  * Characteristics
+    * Maximum Profit: unlimited
+    * Maximum Loss: total debit paid (underlying at strike at expiry)
+    * Break-Even Point: two of them
+      * Upside BEP: strike price + debit paid
+      * Downside BEP: strike price - debit paid
+
+### Short Strangle
+
+Holder has a neutral position and expects decreased volatility.
+
+  * Constructed by writing a call and a put
+  * Call has higher strike than the put
+  * Same expiry
+  * 1:1 ratio
+  * Credit spread
+  * Characteristics
+    * Maximum Profit: limited to total credit received (underlying at/between strikes at expiry)
+    * Maximum Loss: unlimited
+    * Break-Even Point: two of them
+      * Upside BEP: call strike price + credit received
+      * Downside BEP: put strike price - credit received
+
+As always, there is a risk of early assignment with equity options or American-style index options.
+
+### Long Strangle
+
+Holder has a neutral position, but expects increased volatility (a large move either up or down by expiration). Time decay has a negative effect.
+
+  * Constructed by writing a call and a put
+  * Call has higher strike than the put
+  * Same expiry
+  * 1:1 ratio
+  * Debit spread
+  * Characteristics
+    * Maximum Profit: unlimited
+    * Maximum Loss: total debit paid (underlying at/between strikes at expiry)
+    * Break-Even Point: two of them
+      * Upside BEP: call strike price - debit paid
+      * Downside BEP: put strike price - debit paid
+
+## Basics of Spreading: Butterflies and Condors
+
+### Long Call Butterfly
+
+Cheaper than a straddle because maximum loss is capped both for the upside and downside.
+
+  * 1:2:1 (long:short:long)
+  * Debit spread
