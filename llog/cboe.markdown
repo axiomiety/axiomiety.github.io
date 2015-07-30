@@ -356,7 +356,43 @@ Holder has a neutral position, but expects increased volatility (a large move ei
 
 ### Long Call Butterfly
 
-Cheaper than a straddle because maximum loss is capped both for the upside and downside.
+It's entirely made up of call options (some long, some short). Cheaper than a straddle because maximum loss is capped both for the upside and downside.
 
+  * 3 strikes - A, A+x, A+2x
   * 1:2:1 (long:short:long)
   * Debit spread
+  * Characteristics
+    * Maximum Profit: limited (underlying at middle strike at expiry)
+    * Maximum Loss: total debit paid (underlying at/below lowest strike or at/above highest strike at expiry)
+    * Break-Even Point: two of them
+      * Upside BEP: highest strike paid - debit paid
+      * Downside BEP: lowest strike price - debit paid
+
+As always, there is a risk of early assignment with equity options or American-style index options.
+
+### Long Put Butterfly
+
+Entirely made up of put options.
+
+  * 3 strikes - A, A+x, A+2x
+  * 1:2:1 (long:short:long)
+  * Debit spread
+  * Characteristics
+    * Maximum Profit: limited (underlying at middle strike at expiry)
+    * Maximum Loss: total debit paid (underlying at/below lowest strike or at/above highest strike at expiry)
+    * Break-Even Point: two of them
+      * Upside BEP: highest strike paid - debit paid
+      * Downside BEP: lowest strike price - debit paid
+
+Assuming same strikes and expiry, has the same pay-off at expiration as a long call butterfly. Which will be picked depends on the current market prices of the options.
+
+As always, there is a risk of early assignment with equity options or American-style index options.
+
+### Iron Butterfly
+
+Long synthetic butterfly spread. Can be vriwed as a bull put spread and a bear call spread - or a short straddle with the downside protected by a long put and the upside protected by a long call
+
+  * 3 strikes - A, A+x, A+2x
+  * 1:2:1 (long:short:long - +put:-call,-put:+call)
+  * Credit spread
+
