@@ -454,6 +454,39 @@ Character|Sentence|Translation
   <dd>他对生活很满足。</dd>
   <dd>He is satisfied with his life.</dd>
 </dl>
+
+<dl>
+  <dt>干</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>半</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>复</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>阳</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>算</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>双</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>银</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>刚</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>阿</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>讲</dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 <!--
 <dl>
   <dt></dt>
