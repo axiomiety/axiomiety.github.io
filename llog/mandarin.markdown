@@ -457,20 +457,20 @@ Character|Sentence|Translation
 
 <dl>
   <dt>干</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你在这干什么?</dd>
+  <dd>What are you doing here?</dd>
   <dt>半</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这个衬衫很便宜。是半价了！</dd>
+  <dd>This shirt is very cheap. It's half-price!</dd>
   <dt>复</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我不知道。这个问题很复杂。</dd>
+  <dd>I don't know. This problem is very complex.</dd>
   <dt>阳</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>太阳出现在地平线上。</dd>
+  <dd>The sun appeared on the horizon.</dd>
   <dt>算</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>没问题，这事就算了吧。</dd>
+  <dd>Don't bother, forget about this.</dd>
   <dt>双</dt>
   <dd></dd>
   <dd></dd>
