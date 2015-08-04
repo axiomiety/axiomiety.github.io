@@ -472,14 +472,14 @@ Character|Sentence|Translation
   <dd>没问题，这事就算了吧。</dd>
   <dd>Don't bother, forget about this.</dd>
   <dt>双</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你有一双漂亮的眼睛！</dd>
+  <dd>You have beautiful eyes!</dd>
   <dt>银</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>她戴着一条银的手镯。</dd>
+  <dd>She's wearing a silver bracelet.</dd>
   <dt>刚</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你错过他，他刚走了。</dd>
+  <dd>You missed him - he just left.</dd>
   <dt>阿</dt>
   <dd></dd>
   <dd></dd>
