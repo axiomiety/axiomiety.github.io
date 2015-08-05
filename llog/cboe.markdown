@@ -394,5 +394,64 @@ Long synthetic butterfly spread. Can be vriwed as a bull put spread and a bear c
 
   * 3 strikes - A, A+x, A+2x
   * 1:2:1 (long:short:long - +put:-call,-put:+call)
+  * Credit spread (so more money in than out)
+  * Characteristics
+    * Maximum Profit: limited (underlying at middle strike at expiry)
+    * Maximum Loss: limited to strike price differential - credit received (underlying at/below lowest strike or at/above highest strike at expiry)
+    * Break-Even Point: two of them
+      * Upside BEP: middle strike paid + credit received
+      * Downside BEP: middle strike price - credit received
+
+Differences vs Butterfly:
+  * Iron Butterfly uses 2 credit spreads (what makes the iron part - bringing in double premium - only one of the credit spreads can lose if you run to expiry)
+
+Time decay generally has a positive effect on an iron butterfly.
+
+### Long Call Condors
+
+Made up entirely of call options
+
+  * 4 strikes - A,B,C,D
+  * 1:1:1:1 (long:short:short:long)
+  * Debit spread
+  * Characteristics
+    * Maximum Profit: limited (underlying at/between 2 middle strike at expiry)
+    * Maximum Loss: limited to debit paid (underlying at/below lowest strike or at/above highest strike at expiry)
+    * Break-Even Point: two of them
+      * Upside BEP: highest strike paid - debit paid
+      * Downside BEP: lowest strike price - debit paid
+
+Time decay has a positive effect.
+
+### Long Put Condors
+
+Made up entirely of put options
+
+  * 4 strikes - A,B,C,D
+  * 1:1:1:1 (long:short:short:long)
+  * Debit spread
+  * Characteristics
+    * Maximum Profit: limited (underlying at/between 2 middle strike at expiry)
+    * Maximum Loss: limited to debit paid (underlying at/below lowest strike or at/above highest strike at expiry)
+    * Break-Even Point: two of them
+      * Upside BEP: highest strike paid - debit paid
+      * Downside BEP: lowest strike price - debit paid
+
+Time decay has a positive effect.
+
+### Iron Condor
+
+Synthetic Condor spread.
+
+  * 4 strikes - A,B,C,D
+  * 1:1:1:1 (long:short:short:long +put:-put:-call:+call)
   * Credit spread
+  * Characteristics
+    * Maximum Profit: limited (underlying at/between 2 middle strike at expiry)
+    * Maximum Loss: limited to debit paid (underlying at/below lowest strike or at/above highest strike at expiry)
+    * Break-Even Point: two of them
+      * Upside BEP: highest strike paid - debit paid
+      * Downside BEP: lowest strike price - debit paid
+
+Time decay has a positive effect.
 
