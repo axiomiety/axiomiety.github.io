@@ -21,11 +21,11 @@ Characters|Mnemonic
 半平|half vs flat
 跟银|with vs silver
 
-### HSK 3
+## HSK 3
 
 <!--list wasn't 0-indexed. need to fill in the gaps >_< -->
 
-#### 1
+### 1
 
 <dl>
   <dt>市</dt>
@@ -455,6 +455,8 @@ Character|Sentence|Translation
   <dd>He is satisfied with his life.</dd>
 </dl>
 
+#### 131
+
 <dl>
   <dt>干</dt>
   <dd>你在这干什么?</dd>
@@ -484,6 +486,41 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>讲</dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+
+#### 141
+
+<dl>
+  <dt>板</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>突</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>轻</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>史</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>虽</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>练</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>春</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>检</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>层</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>健</dt>
   <dd></dd>
   <dd></dd>
 </dl>
