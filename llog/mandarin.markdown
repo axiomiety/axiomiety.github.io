@@ -483,11 +483,11 @@ Character|Sentence|Translation
   <dd>你错过他，他刚走了。</dd>
   <dd>You missed him - he just left.</dd>
   <dt>阿</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>阿姨，请给我两杯咖啡！</dd>
+  <dd>Auntie, please give me two cups of coffee!</dd>
   <dt>讲</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>上网上有很多外语的讲义。</dd>
+  <dd>There are many teaching materials for foreign languages on the internet.</dd>
 </dl>
 
 #### 141
