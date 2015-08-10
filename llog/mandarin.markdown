@@ -494,20 +494,20 @@ Character|Sentence|Translation
 
 <dl>
   <dt>板</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>算了，你很古板。我要自已去。</dd>
+  <dd>Forget it - you're too inflexible. I'll go by myself.</dd>
   <dt>突</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他突然大笑起来。</dd>
+  <dd>He suddenly burst out laughing.</dd>
   <dt>轻</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>电梯里播放着轻音乐。</dd>
+  <dd>Soft music was playing in the lift.</dd>
   <dt>史</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这所学校里每个学生都念世界史。</dd>
+  <dd>Every student studies world history in this school. </dd>
   <dt>虽</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>虽身居海外，我不想念我的故园。</dd>
+  <dd>Although I live abroad, I do not long for my country.</dd>
   <dt>练</dt>
   <dd></dd>
   <dd></dd>
