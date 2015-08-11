@@ -512,17 +512,17 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>春</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>今年的春节是什么时候？</dd>
+  <dd>When is CNY this year?</dd>
   <dt>检</dt>
   <dd></dd>
   <dd></dd>
   <dt>层</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这家旅馆有80层。</dd>
+  <dd>This hotel is 80-storey high.</dd>
   <dt>健</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我几乎每天健身锻炼。</dd>
+  <dd>I exercise almost daily.</dd>
 </dl>
 <!--
 <dl>
