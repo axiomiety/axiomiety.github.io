@@ -509,14 +509,14 @@ Character|Sentence|Translation
   <dd>虽身居海外，我不想念我的故园。</dd>
   <dd>Although I live abroad, I do not long for my country.</dd>
   <dt>练</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他开车很熟练。</dd>
+  <dd>He is a very skilled driver.</dd>
   <dt>春</dt>
   <dd>今年的春节是什么时候？</dd>
   <dd>When is CNY this year?</dd>
   <dt>检</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>每个雇员都要体检。</dd>
+  <dd>Every employee must undergo a medical examination.</dd>
   <dt>层</dt>
   <dd>这家旅馆有80层。</dd>
   <dd>This hotel is 80-storey high.</dd>
