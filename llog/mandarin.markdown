@@ -532,11 +532,11 @@ Character|Sentence|Translation
   <dd>这条河穿过市镇。</dd>
   <dd>This river goes through the town.</dd>
   <dt>戏</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>玩遊戏不是我喜欢的活动。</dd>
+  <dd>Playing games isn't my cup of tea.</dd>
   <dt>拿</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他左手拿着一把刀。</dd>
+  <dd>He is holding a knife in his left hand.</dd>
   <dt>黄</dt>
   <dd>微博的黄金时代。</dd>
   <dd>The golden age of Weibo.</dd>
@@ -544,8 +544,8 @@ Character|Sentence|Translation
   <dd>角色扮演游戏。</dd>
   <dd>Role-playing game.</dd>
   <dt>担</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你可以试一试，但是要自担风险。</dd>
+  <dd>You can try, but at your own risk.</dd>
   <dt>短</dt>
   <dd></dd>
   <dd></dd>
