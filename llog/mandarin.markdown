@@ -524,6 +524,42 @@ Character|Sentence|Translation
   <dd>我几乎每天健身锻炼。</dd>
   <dd>I exercise almost daily.</dd>
 </dl>
+
+### 151
+
+<dl>
+  <dt>河</dt>
+  <dd>这条河穿过市镇。</dd>
+  <dd>This river goes through the town.</dd>
+  <dt>戏</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>拿</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>黄</dt>
+  <dd>微博的黄金时代。</dd>
+  <dd>The golden age of Weibo.</dd>
+  <dt>角</dt>
+  <dd>角色扮演游戏。</dd>
+  <dd>Role-playing game.</dd>
+  <dt>担</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>短</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>街</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>奇</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>愿</dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+
 <!--
 <dl>
   <dt></dt>
