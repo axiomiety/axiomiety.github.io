@@ -570,14 +570,14 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>择</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你选择你想吃什么。</dd>
+  <dd>Choose what you want to eat.</dd>
   <dt>害</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他害怕高处。</dd>
+  <dd>He is scared of heights.</dd>
   <dt>乎</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你的工作几乎完成了。</dd>
+  <dd>Your work is almost done.</dd>
   <dt>画</dt>
   <dd></dd>
   <dd></dd>
