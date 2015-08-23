@@ -547,19 +547,53 @@ Character|Sentence|Translation
   <dd>你可以试一试，但是要自担风险。</dd>
   <dd>You can try, but at your own risk.</dd>
   <dt>短</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这条裙子太短了！</dd>
+  <dd>This skirt is too short!</dd>
   <dt>街</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这条街道很安静。</dd>
+  <dd>This street is very quiet.</dd>
   <dt>奇</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>发生了一件很奇怪的事。</dd>
+  <dd>Something stranged happened.</dd>
   <dt>愿</dt>
+  <dd>现在我非常愿意认识他。</dd>
+  <dd>Right now I'd very much like to get to know him.</dd>
+</dl>
+
+### 161
+
+<dl>
+  <dt>香</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>康</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>择</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>害</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>乎</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>画</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>换</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>须</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>差</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>季</dt>
   <dd></dd>
   <dd></dd>
 </dl>
-
 <!--
 <dl>
   <dt></dt>
