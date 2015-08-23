@@ -1,0 +1,71 @@
+---
+layout: default
+title: articles/brownian-motion
+category: pages
+---
+
+<style>
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.bar rect {
+  fill: steelblue;
+  shape-rendering: crispEdges;
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+
+<h2>Random Walk</h2>
+
+Let's start with a (fair) coin toss and attach a pay-off on the outcome:
+
+$$X = \begin{cases}1 & \text{Head} \\ -1 & \text{Tail}\end{cases}$$
+
+With each outcome as equally likely ($p = \frac{1}{2}$).
+
+So if it's head you get one of something (candy, nut, ...) and if it's tail you lose it. Now imagine that we don't stop at the first toss but that instead we keep going - for a very, very long time (it's a rainy day). We could be tempted to ask - after the `k`'th toss, what does the tally look like. Here's a graph highlighting a sample run:
+
+<button onclick="refresh('random_walk')">Refresh</button>
+
+<div id='random_walk'></div>
+Let's plot every tick as a bar - dark blue for down, light blue for up:
+<div id='random_walk_barchart'></div>
+
+The way to express that would be: $X_k = \sum\limits_{i=1}^k X_i$ and we want to figure out the expected value: $E[X_k]$ (we're bored but not so bored that we don't want to try and predict the outcome).
+
+The good thing about those tosses, is that each toss is independent from the previous one. So calculating the expectation can be simplified as:
+
+$$E[X_k] = E[\sum\limits_{i=1}^k X_i] = \sum\limits_{i=1}^k E[X_i]$$
+
+What's $E[X_i]$? Nothing more than $(1)*p + (-1)*p = \frac{1}{2} - \frac{1}{2} = 0$. That sort of makes sense - on average, there's no winner. So $E[X_k]$ is also equal to zero. What about the variance?
+
+$$Var(X_k) = E[X_k^2] - (E[X_k])^2 = 1 - 0 = 1$$.
+
+By the [Central Limit Theorem](https://en.wikipedia.org/wiki/Central_limit_theorem), given a sufficiently large number of tosses, $X_k \sim N(0,1)$. Below is an example of over 100 trials, each of 250 tosses. <button onclick="refresh('random_walk_multi')">Refresh</button>
+
+<div id='random_walk_multi'></div>
+
+If we plot the distribution of the 250th toss, we get something vaguely resembling a bell curve (though to be fair, we probably need a lot more paths than 100):
+
+<div id='random_walk_histogram' align='center'></div>
+
+<script src="../javascripts/brownian-d3.js"></script>
+
+<script>
+refresh('random_walk');
+refresh('random_walk_multi');
+</script>
