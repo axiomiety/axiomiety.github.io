@@ -585,14 +585,14 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>须</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这只手表我必须买！</dd>
+  <dd>I must buy that watch!</dd>
   <dt>差</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你的办法，差不多正确。</dd>
+  <dd>Your solution is almost right.</dd>
   <dt>季</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>夏天是桃子旺季。</dd>
+  <dd>Summer is the season for peaches.</dd>
 </dl>
 <!--
 <dl>
@@ -607,6 +607,8 @@ Character|Sentence|Translation
 我一直很好奇 ()
 我经常四处奔走。(I'm often on the move)
 太棒了(that's great!)
+正常来说(normally 'we say')
+
 
 ### Scratch pad
 
