@@ -10,3 +10,4 @@ Learning Log
    * [Korean](korean.html) #livinglanguage
    * [Ruby](ruby.html) #programming
    * [CBOE: Options](cboe.html) #finance
+   * [Javascript](javascript.html) #programming

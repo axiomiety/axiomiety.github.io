@@ -66,7 +66,6 @@ Python|J
 
 ### Cool examples
 
-SI first came across rethose while scanning through the source code for [doom](http://www.github.com/id). It highlights some of the technical limitations at the time, and how people got around them.tuff for which there isn't much of a direct equivalent.
 
       12 10 +. 8 8 NB. GCD
     3 2
