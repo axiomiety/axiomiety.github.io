@@ -567,8 +567,8 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>康</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我奶奶很康健。她每天去散步。</dd>
+  <dd>My grandmother is very healthy. She goes for a stroll every day.</dd>
   <dt>择</dt>
   <dd>你选择你想吃什么。</dd>
   <dd>Choose what you want to eat.</dd>
@@ -579,11 +579,11 @@ Character|Sentence|Translation
   <dd>你的工作几乎完成了。</dd>
   <dd>Your work is almost done.</dd>
   <dt>画</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这个画家画了自己的肖像。</dd>
+  <dd>This painter painted a self-portrait.</dd>
   <dt>换</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我想把我的美元兑换成人民币。</dd>
+  <dd>I'd like to exchange my US dollars for Chinese Yuan.</dd>
   <dt>须</dt>
   <dd>这只手表我必须买！</dd>
   <dd>I must buy that watch!</dd>
