@@ -11,3 +11,4 @@ Learning Log
    * [Ruby](ruby.html) #programming
    * [CBOE: Options](cboe.html) #finance
    * [Javascript](javascript.html) #programming
+   * [J](j.html) #programming
