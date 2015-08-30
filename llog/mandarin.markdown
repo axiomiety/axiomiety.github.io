@@ -594,6 +594,42 @@ Character|Sentence|Translation
   <dd>夏天是桃子旺季。</dd>
   <dd>Summer is the season for peaches.</dd>
 </dl>
+
+#### 171
+
+<dl>
+  <dt>酒</dt>
+  <dd>下班咱们去酒馆吧！</dd>
+  <dd>Let's go to a bar after work!</dd>
+  <dt>简</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>遇</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>久</dt>
+  <dd>久违了！ 近来还好吗？</dd>
+  <dd>Long time no see! Everything still good?</dd>
+  <dt>跟</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>辆</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>般</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>急</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>云</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>婚</dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+
 <!--
 <dl>
   <dt></dt>
