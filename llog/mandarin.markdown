@@ -614,20 +614,20 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>辆</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>下雨了, 去叫辆車子吧。</dd>
+  <dd>Call for a cab - it's raining.</dd>
   <dt>般</dt>
   <dd></dd>
   <dd></dd>
   <dt>急</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他还没来，真急死人了。</dd>
+  <dd>He has yet to arrive and we are worried to death.</dd>
   <dt>云</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>今天云很多。</dd>
+  <dd>There are many clouds today.</dd>
   <dt>婚</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他们的婚姻很美满。</dd>
+  <dd>They have a happy marriage.</dd>
 </dl>
 
 <!--
