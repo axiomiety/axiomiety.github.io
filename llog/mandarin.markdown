@@ -605,20 +605,20 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
   <dt>遇</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我上个星期在商店遇到你的老师。</dd>
+  <dd>I came across your teacher at the store last week.</dd>
   <dt>久</dt>
   <dd>久违了！ 近来还好吗？</dd>
   <dd>Long time no see! Everything still good?</dd>
   <dt>跟</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我正跟朋友去电影院。</dd>
+  <dd>I am going to the cinema with my friends.</dd>
   <dt>辆</dt>
   <dd>下雨了, 去叫辆車子吧。</dd>
   <dd>Call for a cab - it's raining.</dd>
   <dt>般</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我一般八点去上班。</dd>
+  <dd>I usually leave for work at 08:00.</dd>
   <dt>急</dt>
   <dd>他还没来，真急死人了。</dd>
   <dd>He has yet to arrive and we are worried to death.</dd>
