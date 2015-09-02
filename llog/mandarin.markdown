@@ -602,8 +602,8 @@ Character|Sentence|Translation
   <dd>下班咱们去酒馆吧！</dd>
   <dd>Let's go to a bar after work!</dd>
   <dt>简</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>她有简单的心态。</dd>
+  <dd>She has a casual attitude.</dd>
   <dt>遇</dt>
   <dd>我上个星期在商店遇到你的老师。</dd>
   <dd>I came across your teacher at the store last week.</dd>
@@ -630,6 +630,40 @@ Character|Sentence|Translation
   <dd>They have a happy marriage.</dd>
 </dl>
 
+#### 181
+
+<dl>
+  <dt>顾</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>绩</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>绿</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>典</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>背</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>刻</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>笔</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>束</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>夏</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>树</dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 <!--
 <dl>
   <dt></dt>
