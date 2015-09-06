@@ -649,14 +649,14 @@ Character|Sentence|Translation
   <dd>我没有力气。我的背包太重的。</dd>
   <dd>I have no more strength. My backpack is too heavy.</dd>
   <dt>刻</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>请帮助我。我只需要一刻。</dd>
+  <dd>Please give me a hand. I only need 15 minutes/a moment.</dd>
   <dt>笔</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我总是带一本笔记本。</dd>
+  <dd>I always carry a notebook.</dd>
   <dt>束</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这种花，二美元一束。</dd>
+  <dd>Those flowers are 2 dollars a bunch.</dd>
   <dt>夏</dt>
   <dd></dd>
   <dd></dd>
