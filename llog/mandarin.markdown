@@ -634,20 +634,20 @@ Character|Sentence|Translation
 
 <dl>
   <dt>顾</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我得走。请照顾你的妹妹。</dd>
+  <dd>I must go - please take care of your sister.</dd>
   <dt>绩</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>这个工作，你的成绩是什么？</dd>
+  <dd>What is your contribution to this piece of work?</dd>
   <dt>绿</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>在日本，绿茶是最普遍的茶。</dd>
+  <dd>Green tea is the most common kind of tea in Japan.</dd>
   <dt>典</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>中国的结典礼很复杂！</dd>
+  <dd>A Chinese wedding ceremony is very complicated!</dd>
   <dt>背</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我没有力气。我的背包太重的。</dd>
+  <dd>I have no more strength. My backpack is too heavy.</dd>
   <dt>刻</dt>
   <dd></dd>
   <dd></dd>
