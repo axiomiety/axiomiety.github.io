@@ -664,6 +664,41 @@ Character|Sentence|Translation
   <dd></dd>
   <dd></dd>
 </dl>
+
+#### 191
+
+<dl>
+  <dt>邮</dt>
+  <dd>我得去邮局取包裹。</dd>
+  <dd>I have to go the post office to pick up a parcel.</dd>
+  <dt>附</dt>
+  <dd>我确定附近有地铁站。</dd>
+  <dd>I am certain there is a metro station nearby.</dd>
+  <dt>旧</dt>
+  <dd>因为一般新书都很贵，所以我经常买旧书。</dd>
+  <dd>I buy a lot of second-hand books because new ones are often expensive.</dd>
+  <dt>鲜</dt>
+  <dd>我每天早上喝鲜牛奶。</dd>
+  <dd>I drink fresh milk every morning.</dd>
+  <dt>冰</dt>
+  <dd>厨房没有冰箱。</dd>
+  <dd>The kitchen does not have a fridge.</dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 <!--
 <dl>
   <dt></dt>
