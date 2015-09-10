@@ -683,6 +683,41 @@ Character|Sentence|Translation
   <dt>冰</dt>
   <dd>厨房没有冰箱。</dd>
   <dd>The kitchen does not have a fridge.</dd>
+  <dt>怕</dt>
+  <dd>小孩儿怕怪物。</dd>
+  <dd>Children are afraid of monsters.</dd>
+  <dt>借</dt>
+  <dd>我从图书馆借了几本书。</dd>
+  <dd>I borrowed some books from the library.</dd>
+  <dt>静</dt>
+  <dd>你得楼上邻居很安静。</dd>
+  <dd>Your upstairs neighbour is very quiet.</dd>
+  <dt>脚</dt>
+  <dd>她踩了我的脚！</dd>
+  <dd>She stepped on my foot!</dd>
+  <dt>礼</dt>
+  <dd>你收到什么圣诞礼物？</dd>
+  <dd>What Christmas presents did you get?</dd>
+</dl>
+
+#### 201
+
+<dl>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
