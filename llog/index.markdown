@@ -12,3 +12,4 @@ Learning Log
    * [CBOE: Options](cboe.html) #finance
    * [Javascript](javascript.html) #programming
    * [J](j.html) #programming
+   * [Coursera: Financial Engineering and Risk Management Part I](fineng_riskmgmt_1.html) #finance

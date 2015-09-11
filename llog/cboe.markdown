@@ -1,6 +1,6 @@
 ---
 layout: default
-title: CBOE
+title: (CBOE) Options
 category: pages
 ---
 
