@@ -690,7 +690,7 @@ Character|Sentence|Translation
   <dd>我从图书馆借了几本书。</dd>
   <dd>I borrowed some books from the library.</dd>
   <dt>静</dt>
-  <dd>你得楼上邻居很安静。</dd>
+  <dd>你楼上的邻居很安静。</dd>
   <dd>Your upstairs neighbour is very quiet.</dd>
   <dt>脚</dt>
   <dd>她踩了我的脚！</dd>
@@ -703,21 +703,21 @@ Character|Sentence|Translation
 #### 201
 
 <dl>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>箱</dt>
+  <dd>我的行李箱很重。</dd>
+  <dd>My suitcase is very heavy.</dd>
+  <dt>草</dt>
+  <dd>这座花园不好。到处都是野草。</dd>
+  <dd>This garden isn't nice. There is grass growing everywhere.</dd>
+  <dt>趣</dt>
+  <dd>这部电影我不喜欢，虽然它挺有趣的。</dd>
+  <dd>Although this film was interesting but I didn't like it.</dd>
+  <dt>牙</dt>
+  <dd>每年去进行牙科检查是很重要的。</dd>
+  <dd>Having a yearly dental check-up is important.</dd>
+  <dt>坏</dt>
+  <dd>这些牛奶难闻的。我觉得它坏(馊)了。</dd>
+  <dd>This milk smells awful - I think it has gone off.</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
