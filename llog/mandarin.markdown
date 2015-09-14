@@ -718,12 +718,12 @@ Character|Sentence|Translation
   <dt>坏</dt>
   <dd>这些牛奶难闻的。我觉得它坏(馊)了。</dd>
   <dd>This milk smells awful - I think it has gone off.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>净</dt>
+  <dd>浴室很干净。</dd>
+  <dd>The bathroom is really clean.</dd>
+  <dt>句</dt>
+  <dd>别担心。我就说几句话。</dd>
+  <dd>Don't worry. I will only say a few words.</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
