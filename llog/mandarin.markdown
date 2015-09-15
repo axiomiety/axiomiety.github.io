@@ -724,15 +724,15 @@ Character|Sentence|Translation
   <dt>句</dt>
   <dd>别担心。我就说几句话。</dd>
   <dd>Don't worry. I will only say a few words.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>灯</dt>
+  <dd>你家灯还亮着。</dd>
+  <dd>The lights are still on in your house.</dd>
+  <dt>努</dt>
+  <dd>因为任务很无聊，所以她不努力工作。</dd>
+  <dd>She doesn't work hard because her assignment is boring.</dd>
+  <dt>词</dt>
+  <dd>你用完双语词典了吗？</dd>
+  <dd>Have you finished with the bilingual dictionary.</dd>
 </dl>
 <!--
 <dl>
