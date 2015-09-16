@@ -734,6 +734,41 @@ Character|Sentence|Translation
   <dd>你用完双语词典了吗？</dd>
   <dd>Have you finished with the bilingual dictionary.</dd>
 </dl>
+
+#### 211
+
+<dl>
+  <dt>脸</dt>
+  <dd>你的脸脏了！</dd>
+  <dd>Your face is dirty!</dd>
+  <dt>冬</dt>
+  <dd>北京的冬天比较冷。</dd>
+  <dd>Winter in Beijing is relatively cold.</dd>
+  <dt>蓝</dt>
+  <dd>你有没有这幢楼的蓝图？</dd>
+  <dd>Do you have this building's blueprint?</dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 <!--
 <dl>
   <dt></dt>
