@@ -747,12 +747,12 @@ Character|Sentence|Translation
   <dt>蓝</dt>
   <dd>你有没有这幢楼的蓝图？</dd>
   <dd>Do you have this building's blueprint?</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>宾</dt>
+  <dd>他跟50位来宾庆祝他的生日。</dd>
+  <dd>He celebrated his birthday with 50 guests.</dd>
+  <dt>末</dt>
+  <dd>明天是世界末日！</dd>
+  <dd>Tomorrow is the end of the world!</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
