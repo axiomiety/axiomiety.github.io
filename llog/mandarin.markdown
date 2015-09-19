@@ -753,21 +753,21 @@ Character|Sentence|Translation
   <dt>末</dt>
   <dd>明天是世界末日！</dd>
   <dd>Tomorrow is the end of the world!</dd>
-  <dt></dt>
+  <dt>敢</dt>
+  <dd>他不敢说实话，因为他害怕这样做的后果。</dd>
+  <dd>He does not dare to tell the truth because he is afraid of the consequences.</dd>
+  <dt>秋</dt>
+  <dd>初秋，天气还好。</dd>
+  <dd>Early autumn, the weather is still pleasant.</dd>
+  <dt>楚</dt>
+  <dd>你的发言很清楚。</dd>
+  <dd>Your speech was very clear.</dd>
+  <dt>耳</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>镜</dt>
+  <dd>今天你为什么戴眼镜？</dd>
+  <dd>Why are you wearing glasses today?</dd>
 </dl>
 <!--
 <dl>
