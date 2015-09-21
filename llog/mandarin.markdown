@@ -769,6 +769,42 @@ Character|Sentence|Translation
   <dd>今天你为什么戴眼镜？</dd>
   <dd>Why are you wearing glasses today?</dd>
 </dl>
+
+#### 221
+
+<dl>
+  <dt>惯</dt>
+  <dd>我习惯吃亚洲菜。</dd>
+  <dd>I am used to eating Asian food.</dd>
+  <dt>烧</dt>
+  <dd>我弟弟昨晚发烧了。</dd>
+  <dd>My brother had a fever last night.</dd>
+  <dt>忘</dt>
+  <dd>对不起，我忘了带照相相机。</dd>
+  <dd>Sorry - I forgot to bring a camera.</dd>
+  <dt>冒</dt>
+  <dd>我有点不舒服，我想我感冒了。</dd>
+  <dd>I don't feel well. I think I caught a cold.</dd>
+  <dt>舒</dt>
+  <dd>这家电影院的座位很舒服。</dd>
+  <dd>The seats in this cinema are very comfortable.</dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+
 <!--
 <dl>
   <dt></dt>
