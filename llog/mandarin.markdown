@@ -774,7 +774,7 @@ Character|Sentence|Translation
 
 <dl>
   <dt>惯</dt>
-  <dd>我习惯吃亚洲菜。</dd>
+  <dd>我习惯吃亚洲菜/食物。</dd>
   <dd>I am used to eating Asian food.</dd>
   <dt>烧</dt>
   <dd>我弟弟昨晚发烧了。</dd>
@@ -788,21 +788,21 @@ Character|Sentence|Translation
   <dt>舒</dt>
   <dd>这家电影院的座位很舒服。</dd>
   <dd>The seats in this cinema are very comfortable.</dd>
-  <dt></dt>
+  <dt>怪</dt>
+  <dd>怪不得他今天不在。昨天他病了。</dd>
+  <dd>No wonder he isn't in today. He fell ill yesterday.</dd>
+  <dt>爷</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>搬</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
+  <dt>祝</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>迟</dt>
+  <dd>为什么你迟了半个小时？</dd>
+  <dd>Why are you late by half an hour?</dd>
 </dl>
 
 <!--
