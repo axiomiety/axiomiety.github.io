@@ -792,14 +792,14 @@ Character|Sentence|Translation
   <dd>怪不得他今天不在。昨天他病了。</dd>
   <dd>No wonder he isn't in today. He fell ill yesterday.</dd>
   <dt>爷</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>爷爷年轻的时候投军了。</dd>
+  <dd>My grandfather joined the army when he was young.</dd>
   <dt>搬</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他現在不住在这儿。去年他搬了家。</dd>
+  <dd>He no longer lives here nowadays. He move house last year.</dd>
   <dt>祝</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>祝贺你得到新工作！</dd>
+  <dd>Congratulations on your new job!</dd>
   <dt>迟</dt>
   <dd>为什么你迟了半个小时？</dd>
   <dd>Why are you late by half an hour?</dd>
