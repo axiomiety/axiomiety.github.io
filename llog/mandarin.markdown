@@ -805,6 +805,41 @@ Character|Sentence|Translation
   <dd>Why are you late by half an hour?</dd>
 </dl>
 
+#### 231
+
+<dl>
+  <dt>熊</dt>
+  <dd>看！这只小熊猫很可爱。</dd>
+  <dd>Look! This baby panda is adorable.</dd>
+  <dt>鸟</dt>
+  <dd>忽然那只鸟从树掉了下来。</dd>
+  <dd>This bird suddenly fell from the tree.</dd>
+  <dt>扫</dt>
+  <dd>吃晚餐以前，请打扫你的房间。</dd>
+  <dd>Please clean your room before eating dinner.</dd>
+  <dt>啊</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
+
 <!--
 <dl>
   <dt></dt>
