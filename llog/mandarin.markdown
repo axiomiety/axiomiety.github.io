@@ -818,11 +818,11 @@ Character|Sentence|Translation
   <dd>吃晚餐以前，请打扫你的房间。</dd>
   <dd>Please clean your room before eating dinner.</dd>
   <dt>啊</dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>啊！你的头发着火了！</dd>
+  <dd>Oh! Your hair caught fire!</dd>
+  <dt>梯</dt>
+  <dd>你得走楼梯，电梯坏了。</dd>
+  <dd>You must use the staircase, the lift is broken.</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
