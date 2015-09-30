@@ -823,21 +823,21 @@ Character|Sentence|Translation
   <dt>梯</dt>
   <dd>你得走楼梯，电梯坏了。</dd>
   <dd>You must use the staircase, the lift is broken.</dd>
-  <dt></dt>
+  <dt>腿</dt>
+  <dd>这条裤子不合我的身。我的大腿太粗了。</dd>
+  <dd>Those trousers don't fit. My thighs are too big!</dd>
+  <dt>鞋</dt>
+  <dd>你的这双鞋看起来好贵。</dd>
+  <dd>Your shoes look really expensive.</dd>
+  <dt>邻</dt>
   <dd></dd>
   <dd></dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>哭</dt>
+  <dd>她因为迷路了，几乎要哭了。</dd>
+  <dd>Because she was lost, she was close to tears.</dd>
 </dl>
 
 <!--
