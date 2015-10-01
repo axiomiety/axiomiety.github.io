@@ -830,16 +830,50 @@ Character|Sentence|Translation
   <dd>你的这双鞋看起来好贵。</dd>
   <dd>Your shoes look really expensive.</dd>
   <dt>邻</dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我家新邻居很安静。</dd>
+  <dd>Our new neighbours are very quiet.</dd>
+  <dt>糖</dt>
+  <dd>你喝茶加糖和奶吗？</dd>
+  <dd>Do you take sugar and milk with your tea?</dd>
   <dt>哭</dt>
   <dd>她因为迷路了，几乎要哭了。</dd>
   <dd>Because she was lost, she was close to tears.</dd>
 </dl>
 
+#### 241
+
+<dl>
+  <dt>刷</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>厨</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>炼</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>骑</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>帽</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 <!--
 <dl>
   <dt></dt>
