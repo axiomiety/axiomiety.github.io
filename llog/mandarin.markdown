@@ -844,20 +844,20 @@ Character|Sentence|Translation
 
 <dl>
   <dt>刷</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>去睡觉前，请刷牙。</dd>
+  <dd>Please brush your teeth before going to bed.</dd>
   <dt>厨</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>在厨房，他的手艺很不错。</dd>
+  <dd>He is very skilled in the kitchen.</dd>
   <dt>炼</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他每天早上在公园里做锻炼。</dd>
+  <dd>He exercises in the park every morning.</dd>
   <dt>骑</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>她骑马越过了障碍。</dd>
+  <dd>She rode the horse over the obstacle.</dd>
   <dt>帽</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他没有头发，所以他戴着帽子。</dd>
+  <dd>He wears a hat because he has no hair.</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
