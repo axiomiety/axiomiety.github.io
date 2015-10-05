@@ -858,15 +858,15 @@ Character|Sentence|Translation
   <dt>帽</dt>
   <dd>他没有头发，所以他戴着帽子。</dd>
   <dd>He wears a hat because he has no hair.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>葡</dt>
+  <dd>有很多法国人喜欢喝葡萄酒。</dd>
+  <dd>Many French people enjoy drinking wine.</dd>
+  <dt>萄</dt>
+  <dd>吃鱼时喝白葡萄酒是很常见的。</dd>
+  <dd>It is common to drink white wine while eating fish.</dd>
+  <dt>疼</dt>
+  <dd>吃很多糖果以后，我牙疼。</dd>
+  <dd>After eating a lot of candy, my teeth hurt.</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
