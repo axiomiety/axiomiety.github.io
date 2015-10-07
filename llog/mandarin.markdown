@@ -25,6 +25,8 @@ Characters|Mnemonic
 
 <!--list wasn't 0-indexed. need to fill in the gaps >_< -->
 
+A list of HSK3 characters along with sample sentences. The majority of them should have been vetted by predominantly native speakers on italki. Emphasis on *should*.
+
 ### 1
 
 <dl>
@@ -873,6 +875,41 @@ Character|Sentence|Translation
   <dt>甜</dt>
   <dd>你要少吃甜食。你的血糖太高了。</dd>
   <dd>You should eat less sweet things. Your blood sugar level is too high.</dd>
+</dl>
+
+#### 251
+
+<dl>
+  <dt>爬</dt>
+  <dd>在韩国，爬山是一项很流行的爱好。</dd>
+  <dd>Hiking is a very popular hobby in Korea.</dd>
+  <dt>鼻</dt>
+  <dd>他的鼻子很红。我觉得他喝醉了! </dd>
+  <dd>His nose is red. I think he's drunk!</dd>
+  <dt>渴</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
 </dl>
 <!--
 <dl>
