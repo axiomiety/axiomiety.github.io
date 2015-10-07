@@ -867,12 +867,12 @@ Character|Sentence|Translation
   <dt>疼</dt>
   <dd>吃很多糖果以后，我牙疼。</dd>
   <dd>After eating a lot of candy, my teeth hurt.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>聪</dt>
+  <dd>因为他很聪明，这道数学题对他来说很容易。</dd>
+  <dd>This maths problem is easy for him because he is clever.</dd>
+  <dt>甜</dt>
+  <dd>你要少吃甜食。你的血糖太高了。</dd>
+  <dd>You should eat less sweet things. Your blood sugar level is too high.</dd>
 </dl>
 <!--
 <dl>
