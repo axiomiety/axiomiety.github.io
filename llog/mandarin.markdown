@@ -887,17 +887,17 @@ Character|Sentence|Translation
   <dd>他的鼻子很红。我觉得他喝醉了! </dd>
   <dd>His nose is red. I think he's drunk!</dd>
   <dt>渴</dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>跑完步，我总是很渴。</dd>
+  <dd>I am always thirsty after a run.</dd>
+  <dt>啤</dt>
+  <dd>别喝啤酒了，你已经喝得太多了。</dd>
+  <dd>Leave that beer alone, you drank too much already.</dd>
+  <dt>胖</dt>
+  <dd>你的儿子真可爱。胖乎乎的。</dd>
+  <dd>Your son is very cute - he is chubby.</dd>
+  <dt>饱</dt>
+  <dd>我不能再吃了，我饱了。</dd>
+  <dd>I can't eat any more - I'm full!</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
