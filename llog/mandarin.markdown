@@ -898,18 +898,18 @@ Character|Sentence|Translation
   <dt>饱</dt>
   <dd>我不能再吃了，我饱了。</dd>
   <dd>I can't eat any more - I'm full!</dd>
-  <dt></dt>
+  <dt>锻</dt>
   <dd></dd>
   <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>刮</dt>
+  <dd>他沒有没有刮胡子, 胡子就 有了。</dd>
+  <dd>He doesn't shave so he has a beard.</dd>
+  <dt>碗</dt>
+  <dd>中餐我吃了一碗面条。</dd>
+  <dd> ate a bowl of noodles for lunch.</dd>
+  <dt>叔</dt>
+  <dd>叔叔，请给我一些糖果！</dd>
+  <dd>Uncle, please give me some candy!</dd>
 </dl>
 <!--
 <dl>
