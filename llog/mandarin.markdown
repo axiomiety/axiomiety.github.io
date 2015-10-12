@@ -911,6 +911,41 @@ Character|Sentence|Translation
   <dd>叔叔，请给我一些糖果！</dd>
   <dd>Uncle, please give me some candy!</dd>
 </dl>
+
+#### 261
+
+<dl>
+  <dt>裤</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>朵</dt>
+  <dd>你耳朵有毛病吗？我不再说。</dd>
+  <dd>Are you ears blocked? I won't repeat myself.</dd>
+  <dt>瘦</dt>
+  <dd>我的狗小时很瘦了。</dd>
+  <dd>When it was young, my dog was very thin.</dd>
+  <dt>糕</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>衫</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 <!--
 <dl>
   <dt></dt>
