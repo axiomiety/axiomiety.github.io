@@ -916,8 +916,8 @@ Character|Sentence|Translation
 
 <dl>
   <dt>裤</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>你需要新的衣服。你的裤子太紧了。</dd>
+  <dd>You need new clothes. Your trousers are too tight.</dd>
   <dt>朵</dt>
   <dd>你耳朵有毛病吗？我不再说。</dd>
   <dd>Are you ears blocked? I won't repeat myself.</dd>
@@ -925,11 +925,11 @@ Character|Sentence|Translation
   <dd>我的狗小时很瘦了。</dd>
   <dd>When it was young, my dog was very thin.</dd>
   <dt>糕</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>我会送你一个生日蛋糕。</dd>
+  <dd>I'll bring you your birthday cake.</dd>
   <dt>衫</dt>
-  <dd></dd>
-  <dd></dd>
+  <dd>他穿着一件白色的丝绸衬衫。</dd>
+  <dd>He is wearing a white silk shirt.</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
