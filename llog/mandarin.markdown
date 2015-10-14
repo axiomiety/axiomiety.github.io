@@ -930,15 +930,15 @@ Character|Sentence|Translation
   <dt>衫</dt>
   <dd>他穿着一件白色的丝绸衬衫。</dd>
   <dd>He is wearing a white silk shirt.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>汁</dt>
+  <dd>请给我一杯西瓜汁。</dd>
+  <dd>Please give me a watermelon juice.</dd>
+  <dt>伞</dt>
+  <dd>在伦敦的时候，他总带一把伞。</dd>
+  <dd>Whenever he is in London, he always carries an umbrella.</dd>
+  <dt>衬</dt>
+  <dd>穿绿衬衫的那位。</dd>
+  <dd>It's the person in the green shirt.</dd>
   <dt></dt>
   <dd></dd>
   <dd></dd>
