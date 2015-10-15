@@ -939,13 +939,14 @@ Character|Sentence|Translation
   <dt>衬</dt>
   <dd>穿绿衬衫的那位。</dd>
   <dd>It's the person in the green shirt.</dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
-  <dt></dt>
-  <dd></dd>
-  <dd></dd>
+  <dt>澡</dt>
+  <dd>在夏天的时候，她常常洗冷水澡。</dd>
+  <dd>She often takes cold showers in summer.</dd>
+  <dt>饿</dt>
+  <dd>我们去吃饭吧！我很饿！</dd>
+  <dd>Let's go eat - I'm starving!</dd>
 </dl>
+
 <!--
 <dl>
   <dt></dt>
