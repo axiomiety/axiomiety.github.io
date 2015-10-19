@@ -947,6 +947,40 @@ Character|Sentence|Translation
   <dd>Let's go eat - I'm starving!</dd>
 </dl>
 
+#### 271
+
+<dl>
+  <dt>矮</dt>
+  <dd>我比我弟弟矮一公分。</dd>
+  <dd>I am 1cm shorter than my (younger) brother.</dd>
+  <dt>姨</dt>
+  <dd>我的母亲有很多兄弟姐妹，所以我有很多姨表兄弟姐妹。</dd>
+  <dd>I have many (maternal) cousins because my mother has many siblings.</dd>
+  <dt>裙</dt>
+  <dd>请不要穿迷你裙来上班！</dd>
+  <dd>Please don't wear a mini-skirt to work!</dd>
+  <dt>铅</dt>
+  <dd></dd>
+  <dd></dd>
+  <dt>筷</dt>
+  <dd>孩子们觉得用筷子吃面条很难。</dd>
+  <dd>Kids think that using chopsticks to eat noodles is hard.</dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dd></dd>
+</dl>
 <!--
 <dl>
   <dt></dt>
