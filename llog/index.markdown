@@ -13,3 +13,4 @@ Learning Log
    * [Javascript](javascript.html) #programming
    * [J](j.html) #programming
    * [Coursera: Financial Engineering and Risk Management Part I](fineng_riskmgmt_1.html) #finance
+   * [Italian](italian.html) #livinglanguage
