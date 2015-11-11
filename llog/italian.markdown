@@ -99,3 +99,80 @@ Un poquino (? confirm - couldn't find this word anywhere)
 
 A dopo || a più tardi || a preso (see you soon)
 Fai presto - be quick
+
+### Avete...?
+
+<dl>
+  <dt>Avete?</dt>
+  <dd>Do you have?</dd>
+  <dt>Un tavolo per due</dt>
+  <dd>A table for two</dd>
+  <dt>Un tavolo</dt>
+  <dd>A table (in a restaurant - una tavola otherwise it seems)</dd>
+  <dt>Per tre</dt>
+  <dd>For three</dd>
+  <dt>Avete un tavolo vicino alla finestra?</dt>
+  <dd>Do you have a table near the window?</dd>
+  <dt>Vicino</dt>
+  <dd>Near, close</dd>
+  <dt>Alla finestra</dt>
+  <dd>To the window</dd>
+  <dt>Molto bene</dt>
+  <dd>Very good</dd>
+  <dt>Non, mi dispiace</dt>
+  <dd>No, I'm sorry</dd>
+  <dt>Mi dispiace</dt>
+  <dd>I'm sorry</dd>
+  <dt>Si, certamente</dt>
+  <dd>Yes, certainly</dd>
+  <dt>Desiderata ordinare?</dt>
+  <dd>Would you like (do you desire) to order?</dd>
+  <dt>Volete ordinare?</dt>
+  <dd>Do you want to order?</dd>
+  <dt>Si, grazie</dt>
+  <dd>Yes, thanks</dd>
+  <dt>Buon appetito</dt>
+  <dd>"Bon appetit"</dd>
+  <dt>Tutto bene?</dt>
+  <dd>Everything good?</dd>
+  <dt>Tutto</dt>
+  <dd>Everything</dd>
+  <dt>Qualcos'altro?</dt>
+  <dd>Anything else?</dd>
+  <dt>Vuole un dessert?</dt>
+  <dd>Would you like a dessert?</dd>
+  <dt>Cosa avete?</dt>
+  <dd>What do you have?</dd>
+  <dt>Un altro cafe, per favore</dt>
+  <dd>Another coffee, please</dd>
+  <dt>Può avere piu cafe?</dt>
+  <dd>Could I have more coffee?</dd>
+  <dt>Piu</dt>
+  <dd>More</dd>
+  <dt>Il conto, per favor </dt>
+  <dd>The bill, please</dd>
+  <dt>Posso pagare?</dt>
+  <dd>Can I pay?</dd>
+  <dt>Pagare</dt>
+  <dd>Pay</dd>
+  <dt>Posso pagare, con carta di credito?</dt>
+  <dd>Can I pay with a credit card?</dd>
+  <dt>Con carta di credito?</dt>
+  <dd>With a credit card?</dd>
+  <dt>Può chiamare un taxi per favore?</dt>
+  <dd>Could you please call for a cab?</dd>
+  <dt>Chiamare</dt>
+  <dd>To call</dd>
+  <dt>Grazie mille</dt>
+  <dd>Many thanks</dd>
+  <dt>Justo</dt>
+  <dd>Correct</dd>
+  <dt>É justo</dt>
+  <dd>That's right</dd>
+</dl>
+
+#### References
+
+[Tavolo vs tavola](http://blogs.transparent.com/italian/tavolo-or-tavola/)
+
+

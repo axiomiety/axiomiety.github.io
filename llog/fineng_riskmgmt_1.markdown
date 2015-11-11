@@ -119,4 +119,80 @@ $$(1+s_t)^t = \prod_{t=0}{k-1}(1+f_{k,k-1})$$
 
 #### Forward Contracts
 
+Set the forward price $F$ at $t=0$ for maturity $T$, where $S_t$ is the price of the asset at time $t$.
+
+Let $f_t$ be the current price of a long position in $F$ at time $t$. Then $f_t = S_t - F$. We set $F$ at $t=0$ such that $f_0$ is also equal to zero.
+
+No arbitrage price leads to $F = \frac{S_0}{d(0,T)}$. This takes into account the cost of carry.
+
+TODO: deriving $f_t$ for $t>0$.
+
+---
+
+INTRODUCTION TO DERIVATIVE SECURITIES
+
+## Swaps & Futures
+
+### Swaps
+
+Swap cashflows - usually fixed for floating or vice versa. The exchanging-floating-for-fixed leg is defined to be long.
+
+$r_t$ is the unknown interest rate at time $t$. Cash flows at time $t=1,...,T$.
+
+   * Company A (long): receives $Nr_{t-1}$ and pays $NX$
+   * Company B (short): receives $NX$ and pays $Nr_{t-1}$
+
+Value of swap to company A:
+
+$$V_a = N(1-d(0,T)) - NX \sum_{t=1}^{T}d(0,t)$$
+
+### Futures
+
+Settled daily. Has an initial margin > minimum margin (if it his minimum, top to initial). Can be used as hedge.
+
+## Options and Options Pricing
+
+### Options
+
+### Options Pricing
+
+## The 1-Period Binomial Model
+
+### The 1-Period Binomial Model
+
+### Option Pricing in the 1-Period Binomial Model
+
+---
+
+OPTION PRICING IN THE MULTI-PERIOD BINOMIAL MODEL
+
+## The Multi-Period Binomial Model
+
+### The Multi-Period Binomial Model
+
+### What's Going On?
+
+## Pricing American Options and Replicating Strategies
+
+### Pricing American Options
+
+Payoff at expiry is identical to that of a European.
+
+Never optimal to early exercise an American call option on a non-dividend paying stock.
+
+### Replicating Strategies
+
+## Dividends, Pricing in the Binomial Model, and the Black-Scholes Model
+
+### Including Dividends
+
+### Pricing Forwards and Futures in the Binomial Model
+
+### The Black-Scholes Model
+
+## An Example: Pricing a European Put on a Futures Contract
+
+### An Example: Pricing a European Put on a Futures Contract
+
+---
 

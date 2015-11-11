@@ -13,10 +13,12 @@ I primarily code in Python. It's fun, readable, and the possibilities are endles
 *   [debugging from the interpreter](code_python-debug.html)
 *   [`with` statement](code_python-with.html)
 
-### Tech ###
+### Misc ###
 
-Random tech-related stuff I found of interest and wrote about.
+Random stuff I found of interest and wrote about.
 
+*   [Random walks & brownian motion](misc_brownian-motion.html):
+    Using D3.js to visualise random walks
 *   [A quick intro to Vagrant](misc_vagrant-intro.html):
     Vagrant is a very handy way to set up dev VMs.
 *   [Getting started with J](code_j-intro.html):
