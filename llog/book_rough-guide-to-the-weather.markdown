@@ -6,7 +6,7 @@ category: pages
 
 ## Rough Guide To The Weather
 
-Notes taken whilst reading the book - unformatted (best viewed [raw](https://raw.githubusercontent.com/axiomiety/axiomiety.github.io/master/llog/book-rough-guide-to-the-weather.markdown) on github).
+Notes taken whilst reading the book - unformatted (best viewed [raw](https://raw.githubusercontent.com/axiomiety/axiomiety.github.io/master/llog/book_rough-guide-to-the-weather.markdown) on github).
 
 ISBN 1-85828-827-4
 
