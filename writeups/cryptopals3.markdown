@@ -99,11 +99,24 @@ Which yields `b"Yo, VIP Let's kick it Ice, Ice, baby Ice, Ice, baby "`.
 
 ### 19. Break fixed-nonce CTR mode using substitions ###
 
+For this one, the first thing to understand is that we are not recovering the AES key used to generate the key stream. Instead, we are recovering the key stream itself (which, in a way, is almost as good as the key given we already have the ciphertext - and K (+) C = P).
+
 ### 20. Break fixed-nonce CTR statistically ###
+
+Challenge 20 is an extension of challenge 19 and 6 (Break repeating-key XOR). We first pick the length of our smallest ciphertext and truncate all the remaining to that length. We now have 40 samples of what should be sourced from an English text - so as before, the most common character is space (character, not letter).
 
 ### 21. Implement the MT19937 Mersenne Twister RNG ###
 
+For this challenge, we look at the pseudocode made available in [Wikipedia]( https://en.wikipedia.org/wiki/Mersenne_Twister#Pseudocode). There is a Python implementation but where's the fun in that. Note that by default Python's `random` module uses that by default [according to this PEP](http://legacy.python.org/dev/peps/pep-0504/). At the very least it should be a way for us to test our implementation!
+
 ### 22. Crack an MT19937 seed ###
+
+1. time sleep (randint, 2, 30)
+2. seed with int in time . time
+3. do step one again
+4. return the first random value returned by the RNG
+
+Here we need to figure out what the seed was. Simply, we need to figure out what the epoch was. It's a bit of a bruteforce approach - we just need to 'rewind' the seconds until such a time that the first random value returned matches the original one.
 
 ### 23. Clone an MT19937 RNG from its output ###
 
