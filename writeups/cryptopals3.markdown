@@ -109,6 +109,61 @@ Challenge 20 is an extension of challenge 19 and 6 (Break repeating-key XOR). We
 
 For this challenge, we look at the pseudocode made available in [Wikipedia]( https://en.wikipedia.org/wiki/Mersenne_Twister#Pseudocode). There is a Python implementation but where's the fun in that. Note that by default Python's `random` module uses that by default [according to this PEP](http://legacy.python.org/dev/peps/pep-0504/). At the very least it should be a way for us to test our implementation!
 
+This is pretty much a straight-up implementation of the pseudocode listed on Wikipedia - I haven't tried to optimise it.
+
+{% highlight python %}
+    class MT(object):
+      # consts for MT19937 - note those aren't the same as the ones for MT19937-64
+      (w,n,m,r) = (32,624,397,31)
+      a = 0x9908B0DF
+      (u,d) = (11, 0xFFFFFFFF)
+      (s,b) = (7,  0X9D2C5680)
+      (t,c) = (15, 0xEFC60000)
+      l = 18
+      f = 0x6C078965
+      lower_mask = (1<<r) - 1
+      upper_mask = 0xFFFFFFFF ^ lower_mask # 0x80000000
+    
+      def __init__(self):
+        self.mt = [0]*MT.n # used to store the state of the generator
+    
+      def seed_mt(self, seed):
+        self.index = MT.n
+        self.mt[0] = seed
+        for i in range(1, MT.n):
+          self.mt[i] = 0xFFFFFFFF & (MT.f * (self.mt[i-1]^self.mt[i-1] >> (MT.w-2)) + i)
+    
+      def extract_number(self):
+        if self.index >= MT.n:
+          if self.index > MT.n:
+            self.seed_mt(5489)
+          self.twist()
+    
+        y = self.mt[self.index]
+        y ^= (y>>MT.u) & MT.d
+        y ^= (y<<MT.s) & MT.b
+        y ^= (y<<MT.t) & MT.c
+        y ^= y>>MT.l
+        self.index += 1
+    
+        return 0xFFFFFFFF & y
+    
+      def twist(self):
+        for i in range(MT.n):
+          x = (self.mt[i] & MT.upper_mask) + (self.mt[ (i+1)%MT.n ] & MT.lower_mask)
+          xA = x>>1
+          if x%2 != 0:
+            xA = xA ^ MT.a
+          self.mt[i] = self.mt[ (i+MT.n)%MT.n ] ^ xA
+        self.index = 0
+{% endhighlight %}
+
+Now trying this against `random.getstate`, we don't get anything matching at all. What gives?
+
+It turns out that Python's `seed` method users a different initialisation routine - as we can see from the states not matching *at all*. To verify our implementation, we use `numpy` instead. And indeed after setting `numpy.random.seed`, `numpy.random.get_state` ends up matching our internal state.
+
+For those interested, there is a bit more colour to be found in the Python source code for the [random module]( http://svn.python.org/projects/python/branches/py3k/Lib/random.py) - but to get underneath it all we'd probably need to look at the code for the *actual* `_random` module.
+
 ### 22. Crack an MT19937 seed ###
 
 1. time sleep (randint, 2, 30)
@@ -119,5 +174,17 @@ For this challenge, we look at the pseudocode made available in [Wikipedia]( htt
 Here we need to figure out what the seed was. Simply, we need to figure out what the epoch was. It's a bit of a bruteforce approach - we just need to 'rewind' the seconds until such a time that the first random value returned matches the original one.
 
 ### 23. Clone an MT19937 RNG from its output ###
+
+The steps in `extract_number` are as follows, with the values hardcoded for simplicity:
+
+    y ^= (y >> 11) & 0xFFFFFFFF
+    y ^= (y << 7)  & 0x9D2C5680
+    y ^= (y << 15) & 0xEFC60000
+    y ^= y >> 18
+
+For us to invert the transform, we will reverse each operation starting from the last one. But first, let's take a quick look at what this means.
+
+For simplicity, let's pick k = 4077814955. This is because the left-most bit will be set to 1, which makes it easier to visualise the shift.
+
 
 ### 24. Create the MT19937 stream cipher and break it ###
