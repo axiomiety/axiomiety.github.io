@@ -160,7 +160,7 @@ This is pretty much a straight-up implementation of the pseudocode listed on Wik
 
 Now trying this against `random.getstate`, we don't get anything matching at all. What gives?
 
-It turns out that Python's `seed` method users a different initialisation routine - as we can see from the states not matching *at all*. To verify our implementation, we use `numpy` instead. And indeed after setting `numpy.random.seed`, `numpy.random.get_state` ends up matching our internal state.
+It turns out that Python's `seed` method uses a different initialisation routine - as we can see from the states not matching *at all*. To verify our implementation, we use `numpy` instead. And indeed after setting `numpy.random.seed`, `numpy.random.get_state` ends up matching our internal state.
 
 For those interested, there is a bit more colour to be found in the Python source code for the [random module]( http://svn.python.org/projects/python/branches/py3k/Lib/random.py) - but to get underneath it all we'd probably need to look at the code for the *actual* `_random` module.
 
