@@ -186,5 +186,42 @@ For us to invert the transform, we will reverse each operation starting from the
 
 For simplicity, let's pick k = 4077814955. This is because the left-most bit will be set to 1, which makes it easier to visualise the shift.
 
+{% highlight python %}
+    print('k       {0:0>32b}'.format(k))
+    print('k>>11   {0:0>32b}'.format(k>>11))
+    print('k^k>>11 {0:0>32b}'.format(k^k>>11))
+{% endhighlight %}
+
+Which yields:
+
+    k       11110011000011101000010010101011
+    k>>11   00000000000111100110000111010000
+    k^k>>11 11110011000100001110010101111011
+
+The key to reversing this is to think about the result as being composed of an upper and lower part `U || L`. We see the right shift moves everything down to the right by 11 places. That leaves 11 zeros, which when xor'd with `k` give us the original top 11 bits - so we can recover `U`:
+
+{% highlight python %}
+    print('top 11  {0:0>32b}'.format( (k^k>>11) & (0xffffffff<<21) ))
+{% endhighlight %}
+
+Giving us:
+
+    top 11  11110011000000000000000000000000
+    
+For `L` however it's a little be more complicated. If we now byteshift the top 11 to the right, it will give us the next 11 bits only - and we'll be 'missing' 10.
+
+{% highlight python %}
+    print('bot 21  {0:0>32b}'.format( ((k^k>>11) & (0xffffffff <<21)) >> 11))
+{% endhighlight %}
+
+Putting it on top of each other and comparing with `k` and `k^k>>``, we're not there yet:
+
+    top 11  11110011000000000000000000000000
+    bot 21  00000000000111100110000000000000
+    k^k>>11 11110011000100001110010101111011
+    k       11110011000011101000010010101011
+
+
+However we now have the top 22 bits - and if we *now* byteshift those to the right, some will end up dropping off. We have all the information we need.
 
 ### 24. Create the MT19937 stream cipher and break it ###
