@@ -213,7 +213,7 @@ yielding:
     kdash   11110011000011101011100001101000
     top18   11110011000011101000000000000000
 
-We know that `k` was byteshifted to the right by 18 zeros before being xor'ed with itself. We also know that `k>>18` xor'ed with `kdash` will yield the original `k`. We can get the bottom 14 by byteshifting `top18` by 18 to the right. Let's break it down:
+We know that `k` was bitshifted to the right by 18 zeros before being xor'ed with itself. We also know that `k>>18` xor'ed with `kdash` will yield the original `k`. We can get the bottom 14 by bitshifting `top18` by 18 to the right. Let's break it down:
 
     top18   11110011000011101000000000000000
     bot14   00000000000000000011110011000011
