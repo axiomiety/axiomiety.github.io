@@ -188,40 +188,65 @@ For simplicity, let's pick k = 4077814955. This is because the left-most bit wil
 
 {% highlight python %}
     print('k       {0:0>32b}'.format(k))
-    print('k>>11   {0:0>32b}'.format(k>>11))
-    print('k^k>>11 {0:0>32b}'.format(k^k>>11))
+    print('k>>18   {0:0>32b}'.format(k>>18))
+    print('k^k>>18 {0:0>32b}'.format(k^k>>18))
 {% endhighlight %}
 
 Which yields:
 
     k       11110011000011101000010010101011
-    k>>11   00000000000111100110000111010000
-    k^k>>11 11110011000100001110010101111011
+    k>>18   00000000000000000011110011000011
+    k^k>>18 11110011000011101011100001101000
 
-The key to reversing this is to think about the result as being composed of an upper and lower part `U || L`. We see the right shift moves everything down to the right by 11 places. That leaves 11 zeros, which when xor'd with `k` give us the original top 11 bits - so we can recover `U`:
+We see the right shift moves everything down to the right by 18 places - leaving 18 zeros. When xor'ed with `k`, those 18 left-most zeros are essentially a no-op and allow us to recover the original 18 bits.
 
-{% highlight python %}
-    print('top 11  {0:0>32b}'.format( (k^k>>11) & (0xffffffff<<21) ))
-{% endhighlight %}
-
-Giving us:
-
-    top 11  11110011000000000000000000000000
-    
-For `L` however it's a little be more complicated. If we now byteshift the top 11 to the right, it will give us the next 11 bits only - and we'll be 'missing' 10.
+Let's do this piece-wise. For simplicity let `kdash=k^k>>18`. We'll isolate them by and'ing them with a 32-bit number composed of 18 leading 1's (which you can easily find via `hex(0b<insert 1's and 0's here>`):
 
 {% highlight python %}
-    print('bot 21  {0:0>32b}'.format( ((k^k>>11) & (0xffffffff <<21)) >> 11))
+    kdash = k^k>>18
+    print('kdash   {0:0>32b}'.format(kdash))
+    print('top18   {0:0>32b}'.format(kdash & 0xffffc000))
 {% endhighlight %}
 
-Putting it on top of each other and comparing with `k` and `k^k>>``, we're not there yet:
+yielding:
 
-    top 11  11110011000000000000000000000000
-    bot 21  00000000000111100110000000000000
-    k^k>>11 11110011000100001110010101111011
+    kdash   11110011000011101011100001101000
+    top18   11110011000011101000000000000000
+
+We know that `k` was byteshifted to the right by 18 zeros before being xor'ed with itself. We also know that `k>>18` xor'ed with `kdash` will yield the original `k`. We can get the bottom 14 by byteshifting `top18` by 18 to the right. Let's break it down:
+
+    top18   11110011000011101000000000000000
+    bot14   00000000000000000011110011000011
+    kdash   11110011000011101011100001101000
     k       11110011000011101000010010101011
 
+We're almost there! We see that by xoring the bottom 14 bits with `kdash` we recover `k`. The actual sequence can be summarised as:
 
-However we now have the top 22 bits - and if we *now* byteshift those to the right, some will end up dropping off. We have all the information we need.
+{% highlight python %}
+      k = 4077814955
+      kdash = k^k>>18
+      top18 = kdash & 0xffffc000
+      # this is equivalent to k>>18
+      bot14 = top18>>18
+      # we isolate the last 14 bytes of kdash
+      kdash_bot14 = kdash & 0x00003fff
+      actual_bot14 = kdash_bot14^bot14
+      orig_k = top18^actual_bot14
+{% endhighlight %}
+
+That was the last step. Now let's recover the one before that:
+
+    y ^= (y << 15) & 0xEFC60000
+
+Just as before, we'll break it down. Let's keep `k` as defined above and let `m` be the mask `0xEFC60000`.
+
+    k                  11110011000011101000010010101011
+    (k<<15)&0xffffffff 01000010010101011000000000000000
+    0xefc60000         11101111110001100000000000000000
+    (k<<15)&0xefc60000 01000010010001000000000000000000
+
+For the 2nd step we need to mask with `0xFFFFFFFF` because we want to keep the numbers as 32-bit.
+
+
 
 ### 24. Create the MT19937 stream cipher and break it ###
