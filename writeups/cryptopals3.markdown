@@ -234,7 +234,15 @@ We're almost there! We see that by xoring the bottom 14 bits with `kdash` we rec
       orig_k = top18^actual_bot14
 {% endhighlight %}
 
-That was the last step. Now let's recover the one before that:
+As a side note, I just want to emphasise that now that we can derive `k` from `kdash`, we know what it was before the transform. Just to recap:
+
+    y' = y ^ y>>18
+
+Which implies
+
+    y' ^ y>>18 = y
+
+Now let's take a look at the one before:
 
     y ^= (y << 15) & 0xEFC60000
 
@@ -247,6 +255,37 @@ Just as before, we'll break it down. Let's keep `k` as defined above and let `m`
 
 For the 2nd step we need to mask with `0xFFFFFFFF` because we want to keep the numbers as 32-bit.
 
+For the sake of briefty:
 
+{% highlight python %}
+      const = 0xefc60000
+      ret = (k<<15)&const ^ k
+      last15 = ret & 0x00007fff # 15 1's
+      kk = last15<<15
+      val = kk&const ^ ret
+      last17 = val & 0x0001ffff # 17 1's
+      kk = last17<<15
+      val = kk&const ^ ret
+      top15 = val & 0xfffe0000
+      assert(k == top15 | last17) # we add the top and the bottom together
+{% endhighlight %}
+    
+{% highlight python %}
+      const = 0x9d2c5680
+      ret = (kk<<7)&const ^ k
+      last7 = ret & 0x0000007f
+      kk = last7<<7
+      val = kk&const ^ ret
+      last14 = val & 0x00003fff
+      kk = last14<<7
+      val = kk&const ^ ret
+      last21 = val & 0x001fffff
+      kk = last21<<7
+      val = kk&const ^ ret
+      last28 = val & 0x0fffffff
+      kk = last28<<7
+      val = kk&const ^ ret
+      assert(k == val)
+{% endhighlight %}
 
 ### 24. Create the MT19937 stream cipher and break it ###
