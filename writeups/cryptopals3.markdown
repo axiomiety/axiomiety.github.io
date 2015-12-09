@@ -166,12 +166,37 @@ For those interested, there is a bit more colour to be found in the Python sourc
 
 ### 22. Crack an MT19937 seed ###
 
-1. time sleep (randint, 2, 30)
-2. seed with int in time . time
-3. do step one again
-4. return the first random value returned by the RNG
+The instructions given are fairly straightforward:
+
+  1. time sleep (randint, 2, 30)
+  1. seed with `int(time.time)`
+  1. do step one again
+  1. return the first random value returned by the RNG
 
 Here we need to figure out what the seed was. Simply, we need to figure out what the epoch was. It's a bit of a bruteforce approach - we just need to 'rewind' the seconds until such a time that the first random value returned matches the original one.
+
+
+{% highlight python %}
+    import time, random
+    time.sleep(random.randint(2,30))
+    seed = int(time.time())
+    print('original seed: {0}'.format(seed))
+    o = MT()
+    o.seed_mt(seed)
+    time.sleep(random.randint(2,30))
+    num = o.extract_number()
+    
+    oo = MT()
+    trial_seed = int(time.time())
+    oo.seed_mt(trial_seed)
+    while oo.extract_number() != num:
+      trial_seed -= 1
+      oo.seed_mt(trial_seed)
+  
+    print('matching trial_seed: {0}'.format(trial_seed))
+{% endhighlight %}
+
+If we didn't know the seed had been based on the current time, this would have been considerably more difficult!
 
 ### 23. Clone an MT19937 RNG from its output ###
 
