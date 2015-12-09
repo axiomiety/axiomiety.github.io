@@ -234,15 +234,9 @@ We're almost there! We see that by xoring the bottom 14 bits with `kdash` we rec
       orig_k = top18^actual_bot14
 {% endhighlight %}
 
-As a side note, I just want to emphasise that now that we can derive `k` from `kdash`, we know what it was before the transform. Just to recap:
+As a side note, I just want to emphasise all we've done is derive `k` back from `kdash` (i.e., what `k` was before the transform).
 
-    y' = y ^ y>>18
-
-Which implies
-
-    y' ^ y>>18 = y
-
-Now let's take a look at the one before:
+Now let's take a look at the next transform:
 
     y ^= (y << 15) & 0xEFC60000
 
@@ -253,9 +247,11 @@ Just as before, we'll break it down. Let's keep `k` as defined above and let `m`
     0xefc60000         11101111110001100000000000000000
     (k<<15)&0xefc60000 01000010010001000000000000000000
 
-For the 2nd step we need to mask with `0xFFFFFFFF` because we want to keep the numbers as 32-bit.
+For the 2nd step we need to mask with `0xFFFFFFFF` because we want to keep the numbers as 32-bit (you don't need to do this in code because the mask will take care of this for you - only for display purposes). The mask means we can easily recover the last 17 bits - because we just `&` them with 0's.
 
 For the sake of briefty:
+
+TODO: rework this section. It was painful getting the below, and a decent explanation would help - just so it doesn't look like those ops were plucked out of thin air.
 
 {% highlight python %}
       const = 0xefc60000
@@ -287,5 +283,34 @@ For the sake of briefty:
       val = kk&const ^ ret
       assert(k == val)
 {% endhighlight %}
+
+{% highlight python %}
+      kdash = k^((k>>11)&0xffffffff)
+      kk = kdash & 0xffe0000 # top 11
+      ret = (kk>>11)&0xffffffff
+      kk = ret^kdash # top 22
+      ret = (kk>>11)&0xffffffff
+      val= ret^kdash # top 32
+      assert(k == val)
+{% endhighlight %}
+
+We can then string the above to reverse each transform successively (look for `reverse_mersene_transform` in `crypto_utils.py`).
+
+With this done, all we need is to source 624 numbers from the generator to recover the initial state:
+
+    >>> o=MT()
+    >>> o_clone = MT()
+    >>> o.seed_mt(123)
+    >>> state = [reverse_mersene_transform(n) for n in [o.extract_number() for _ in range(624)]]
+    >>> o_clone.index = 624 # since we generated 624 values
+    >>> o.index
+    624
+    >>> o_clone.mt = state
+    >>> o.extract_number()
+    2439673420
+    >>> o_clone.extract_number()
+    2439673420
+
+Job done!
 
 ### 24. Create the MT19937 stream cipher and break it ###
