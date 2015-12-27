@@ -17,6 +17,8 @@ I primarily code in Python. It's fun, readable, and the possibilities are endles
 
 Random stuff I found of interest and wrote about.
 
+*   [Taking the MSP430 Launchpad for a spin](hw_msp430.html):
+    Exploring the MSP430
 *   [Random walks & brownian motion](misc_brownian-motion.html):
     Using D3.js to visualise random walks
 *   [A quick intro to Vagrant](misc_vagrant-intro.html):
