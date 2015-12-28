@@ -4,7 +4,7 @@ title: articles/msp430
 category: pages
 ---
 
-_This is far from being complete_
+_This is far from being complete!_
 
 I was oscillating between this and something like Arduino/RaspberryPI. The reason I ended up with the MSP430 is simply because I wanted to be closer to the metal - and I felt like the other two just had... too much power (!!). I'm also 5 years late to the party but heh.
 
@@ -120,3 +120,42 @@ References:
 
   * [MSP430 pins](http://processors.wiki.ti.com/index.php/Digital_I/O_(MSP430))
 
+#### Don't push that button
+
+Let's see if we can get the push button working. For reasons well explained below (c.f. references below), we need to toggle the pull-up resistor for the P1.3 pin. The code looks like this:
+
+{% highlight c %}
+int main(void) {
+    WDTCTL = WDTPW | WDTHOLD; // Stop watchdog timer
+  
+    P1DIR |= 0x41;
+    P1OUT |= 0x41;
+    // we need to set the pull-up resistor as well as the output
+    P1OUT |= BIT3;
+    P1REN |= BIT3;
+
+    for (;;) {
+      if ((P1IN & BIT3) == 0) {
+        P1OUT ^= 0x41;
+      }
+    }
+
+  return 0;
+}
+{% endhighlight c %}
+
+It might sound a little counter-intuitive to set `P1OUT |= BIT3` but that's how it works (_TODO:_ figure out why it's counter-intuitive!).
+
+When the button is pressed down, the 3rd bit `P1IN` gets set to 0 - and we then toggle the state of the LEDs.
+
+However this is woefully inefficient. We're essentially polling for state at every iteration. And if there's any jitter it'll lead to funky behaviour.
+
+So let's move to interrupts next.
+
+References:
+
+  * [Pull-up resistor](https://learn.sparkfun.com/tutorials/pull-up-resistors)
+
+#### Interrupts
+
+The CPU can be interrupted if a particular situation occurs - for instance, if the watchdog timer hits the max.
