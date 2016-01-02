@@ -175,4 +175,67 @@ Fai presto - be quick
 
 [Tavolo vs tavola](http://blogs.transparent.com/italian/tavolo-or-tavola/)
 
+### Vorrei...?
 
+<dl>
+  <dt>Vorrei...</dt>
+  <dd>I would like</dd>
+  <dt>Un caffè</dt>
+  <dd>A coffee</dd>
+  <dt>Un caffè latte</dt>
+  <dd>A latte</dd>
+  <dt>Per favore</dt>
+  <dd>Please</dd>
+  <dt>Vorrei un caffè latte per favore</dt>
+  <dd></dd>
+  <dt>Un tè</dt>
+  <dd></dd>
+  <dt>Con zucchero</dt>
+  <dd>With</dd>
+  <dt>Zucchero</dt>
+  <dd>Sugar</dd>
+  <dt>Vorrei un caffè latte con zucchero</dt>
+  <dd>I'd like a latte with sugar</dd>
+  <dt>Un cornetto</dt>
+  <dd>A croissant</dd>
+  <dt>E un cornetto</dt>
+  <dd>And a croissant</dd>
+  <dt>Gracie</dt>
+  <dd>Thanks</dd>
+  <dt>Molto bene</dt>
+  <dd>Very good</dd>
+  <dt>Una birra</dt>
+  <dd>A beer</dd>
+  <dt>Acqua</dt>
+  <dd>Water</dd>
+  <dt>Del</dt>
+  <dd>Some</dd>
+  <dt>Dell'acqua</dt>
+  <dd>Some water</dd>
+  <dt>Una bottiglia d'acqua per favore</dt>
+  <dd>A bottle of water please</dd>
+  <dt>Di vino</dt>
+  <dd>Of wine</dd>
+  <dt>Una bottiglia di vino</dt>
+  <dd>A bottle of wine</dd>
+  <dt>Vorrei mangiare qualcosa</dt>
+  <dd>I would like to eat something</dd>
+  <dt>Qualcosa</dt>
+  <dd>Something</dd>
+  <dt>Mangiare</dt>
+  <dd>To eat</dd>
+  <dt>Vorrei una bottiglia di vino per favor</dt>
+  <dd>I would like a bottle of wine please</dd>
+  <dt>Benissimo</dt>
+  <dd>Very good</dd>
+  <dt>Di niente</dt>
+  <dd>You're welcome</dd>
+</dl>
+
+#### Related vocabulary
+
+#### Cultural
+
+   * [Cornetto vs Croissant](http://www.chicagotribune.com/dining/recipes/ct-food-0708-cornetti-20150702-story.html)
+
+## Duolingo

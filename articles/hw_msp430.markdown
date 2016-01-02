@@ -114,7 +114,9 @@ In code:
     P1OUT  =  0x41;
 {% endhighlight c %}
 
-And there - we have just turned on both LED1 and LED2.
+And there - we have just turned on both LED1 and LED2 (red and green respectively, which you can *not* see from the picture below).
+
+![LEDs](../images/msp430/msp430_led1_and_led2.PNG)
 
 References:
 
@@ -148,7 +150,7 @@ It might sound a little counter-intuitive to set `P1OUT |= BIT3` but that's how 
 
 When the button is pressed down, the 3rd bit `P1IN` gets set to 0 - and we then toggle the state of the LEDs.
 
-However this is woefully inefficient. We're essentially polling for state at every iteration. And if there's any jitter it'll lead to funky behaviour.
+However this is woefully inefficient. We're essentially polling for state at every iteration. And if there's any jitter it'll lead to funky behaviour (this is because this loop gets executed constantly - we can see it more clearly if we add a delay after the if - something like `for (int i=0;i<6000;i++) {}`).
 
 So let's move to interrupts next.
 
