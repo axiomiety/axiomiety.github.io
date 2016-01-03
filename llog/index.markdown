@@ -16,3 +16,4 @@ Learning Log
    * [Italian](italian.html) #livinglanguage
    * [buildyourownlisp](buildyourownlisp.html) #programming
    * [Rough Guide To The Weather](book_rough-guide-to-the-weather.html) #book
+   * [Esperanto](esperanto.html) #livinglanguage

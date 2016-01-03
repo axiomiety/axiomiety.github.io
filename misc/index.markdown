@@ -56,7 +56,9 @@ MindMup is a really cool tool. Highly recommended.
 
 You can find me on [github](http://www.github.com/axiomiety).
 
+<!--
 ### Random ###
 
   * [Singapore vs United Kingdom](misc_sg_vs_uk.html):
     I relocated to Singapore from the UK. How certain things (banking/mobile/transport/...) differ.
+-->

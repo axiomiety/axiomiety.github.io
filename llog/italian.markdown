@@ -239,3 +239,40 @@ Fai presto - be quick
    * [Cornetto vs Croissant](http://www.chicagotribune.com/dining/recipes/ct-food-0708-cornetti-20150702-story.html)
 
 ## Duolingo
+
+### Vocab
+
+<dl>
+  <dt></dt>
+  <dd>Boy</dd>
+  <dt></dt>
+  <dd>Girl</dd>
+  <dt></dt>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+  <dt></dt>
+  <dd></dd>
+</dl>
+
+### To be (Essere)
+
+Present
+
+pronoun|verb
+:------|:---
+io|sono
+tu|sei
+lui, lei|è
+noi|siamo
+voi|siete
+loro|sono
+

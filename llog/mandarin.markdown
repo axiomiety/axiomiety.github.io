@@ -1,6 +1,6 @@
 ---
 layout: default
-title: mandarin
+title: llog/mandarin
 category: pages
 ---
 
