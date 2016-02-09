@@ -20,3 +20,4 @@ Learning Log
    * [Lynda: Up and running with git & github](lynda-up_and_running_with_git_and_github.html) #lynda
    * [Lynda: Managing international projects](lynda-managing_international_projects.html) #lynda
    * [Safari: The zen of architecture](safari-the_zen_of_architecture.html) #safari
+   * [Erlang](erlang.html) #programming
