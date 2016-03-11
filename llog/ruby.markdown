@@ -133,3 +133,19 @@ Instance variables can't be accessed directly. At all. Ever. Instead access need
 #### E
 
 `self` can represent both the instance or the class. I guess using `cls` in Python is more convention than anything else.
+
+#### E
+
+We can have macros! Via `define_method` - so we can call methods (from mixins, say) which in turn add new methods to the class.
+
+#### E
+
+There's a `module` keyword - just like `class`. But you cannot create objects from modules or sublcass them. Useful as namespaces among other things.
+
+#### E
+
+When you set a class variable in a sub class, you set it for the superclass and all other subclasses too.
+
+#### E
+
+You can't use `yield` inside `define_method` (see [here](http://stackoverflow.com/questions/2306731/using-yield-inside-define-method-in-ruby)).
