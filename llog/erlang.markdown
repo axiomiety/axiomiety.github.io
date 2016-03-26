@@ -42,4 +42,8 @@ Can bind functions to variables via `FallVelocity = fun(Distance) -> X = (2*9.8*
 
 #### E
 
+`if` statements can only contain a very few BIF/simple boolean statements. For anything more complex, break it up or use `case`.
 
+#### E
+
+List comprehensions can be used as such: `accumulate(Fn, Ls) -> [Fn(El) || El <- Ls]` - really neat!
