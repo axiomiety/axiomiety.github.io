@@ -47,3 +47,7 @@ Can bind functions to variables via `FallVelocity = fun(Distance) -> X = (2*9.8*
 #### E
 
 List comprehensions can be used as such: `accumulate(Fn, Ls) -> [Fn(El) || El <- Ls]` - really neat!
+
+#### E
+
+When compiling a function via the shell, you can export all private methods via `c(file_name, [export_all])`. You can even specify that in the file itself via `-compile(pdebug_info, export_all])`. Though it's usually bad practice to leave an `export_all` in there.
