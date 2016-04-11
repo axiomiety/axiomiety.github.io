@@ -195,4 +195,194 @@ Review: bridge
 Total score: 13/20
 Review: ?
 
+== 20160406 19mns
+
+Ethernet - contention-based media access method
+CSMA/CD - Carrier Sense Multiple Access with Collision Detection (protocol)
+If host notices another signal whilst transmitting, sends jam signal (informs everyone of collision) -> random backoff
+Each host has equal priority
+
+Half-duplex - one pair of wires for both transmission & reception
+Full-duplex - no collision, different pairs for received/transmitted data -> uses point-to-point between transmitter & receiver
+
+Full-duplex port, when powered on, will check capabilities on the other side (auto-detect).
+
+Ethernet Addressing
+MAC - 48 bits, split in half
+* First 24 = I/G (1) G/L (1) OUI (22)
+* Second 24 = vendor assigned
+
+I/G -> Individual Group. 0 for a device, 1 if it's a broadcast/multicast address in Ethernet
+G/L (a.k.a U/L) -> Global/Local, or Universal/Local. 0 if address is globally administered (c.f. IEEE), 1 if it's locally administered
+
+Binary Value | Decimal Value
+--- | ---
+10000000 | 128
+11000000 | 192
+11100000 | 224
+11110000 | 240
+11111000 | 248
+11111100 | 252
+11111110 | 254
+11111111 | 255
+
+Frames are used at the DL layer - encapsulate packets from the Network layer for transmission
+
+MAC frame format. Includes Cyclic Redundancy Check (CRC)
+!! error detection, *not* correction
+
+Tunneling - encapsulating a frame within a different type of frame
+
+Ethernet_II format
+
+Preamble (7) - alternating 1,0 pattern, 5MHz clock
+SFD (1) - Start Frame Delimiter - 10101011. Last pair of 1's indicate the beginning of the data
+Dest (6) - Least Significant Bit first. Can be an individual, broadcast, or multicast MAC address. For a broadcast address this would be all 1's
+Src (6) - Source address, LSB first. Can't be a multicast/broadcast format.
+Type (2) - or length for 802.3. For Eth_II, this is the network layer protocol
+Data/padding (46-1500) - duh
+FCS (4) - holds the CRC. Doesn't include the preamble or SFD.
+
+== 20160408 22mns + 11mns
+
+Cable types:
+* 10Base-T - 100m
+* 100Base-TX - 100m
+* 100Base-FX - 412m
+* 1000Base-CX - 25m
+* 1000Base-T - 100m
+* 1000Base-SX - multimode fibre (MMF) - 220m
+* 1000Base-LX - singlemode fibre - 3 to 10km
+
+Cat 5 cable has more wire twists per unit length, so less crosstalk (each pair is twisted at a different 'frequency'). If you don't want Electo-Magnetic Interference (EMI), use fibre optic!
+
+Multimode fibre (MMF), like 62.5|50/125(mu)m has a larger diametral core -> multiple modes of light. 850nm laster, ~220/550m respectively
+Singlemode fiber, 9/125(mu)m - single mode of light. 1300nm laster, 3-10km
+
+Straight-through cable. Pins (1,2) and (3,6). Used for Switch <-> Client or Router <-> Switch
+Cross-over cable. Pins (1,2)->(3,6) and (3,6)->(1,2) on the other side. Used for Client <-> Router, Switch <-> Switch, Router <-> Router. Gigabit UTP crossover is Pins (1,2)->(3,6), (4,7)->(7,4), (5,8)->(8,5)
+
+Auto-MDIX - a mechanism by which Cisco hw knows how to decide which pins are receiving/transmitting.
+
+Encapsulation at each layer:
+Transport = TCP Header + Upper-layer data
+Network = IP Header + Upper-layer data
+Frame = MAC | LLC + Upper-layer data + FCS
+
+Cisco 3-layer hierarchical model:
+* Core layer - switch traffic as fast as possible, small # of units, desgined for high reliability
+* Distribution/Workgroup - routing, filtering, WAN access
+* Access/Desktop - segmentation (separate collision domains)
+
+== 20160411 13mns + 24mns
+
+Lab 2.1
+
+1.
+
+192.11000000 /
+168.10101000 /
+10.00001010 /
+15.00001111 /
+
+172.10101100 /
+16.00010000 /
+20.00010100 /
+55.00110111 /
+
+10.00001010 /
+11.00001011 /
+12.00001100 /
+99.01100011 X 01100111
+
+2.
+
+11001100.128+64+8+4=204 /
+00110011.32+16+2+1=51 /
+10101010.128+32+8+2=170 /
+01010101.64+16+4+1=85 /
+
+11000110.128+64+4+2=198 /
+11010011.128+64+16+2+1=211 /
+00111001.32+16+8+1=57 /
+11010001.128+64+16+1=209 /
+
+10000100.128+4=132 /
+11010010.128+64+16+2=190 X 210 (can't add -\_-)
+10111000.128+32+16+8=184 /
+10100110.128+32+4+2=166 /
+
+3.
+
+8421
+
+1101 1000.xD8 /
+0001 1011.x1B /
+0011 1101.x3D /
+0111 0110.x76 /
+
+11001010.xCA /
+11110101.xF5 /
+10000011.x83 /
+11101011.xEB /
+
+10000100.x84 /
+11010010.xD2 /
+01000011.x43 /
+10110011.xB3 /
+
+Total: 35/36
+Takeaway: learn how to add...
+
+Lab 2.2
+
+4 2 3 1
+
+Total: 4/4
+
+Lab 2.3
+
+1. C /
+2. S /
+3. C /
+4. C /
+5. S /
+6. C /
+7. C /
+8. R /
+
+Total: 8/8
+Takeaway: this needs to make it into a flashcard. Feels a bit like fluke
+
+Lab 2.4
+
+3 5 2 1 4
+
+Total: 5/5
+
+Review Q
+
+1. D /
+2. A /
+3. A /
+4. B /
+5. D X B
+6. D /
+7. D /
+8. B,C /
+9. B /
+10. ? X
+11. D /
+12. B /
+13. D X B
+14. A /
+15. B /
+16. ? X (THIS NEEDS TO BE ON A FLASHCARD!)
+17. B /
+18. B /
+19. 00011100 - 1C A /
+20. A /
+
+Total: 16/20
+Takeaway: learn which standards match which cable types. Also some 'router connection' settings over a rolled cable
 
