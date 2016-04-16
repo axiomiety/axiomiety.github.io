@@ -21,3 +21,4 @@ Learning Log
    * [Lynda: Managing international projects](lynda-managing_international_projects.html) #lynda
    * [Safari: The zen of architecture](safari-the_zen_of_architecture.html) #safari
    * [Erlang](erlang.html) #programming
+   * [Safari: Beginning Docker](safari-beginning_docker.html) #safari

@@ -386,3 +386,230 @@ Review Q
 Total: 16/20
 Takeaway: learn which standards match which cable types. Also some 'router connection' settings over a rolled cable
 
+== 20160412 ? + 9mns
+
+TCP/IP = Transmission Control Protocol/Internet Protocol
+
+DoD -> OSI Model:
+* Process/Application -> Application, Session, Presentation
+* Host-to Host -> Transport
+* Internet -> Network
+* Network Access -> Data Link/Physical
+
+Telnet: 8-bit, byte-oriented connection over TCP, clear text
+SSH: over TCP/IP, all encrypted
+FTP: protocol *and* program. For file transfer
+TFPT: Trivial FTP. Stripped down version of FTP, no directory browsing abilities. Only used to send/receive files. No auth either
+SNMP: Simple Network Management Protocol. Polls devices from a Network Management Station (NMS) at fixed/random intervals. No issue -> baseline. V3 is the standard.
+HTTP: HyperText Transfer Protocol
+HTTPS: as above, but encrypted
+NTP: Network Time Protocol - used for synchronization
+DNS: Domain Name Service. Forwards happen over TCP
+DHCP: Dynamic Host Configuration Protocol. Not the same as BootP (Bootstrap Protocol). Can provide a variety of information to clients (IP, subnet, domain, gateways, DNS, WINS, ...). Clients sending out DHCP Discover messages send broadcast at L2 and L3 (L2: ff:ff:ff:ff:ff:ff, L3: 255.255.255.255 - all networks, all hosts). Uses UDP, off port 67 by default. Usually a 4 step process (DHCPDiscover, DHCPOffer, DCHPRequest, DHCPACK). Host uses a gratuitous ARP
+!! more time to be spent on DHCP
+APIPA: Automatic Private IP Addressing - Windows. 169.254.0.1 to 169.254.255.254 (class B, mask of 255.255.0.0)
+
+Host-to-Host Layer protocols
+
+TCP + UDP (Transmission Control Protocol, User Datagram Protocol)
+
+TCP - numbers and sequences each segment, waits for an ACK, and retransmits any segments that aren't acknowledged.
+Virtual circuit - handshake, which includes window size.
+Costly network overhead
+
+TCP segment format:
+        16bit source port | 16bit destn port
+        32bit seq number
+        32bit ack number
+        4bit header length, reserved, code bits/flags | 16bit window size
+        16bit TCP checksum (CRC) | 16bit urgent pointer (only if urgent flag set)
+        Options
+        Data
+
+Header length is a multiple of 32bits. TCP header length is always 0 mod 32 (bit)
+
+UDP is connectionless (no circuit). Fire and forget, no ack, no ordering, ...
+
+UDP segment format:
+        16bit source port | 16bit desn port
+        16bit length | 16bit checksum
+        Data
+
+Sample apps/port #s:
+* FTP:21, TCP
+* telnet:23, TCP
+* POP3:110, TCP
+* NTP:123, TCP
+* IMAP4:143, TCP
+* DNS:53, TCP/UPDP
+* TFTP:69 UDP
+* BootPS:67 UDP
+* SNMP:161 UDP
+
+Ports below 1024 are defined in RFC 3232
+
+!! Session layer keeps application layer data separate (e.g. different 'tabs' in your browser, to the same domain)
+
+== 20160414 17mns + 21mns
+
+Internet Protocol (IP) - internet layer.
+
+IP Header
+Version (4b) | Header length (4b) | Priority and type of service (8b) | Total length (16, inc header)
+Identification (16) | Flags (3b) | Fragmented offset (13b)
+TTL (8b) | Protocol 0x06 for TCP, 0x17 for UDP (8b) | Header checksum - CRC (16b)
+Source IP (32b)
+Destination IP (32b)
+Options (0 or 32b)
+Data
+
+Protocol numbers are available here: www.iana.org/assignments/protocol-numbers
+
+ICMP - Internet Control Message Protocol
+
+Encapsulated within IP datagrams
+- Destination unreachable: if a router can't send an IP datagram any further
+- Buffer full/source quench: if a router's memory buffer for incoming datagrams is full
+- Hops/time exceeded: TTL = 0
+- Ping: Packet Internet Groper
+- Traceroute: discover full path using ICMP time-outs
+
+!! you can sometimes tell what OS sent a ping request by looking at the data. Usually it's 100 bytes of the alphabet, but Windows stops at W before looping back to A
+
+ARP - address resolution protocol
+
+Finds a hardware address from a known IP address
+
+IP Addressing
+
+Hierarchical. Very useful for routing (vs flat).
+
+Network address: 172.16.30.56 -> 172.16
+Node address: 172.16.30.35 30.56
+
+Class A: N.H.H.H
+Class B: N.N.H.H
+Class C: N.N.N.H
+Class D: Multicast
+Class E: Research
+
+Class A
+* first bit is always 0
+* 0 - 127
+* 0 and 127 reserved, so 2^24 (3 bytes for node addresses)-2 potential node addresses
+
+Class B
+* first bit is always 1, second is always 0
+* 10000000 - 10111111 = 128 to 191
+* 2^16 (2 bytes for node addresses) - but because it should be 1 followed by 0, that's 2^14-2 (for all 0s/1s)=65,534
+
+Class C
+* first 2 bits are always 1, 3rd bit is always off
+* 11000000 - 11011111 = 192 to 223
+* one byte for note addresses, but 110 start so 2^8-2 -> 254 node addresses *for each class C network*
+
+Class D
+* 224 to 239 - multicast
+
+Class E
+* 240 to 255
+
+Reserved IP address:
+* Network address all 0 -> this network segment
+* Network address all 1 -> all networks
+* 127.0.0.1 -> loopback
+* Node address all 0 -> any host on a specified network
+* Node address of all 1 -> all nodes (e.g. 128.2.255.255 is all nodes on 128.2)
+* All 0 -> Cisco default route
+* All 1 -> broadcast to all nodes on current network (255.255.255.255)
+
+NAT - Network Address Translation
+
+Converts private IP address for use on the internet
+
+Class A: 10.0.0.0 - 10.255.255.255
+Class B: 172.16.0.0 - 172.31.255.255
+Class C: 192.168.0.0 - 192.168.255.255
+
+Layer 2 broadcast
+a.k.a. hardware broadcasts, won't go past LAN boundary (router)
+
+Layer 3 broadcast
+Network broadcast, all host bits are on
+
+Unicast
+Directed to a single address
+
+Multicast
+Point to multipoint
+Via group address
+Routers forward to interfaces that have hosts subscribed to a group address
+
+== 20160415 28mns
+
+Lab 3.1
+
+1. 1100 0000 to 1101 1111 = 192 to 223 /
+2. ? X
+3. 0000 0000 to 0111 1111 = 0 to 127 (though 0 and 127 are reserved) /
+4. loopback - used for testing /
+5. replace the host address with 0 /
+6. replace the host address with 1b (so 255) /
+7. X 10.0.0.0 to 10.255.255.255
+8. X 172.16.0.0 to 172.31.255.255
+9. X 192.168.0.0 to 192.168.255.255
+10. A-F /
+
+Total: 6/10
+Takeway: learn the private address spaces for each network!
+
+Lab 3.2
+
+1. I
+2. H2H
+3. P/A
+4. P/A
+5. I
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+17.
+
+Total: pfff /17
+Takeaway: didn't think it was relevant, I was wrong. DoD model needs to be learnt!
+
+Review questions
+
+1. C /
+2. B /
+3. C /
+4. A X
+5. D,E,F X
+6. C /
+7. D X
+8. C X
+9. ?? X
+10. B,D,E /
+11. C /
+12. C /
+13. C /
+14. A /
+15. C /
+16. C,E /
+17. B /
+18. B, C /
+19. C /
+20. Request, Discover, Offer, Ack X
+
+
+Total:  14/20
+Takeaway: brush up on DHCP, as well as the DoD model
+
