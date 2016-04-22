@@ -613,3 +613,213 @@ Review questions
 Total:  14/20
 Takeaway: brush up on DHCP, as well as the DoD model
 
+Subnetting offsets
+
+  0 +0
+  128 +1 - /9,/17,/25
+  192 +2 - /10,/18,/26
+  224 +3
+  240 +4
+  248 +5
+  252 +6
+  254 +7
+  255 +8 - /16,/24
+
+  == 20160418 37mns
+
+  Subnet mask  - 32-bit value that allows the device that's receiving IP packets to distinguish the network ID from the host ID portion of the IP address. The differentiation is done by splitting the 1's and 0's (1's = network ID, 0's = host IDs)
+
+  Classless Inter-Domain Routing (CIDR)
+
+  Largest subnet is /30 as we need at least 2 bits for host bits
+
+  What are the possible subnets per network class?
+  * A - /8 to /15
+  * B - /16 to /23
+  * C - /24 to /30
+
+  `ip subnet-zero` - assuming a mask has been set up, use the first and last subnet in your network design.
+  http://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/13711-40.html#subnetzero
+  default from IOS 12.x
+
+  Subnetting questions:
+  * how many subnets
+  * how many hosts/subnet
+  * what are the valid subnets
+  * what's the broadcast address for each subnet
+  * what are the valid hosts
+
+  e.g. 255.255.255.128/25 - Class C network address 192.168.10.0
+
+  1 bit for subnetting, 7 bits for hosts.
+  * how many subnets - 2^1 = 2
+  * how many hosts/subnet - 2^7-2 = 126
+  * what are the valid subnets - 256 - 128 -> 0, 128 = 2 subnets
+  * what's the broadcast address for each subnet - 192.168.10.127 & 192.168.10.255
+  * what are the valid hosts - 1->127, 129->254
+
+  `show ip route` to show the routing table. `C` -> directly connected network
+
+  e.g. 255.255.255.192/26 - Class C network address 192.168.10.0
+
+  2 bit for subnetting, 6 bits for hosts.
+  * how many subnets - 2^2 = 4
+  * how many hosts/subnet - 2^6-2 = 62
+  * what are the valid subnets - 256 - 192 -> 0, 64, 128, 192 = 4 subnets <- block size is 64
+  * what's the broadcast address for each subnet - 192.168.10.63, 192.168.10.127, 192.168.10.191, 192.168.10.254
+  * what are the valid hosts - 1->63,65->126,129->190,192-254
+
+  !! 255.255.255.240 mask is often asked!
+
+  What do we know about a /26 subnet?
+  * 192 mask (1111111.11111111.11111111.11000000)
+  * 2 bits on, 6 off
+  * 4 subnets (2^2)
+  * block size is 256-192 = 64 (alternatively, 256/4 = 64)
+  * 4 subnets, 64-2=62 hosts in each
+
+  !! Any number between the subnet number and the broadcast address is always a valid host.
+
+  == 20160419 18mns 6mns
+
+  Subnetting class B networks
+  16 bits available for hosts, can use 14 bits. 255.255.0.0 is /16 (16 bits set), +14 -> all the way to /30.
+  Anything in excess of /24 will be exactly like class C.
+  Anything before and you subnet in the 3rd octet
+
+  e.g. 255.255.128.0/17 - Class B with network address 172.16.0.0 and subnet mask 255.255.128.0
+  * how many subnets - 2^1 = 2
+  * how many hosts/subnet - 2^15-2 = 32766
+  * what are the valid subnets - 256 - 128 -> 0, 128 - in the 3rd octet
+  * what's the broadcast address for each subnet - 172.16.127.255 & 172.16.255.255
+  * what are the valid hosts - 172.16.0.1->172.16.127.254,172.16.128.1->172.16.255.254
+
+  !! in this example, 172.16.10.0 is a valid host address, and so is 172.16.10.255
+
+  e.g. 255.255.255.128/25 - Class B with network address 172.16.0.0 and subnet mask 255.255.255.128
+  * how many subnets - 2^9 = 512
+  * how many hosts/subnet - 2^7-2 = 126
+  * what are the valid subnets - 256 - 255 -> 0,1,2,3... in the 3rd octet and one extra bit in the 4th octet (so 0,128). You get 255x2+2
+  * what's the broadcast address for each subnet - 172.16.127.255 & 172.16.255.255
+  * what are the valid hosts - 172.16.0.1->172.16.127.254,172.16.128.1->172.16.255.254
+
+  Subnetting class A networks
+  The masks are from /8 to /30
+
+  What are the advantages of subnetting?
+  * reduced network traffic
+  * optimised network performance
+  * simplified management
+
+  == 20160420 25mns 17:31
+
+  Labs 4.1
+
+  1. 192.168.100.25/30
+  Subnet mask: 255.255.255.252 - 4 hosts/subnet (-2 for network address + broadcast) /
+  Valid subnet: 192.168.100.24 /
+  Broadcast address: 192.168.100.27 (next subnet is .28) /
+  Host range: 192.168.100.25->26 /
+
+  2. 192.168.100.37/28
+  4 network bits -> 128+64+32+16 - 240
+  Subnet mask: 255.255.255.240 /
+  Valid subnet: 256-240 -> 16 block size -> 192.168.100.32 /
+  Broadcast address: 192.168.100.63 X 47
+  Host range: 192.168.100.33->63 X 46
+
+  3. 192.168.100.66/27
+  3 network bits -> 128+64+32 - 224
+  Subnet mask: 255.255.255.224 /
+  Valid subnet: 256-224 -> 32 block size -> 192.168.100.64 /
+  Broadcast address: 192.168.100.95 /
+  Host range: 192.168.100.65-94 /
+
+  4. 192.168.100.17/29
+  5 network bits -> 128+64+32+16 - 248
+  Subnet mask: 255.255.255.248 /
+  Valid subnet: 256-248 -> 8 block size -> 192.168.100.16
+  Broadcast address: 192.168.100.31 X 23
+  Host range: 192.168.100.17->32 X 22
+
+  5. 192.168.100.99/26
+  2 network bits -> 128+64 - 192
+  Subnet mask: 255.255.255.192 /
+  Valid subnet: 256-192 -> 64 block size -> 192.168.100.64 /
+  Broadcast address: 192.168.100.127 /
+  Host range: 192.168.100.65->126 /
+
+  6. 192.168.100.99/25
+  1 network bits -> 128
+  Subnet mask: 255.255.255.128 /
+  Valid subnet: 256-128 -> 128 block size -> 192.168.100.0 /
+  Broadcast address: 192.168.100.127 /
+  Host range: 192.168.100.0->126 /
+
+  7. 255.255.224.0 X 2^4 = 16, 2^5 = 32 -> 5 bits. /21
+  8. 192.168.192.10/29 - 255.255.255.248, 8 -> 192.168.192.15 /
+  9. 2^3-2 = 6 /
+  10. 10.16.3.65/23 - 7 bits in 3rd octet - 256-2 = 254 - 10.16.3.64 X block size is 2 (256-254). 3.255, in 2.0 subnet
+
+  Total: 22/30
+  Takeaway: Class A subnetting. Mental arithmetic -_-
+
+  Labs 4.2
+
+  /16   255.255.0.0               65536-2
+  /17   255.255.128.0             32768-2
+  /18   255.255.192.0             16384-2
+  /19   255.255.224.0             8192-2
+  /20   255.255.240.0             4096-2
+  /21   255.255.248.0             2048-2
+  /22   255.255.252.0             1024-2
+  /23   255.255.254.0             512-2
+  /24   255.255.255.0             256-2
+  /25   255.255.255.128   128-2
+  /26   255.255.255.192   64-2
+  /27   255.255.255.224   32-2
+  /28   255.255.255.240   16-2
+  /29   255.255.255.248   8-2
+  /30   255.255.255.252   4-2
+
+  Labs 4.3
+
+  10.25.66.154/23 A       2^15,2^9-2=510 /
+  172.31.254.12/24        B       2^8=256,2^8-2=254 /
+  192.158.20.123/28       C       2^4=16,2^4-2=14 /
+  63.24.89.21/18  A       2^10=1024,2^6-2=62 X 2^14-2=16382
+  128.1.1.254/20  B       2^4=16,2^12-2=4094 /
+  208.100.54.209/30       C       2^6=64,2^2-2=2 /
+
+  Total: 5/6
+  Takeaway: Pesky A networks...
+
+  == 20160421 33mns
+
+  Review Questions
+  1.
+  224 -> 256-224 = 32 = block size
+  224 = 128+64+32 - 3 bits network, 5 bits host -> 2^5-1 = 30 hosts
+  D /
+  2. 29 subnets - 32 - 2^5 -> 5 bits, D /
+  3. /28 - 4 bits - .240 - 16 block size -> 32, 48, 64 - C /
+  4. /19 172 is a class B. 2^3-1 subnets, 2^13-2 - F (no zero subnet by default) /
+  5. .254 mask - A, D X B,D
+  6. 172.16.45.14/30 - 6 bits - 2^2 block size -> D /
+  7. E X D
+  8. /21 - 3 bits = 224 - 32 -> C /
+  9. /29 - 3 bits for host - 2^3-2 = 6 -> A /
+  10. /29 on class C - 248, 8 block size -> C /
+  11. A /
+  12. 2^4 = 16 - 2^5-2 = 30 -> 3 bits for network -> 255.255.255.224 -> B /
+  13. C /
+  14. /25 in class B - 1 bit, 128 block size-> B X
+  15. 192.168.10.0/28 - 4 bits, 240 -> block size is 16 - -> 192.168.10.254 X
+  16. 192.168.10.0/28 - C /
+  17. E /
+  18. 172.16.17.0/22 - class B, 6 bits for network - 252.0 - E /
+  19. 172.16.2.1/23 - 7 bits - 254 -> subnet size 2, B&C X D,E
+  20. C /
+
+  Total: 16/20
+  Takeaway: subnetting is *hard*!
