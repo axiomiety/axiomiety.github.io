@@ -93,3 +93,94 @@ We can make some changes to the filesystem and see those via `docker diff`:
     A /dir_that_did_not_exist
 
 Commit the changes to a new image via `docker commit santa myuser/newdir`
+
+There is a free registry via the docker hub (docker.io -> signup). `docker login` with the credentials set up above.
+
+`docker push` only pushes layers it's not aware of.
+
+Use `docker rmi <image_name>` to remove the image, and `docker pull <image_name>` to download it. By default this will use the last command it was run with before the commit.
+
+To look at the public index, go to [https://hub.docker.com/](https://hub.docker.com/) and type your query in the search box. Images are official if they are built automatically from a GitHub repo. For instance, `docker pull redis` will grab the 'official' redis docker image: [https://hub.docker.com/_/redis/](https://hub.docker.com/_/redis/).
+
+    vagrant@vagrant-ubuntu-wily-64:~$ docker run --rm -i -t --entrypoint="bash" --link don-redis:redis redis -c 'redis-cli -h $REDIS_PORT_6379_TCP_ADDR'
+    172.17.0.1:6379> set msg 'hello world'
+    OK
+    172.17.0.1:6379> get msg
+    "hello world"
+
+Dockerfile - add `FROM` as the first instruction to specify the base image. A `MAINTAINER` tag is also recommended. `RUN` is just like running a command via the shell. Each `RUN` instruction creates a new layer so it's sometimes better to bundle related instructions on a single line.
+
+    vagrant@vagrant-ubuntu-wily-64:~/crashburn/sshd-example$ docker build -t myusername/sshd-example .
+    Sending build context to Docker daemon 2.048 kB
+    Sending build context to Docker daemon
+    Step 0 : FROM ubuntu
+     ---> a572fb20fc42
+    Step 1 : MAINTAINER foo <foo@bar.com>
+     ---> Running in 55e5cc993c95
+     ---> 57d821f7e039
+    Removing intermediate container 55e5cc993c95
+    Step 2 : RUN apt-get update && apt-get install -y openssh-server
+     ---> Running in 9aa37b6c9a86
+    Ign http://archive.ubuntu.com trusty InRelease
+    ...
+    Setting up ssh-import-id (3.21-0ubuntu1) ...
+    Processing triggers for libc-bin (2.19-0ubuntu6.7) ...
+    Processing triggers for ca-certificates (20160104ubuntu0.14.04.1) ...
+    Updating certificates in /etc/ssl/certs... 173 added, 0 removed; done.
+    Running hooks in /etc/ca-certificates/update.d....done.
+    Processing triggers for ureadahead (0.100.0-16) ...
+     ---> 2d5df169f8ea
+    Removing intermediate container 9aa37b6c9a86
+    Step 3 : RUN mkdir -p /var/run/sshd
+     ---> Running in 5ec2bd2e7935
+     ---> 5fab8bba8c37
+    Removing intermediate container 5ec2bd2e7935
+    Successfully built 5fab8bba8c37
+
+The image will then be available to use. You can check `docker images`:
+
+    vagrant@vagrant-ubuntu-wily-64:~/crashburn/sshd-example$ docker images
+    REPOSITORY                TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
+    myusername/sshd-example   latest              5fab8bba8c37        About a minute ago   251.6 MB
+    ubuntu                    latest              a572fb20fc42        9 days ago           187.9 MB
+    
+The `ADD` command takes 2 args, src & destn. The first one *relative* to the project directory at build time. Source could also be a url, which the builder would download and place accordingly.
+
+Use the `CMD` directive to run something by default.
+
+So far it looks like this:
+
+    FROM ubuntu
+    
+    MAINTAINER foo <foo@bar.com>
+    
+    RUN apt-get update && apt-get install -y openssh-server
+    
+    RUN mkdir -p /var/run/sshd
+    ADD sshd_config /etc/ssh/sshd_config
+    
+    CMD /usr/sbin/sshd -D
+
+Another directive is `ENTRYPOINT` like `ENTRYPOINT /usr/sbin/ssh` - which sort of forces whatever gets added via `docker run` as an argument (appended, really).
+
+By default, the commands are being run as root. User `USER` to change that. `WORKDIR` will change the working directory and `ENV` will set an environment variable.
+
+`EXPOSE 2222` exposes the 2222 port outside the container - which is also shown in `docker ps`:
+
+    vagrant@vagrant-ubuntu-wily-64:~/crashburn/sshd-example$ docker ps
+    CONTAINER ID        IMAGE                            COMMAND                CREATED             STATUS              PORTS               NAMES
+    bf677438e49d        myusername/sshd-example:latest   "/bin/sh -c '/usr/sb   11 seconds ago      Up 11 seconds       2222/tcp            suspicious_davinci
+
+When building on top of another container, the latest instructions override the previous ones.
+
+Use `ONBUILD` to always run the instruction that follows when building - even when building a downstream container image:
+
+    Step 0 : FROM myusername/sshd-example
+    # Executing 1 build triggers
+    Trigger 0, ADD sshd_config /etc/ssh/sshd_config
+    Step 0 : ADD sshd_config /etc/ssh/sshd_config
+     ---> 5e56e2bf6791
+    Removing intermediate container 64b86944f044
+    ...
+
+Link your GitHub account onto the docker hub - automated builds, which will kick in after every commit. You can also specify dependencies on other docker repos.
