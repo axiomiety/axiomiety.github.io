@@ -225,3 +225,77 @@ By default the mounts are read-write but can be made as read-only via `:ro`:
     root@8fde5cf73b51:/# touch /mnt/some_new_file
     touch: cannot touch '/mnt/some_new_file': Read-only file system
 
+Docker volumes are only 'live' whilst a container is running. But they're meant to be shared across containers like so:
+
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker run -d -v /var/volume1 donaldsimpson/memalloc 256
+    0e1201dcd76004632f839e66fedacb98d3171c41dba63899b12790f269e0c087
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker run --rm -ti  --volumes-from 0e1201 ubuntu bash
+    root@7c206c611ac1:/# cd /var/volume1/
+    root@7c206c611ac1:/var/volume1# touch foo
+    root@7c206c611ac1:/var/volume1# exit
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker run --rm -ti  --volumes-from 0e1201 ubuntu bash
+    root@52ec449d6589:/# ls /var/volume1/
+    foo
+
+Whilst a volume is still attached to a running (TBC!) container, it will remain live.
+
+Ports in containers are not exposed unless explicitly told so. `EXPOSE` tells docker what port to expose to the host system.
+
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker run -d -P redis
+    0c052674d81edbc1d848e2288a059c097a5dfeee2a98a5a02bd8705228d0bcf3
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker ps
+    CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                     NAMES
+    0c052674d81e        redis:latest        "/entrypoint.sh redi   3 seconds ago       Up 3 seconds        0.0.0.0:32768->6379/tcp   insane_hopper
+
+We can also use `docker port`:
+
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker port insane_hopper
+    6379/tcp -> 0.0.0.0:32768
+
+A port can be re-directed on the fly via `-p <public_port>:<private_port>`. An IP can also be specified like `-p 127.0.0.1:6379:6379`. This would ensure only localhost has access.
+
+Outgoing connections can be prevented using the `--net="none"` (network is then disabled). This is useful for sandboxed environments.
+
+By default, a container uses the host container. But `--dns=8.8.8.8` will override that.
+
+Linking containers - there is no point exposing a port on a public IP only to have another container connecting to it via that public IP.
+
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker run -d --name=redis redis
+    a5a2ca4a121d51bebb9045e6d397e5d2904e154be5f7ed94bcdaae4cc5c6d8b5
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker run --rm -it --link redis:db ubuntu bash
+    root@7ae794e8ee9a:/# env
+    ...
+    DB_NAME=/adoring_fermat/db
+    DB_PORT_6379_TCP_PORT=6379
+    DB_PORT=tcp://172.17.0.23:6379
+    DB_PORT_6379_TCP=tcp://172.17.0.23:6379
+    DB_ENV_GOSU_VERSION=1.7
+    DB_ENV_REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-3.0.7.tar.gz
+    DB_ENV_REDIS_VERSION=3.0.7
+    DB_PORT_6379_TCP_ADDR=172.17.0.23
+    DB_PORT_6379_TCP_PROTO=tcp
+    DB_ENV_REDIS_DOWNLOAD_SHA1=e56b4b7e033ae8dbf311f9191cf6fdf3ae974d1c
+
+This populates entries in the linked container's environment - in this case, everything starting with `DB`. We also see the `/etc/hosts` file has been prepopulated:
+
+    root@7ae794e8ee9a:/# cat /etc/hosts | grep redis
+    172.17.0.23     db a5a2ca4a121d redis
+
+Example with the `redis` container:
+
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker run --rm -it --link redis:redis redis bash
+    root@07f0b4343821:/data# env | grep REDIS_PORT
+    REDIS_PORT_6379_TCP_PROTO=tcp
+    REDIS_PORT_6379_TCP_ADDR=172.17.0.23
+    REDIS_PORT_6379_TCP_PORT=6379
+    REDIS_PORT_6379_TCP=tcp://172.17.0.23:6379
+    REDIS_PORT=tcp://172.17.0.23:6379
+    root@07f0b4343821:/data# redis-cli -h $REDIS_PORT_6379_TCP_ADDR
+    172.17.0.23:6379> set foo bar
+    OK
+    172.17.0.23:6379> get foo
+    "bar"
+
+This only works whilst cpntainers don't need restarting and *are on the same host*.
+
+
