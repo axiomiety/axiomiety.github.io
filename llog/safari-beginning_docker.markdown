@@ -184,3 +184,44 @@ Use `ONBUILD` to always run the instruction that follows when building - even wh
     ...
 
 Link your GitHub account onto the docker hub - automated builds, which will kick in after every commit. You can also specify dependencies on other docker repos.
+
+Docker can allow us to set resource limitations. The `-c=10` command is relative to what you give other processes.
+
+Docker limitations only work against *used* memory, not allocated. You specify those like `-m=256mb` (note the units).
+
+If you get errors like the below:
+
+    WARNING: Your kernel does not support swap limit capabilities. Limitation discarded.
+
+Make sure your kernel has the right `cgroups` set up as described [here](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
+
+If the `ENTRYPOINT` directive has been issued, it can be overridden:
+
+    vagrant@vagrant-ubuntu-wily-64:~$ docker run -ti --entrypoint=/bin/sh donaldsimpson/memalloc
+
+By default a container runs as root. We can override the user `-u=nobody` for instance:
+
+    vagrant@vagrant-ubuntu-wily-64:~$ docker run --rm -ti -u=nobody ubuntu bash
+    nobody@0bddd2b4440d:/$ id
+    uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)
+
+The user needs to exist!
+
+Environment variables can be overriden with `-e`: `vagrant@vagrant-ubuntu-wily-64:~$ docker run --rm -it -e VAR1=foo ubuntu bash`. If you have many, you can store them in a key-value pair file and pass that with `--env-file=/path/to/file`.
+
+Mounting directories inside a container is achieved via `-v [host_path]:[guest_path]`:
+
+    vagrant@vagrant-ubuntu-wily-64:~$ mkdir mounts
+    vagrant@vagrant-ubuntu-wily-64:~$ cd mounts/
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ cat > hostfile
+    Hello from the host system
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker run --rm -it -v $(pwd):/mnt ubuntu bash
+    root@c630d510a5d9:/# ls mnt/
+    hostfile
+
+By default the mounts are read-write but can be made as read-only via `:ro`: 
+
+    vagrant@vagrant-ubuntu-wily-64:~/mounts$ docker run --rm -it -v $(pwd):/mnt:ro ubuntu bash
+    root@8fde5cf73b51:/# touch /mnt/some_new_file
+    touch: cannot touch '/mnt/some_new_file': Read-only file system
+
