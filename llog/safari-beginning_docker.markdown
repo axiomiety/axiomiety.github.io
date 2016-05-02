@@ -296,6 +296,97 @@ Example with the `redis` container:
     172.17.0.23:6379> get foo
     "bar"
 
-This only works whilst cpntainers don't need restarting and *are on the same host*.
+This only works whilst containers don't need restarting and *are on the same host*.
+
+New Dockerfile:
+
+    FROM ubuntu
+    MAINTAINER foo <foo@bar.com>
+    
+    RUN apt-get update
+    RUN apt-get install -y python python-pip
+    RUN pip install redis flask
+    
+    ADD ./hello.py /hello.py
+    EXPOSE 8000
+    CMD ["python", "/hello.py"]
+
+Using a makefile is handy:
+
+    vagrant@vagrant-ubuntu-wily-64:~/crashburn/pyred_app$ cat Makefile
+    build:
+            docker build -t myusername/helloworld .
+    
+If you like to use spaces instead of tab, `make` will complain. I use `ts=2` in vim so `unexpand --first-only -t 2 Makefile` does the trick. To show tabs in a file, you can use the below:
+
+    vagrant@vagrant-ubuntu-wily-64:~/crashburn/pyred_app$ cat -etv Makefile
+    build:$
+    ^Idocker build -t myusername/helloworld .$
+
+To deploy to, say, EC2 or DO, all you need to do is to create a local docker hub on your 'production' host. There is a dockerised version of docker hub: `docker pull samalba/docker-registry`. We can run it with a volume: `docker run -d -p 5000:5000 -v /tmp/registry:/tmp/registry smalba/docker-registry`. In case the application crashes, we can just restart it without having to repush our images.
+
+To check the repo is up and running, use:
+
+    vagrant@vagrant-ubuntu-wily-64:~/crashburn/pyred_app$ curl 10.0.2.15:5000/v1/_ping
+    true
+
+To push to a private repo, the docker image must be renamed: `docker tag myusername/helloworld 10.0.2.15:5000/myusername/helloworld`.
+
+If you get errors regarding the repo being insecure, edit `/etc/default/docker` and change `DOCKER_OPTS` to `DOCKER_OPTS="--insecure-registry 10.0.2.15:5000"` - then resart the docker service (`sudo service docker stop/start`). You can then push using the standard `docker push`:
+
+    vagrant@vagrant-ubuntu-wily-64:~/crashburn/pyred_app$ docker push 10.0.2.15:5000/myusername/helloworld
+    The push refers to a repository [10.0.2.15:5000/myusername/helloworld] (len: 1)
+    Sending image list
+    Pushing repository 10.0.2.15:5000/myusername/helloworld (1 tags)
+    dbcb51e048f9: Image successfully pushed
+    4e910c38549a: Image successfully pushed
+    d43cf1f769e9: Image successfully pushed
+    a572fb20fc42: Image successfully pushed
+    57d821f7e039: Image successfully pushed
+    1131754cc2e1: Image successfully pushed
+    1e56c45bad45: Image successfully pushed
+    8c94400220e3: Image successfully pushed
+    70aa07b01d4b: Image successfully pushed
+    7af91f9afe5f: Image successfully pushed
+    3e9e54676dff: Image successfully pushed
+    Pushing tag for rev [3e9e54676dff] on {http://10.0.2.15:5000/v1/repositories/myusername/helloworld/tags/latest}
+
+You can then import it on your local machine: `docker pull 10.0.2.15:5000/myusername/helloworld`, which will bring the image to the local host.
+
+Given the deploy script below (living on the 'prod' machine):
+
+    #!/bin/bash
+    set -e
+    ip="10.0.2.15" #"$(curl icanhazip.com -s)"
+    name="$1"
+    version="$2"
+    port="8000"
+    registry="$ip:5000"
+    
+    echo "pulling $version from registry..."
+    docker pull $registry/$name:$version > /dev/null
+    docker tag -force $registry/$name:$version $name:$version
+    echo "stopping existing version"
+    docker rm -f $(docker ps | grep $name | cut -d ' ' -f 1) > /dev/null 2>&1 || true
+    echo "starting version $version"
+    docker run -d -P --link redis:db $name:$version > /dev/null
+    echo "name deployed:"
+    echo "  $(docker port `docker ps -lq` $port | sed s/0.0.0.0/$ip/)"
 
 
+We can update our makefile to make deployment a one-liner:
+
+    VERSION=current
+    HOST=10.0.2.15
+    
+    all: build deploy
+    
+    build:
+            docker build -t myusername/helloworld .
+            docker tag -force myusername/helloworld $(HOST):5000/myusername/helloworld:$(VERSION)
+    
+    deploy:
+            docker push $(HOST):5000/myusername/helloworld:$(VERSION)
+            ssh vagrant@$(HOST) ./crashburn/pyred_app/deploy-app myusername/helloworld $(VERSION)
+
+You can override the makefile's variables like `make VERSION=v1`.
