@@ -823,3 +823,23 @@ Subnetting offsets
 
   Total: 16/20
   Takeaway: subnetting is *hard*!
+
+== 20160505 8mns
+
+Lab 6
+
+1. clock rate 1000000 # clock rate is in bits /
+2. configure vty 0 4;password <password>; login X no login
+3. no shutdown /
+4. erase startup-config /
+5. line console 0;enable password todd;login /
+6. enable secret cisco;login /
+7. show controllers /
+8. ? X show terminal
+9. reload /
+10. conf t;hostname Sales /
+
+Total: 8/10
+Takeaway: brush up on simple (but not frequently used) commands!
+
+
