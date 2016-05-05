@@ -298,30 +298,9 @@ You can use the `|` to scroll through to the relevant section - like `sh run | b
 
 `show running-config` is for the config being run *right now*, versus `show startup-config` which is for... the startup configuraiton.
 
-#### Managing configurations
+`show protocols` show layer 1 and 2 information on all interfaces.
 
-NVRAM is non-volatile RAM. For a config to survive a powerdown, it needs to be somewhere other than RAM (DRAM).
-
-    home>en
-    home#copy runn
-    home#copy running-config ?
-      flash:          Copy to flash file
-      ftp:            Copy to current system configuration
-      startup-config  Copy to startup configuration
-      tftp:           Copy to current system configuration
-    home#copy running-config s
-    home#copy running-config startup-config 
-    Destination filename [startup-config]? 
-    Building configuration...
-    [OK]
-
-Use `erase startup-config` to remove the startup config (note: cmd has to be typed in full!). Use `reload` afterwards.
-
-#### Misc
-
-The appliances should have their own versions of `ping` and `traceroute`. The former has some funnky options that allow you to set things like the datagram size.
-
-`telnet` is also included.
+`show clock` for the time set on the router.
 
 ##### Interface stats
 
@@ -353,6 +332,24 @@ MTU is the Maximum Transmission Unit - which essentially is the max packet size.
 
 If `0 output errors, 0 collisions` is increasing, it suggests issues at the Physical or Datalink layer (often as a result of half-duplex on one end and full-duplex on the other).
 
+If `0 input errors, 0 CRC` is increasing, it could be an issue with the Physical layer - like the cable receiving excessive interference. Interfernce usually manifests itself with increasing CRC/input errors but the collision counter stays the same.
+
+`0 no buffer` is good - means we're processing all incoming packets and don't have to drop any.
+
+`0 ignored` is also good. Will increase in conjunction with `no buffer` - dropped packets essentially.
+
+`runts` is for frames that are not at least 64 bytes (minimum). Usually caused by collisions
+
+`griants` - big frames, greater than 1518 bytes.
+
+`input errors` = `runts` + `giants` + `no buffer` + `CRC` + `frame` + `overrun` + `ignored`.
+
+`CRC` - the checksum in the `FCS` portion of the frame.
+
+`frame` represents incomplete/illegal frames.
+
+`late collision` - all collisions should occur by the 64th byte of a frame, as per Ethernet specs. If not, usually points to a duplex mismatched or an excessive cable length (greater than specifications).
+
     home#sh int s0/3/0
     Serial0/3/0 is administratively down, line protocol is down (disabled)
       Hardware is HD64570
@@ -364,3 +361,37 @@ If `0 output errors, 0 collisions` is increasing, it suggests issues at the Phys
 The first part relates to the Physical layer, the 2nd to the datalink layer. For serial interfaces, the latter being down is usually an issue clocking (keepalive) or framing. In the above keepalive is set to 10 seconds. This means the router sends a keepalive message to its neighbhour every 10 seconds. Both the router and its neighbhours must have the same keepalive value.
 
 Counters are cleared with `clear counters <interface>`. Useful if you just fixed an issue and want a clean slate.
+
+For layer 3 stats, use `sh ip interface`. Includes things like whether an access list has been set. Use `sh ip int brief` for a quick overview.
+
+#### Managing configurations
+
+NVRAM is non-volatile RAM. For a config to survive a powerdown, it needs to be somewhere other than RAM (DRAM).
+
+    home>en
+    home#copy runn
+    home#copy running-config ?
+      flash:          Copy to flash file
+      ftp:            Copy to current system configuration
+      startup-config  Copy to startup configuration
+      tftp:           Copy to current system configuration
+    home#copy running-config s
+    home#copy running-config startup-config 
+    Destination filename [startup-config]? 
+    Building configuration...
+    [OK]
+
+Use `erase startup-config` to remove the startup config (note: cmd has to be typed in full!). Use `reload` afterwards.
+
+#### Misc
+
+The appliances should have their own versions of `ping` and `traceroute`. The former has some funnky options that allow you to set things like the datagram size.
+
+`telnet` is also included.
+
+`logging synchronous` stops the console from overriding what you are typing.
+
+A router will not (usually) allow a telnet user to enter privilege mode *unless* `enable password` or `enable secret` has been set. That's sensible!
+
+All interfaces are shut down on a router by default.
+
