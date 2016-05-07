@@ -842,4 +842,31 @@ Lab 6
 Total: 8/10
 Takeaway: brush up on simple (but not frequently used) commands!
 
+== 20160506 13:05
 
+Review questions
+
+1. many input/CRC errors - D /
+2. C /
+3. C, E X
+4. C /
+5. user -> limited, priv -> all other; global -> entire; specific -> int/proc; setup -> inter /
+6. A X 100MB
+7. B / 
+8. C /
+9. C /
+10. C /
+11. D /
+12. C, D X D
+13. D /
+14. B /
+15. C /
+16. C /
+17. C X D
+18. B /
+19. D X B, D
+20. A /
+
+Total: 15/20
+Takeaway: watch out for the router name, and the mode in which a command gets executed.
+If a cmd is unfamiliar, maybe it's because they made it up!
