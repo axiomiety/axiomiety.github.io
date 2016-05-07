@@ -447,3 +447,27 @@ You can expose the docker service from the host to containers - so control can b
     foo
 
 Container within a container. Nifty heh. Though note the 'sub' container is still managed by the host's docker service.
+
+Docker only logs stdout and stderr. We can use `gliderlabs/logspout` to aggregate all those logs and access them over http.
+
+    vagrant@vagrant-ubuntu-wily-64:~$ docker run -d -p 8000:8000 -v /var/run/docker.sock:/tmp/docker.sock gliderlabs/logspout:v2
+
+(v3, which is currently in master, has different settings)
+
+    vagrant@vagrant-ubuntu-wily-64:~$ docker run -d -p 8000:8000 -v /var/run/docker.sock:/tmp/docker.sock gliderlabs/logspout:v2
+    465aace4a82a1b9298f2d20b92d401a22f3df43d2ee7b2624af1eb5838f21df0
+    vagrant@vagrant-ubuntu-wily-64:~$ docker logs `docker ps -lq`
+    2016/05/07 22:42:49 loading and persisting routes in /mnt/routes
+    2016/05/07 22:42:49 logspout v2 serving http on :8000
+    vagrant@vagrant-ubuntu-wily-64:~$ curl localhost:8000/logs
+       modest_bartik|[martini] Started GET /logs for 172.17.42.1:44850
+    distracted_sammet|25754
+        prickly_tesla|18824
+    hopeful_kowalevski|31043
+     distracted_sammet|3780
+
+It's streaming. How cool is that!
+
+Specify a container with `curl localhost:8000/logs/name:prickly_tesla` - or filter on names that match a pattern with `curl localhost:8000/logs/filter:foo`.
+
+[papertrail](http://www.papertrailapp.com) is a log aggregator. `logspouts` can speak syslog, and we can redirector logs from our container (which aggregates logs over all our running containers on the host) to `papertrail`.
