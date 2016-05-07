@@ -390,3 +390,60 @@ We can update our makefile to make deployment a one-liner:
             ssh vagrant@$(HOST) ./crashburn/pyred_app/deploy-app myusername/helloworld $(VERSION)
 
 You can override the makefile's variables like `make VERSION=v1`.
+
+The Docker CLI actually communicates to a server over a unix socket. We can make it communicate over HTTP. Open `/etc/init.d/docker` and change `DOCKER_OPTS` to `-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock` (note in some distros, you'll want to update `/etc/default/docker` instead - c.f. above).
+
+Docker remote API is documented [here](https://docs.docker.com/engine/reference/api/docker_remote_api/).
+
+    vagrant@vagrant-ubuntu-wily-64:~$ curl 127.0.0.1:4243/_ping
+    OKvagrant@vagrant-ubuntu-wily-64:~$
+    vagrant@vagrant-ubuntu-wily-64:~$ curl 127.0.0.1:4243/containers/json
+    [{"Command":"python /hello.py","Created":1462658866,"Id":"94f7d0998a2daf6f462a241e31405fb545ae4573c211dca84899778cc9d291eb","Image":"myusername/helloworld:latest","Labels":{},"Names":["/serene_hoover"],"Ports":[{"IP":"0.0.0.0","PrivatePort":80,"PublicPort":8090,"Type":"tcp"},{"PrivatePort":8000,"Type":"tcp"}],"Status":"Up 2 minutes"}
+
+You can use `curl` to start an image:
+
+    vagrant@vagrant-ubuntu-wily-64:~$ curl localhost:4243/containers/create -X POST -H "Content-Type: application/json" -d '{"Image": "ubuntu", "Cmd":["echo","Hello world"]}'
+    {"Id":"63354c7a992398d483d612d8bf13acd385ffb6f92efae64ab3549d2d87abe03b","Warnings":null}
+
+An endpoint with the container id has been created. We can use this to interact with the container:
+
+    vagrant@vagrant-ubuntu-wily-64:~$ curl localhost:4243/containers/63354c7a992398d483d612d8bf13acd385ffb6f92efae64ab3549d2d87abe03b/start -X POST                         vagrant@vagrant-ubuntu-wily-64:~$ curl localhost:4243/containers/63354c7a992398d483d612d8bf13acd385ffb6f92efae64ab3549d2d87abe03b/logs?stdout=1
+    Hello world!
+
+There is a `docker-py` module, which we can install with `pip`. If you get an error in regards to an API version mismatch between the client and server, you'll need to specify the API version:
+
+    >>> import docker
+    >>> client = docker.Client()
+    >>> client.containers()
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      File "/home/vagrant/crashburn/pyred_app/local/lib/python2.7/site-packages/docker/api/container.py", line 70, in containers
+        res = self._result(self._get(u, params=params), True)
+      File "/home/vagrant/crashburn/pyred_app/local/lib/python2.7/site-packages/docker/client.py", line 158, in _result
+        self._raise_for_status(response)
+      File "/home/vagrant/crashburn/pyred_app/local/lib/python2.7/site-packages/docker/client.py", line 153, in _raise_for_status
+        raise errors.NotFound(e, response, explanation=explanation)
+    docker.errors.NotFound: 404 Client Error: Not Found ("client and server don't have same version (client : 1.22, server: 1.18)")
+    >>> client = docker.Client(version='1.18')
+    >>> client.containers()
+    [{u'Status': u'Up 11 minutes', u'Created': 1462658866, u'Image': u'myusername/helloworld:latest', u'Labels': {}, u'Ports': [{u'Type': u'tcp', u'PrivatePort': 8000}, {u'IP': u'0.0.0.0', u'Type': u'tcp', u'PublicPort': 8090, u'PrivatePort': 80}], u'Command': u'python /hello.py', u'Names': [u'/serene_hoover'], u'Id': u'94f7d0998a2daf6f462a241e31405fb545ae4573c211dca84899778cc9d291eb'}]
+
+And the library is somewhat simpler to use than curl:
+
+    >>> container = client.create_container("ubuntu", "echo foobar")
+    >>> client.start(container)
+    >>> client.logs(container)
+    'foobar\n'
+    
+You can expose the docker service from the host to containers - so control can be delegated to other containers. Easiest way is to mount the docker socket inside the container: `docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock ubuntu bash`. In the container, you can just download the binary: `root@17e35c73f1b4:/# wget -O /usr/bin/docker https://get.docker.com/builds/Linux/x86_64/docker-1.6.0`.
+
+    root@17e35c73f1b4:/# chmod +x /usr/bin/docker
+    root@17e35c73f1b4:/# docker ps
+    CONTAINER ID        IMAGE                          COMMAND              CREATED             STATUS              PORTS                            NAMES
+    17e35c73f1b4        ubuntu:latest                  "bash"               2 minutes ago       Up 2 minutes                                         happy_fermat
+    94f7d0998a2d        myusername/helloworld:latest   "python /hello.py"   21 minutes ago      Up 21 minutes       8000/tcp, 0.0.0.0:8090->80/tcp   serene_hoover
+    root@17e35c73f1b4:/# docker run --rm -it ubuntu bash
+    root@eafeb4696aa7:/# echo foo
+    foo
+
+Container within a container. Nifty heh. Though note the 'sub' container is still managed by the host's docker service.
