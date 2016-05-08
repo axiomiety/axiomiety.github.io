@@ -471,3 +471,7 @@ It's streaming. How cool is that!
 Specify a container with `curl localhost:8000/logs/name:prickly_tesla` - or filter on names that match a pattern with `curl localhost:8000/logs/filter:foo`.
 
 [papertrail](http://www.papertrailapp.com) is a log aggregator. `logspouts` can speak syslog, and we can redirector logs from our container (which aggregates logs over all our running containers on the host) to `papertrail`.
+
+Dokku is a PaaS implementation. Start up a Dokku instance - when pushing code to it (through git) it will automagically build a container and run your app in there.
+
+The Amabassador pattern is a way to link containers across hosts. You run ambassadors on each hosts - they handle the communication between external containers - and the local ones just talk to the ambassador. No single flavour - they're dynamic. You can even build your own (reverse proxies).
