@@ -58,6 +58,18 @@ Need to specify the type and port:
     Switch(config)#int fa 0/1
     Switch(config-if)#
 
+Interfaces can also be updated in bulk (range):
+
+    Switch(config)#interface ?
+      Ethernet         IEEE 802.3
+      FastEthernet     FastEthernet IEEE 802.3
+      GigabitEthernet  GigabitEthernet IEEE 802.3z
+      Port-channel     Ethernet Channel of interfaces
+      Vlan             Catalyst Vlans
+      range            interface range command
+    Switch(config)#interface range fa0/1 - 10
+    Switch(config-if-range)#no shutdown
+
 You can also configure the `line` used (console, VTY):
 
     Switch(config)#line console ?
@@ -302,6 +314,8 @@ You can use the `|` to scroll through to the relevant section - like `sh run | b
 
 `show clock` for the time set on the router.
 
+`show logging` to see logging information (like if logs are forwarded to a syslog server).
+
 ##### Interface stats
 
     Router#show in fa0/1
@@ -383,6 +397,36 @@ NVRAM is non-volatile RAM. For a config to survive a powerdown, it needs to be s
 
 Use `erase startup-config` to remove the startup config (note: cmd has to be typed in full!). Use `reload` afterwards.
 
+You can copy to/from other locations:
+
+    batcave#copy running-config flash:
+    Destination filename [running-config]? foo
+    %Warning:There is a file already existing with this name
+    Do you want to over write? [confirm] 
+    Building configuration...
+    [OK]
+    batcave#show flash: 
+    
+    System flash directory:
+    File  Length   Name/status
+      3   33591768 c2900-universalk9-mz.SPA.151-4.M4.bin
+      5   1007     foo
+      2   28282    sigdef-category.xml
+      1   227537   sigdef-default.xml
+    [33848594 bytes used, 221895406 available, 255744000 total]
+    249856K bytes of processor board System flash (Read/Write)
+
+And the other way around (you should be able to specify the filename?):
+
+    batcave#copy flash: startup-config 
+    Source filename []? foo
+    Destination filename [startup-config]? 
+    [OK]
+    
+    1007 bytes copied in 0.416 secs (2420 bytes/sec)
+
+Interfaces are shut down by default - so if you erase, reload, and restore a config from somewhere, you'll still need to enable those with a `no shutdown`.
+
 #### Misc
 
 The appliances should have their own versions of `ping` and `traceroute`. The former has some funnky options that allow you to set things like the datagram size.
@@ -395,3 +439,160 @@ A router will not (usually) allow a telnet user to enter privilege mode *unless*
 
 All interfaces are shut down on a router by default.
 
+By default, debug messages aren't shown on a remote console. Use `terminal monitor` to enable, and `terminal no monitor` to disable (consistency FTW!).
+
+##### Fancy session multiplexing
+
+Use `Ctrl+Shift+6, X` to detach, and `resume`/`disconnect` to resume/disconnect (duh).
+
+    SW_SUBNET_A#telnet 192.168.1.1
+    Trying 192.168.1.1 ...Open
+    
+    
+    User Access Verification
+    
+    Password: 
+    RT_SALES>en
+    Password: 
+    RT_SALES#sh sessions
+    % No connections open
+    RT_SALES#
+    SW_SUBNET_A#show sessions
+    Conn Host                Address             Byte  Idle Conn Name
+    *  1 192.168.1.1         192.168.1.1            0     0 192.168.1.1
+    SW_SUBNET_A#resume ?
+      <1-16>  The number of an active network connection
+      WORD    The name of an active network connection or Connection options
+      <cr>
+    SW_SUBNET_A#resume 1
+    [Resuming connection 1 to 192.168.1.1 ... ]
+    
+    RT_SALES#
+
+#### DHCP
+
+You sohuld be able to set the lease with `lease`:
+
+    batcave(config)#ip dhcp excluded-address 192.168.10.1 192.168.10.10
+    batcave(config)#ip dhcp pool SALES
+    batcave(dhcp-config)#?
+      default-router  Default routers
+      dns-server      Set name server
+      exit            Exit from DHCP pool configuration mode
+      network         Network number and mask
+      no              Negate a command or set its defaults
+      option          Raw DHCP options
+    batcave(dhcp-config)#network 192.168.10.0 255.255.255.0
+    batcave(dhcp-config)#default-router 192.168.10.1
+    batcave(dhcp-config)#dns-server 8.8.8.8
+
+The pool can be removed with `no ip dhcp pool SALES`.
+
+You can also forward UDP broadcasts (of which DHCPDiscover is one):
+
+    batcave(config)#int g0/0
+    batcave(config-if)#ip ?
+      access-group     Specify access control for packets
+      address          Set the IP address of an interface
+      authentication   authentication subcommands
+      flow             NetFlow Related commands
+      hello-interval   Configures IP-EIGRP hello interval
+      helper-address   Specify a destination address for UDP broadcasts
+      mtu              Set IP Maximum Transmission Unit
+      nat              NAT interface commands
+      ospf             OSPF interface commands
+      proxy-arp        Enable proxy ARP
+      split-horizon    Perform split horizon
+      summary-address  Perform address summarization
+    batcave(config-if)#ip helper-address 10.10.10.254
+
+##### `show ip dhcp`
+
+`binding`
+
+`pool [poolname]`
+
+`server statistics`
+
+`conflict`
+
+#### Logging
+
+To log to  a syslog server:
+
+    Switch(config)#logging host 172.16.10.1
+    Switch(config)#service timestamps ?
+      debug  Timestamp debug messages
+      log    Timestamp log messages
+    Switch(config)#service timestamps log?
+    log  
+    Switch(config)#service timestamps log ?
+      datetime  Timestamp with date and time
+    Switch(config)#service timestamps log datetime ?
+      msec  Include milliseconds in timestamp
+    Switch(config)#service timestamps log datetime msec
+
+#### NTP
+
+Often a good idea so all devices are synchronised.
+
+    batcave(config)#ntp ?
+      authenticate        Authenticate time sources
+      authentication-key  Authentication key for trusted time sources
+      server              Configure NTP server
+      trusted-key         Key numbers for trusted time sources
+      update-calendar     Configure NTP to update the calendar.
+    batcave(config)#ntp server 10.1.1.4
+
+Some versions of IOS allow you to specify the version number (`ntp server <ip> version 4` say).
+
+You can verify the status as such:
+
+    batcave#show ntp status
+    Clock is unsynchronized, stratum 16, no reference clock
+    nominal freq is 000.0000 Hz, actual freq is 000.0000 Hz, precision is 0**00
+    reference time is 00000000.00000000 (00:00:00.000 UTC Mon Jan 1 1990)
+    clock offset is 0.00 msec, root delay is 0.00  msec
+    root dispersion is 0.00 msec, peer dispersion is 0.00 msec.
+
+#### Cisco Discovery Protocol (CDP)
+
+    batcave#sh cdp
+    Global CDP information:
+        Sending CDP packets every 60 seconds
+        Sending a holdtime value of 180 seconds
+        Sending CDPv2 advertisements is enabled
+
+It's turned on/off with `cdp run`/`no cdp run`.
+
+Useful to map the network:
+
+    batcave#show cdp neighbors 
+    Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                      S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone
+    Device ID    Local Intrfce   Holdtme    Capability   Platform    Port ID
+    Switch       Gig 0/0          130            S       2960        Gig 0/1
+
+And add more details as required:
+
+Switch#show cdp neighbors detail
+
+    Device ID: batcave
+    Entry address(es): 
+      IP address : 192.168.0.1
+    Platform: cisco C2900, Capabilities: Router
+    Interface: GigabitEthernet0/1, Port ID (outgoing port): GigabitEthernet0/0
+    Holdtime: 176
+    
+    Version :
+    Cisco IOS Software, C2900 Software (C2900-UNIVERSALK9-M), Version 15.1(4)M4, RELEASE SOFTWARE (fc2)
+    Technical Support: http://www.cisco.com/techsupport
+    Copyright (c) 1986-2012 by Cisco Systems, Inc.
+    Compiled Thurs 5-Jan-12 15:41 by pt_team
+    
+    advertisement version: 2
+    Duplex: full
+
+This is identical to `show cdp entry *`.
+
+There's a non proprietary discovery protocol called Link Layer Discovery Protocol (802.1AB).
