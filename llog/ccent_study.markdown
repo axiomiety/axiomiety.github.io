@@ -842,7 +842,7 @@ Lab 6
 Total: 8/10
 Takeaway: brush up on simple (but not frequently used) commands!
 
-== 20160506 13:05
+== 20160506
 
 Review questions
 
@@ -870,3 +870,37 @@ Review questions
 Total: 15/20
 Takeaway: watch out for the router name, and the mode in which a command gets executed.
 If a cmd is unfamiliar, maybe it's because they made it up!
+
+== 20160511 8mns
+
+Lab 7.1
+
+1. copy start run /
+2. show cdp neighbors /
+3. show cdp entry * /
+4. ctrl+shift+6 - X /
+5. show sessions /
+6. copy flash:|start run /
+7. ntp /
+8. ? UDP broadcast X ip helper-address
+9. ntp ? X ntp server <ip> version 4 (or no version
+10. show ntp status
+
+Total: 8/10
+Takeaway: Learn those pesky ntp commands and brush on cdp
+
+Lab 7.2
+
+1. flash /
+2. NVRAM X ROM
+3. NVRAM /
+4. ROM /
+5. DRAM /
+6. DRAM /
+7. ROM / 
+8. DRAM X ROM
+9. NVRAM X DRAM
+10. DRAM
+
+Total: 7/10
+Takeaway: that's important stuff

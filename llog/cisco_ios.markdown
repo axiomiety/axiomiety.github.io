@@ -316,6 +316,19 @@ You can use the `|` to scroll through to the relevant section - like `sh run | b
 
 `show logging` to see logging information (like if logs are forwarded to a syslog server).
 
+`show processes`:
+
+    SW_SUBNET_A#show processes
+    CPU utilization for five seconds: 0%/0%; one minute: 0%; five minutes: 0%
+     PID QTy       PC Runtime (ms)    Invoked  uSecs     Stacks TTY Process
+       1 Csp 602F3AF0            0       1627       0 2600/3000   0 Load Meter 
+       2 Lwe 60C5BE00            4        136      29 5572/6000   0 CEF Scanner 
+       3 Lst 602D90F8         1676        837    2002 5740/6000   0 Check heaps 
+       4 Cwe 602D08F8            0          1       0 5568/6000   0 Chunk Manager 
+       5 Cwe 602DF0E8            0          1       0 5592/6000   0 Pool Manager 
+
+
+
 ##### Interface stats
 
     Router#show in fa0/1
@@ -596,3 +609,83 @@ Switch#show cdp neighbors detail
 This is identical to `show cdp entry *`.
 
 There's a non proprietary discovery protocol called Link Layer Discovery Protocol (802.1AB).
+
+#### Host table
+
+You can add a static mapping:
+
+    SW_SUBNET_B(config)#ip host RT_SALES 192.168.1.17
+    SW_SUBNET_B(config)#do show hosts
+    Default Domain is not set
+    Name/address lookup uses domain service
+    Name servers are 255.255.255.255
+    
+    Codes: UN - unknown, EX - expired, OK - OK, ?? - revalidate
+           temp - temporary, perm - permanent
+                  NA - Not Applicable None - Not defined
+    
+                  Host                      Port  Flags      Age Type   Address(es)
+                  RT_SALES                  None  (perm, OK)  0   IP      192.168.1.17
+
+`perm` means the entry was added manually, and `temp` means it was resolved by DNS.
+
+Removal is done via `no ip host`.
+
+#### DNS
+
+    SW_SUBNET_A(config)#ip domain-lookup
+    SW_SUBNET_A(config)#ip name-server ?
+     A.B.C.D  Domain server IP address
+      SW_SUBNET_A(config)#ip name-server 192.168.1.11
+      SW_SUBNET_A(config)#end
+      SW_SUBNET_A#
+      %SYS-5-CONFIG_I: Configured from console by console
+
+      SW_SUBNET_A#ping foo
+      Translating "foo"...domain server (192.168.1.11)
+      Type escape sequence to abort.
+      Sending 5, 100-byte ICMP Echos to 192.168.1.1, timeout is 2 seconds:
+      !!!!!
+      Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/1 ms
+
+You can see it resolved `foo` via our DNS (192.168.1.11). A `show hosts` will list the entry (as `temp`, as it is not static):
+
+    SW_SUBNET_A#show hos
+    Default Domain is not set
+    Name/address lookup uses domain service
+    Name servers are 192.168.1.11
+    
+    Codes: UN - unknown, EX - expired, OK - OK, ?? - revalidate
+           temp - temporary, perm - permanent
+                  NA - Not Applicable None - Not defined
+    
+                  Host                      Port  Flags      Age Type   Address(es)
+                  foo                       None  (temp, OK)  0   IP      192.168.1.1
+
+Technically you should add `ip domain-name yourdomain` so as not to type fully qualified domain names (like `foo.yourdomain.com`).
+
+#### Debug
+
+Enable in privileged mode with `debug ?`. A `debug all` will be a drag on system resources.
+
+    SW_SUBNET_A#debug ip icmp
+    ICMP packet debugging is on
+    SW_SUBNET_A#ping foo
+    
+    Type escape sequence to abort.
+    Sending 5, 100-byte ICMP Echos to 192.168.1.1, timeout is 2 seconds:
+    !
+    ICMP: echo reply rcvd, src 192.168.1.1, dst 192.168.1.2
+    !
+    ICMP: echo reply rcvd, src 192.168.1.1, dst 192.168.1.2
+    !
+    ICMP: echo reply rcvd, src 192.168.1.1, dst 192.168.1.2
+    !
+    ICMP: echo reply rcvd, src 192.168.1.1, dst 192.168.1.2
+    !
+    Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/1 ms
+    
+    SW_SUBNET_A#
+    ICMP: echo reply rcvd, src 192.168.1.1, dst 192.168.1.2
+
+
