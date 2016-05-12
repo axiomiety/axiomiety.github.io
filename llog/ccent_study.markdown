@@ -904,3 +904,31 @@ Lab 7.2
 
 Total: 7/10
 Takeaway: that's important stuff
+
+== 20160512
+
+Review questions
+
+1. B LLDP /
+2. C /
+3. B /
+4. A/B (?) X C!
+5. D /
+6. C /
+7. C /
+8. C /
+9. C /
+10. B/E? X C
+11. D /
+12. B,D /
+13. A,D /
+14. B,C,D X tracert vs traceroute
+15. D /
+16. C /
+17. terminal monitor /
+18. C X E
+19. D /
+20. B, D /
+
+Total: 16/20
+Takeaway: read the questions carefully! (e.g. tracert vs traceroute)
