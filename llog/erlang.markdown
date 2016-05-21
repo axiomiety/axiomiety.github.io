@@ -51,3 +51,9 @@ List comprehensions can be used as such: `accumulate(Fn, Ls) -> [Fn(El) || El <-
 #### E
 
 When compiling a function via the shell, you can export all private methods via `c(file_name, [export_all])`. You can even specify that in the file itself via `-compile(pdebug_info, export_all])`. Though it's usually bad practice to leave an `export_all` in there.
+
+#### E
+
+`lists:filtermap` is very nice. Takes a fn returning a `{true,val}` tuple, or just `false` and filters a list accordingly.
+
+
