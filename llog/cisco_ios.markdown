@@ -688,4 +688,92 @@ Enable in privileged mode with `debug ?`. A `debug all` will be a drag on system
     SW_SUBNET_A#
     ICMP: echo reply rcvd, src 192.168.1.1, dst 192.168.1.2
 
+### OSPF
 
+You can reset OSPF with `clear ip ospf process`.
+
+
+`show ip ospf interface <int>` provides important information, like the network type. A BROADCAST type would have a DR and BDR. Note the `State BDR` below, indicating what the *current* router is.
+
+    Router1# show ip ospf interface ethernet 0
+    Ethernet0 is up, line protocol is up 
+      Internet Address 10.10.10.1/24, Area 0 
+      Process ID 1, Router ID 192.168.45.1, Network Type BROADCAST, Cost: 10
+      Transmit Delay is 1 sec, State BDR, Priority 1 
+      Designated Router (ID) 172.16.10.1, Interface address 10.10.10.2
+      Backup Designated router (ID) 192.168.45.1, Interface address 10.10.10.1
+      Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+        Hello due in 00:00:06
+      Index 1/1, flood queue length 0
+      Next 0x0(0)/0x0(0)
+      Last flood scan length is 2, maximum is 2
+      Last flood scan time is 0 msec, maximum is 4 msec
+      Neighbor Count is 1, Adjacent neighbor count is 1 
+        Adjacent with neighbor 172.16.10.1  (Designated Router)
+      Suppress hello for 0 neighbor(s)
+
+The priority of an interface (above is `Priority 1`) dictates which router is selected as the DR. Default is 1, can be 255. If 0, it isn't considered. It is set as follows:
+
+    LabC(config)#int g0/0
+    LabC(config-if)#ip ospf ?
+      authentication      Enable authentication
+      authentication-key  Authentication password (key)
+      cost                Interface cost
+      dead-interval       Interval after which a neighbor is declared dead
+      hello-interval      Time between HELLO packets
+      message-digest-key  Message digest authentication password (key)
+      priority            Router priority
+    LabC(config-if)#ip ospf priority ?
+      <0-255>  Priority
+    LabC(config-if)#ip ospf priority 4
+
+We can also learn about the OSPF neighbours:
+
+    Router2# show ip ospf neighbor 
+    
+    Neighbor ID     Pri    State      Dead Time    Address     Interface
+    192.168.45.1    1      FULL/DR    00:00:36     10.0.0.1    Ethernet0
+
+`Pri` is the priority discussed above. `State` indicates Router2 is FULLy adjacent, and `DR` is what it is.
+
+#### Gotchas
+
+All OSPF routers in the same area must have the same timer intervals - to the second. Otherwise they won't be able to form adjacencies.
+
+### Switchport
+
+Switchport can only be enabled on `access` ports. By default ports are set to `dynamic` (they can be either `access` or `trunk`).
+
+Note that to enable it in the first place, you need to enter `switchport port-security <cr>`. You can check the status via `show port-security int <int>`:
+
+S3(config-if-range)#do show port-sec int f0/5
+Port Security              : Disabled
+Port Status                : Secure-down
+...
+
+If `Port Security` is `Disabled`, it means it wasn't enabled. A port will become `Secure-up` when a host is connected.
+
+Setting `switchport port-security mac-address sticky` will force the switch to learn the MAC addresses it sees on a port and store them as `STATIC`:
+
+              Mac Address Table
+    -------------------------------------------
+    
+    Vlan    Mac Address       Type        Ports
+    ----    -----------       --------    -----
+    
+       1    0060.704b.ade0    DYNAMIC     Fa0/2
+       1    00e0.a3b8.9824    STATIC      Fa0/1
+
+To make this permanent, a `copy run start` is required.
+
+You can see a switchport status with `show port-security`:
+
+    SW1#show port-security 
+    Secure Port MaxSecureAddr CurrentAddr SecurityViolation Security Action
+                   (Count)       (Count)        (Count)
+    --------------------------------------------------------------------
+            Fa0/1        1          1                 0         Shutdown
+
+If the security action is `Shutdown` and a security violation occurs, the port needs to be reset with `shut;no shut`.
+
+A security action of 

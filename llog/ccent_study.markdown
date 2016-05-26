@@ -932,3 +932,96 @@ Review questions
 
 Total: 16/20
 Takeaway: read the questions carefully! (e.g. tracert vs traceroute)
+
+=== 20160518
+
+Lab 8
+
+1. en/conf t: ip route 171.16.10.0 255.255.255.0 172.16.20.1 150 /
+2. IP of remote PC, MAC of gateway /
+3. en/conf t: ip route 0.0.0.0 0.0.0.0 172.16.40.1 /
+4. one with one exit interface / (stub network)
+5. show ip route
+6. interface
+7. False
+8. True
+9. ? X router rip;passive-interface s1
+10. True - sends submask
+
+Total: 9/10
+Takeaway: review routing commands!
+
+=== 20160519
+
+Review Questions
+
+1. show ip route /
+2. B / 
+3. A,D X A,B
+4. C,F / 
+5. B /
+6. B /
+7. MAC, IP /
+8. B,E /
+9. B,C /
+10. A X C
+11. A,C /
+12. B /
+13. D /
+14. A /
+15. A /
+16. D X C
+17. B X C
+18. A,B,C X D (misread the question...)
+19. C /
+20. B /
+
+Total: 15/20
+Takeaway: review different kinds of routing protocols, and read questions properly (read twice, answer once)
+
+=== 20160524
+
+Lab 9
+
+1. router ospf 101
+2. show ip ospf
+3. show ip ospf int g0/0
+4. show ip ospf database X show ip ospf neigh
+5. show ip proto X show ip route ospf
+
+Total: 3/5
+Takeaway: brush up on all the `show ip` commands related to ospf
+
+=== 20160525
+
+Wildcard mask of 0.0.0.0 - this is used to specify an interface.
+E.g.:
+* network 0.0.0.0 255.255.255.255 area 0 - all interfaces participate in OSPF
+* network 172.16.0.1 0.0.0.0 area 0 - only the interface with that ip participates in OSPF
+* network 172.16.0.0 0.0.255.255 area 0 - any matching interfaces participate
+
+Review Questions
+
+1. lowest AD - EIGRP /
+2. ABR? ABC? / - ABR - Area Border Router
+3. A,C /
+4. B,C X B
+5. C /
+6. A /
+7. D X A
+8. D /
+9. A /
+10. A /
+11. C X A
+12. D /
+13. Des rout-> elec, Topo-> contains all, Hell-> provides, Rout -> contains only /
+14. passive-interface fa0/1 /
+15. E,F X B,G 
+16. B X A
+17. A,B,D X C
+18. show ip ospf interface f0/0 /
+19. A /
+20. B /
+
+Total: 14/20
+Takeaway: Learn to read the output of the show commands!
