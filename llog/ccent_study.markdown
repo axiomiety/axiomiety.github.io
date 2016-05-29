@@ -781,6 +781,7 @@ Subnetting offsets
   /28   255.255.255.240   16-2
   /29   255.255.255.248   8-2
   /30   255.255.255.252   4-2
+  
 
   Labs 4.3
 
@@ -1025,3 +1026,44 @@ Review Questions
 
 Total: 14/20
 Takeaway: Learn to read the output of the show commands!
+
+=== 20160526
+
+Lab 10
+
+1. show mac address-table /
+2. flood all interfaces apart from originating /
+3. packet switching, packet filtering, spanning tree (prevent loops) X 'address learning'
+4. add it to the CAM / (and associate it with the port)
+5. violation is just notify X maximum , violation shutdown
+
+Total: 4/5
+Takeaway: default behaviour!
+
+==== 20160529
+
+Review Questions
+
+1. A, B /
+2. int f0/7 - ? X
+3. B,D,E /
+4. show mac address-table /
+5. Addr learning, Forward/Filter decision, Loop Avoid /
+6. A,D /
+7. switchport port-security maximum 2 /
+8. B - switchport port-security /
+9. B /
+10. A /
+11. A,B X B,C
+12. STP /
+13. ip router-address X ip default-gateway
+14. C /
+15. B /
+16. switchport port-security mac-address sticky /
+17. D X B, D
+18. D /
+19. D /
+20. switchport port-security violation shutdown /
+
+Total: 16/20
+Takeaway: adding a static mac to the address table, default-gateway 
