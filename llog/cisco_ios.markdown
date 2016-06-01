@@ -327,7 +327,22 @@ You can use the `|` to scroll through to the relevant section - like `sh run | b
        4 Cwe 602D08F8            0          1       0 5568/6000   0 Chunk Manager 
        5 Cwe 602DF0E8            0          1       0 5592/6000   0 Pool Manager 
 
+#### MAC
 
+You can take a look at the MAC addresses with:
+
+    S2#show mac address-table 
+              Mac Address Table
+    -------------------------------------------
+    
+    Vlan    Mac Address       Type        Ports
+    ----    -----------       --------    -----
+    
+       1    0090.2b3c.b611    DYNAMIC     Fa0/1
+      10    0090.2b3c.b611    DYNAMIC     Fa0/1
+      20    0090.2b3c.b611    DYNAMIC     Fa0/1
+
+You can assign an address onto that table with `mac address-table static aaaa.bbbb.cccc vlan 1 int fa0/1`.
 
 ##### Interface stats
 
@@ -742,14 +757,14 @@ All OSPF routers in the same area must have the same timer intervals - to the se
 
 ### Switchport
 
-Switchport can only be enabled on `access` ports. By default ports are set to `dynamic` (they can be either `access` or `trunk`).
+Switchport can only be enabled on `access` or `trunk` ports. By default ports are set to `dynamic` (they can be either `access` or `trunk`).
 
 Note that to enable it in the first place, you need to enter `switchport port-security <cr>`. You can check the status via `show port-security int <int>`:
 
-S3(config-if-range)#do show port-sec int f0/5
-Port Security              : Disabled
-Port Status                : Secure-down
-...
+    S3(config-if-range)#do show port-sec int f0/5
+    Port Security              : Disabled
+    Port Status                : Secure-down
+    ...
 
 If `Port Security` is `Disabled`, it means it wasn't enabled. A port will become `Secure-up` when a host is connected.
 
@@ -776,4 +791,15 @@ You can see a switchport status with `show port-security`:
 
 If the security action is `Shutdown` and a security violation occurs, the port needs to be reset with `shut;no shut`.
 
-A security action of 
+Using `violation restrict` and `violation protect` both drop unauthorised frames once the maximum number of MAC addresses has been reached. However `restrict` increases the `SecurityViolation` counter, and along with `shutdown` they will send SNMP alerts.
+
+
+### Trunking
+
+If an interface isn't showing up in `show vlan`, it's probably because it's in `trunk` mode.
+
+Do trunk frames communicate over the native VLAN? I think they do - over the native VLAN.
+
+### ACLs
+
+When using wildcards, each block size must start at either 0 or a multiple. E.g. if the block size is 32, you can't start at 5.

@@ -1040,9 +1040,9 @@ Lab 10
 Total: 4/5
 Takeaway: default behaviour!
 
-==== 20160529
+=== 20160529
 
-Review Questions
+Review Questions (10)
 
 1. A, B /
 2. int f0/7 - ? X
@@ -1066,4 +1066,48 @@ Review Questions
 20. switchport port-security violation shutdown /
 
 Total: 16/20
-Takeaway: adding a static mac to the address table, default-gateway 
+Takeaway: adding a static mac to the address table, default-gateway
+
+=== 20160531
+
+Lab 11
+
+1. F /
+2. STP /
+3. broadcast /
+4. collision /
+5. switchport trunk encapsulation dot1Q /
+6. carry VLANs over a single port X
+7. tags a frame with the corresponding VLAN, so can communicate between switches /
+8. T /
+9. access port /
+10. ? X switchport trunk native vlan 4
+
+Total: 8/10
+Takeaway: what trunking is really for!
+
+Review Questions (11)
+
+1. C X D
+2. X ip routing
+3. C /
+4. B /
+5. A /
+6. C / 
+7. D /
+8. switchport access vlan 2 /
+9. show vlan /
+10. B /
+11. A /
+12. C? X A
+13. C /
+14. ? X sh interfaces f0/15 switchport
+15. C /
+16. B /
+17. C /
+18. vlan 2 /
+19. C X B
+20. ? X switchport nonegotiate
+
+Total: 14/20
+Takeaway: DTP frames? Need to brush up on all those show commands, as well as ISL vs dot1q 
