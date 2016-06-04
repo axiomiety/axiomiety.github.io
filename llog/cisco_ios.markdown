@@ -793,6 +793,24 @@ If the security action is `Shutdown` and a security violation occurs, the port n
 
 Using `violation restrict` and `violation protect` both drop unauthorised frames once the maximum number of MAC addresses has been reached. However `restrict` increases the `SecurityViolation` counter, and along with `shutdown` they will send SNMP alerts.
 
+You can change an interface's VLAN with:
+
+    S2(config-vlan)#int f0/1
+    S2(config-if)#switchport access vlan 100
+
+And verify it's been correctly set up:
+
+    S2#show vlan id 100
+    
+    VLAN Name                             Status    Ports
+    ---- -------------------------------- --------- -------------------------------
+    100  SALES                            active    Fa0/1
+    
+    VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+    ---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+    100  enet  100100     1500  -      -      -        -    -        0      0
+
+You can also use `show vlan name SALES` for the above.
 
 ### Trunking
 
@@ -800,6 +818,138 @@ If an interface isn't showing up in `show vlan`, it's probably because it's in `
 
 Do trunk frames communicate over the native VLAN? I think they do - over the native VLAN.
 
+    S2#show dtp 
+    Global DTP information
+        Sending DTP Hello packets every 30 seconds
+        Dynamic Trunk timeout is 300 seconds
+        3 interfaces using DTP
+
+You can display more information on interfaces' trunking status with `show interfaces switchport`:
+
+    Name: Gig0/2
+    Switchport: Enabled
+    Administrative Mode: dynamic auto
+    Operational Mode: down
+    Administrative Trunking Encapsulation: dot1q
+    Operational Trunking Encapsulation: native
+    Negotiation of Trunking: On
+    Access Mode VLAN: 1 (default)
+    Trunking Native Mode VLAN: 1 (default)
+    Voice VLAN: none
+    Administrative private-vlan host-association: none
+    Administrative private-vlan mapping: none
+    Administrative private-vlan trunk native VLAN: none
+    Administrative private-vlan trunk encapsulation: dot1q
+    Administrative private-vlan trunk normal VLANs: none
+    Administrative private-vlan trunk private VLANs: none
+    Operational private-vlan: none
+    Trunking VLANs Enabled: All
+    Pruning VLANs Enabled: 2-1001
+    Capture Mode Disabled
+    Capture VLANs Allowed: ALL
+    Protected: false
+    Unknown unicast blocked: disabled
+    Unknown multicast blocked: disabled
+    Appliance trust: none
+
+By default all ports eligible for trunking are in `dynamic auto`. You need to be explicit to set trunking:
+
+    S2(config)#int g0/1
+    S2(config-if)#switchport mode trunk 
+    S2(config-if)#do show int trunk
+    Port        Mode         Encapsulation  Status        Native vlan
+    Gig0/1      on           802.1q         trunking      1
+    
+    Port        Vlans allowed on trunk
+    Gig0/1      1-1005
+    
+    Port        Vlans allowed and active in management domain
+    Gig0/1      1,100,200
+    
+    Port        Vlans in spanning tree forwarding state and not pruned
+    Gig0/1      none
+
+The other side will show a different kind of encapsulation:
+
+    S1(config-if)#do show int trun
+    Port        Mode         Encapsulation  Status        Native vlan
+    Gig0/1      auto         n-802.1q       trunking      1
+
+To restrict which VLANs can go over the trunk, use `S2(config-if)#switchport trunk allowed vlan 200`. For multiple VLANs, `S2(config-if)#switchport trunk allowed vlan 100,200`. And for more fine-grained tuning:
+
+    S2(config-if)#switchport trunk allowed vlan ?
+      WORD    VLAN IDs of the allowed VLANs when this port is in trunking mode
+      add     add VLANs to the current list
+      all     all VLANs
+      except  all VLANs except the following
+      none    no VLANs
+      remove  remove VLANs from the current list
+
+On routers:
+
+    R1(config-if)#int g0/0.100
+    R1(config-subif)#
+    %LINK-5-CHANGED: Interface GigabitEthernet0/0.100, changed state to up
+    
+    %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.100, changed state to up
+    
+    R1(config-subif)#ip addr 192.168.1.1 255.255.255.0
+    
+    % Configuring IP routing on a LAN subinterface is only allowed if that
+    subinterface is already configured as part of an IEEE 802.10, IEEE 802.1Q,
+    or ISL vLAN.
+    
+    R1(config-subif)#encapsulation dot1Q ?
+      <1-1005>  IEEE 802.1Q VLAN ID
+    R1(config-subif)#encapsulation dot1Q 100
+    R1(config-subif)#ip addr 192.168.1.1 255.255.255.0
+
+So whilst VLAN IDs can go quite high (4095?), dot1Q is restricted to 1005.
+
+Just for kicks, you can change the native VLAN:
+
+    S2(config-if)#switchport trunk native vlan 3
+    S2(config-if)#do show int tr
+    Port        Mode         Encapsulation  Status        Native vlan
+    Gig0/1      on           802.1q         trunking      3
+    
+    Port        Vlans allowed on trunk
+    Gig0/1      1-1005
+    
+    Port        Vlans allowed and active in management domain
+    Gig0/1      1,100,200
+    
+    Port        Vlans in spanning tree forwarding state and not pruned
+    Gig0/1      1,100,200
+    S2(config-if)#
+    %CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on GigabitEthernet0/1 (3), with S1 GigabitEthernet0/1 (1).
+
 ### ACLs
 
 When using wildcards, each block size must start at either 0 or a multiple. E.g. if the block size is 32, you can't start at 5.
+
+Sandard access lists (1-99) can only filter on *source* IP address.
+
+You can add an ACL to VTYs:
+
+    LabA(config)#access-list 50 permit host 172.16.10.3
+    LabA(config)#line vty 0 15
+    LabA(config-line)#access-class 50 in
+
+ACLs can also be named via the `ip access-list` command:
+
+    LabA(config)#ip access-list standard BlockSales
+    LabA(config-std-nacl)#deny 172.16.40.0 0.0.0.255
+
+Note that in named ACL mode, you don't need to start each line with `access-list <ACL #>`.
+
+They are displayed as such:
+
+    LabA(config-std-nacl)#do show access-list
+    Standard IP access list 10
+        10 deny 172.16.40.0 0.0.0.255
+        20 permit any
+    Standard IP access list 50
+        10 permit host 172.16.10.3
+    Standard IP access list BlockSales
+        10 deny 172.16.40.0 0.0.0.255
