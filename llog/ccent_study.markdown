@@ -1111,3 +1111,49 @@ Review Questions (11)
 
 Total: 14/20
 Takeaway: DTP frames? Need to brush up on all those show commands, as well as ISL vs dot1q 
+
+=== 20160607
+
+Lab 12
+
+1. access-list 10 deny 172.16.0.0 255.255.0.0; permit any /
+2. ip access-group 10 out /
+3. deny 192.168.15.5 ; permit any any X
+4. show access-lists  /
+5. port-security & access-list X IDS, IPS
+6. deny tcp 172.16.10.1 eq telnet 172.16.30.5 /
+7. access-class /
+8. X
+9. ip access-list standard BOB X
+10. show ip interface  f0/0 /
+
+Total: 7/10
+Takeaway: Syntax differs a little with line.
+
+=== 20160608
+
+Review Questions
+
+1. D /
+2. C /
+3. C /
+4. B /
+5. A /
+6. C /
+7. show access-list -> disp; show access-list 110 shows only the param; show ip access-list -> shows only the IP; show ip int -> shows which /
+8. C /
+9. D /
+10. D /
+11. B /
+12. A /
+13. B /
+14. C /
+15. B /
+16. D /
+17. C /
+18. C /
+19. C /
+20. C /
+
+Total: 20/20!
+Takeaway: Beware sneaky things like using standard access list with protocols, along with access-list vs access-group

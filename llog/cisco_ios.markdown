@@ -926,9 +926,13 @@ Just for kicks, you can change the native VLAN:
 
 ### ACLs
 
+Standard Acccess Lists permit or deny an entire suite of protocols (e.g. all IP traffic). Extended Access List can look at L3/L4 headers - including source/destination addreses, protocol field (Network layer) and port number (Transport layer).
+
+ACLs can be placed inbound (before being routed) or outbound (after being routed).
+
 When using wildcards, each block size must start at either 0 or a multiple. E.g. if the block size is 32, you can't start at 5.
 
-Sandard access lists (1-99) can only filter on *source* IP address.
+Sandard access lists (1-99 and 1300-1999) can only filter on *source* IP address.
 
 You can add an ACL to VTYs:
 
@@ -953,3 +957,60 @@ They are displayed as such:
         10 permit host 172.16.10.3
     Standard IP access list BlockSales
         10 deny 172.16.40.0 0.0.0.255
+
+To only show IP-related access lists, use `show ip access-lists`.
+
+It is added to an interface via `ip access-group 10 out`. Note the direction is from the device's perspective.
+
+To check out which access lists have been set on an interface, use `show ip interface <int>`:
+
+    ...
+    Outgoing access list is 111
+    Inbound  access list is not set
+    ...
+
+Extended Access Lists take value from 100-199 and 2000-2699. They can filter on more things, like blocking access to tcp port 80: `access-list 111 deny tcp any host 172.16.50.2 eq 80`.
+
+There's an implicit `deny all` at the end of all ACLs so a `permit ip any any` would be required to still let traffic through (unless a previous rule matched already).k
+
+### NAT
+
+TODO: more than one ip per interface?
+
+The `overload` option is likely to be the most used as it only requires a pool with one address (though you can have more!):
+
+    ip nat pool Todd 192.1.2.109 192.1.2.109 netmask 255.255.255.248
+    access-list 1 permit 192.168.10.0 0.0.0.255
+    ip nat inside source list 1 pool Todd overload
+
+You do however require to set the `inside` and `outside` interfaces accordingly:
+
+    interface GigabitEthernet0/0
+     ip address 192.168.10.126 255.255.255.0
+     ip nat inside
+     duplex auto
+     speed auto
+    !
+    interface Serial0/3/0
+     ip address 192.1.2.109 255.255.255.0
+     ip nat outside
+     clock rate 4000000
+
+This is after a ping - each connection is separate and as such had a new port assigned:
+
+    Corp#show ip nat translations 
+    Pro  Inside global     Inside local       Outside local      Outside global
+    icmp 192.1.2.109:30    192.168.10.4:30    192.1.3.2:30       192.1.3.2:30
+    icmp 192.1.2.109:31    192.168.10.4:31    192.1.3.2:31       192.1.3.2:31
+    icmp 192.1.2.109:32    192.168.10.4:32    192.1.3.2:32       192.1.3.2:32
+    icmp 192.1.2.109:33    192.168.10.4:33    192.1.3.2:33       192.1.3.2:33
+    icmp 192.1.2.109:34    192.168.10.4:34    192.1.3.2:34       192.1.3.2:34
+    icmp 192.1.2.109:35    192.168.10.4:35    192.1.3.2:35       192.1.3.2:35
+
+The mappings do die down relatively quickly:
+
+    Corp#show ip nat translations 
+    Pro  Inside global     Inside local       Outside local      Outside global
+    tcp 192.1.2.109:1025   192.168.10.4:1025  192.1.3.2:80       192.1.3.2:80
+
+
