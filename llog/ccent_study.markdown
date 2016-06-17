@@ -1157,3 +1157,49 @@ Review Questions
 
 Total: 20/20!
 Takeaway: Beware sneaky things like using standard access list with protocols, along with access-list vs access-group
+
+=== 20160613
+
+Lab 13
+
+1. PAT /
+2. debug ip nat /
+3. show ip nat trans /
+4. clear ip nat trans * /
+5. before /
+6. after /
+7. show ip nat trans X stat 
+8. ip nat inside/outside /
+9. dynamic /
+10. net X prefix-length
+
+Total: 8/10
+Takeaway: `show ip nat statistics` and `prefix-length` - totally missed those.
+
+=== 20160614
+
+Review Questions
+
+1. A,C,E /
+2. B,D,F /
+3. C /
+4. A /
+5. D /
+6. B /
+7. B /
+8. A,C,E /
+9. B /
+10. C /
+11. A,B,D /
+12. B X C
+13. A /
+14. D /
+15. B / 
+16. A /
+17. B /
+18. C /
+19. A X B
+20. B /
+
+Total: 18/20
+Takeaway: watch out for case-sensitive pool names! note the NAT\* for fast-switching - as well as inside/outside local/global

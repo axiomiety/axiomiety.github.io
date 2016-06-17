@@ -977,7 +977,7 @@ There's an implicit `deny all` at the end of all ACLs so a `permit ip any any` w
 
 TODO: more than one ip per interface?
 
-The `overload` option is likely to be the most used as it only requires a pool with one address (though you can have more!):
+Th `overload` option is likely to be the most used as it only requires a pool with one address (though you can have more!):
 
     ip nat pool Todd 192.1.2.109 192.1.2.109 netmask 255.255.255.248
     access-list 1 permit 192.168.10.0 0.0.0.255
@@ -1012,5 +1012,69 @@ The mappings do die down relatively quickly:
     Corp#show ip nat translations 
     Pro  Inside global     Inside local       Outside local      Outside global
     tcp 192.1.2.109:1025   192.168.10.4:1025  192.1.3.2:80       192.1.3.2:80
+
+You can check stats too via `show ip nat statistics`:
+
+    LabA(config)#do show ip nat st
+    Total translations: 2 (0 static, 2 dynamic, 2 extended)
+    Outside Interfaces: Serial0/3/1
+    Inside Interfaces: Serial0/3/0
+    Hits: 110  Misses: 22
+    Expired translations: 6
+    Dynamic mappings:
+    -- Inside Source
+    access-list 2 pool Lammle refCount 2
+     pool Lammle: netmask 255.255.255.0
+           start 171.16.10.100 end 171.16.10.100
+           type generic, total addresses 1 , allocated 1 (100%), misses 0
+    LabA(config)#
+
+When using `debug ip nat`, a `*` indicates the translation hit the cache:
+
+    NAT: s=192.168.30.2->171.16.10.100, d=171.16.10.1 [53]
+    
+    NAT*: s=171.16.10.1, d=171.16.10.100->192.168.30.2 [93]
+
+### IPv6
+
+    Router(config)#ipv6 unicast-routing 
+    Router(config)#int g0/0
+    Router(config-if)#ipv6 address 2001:db8:3cd1:1::/64 eui-64
+
+You can then see the details via:
+
+    Router(config-if)#do show ipv6 int br
+    GigabitEthernet0/0         [administratively down/down]
+        FE80::260:5CFF:FE20:4801
+        2001:DB8:3CD1:1:260:5CFF:FE20:4801
+
+#### EUI-64
+
+Uses the MAC address with some bit flipping on the 7th one (part of the OUI of a MAC - `10` is universally unique, `00` is locally unique).
+
+    Hardware is CN Gigabit Ethernet, address is 0060.5c20.4801 (bia 0060.5c20.4801)
+
+To make it 64 bit, we take the first 24 bits, flip the 7th bit, stick in `FFFE` (16 bit) and add the remaining 24. Using the above that means:
+   * 00605c -> 02605c
+   * 02505c.fffe
+   * 02605c.fffe.204801
+
+#### Autoconfiguration
+
+Host sends a router solicitation (RS) message via multicast (FF02::2). Router advertisement (RA) comes back on FF02::1 (all nodes multicast).
+
+Assuming there's a router present, you can do the below:
+
+    Branch(config-if)#ipv6 address autoconfig
+    Branch(config-if)#do show ipv int
+    FastEthernet0/0 is up, line protocol is up
+      IPv6 is enabled, link-local address is FE80::204:9AFF:FE74:EC01
+      No Virtual link-local address(es):
+      Global unicast address(es):
+        2001:DB8:3CD1:1:204:9AFF:FE74:EC01, subnet is 2001:DB8:3CD1:1::/64
+      Joined group address(es):
+        FF02::1
+        FF02::2
+        FF02::1:FF74:EC01
 
 
