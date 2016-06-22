@@ -1203,3 +1203,62 @@ Review Questions
 
 Total: 18/20
 Takeaway: watch out for case-sensitive pool names! note the NAT\* for fast-switching - as well as inside/outside local/global
+
+=== 20160621
+
+Lab 14.1
+
+1. unicast
+2. global unicast (2000::/3)
+3. link-local (fe80::/10)
+4. unique local (fc00::/7)
+5. multicast (ff00::/8)
+6. anycast
+7. ospfv3
+8. ::1
+9. fe80::/10
+10. fc00::/10
+
+Total: ?/10 Had to use the textbook...
+Takeaway: memorise the kind of addresses and their prefix. no shortcut.
+
+Lab 14.2
+
+1. 0b0c:abcd:1234
+00001011 -> 00001001: 2001:db8:1:1:090c:abff:fced:1234 X
+2. 060c:32f1:a4d2
+00000110 -> 00000100: 2001:db8:1:1:040c:32ff:fef1:a4d2 /
+3. 10bc:abcd:1234
+00010000 -> 00010010: 2001:db8:1:1:12bc:abff:fecd:1234 /
+4. 0d01:3af2:1234
+00001101 -> 00001111: 2001:db8:1:1:0f01:3aff:fef2:1234 /
+5. 0a0c.abac.caba
+00001010 -> 00001000: 2001:db8:1:1:080c:abff:feac:caba /
+
+Total: 4/5
+Takeawy: learn to convert hex to binary and back again - in my sleep
+
+Review Questions
+1. A,B X B
+2. A,D X A
+3. C /
+4. C,D X D
+5. B /
+6. C /
+7. C /
+8. C,D /
+9. A,D X A,C
+10. D X C
+11. B /
+12. ? X A
+13. E X A
+14. B,D /
+15. C,D / 
+16. B /  
+17. F X D (per *field*!)
+18. C,D X A,D
+19. B,C /
+20. C,D,E /
+
+Total: 11/20 : (
+Takeaway: read up on RA/... routing messages etc

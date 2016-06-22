@@ -1048,6 +1048,14 @@ You can then see the details via:
         FE80::260:5CFF:FE20:4801
         2001:DB8:3CD1:1:260:5CFF:FE20:4801
 
+We can enable OSPF as follows:
+
+    E(config-if)#ipv6 router ospf 1
+    %OSPFv3-4-NORTRID: OSPFv3 process 1 could not pick a router-id,please configure manually
+    E(config-rtr)#router-id 5.5.5.5
+    E(config-rtr)#int g0/0
+    E(config-if)#ipv ospf 1 area 0
+
 #### EUI-64
 
 Uses the MAC address with some bit flipping on the 7th one (part of the OUI of a MAC - `10` is universally unique, `00` is locally unique).
@@ -1076,5 +1084,4 @@ Assuming there's a router present, you can do the below:
         FF02::1
         FF02::2
         FF02::1:FF74:EC01
-
 
