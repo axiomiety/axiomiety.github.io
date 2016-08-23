@@ -1,6 +1,6 @@
 ---
 layout: post
-title: vagrant-into
+title: vagrant-intro
 excerpt: "Getting started with Vagrant."
 categories: [tech]
 tags: [howto,vagrant]
