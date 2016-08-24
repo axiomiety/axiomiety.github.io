@@ -2,8 +2,8 @@
 layout: post
 title: powershell-batchrename
 excerpt: "Using Powershell to rename files."
-categories: [howto, bytesize]
-tags: [powershell]
+categories: [tech, bytesize]
+tags: [powershell, howto]
 ---
 
 I had to rename a bunch of files that underwent conversion and well - doing this by hand wasn't an option. I could have used Python, but given Powershell now comes as standard I thought it'd be easier than to introduce a new dependency (and the opportunity to try something new!).
