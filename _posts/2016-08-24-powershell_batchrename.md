@@ -30,6 +30,14 @@ Function batchRename{
 }
 {% endhighlight %}
 
+And sample output:
+
+{%highlight powershell%}
+PS C:\WINDOWS\system32> batchRename -dir u:\dump\w -basename "some other name "
+Base directory: u:\dump\w
+Renamed 3 file(s)
+{% endhighlight %}
+
 What took me some time to figure out though was how to run this. It turns out you have to start Powershell as an administrator. And then use `Set-ExecutionPolicy RemoteSigned` to enable you to run unsigned scripts. A bit heavy when in Linux I would have just used a Python script or some fancy piping (which I'm sure you can do here too).
 
 Saying that the strongly-typed objects are actually pretty neat. Some bits aren't exactly straight-forward but they do make a lot of sense - like renaming a file by providing the new name, not the full path. Though given this was my first foray into Powershell, it would have certainly been faster to do this manually. But there's always next time.
