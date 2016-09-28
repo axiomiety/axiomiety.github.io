@@ -37,7 +37,7 @@ This is relatively straight forward - the key thing to note is that we don't nee
 
 For our particular case a chromosome will be represented as a sequence of 5 genes - so `1+1/4` would be `0x1a1d4`.
 
-## Extracting and decoding genes
+## Extracting genes
 
 Extracting genes is akin to applying a 4-bit mask (the size of a single gene).
 
@@ -57,7 +57,11 @@ Extracting genes is akin to applying a 4-bit mask (the size of a single gene).
 
 {%endhighlight%}
 
-Note the right-shift as our mask might be something like `0b00001111000000000000` - so once we have the relevant gene we need to get rid of all the extra zeroes to the right.
+### Worked example
+
+Let `chromosome = 0x43ae2`. We generate the first mask by bitshifting `0xf`, or `0b1111` by 0. This means `chromosome & mask = 0x43ae2 & 0x0000f = 0x2`. For the second mask we bitshift `0xf` by 4 - so `0xf0`. We then have `chromosome & mask = 0x43ae2 & 0x000f0 = 0xe0`. We need to bitshift this to the right by 4, leading to `0xe` - and continue until we isolate each group of 4 bits.
+
+## Decoding genes
 
 Decoding is just mapping the encoding to the actual genes:
 
@@ -69,7 +73,6 @@ Decoding is just mapping the encoding to the actual genes:
 {%endhighlight%}
 
 A chromosome is only valid if all the genes themselves are valid and *in the right place*. This means we need the genes are positions 2 and 4 to be operators, not numbers. We can probably relax this a little, but it makes it easier to comprehend.
-
 
 {%highlight python%}
     def validate(genes):
@@ -113,9 +116,15 @@ It's also a bit of a shame that we're reading genes from left to right when thei
     assert crossover(0x54321,0x12345,3) == (0x54345,0x12321)
 {%endhighlight%}
 
+### Worked example
+
+Let's work through the last `assert` - namely `a = 0x54321`, `b = 0x12345` and `gene_number=3`.
+
+`mask_swapped = 0x000ff` with the leading zeroes added for clarity, and `mask_notswapped = 0xfff00` (c.f. comment about 2's complement). Then `a & mask_notswapped = 0x54300` and `b & mask_swapped = 0x00045`. XOR'ing just means adding the two together - leading to `0x54245`.
+
 ## Mutation
 
-This step is straight forward - we toggle bits on and off based on probabilities.
+This step is straight forward - we toggle bits on and off (using XOR) based on probabilities drawn from a uniform distribution and being less than `mutation_rate`.
 
 {%highlight python%}
     def mutate(chromosome, probabilities, mutation_rate):
@@ -124,15 +133,16 @@ This step is straight forward - we toggle bits on and off based on probabilities
         if p < mutation_rate:
           mask = 1 << (CHROMOSOME_LENGTH*GENE_LENGTH-idx-1) # ugly - maybe we should always index from the right
           chromosome ^= mask
-      #print(bin(chromosome))
       return chromosome
     
     assert mutate(0x30100,[1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],0.5) == 0x20101
 {%endhighlight%}
 
+I could have had the method just take the mutation rate but I wanted it to give the same output given the same inputs (which is harder to do if I generate the probabilities internally).
+
 ## The first population
 
-Creating the initial population in a meaningful way was a little harder than I thought. I first thought I'd just need to randomly generate integers in the `(0,2**5*4)` range. However that would mean that by definition, about half would start with 0. Instead I opted to generate each gene individually, which gave me better results.
+Creating the initial population in a meaningful way was a little harder than I thought. I first thought I'd just need to randomly generate integers in the `(0,2**5*4)` range. Instead I opted to generate each gene individually as it makes it easier to reason about what the initial population will look like.
 
 {%highlight python%}
     def create_initial_population(population_size):
@@ -148,3 +158,41 @@ Creating the initial population in a meaningful way was a little harder than I t
     
     assert len(create_initial_population(20)) == 20
 {%endhighlight%}
+
+## Chromosome selection
+
+In each iteration we'll need to select a pair of chromosomes. However not all chromosomes are equal - some are 'fitter' than others and should therefore have a higher probability of being selected.
+
+I take *no* credit for the below - this was taken from [SO](http://stackoverflow.com/questions/10324015/fitness-proportionate-selection-roulette-wheel-selection-in-python) : )
+
+{%highlight python%}
+    def weighted_random_choice(chromosomes):
+      total_fitness = sum(c.fitness for c in chromosomes)
+      pick = random.uniform(0, total_fitness)
+      curr = 0
+      for c in chromosomes:
+        curr += c.fitness
+        if curr >= pick:
+          return c
+      raise Exception('that should never happen! {0} {1}'.format(total_fitness, pick))
+{%endhighlight%}
+
+To understand *why* this works, picture a series of rectangles next to each other. A 'fit' chromosome might have a rectangle of width 10 whereas an unfit one might have a width of just 2. Putting those two next to each other we have a rectangle of width 12. When generating a number between 0 and 12, there's a 10:2 chance that the number generated will fall within the boundary of the first rectangle.
+
+## Putting it all together
+
+The steps are then as below:
+
+- generate the initial population and evaluate the fitness of each chromosome
+- create a new (empty) population
+- pick 2 chromosomes from the existing population, proportionally to their fitness
+- decide whether to cross them over
+- mutate each based on the mutation rate
+- add them into the new population, replacing your initial population
+- lather, rinse repeat
+
+If an exact solution hasn't been found, you can then grab the chromosomes with the highest fitness to find the best approxmation.
+
+## Conclusion
+
+This was actually very informative. Conceptually it's rather simple - though getting a decent fitness function, along with tuning the parameters (like mutation rate, number of rounds etc...) can be hard to get right.
