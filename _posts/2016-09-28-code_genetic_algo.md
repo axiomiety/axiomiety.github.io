@@ -92,6 +92,12 @@ A chromosome is only valid if all the genes themselves are valid and *in the rig
 
 ## Crossover
 
+The crossover step takes two chromosomes and an index, and swaps parts between them. Namely `new_a = a[:idx] + b[idx:]` and `new_b = b[:idx] + a[idx:]`. Given we're using bits, we're using masks again.
+
+Python's `~` operator is not the 'not' some people are used to - it's actually 2's complement. To get the actual *not* (e.g. `~0xf0 -> 0x0f`) we need to mask it with `0xfffff`.
+
+It's also a bit of a shame that we're reading genes from left to right when their binary representation really works from right to left. It'd probably make the code a little neater if we could read them the other way around.
+
 {%highlight python%}
     def crossover(a, b, gene_number):
       # we're counting genes from left to right
@@ -100,16 +106,16 @@ A chromosome is only valid if all the genes themselves are valid and *in the rig
     
       new_a = (a & mask_notswapped) ^ (b & mask_swapped)
       new_b = (b & mask_notswapped) ^ (a & mask_swapped)
-      #print(hex(new_a),hex(new_b))
       return (new_a, new_b)
     
     assert crossover(0x10001,0x01010,3) == (0x10010,0x01001)
     assert crossover(0x54321,0x12345,4) == (0x54325,0x12341)
     assert crossover(0x54321,0x12345,3) == (0x54345,0x12321)
-    
 {%endhighlight%}
 
 ## Mutation
+
+This step is straight forward - we toggle bits on and off based on probabilities.
 
 {%highlight python%}
     def mutate(chromosome, probabilities, mutation_rate):
@@ -124,7 +130,9 @@ A chromosome is only valid if all the genes themselves are valid and *in the rig
     assert mutate(0x30100,[1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],0.5) == 0x20101
 {%endhighlight%}
 
-## Init
+## The first population
+
+Creating the initial population in a meaningful way was a little harder than I thought. I first thought I'd just need to randomly generate integers in the `(0,2**5*4)` range. However that would mean that by definition, about half would start with 0. Instead I opted to generate each gene individually, which gave me better results.
 
 {%highlight python%}
     def create_initial_population(population_size):
