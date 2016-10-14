@@ -142,7 +142,7 @@ I could have had the method just take the mutation rate but I wanted it to give 
 
 ## The first population
 
-Creating the initial population in a meaningful way was a little harder than I thought. I first thought I'd just need to randomly generate integers in the `(0,2**5*4)` range. Instead I opted to generate each gene individually as it makes it easier to reason about what the initial population will look like.
+Creating the initial population in a meaningful way was a little harder than I thought. I first thought I'd just need to randomly generate integers in the `(0,2**5*4)` range. Instead I opted to generate each gene individually as it makes it easier to reason about what the initial population will look like. We also ensure the chromosomes generated are valid - otherwise they'd be discarded in the first iteration.
 
 {%highlight python%}
     def create_initial_population(population_size):
@@ -150,9 +150,11 @@ Creating the initial population in a meaningful way was a little harder than I t
       for i in range(population_size):
         # we generate each gene separately
         chromosome = 0
-        for g in range(CHROMOSOME_LENGTH):
-          gene = random.randint(0,2**GENE_LENGTH-1) # so GENE_LENGTH bits
-          chromosome ^= gene << g*GENE_LENGTH
+        while not validate(decode(chromosome)):
+          chromsome = 0
+          for g in range(CHROMOSOME_LENGTH):
+            gene = random.randint(0,2**GENE_LENGTH-1) # so GENE_LENGTH bits
+            chromosome ^= gene << g*GENE_LENGTH
         chromosomes.append( chromosome )
       return chromosomes
     
@@ -179,6 +181,8 @@ I take *no* credit for the below - this was taken from [SO](http://stackoverflow
 
 To understand *why* this works, picture a series of rectangles next to each other. A 'fit' chromosome might have a rectangle of width 10 whereas an unfit one might have a width of just 2. Putting those two next to each other we have a rectangle of width 12. When generating a number between 0 and 12, there's a 10:2 chance that the number generated will fall within the boundary of the first rectangle.
 
+Note this only works if fitness is positive (woops).
+
 ## Putting it all together
 
 The steps are then as below:
@@ -192,6 +196,8 @@ The steps are then as below:
 - lather, rinse repeat
 
 If an exact solution hasn't been found, you can then grab the chromosomes with the highest fitness to find the best approxmation.
+
+Check out the `run` method in [this module](https://github.com/axiomiety/crashburn/blob/master/ga.py) for an actual implementation.
 
 ## Conclusion
 
