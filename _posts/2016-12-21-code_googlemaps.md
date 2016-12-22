@@ -46,7 +46,7 @@ We'll create a page filled with the map. All it takes for this to work is to wor
 </html>
 ~~~
 
-You'll note we pass in the {{callback=initMap}} parameter - this is what gets called once the API is loaded - at which point you can initialise your map.
+You'll note we pass in the `callback=initMap` parameter - this is what gets called once the API is loaded - at which point you can initialise your map.
 
 Okay that's a little boring with nothing to see. Let's pass in a zoom level and centre the map around the `0,0` coordinate.
 
@@ -100,7 +100,7 @@ Due to the CORS (cross-origin resource sharing) restrictions, we can't fetch thi
 'red'
 >>> iconType(23)
 'green'
->>> def getMarkerText(station): return '{{position: new google.maps.LatLng({lat},{lng}), colour: "{colour}", tooltip: "{tt}"}}'.format(lat=station['la'],lng=station['lo'],colour=iconType(station['da']),tt=station['s'])
+>>> def getMarkerText(station): return '{% raw %}{{{% endraw %}position: new google.maps.LatLng({lat},{lng}), colour: "{colour}", tooltip: "{tt}"{% raw %}}}{% endraw %}'.format(lat=station['la'],lng=station['lo'],colour=iconType(station['da']),tt=station['s'])
 ...
 >>> getMarkerText(data['stations'][0])
 {position: new google.maps.LatLng(45.52604347726228,-73.54896068572998), colour: "red", tooltip: "Parthenais/Ste-Catherine"}
