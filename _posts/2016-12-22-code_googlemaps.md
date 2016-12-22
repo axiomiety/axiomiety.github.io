@@ -1,6 +1,6 @@
 ---
 layout: post
-title: googlemaps-mkl
+title: googlemaps-api
 excerpt: "Getting started with Google Maps."
 categories: [tech]
 tags: [google, gis, howto]
