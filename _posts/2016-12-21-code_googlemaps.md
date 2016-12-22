@@ -111,7 +111,8 @@ Let's randomly select a few:
 ~~~ python
 >>> import random
 >>> stationIDs = [random.randint(0,len(data['stations'])) for _ in range(10)]
->>> print(',\n'.join(getMarkerText(data['stations'][x]) for x in stationIDs))                           {position: new google.maps.LatLng(45.54176571696572,-73.62612783908844), colour: "green", tooltip: "Gounod / Saint-Denis"},
+>>> print(',\n'.join(getMarkerText(data['stations'][x]) for x in stationIDs))
+{position: new google.maps.LatLng(45.54176571696572,-73.62612783908844), colour: "green", tooltip: "Gounod / Saint-Denis"},
 {position: new google.maps.LatLng(45.52114,-73.54926), colour: "green", tooltip: "RenLesque / Papineau"},
 {position: new google.maps.LatLng(45.477313,-73.615327), colour: "green", tooltip: "Ave Notre Dame de Gre / Darie"},
 {position: new google.maps.LatLng(45.50233,-73.566497), colour: "green", tooltip: "Union/RenLesque"},
