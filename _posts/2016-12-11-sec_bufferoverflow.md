@@ -1,15 +1,15 @@
 ---
 layout: post
 title: bufferoverflow
-excerpt: "A look at how buffer overflows work and some mitigation techniques."
+excerpt: "A look at how buffer overflows work without the usual mitigation techniques."
 categories: [tech]
 tags: [itsec, howto]
 comments: false
 ---
 
-To follow this post you may need a modicum of C know-how as well as some familiarity with `gdb`. In regards to compile flags, we're using `-g` to include debugging information (which will be used by `gdb`) and `-m32` to compile to 32 bits (I'm using a 64 bits machine and you're probably too) - but 32 bit is easier to understand. 
+To follow this post you may need a modicum of C know-how as well as some familiarity with `gdb`. In regards to compile flags, we're using `-g` to include debugging information (which will be used by `gdb`) and `-m32` to compile to 32 bits (I'm using a 64 bits machine and you probably are too) - but 32 bit is easier to understand. 
 
-I'll also be using the `-fno-stack-protector` option which is enabled by default on modern versions of `gdb` and ALSR has been disabled via `sudo echo 0 | tee /proc/sys/kernel/randomize_va_space`.
+I'll also be using the `-fno-stack-protector` option which is enabled by default on modern versions of `gdb` and ASLR (Address Space Layout Reandomisation) has been disabled via `sudo echo 0 | tee /proc/sys/kernel/randomize_va_space`.
 
 ## The call stack
 
