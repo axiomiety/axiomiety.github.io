@@ -127,7 +127,7 @@ Bob is shutting down
 
 The dealer is arguably the most interesting entity - this is because it has to deal with the asynchronicity of the messages. When it asks players for cards, the replies won't necessarily come back in the same order.
 
-Setting the game up however is easy. For simplicity we're leveraging `Process.register` so we can access the players without having to pass PIDs around. The tricky bit here is to make sure we wait until all players have performed the required actions before proceeding. For this we will introduce the concept of `count`, which keeps track of the number of replies received. The first two lists represent the cards laid out for each player:
+Setting the game up however is easy. For simplicity we're leveraging `Process.register` so we can access the players without having to pass PIDs around (though we need to use `Process.whereis` to pattern-match in the `receive` call - there *must* be a better way). The tricky bit here is to make sure we wait until all players have performed the required actions before proceeding. For this we will introduce the concept of `count`, which keeps track of the number of replies received. The first two lists represent the cards laid out for each player:
 
 ~~~ erlang
 defmodule Dealer do
@@ -145,27 +145,26 @@ defmodule Dealer do
   def loop([], [], 0) do
     send(:player1, {:give, self(), 1})
     send(:player2, {:give, self(), 1})
+    pid1 = Process.whereis(:player1)
+    pid2 = Process.whereis(:player2)
     receive do
-      {:player1, cards} ->
+      {^pid1, cards} ->
         loop(cards, [], 1)
-      {:player2, cards} ->
+      {^pid2, cards} ->
         loop([], cards, 1)
     end
   end
 
   def loop(p1, p2, count) when count < 2 do
     IO.puts("p1: #{inspect p1}, p2: #{inspect p2}")
+    pid1 = Process.whereis(:player1)
+    pid2 = Process.whereis(:player2)
     receive do
-      {:player1, cards} ->
+      {^pid1, cards} ->
         loop(cards, p2, count + 1)
-      {:player2, cards} ->
+      {^pid2, cards} ->
         loop(p1, cards, count + 1)
     end
-  end
-
-  def stop() do
-    send(:player1, :stop)
-    send(:player2, :stop)
   end
 ~~~
 
@@ -174,6 +173,11 @@ It's a little muddy but after requesting players to hand over a card we then nee
 We can then list out the end conditions:
 
 ~~~ erlang
+  def stop() do
+    send(:player1, :stop)
+    send(:player2, :stop)
+  end
+
   def loop([], p2, count) when count == 2 do
     IO.puts("p1: [], p2: #{inspect p2} - P2 wins!")
     stop()
@@ -188,7 +192,6 @@ We can then list out the end conditions:
     IO.puts("It's a tie!")
     stop()
   end
-
 ~~~
 
 This takes care of when a player (or both!) runs out of cards. Now for the main game logic:
@@ -202,11 +205,11 @@ This takes care of when a player (or both!) runs out of cards. Now for the main 
     cond do
       (v1 > v2) ->
         IO.puts("p1 wins this round as #{v1} > #{v2}")
-        send(:player1, {:take, [h1|t1] ++ [h2|t2]})
+        send(:player1, {:receive, [h1|t1] ++ [h2|t2]})
         loop([], [], 0)
       (v2 > v1) ->
         IO.puts("p2 wins this round as #{v2} > #{v1}")
-        send(:player1, {:take, [h2|t2] ++ [h1|t1]})
+        send(:player1, {:receive, [h2|t2] ++ [h1|t1]})
         loop([], [], 0)
       (v1 == v2) ->
         IO.puts("tie! as #{v1} == #{v2}")
@@ -217,6 +220,55 @@ This takes care of when a player (or both!) runs out of cards. Now for the main 
   end
 ~~~
 
+Which takes care of all possible outcomes. We define `sample_run` to convince ourselves it works as expected:
+
+~~~ erlang
+  def sample_run() do
+    {dp1, dp2} = {[{"C",1},{"C",8}], [{"S", 3}, {"S",8}]}
+    player1 = spawn(Player, :loop, ["Bob", dp1])
+    Process.register(player1, :player1)
+    player2 = spawn(Player, :loop, ["Alice", dp2])
+    Process.register(player2, :player2)
+    loop([], [], 0)
+  end
+~~~
+
+And here is the corresponding output:
+
+~~~ erlang
+iex(7)> Dealer.sample_run
+Bob has 2 cards
+Alice has 2 cards
+Bob was asked to give 1 cards to #PID<0.101.0>
+Alice was asked to give 1 cards to #PID<0.101.0>
+Bob has 1 cards
+Alice has 1 cards
+p1: [{"C", 1}], p2: []
+p1: {"C", 1}, p2: {"S", 3}
+p2 wins this round as 3 > 1
+Alice received 2 from dealer
+Bob was asked to give 1 cards to #PID<0.101.0>
+Alice has 3 cards
+Bob has 0 cards
+p1: [{"C", 8}], p2: []
+Alice was asked to give 1 cards to #PID<0.101.0>
+Alice has 2 cards
+p1: {"C", 8}, p2: {"S", 8}
+tie! as 8 == 8
+p1: [{"C", 8}], p2: [{"S", 8}]
+Bob was asked to give 3 cards to #PID<0.101.0>
+Alice was asked to give 3 cards to #PID<0.101.0>
+Bob has 0 cards
+Alice has 0 cards
+p1: [], p2: [{"S", 8}]
+p1: [], p2: [{"S", 3}, {"C", 1}] - P2 wins!
+Bob is shutting down
+Alice is shutting down
+:stop
+~~~
+
+Success!
+
 ## Further enhancements
 
-It's a game that could arguably be played with a number of decks and more than 2 players. The code above is tied to 2 players - making the change would probably mean using some sort of state machine.
+It's a game that could arguably be played with a number of decks and more than 2 players. The code above is tied to 2 players - making the change would probably mean using some sort of state machine with the state stored in a map of sorts.
