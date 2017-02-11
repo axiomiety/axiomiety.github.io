@@ -50,39 +50,133 @@ vagrant@vagrant:/shared/crashburn$ tail -1 /var/log/syslog
 Feb 11 06:47:45 the quick brown fox
 ```
 
-(If you're generating a lot of messages, you're probably better off using `tail -f`)
-
-First we need to make sure we have syslog up and running.
-
-We can tail our logs and make sure this works as expected:
-
-
-``` shell
-echo ...
-tail var log ...
-```
-
-So in theory, sending messages to syslog shouldn't be much more complex than that!
+Note that if you're generating a lot of messages, you're probably better off using `tail -f`. So in theory, sending messages to syslog shouldn't be much more complicated than opening a UDP connection to 514 and sending in a message (famous last words!).
 
 ## Creating a UDP connection to syslog
 
-To make things simple
+To connect to the syslog server we'll need to create a UDP connection. For this we leverage Erlang's `gen_udp` module:
 
+``` shell
+iex(10)> {ok, Socket} = :gen_udp.open(514)
+** (MatchError) no match of right hand side value: {:error, :eacces}
+```
+
+Woops - it turns out that 514 is a privileged port! As such we can either start `iex` as root or create a pipe from a non-privilege port to 514. Either option works but the latter meant I didn't have to restart the shell. To kick this off, run `socat udp4-listen:5514,reuseaddr,fork udp4-sendto:127.0.0.1:514` which will redirect port 5514 to 514 on localhost. With this in place, let's try again:
+
+``` shell
+iex(8)> {:ok, socket} = :gen_udp.open(5514, [:binary, reuseaddr: true])
+{:ok, #Port<0.4894>}
+iex(9)> :gen_udp.send(socket, {127,0,0,1}, 514, "<14>pluto elixir is sending a message")
+:ok
+```
+
+And looking at syslog:
+
+``` shell
+vagrant@vagrant:~$ tail -1 /var/log/syslog
+Feb 11 18:15:59 pluto elixir is sending a message
+```
+
+We now need to integrate the above with the `Logger` module.
 
 ## Wiring this up with the logger
 
-https://hexdocs.pm/logger/Logger.html
+This isn't a tutorial on the `Logger` module but in a nutshell it can be used as such:
 
-## Validation
+``` shell
+iex(10)> require Logger
+Logger
+iex(11)> Logger.info("this is a message at the info level")
 
-Logger.add_backend
+18:20:36.895 [info]  this is a message at the info level
+:ok
+```
 
-https://github.com/onkel-dirtus/logger_file_backend
-http://reganmian.net/blog/2015/08/26/email-notifications-about-errors-in-elixir/
+The module is documented [here](https://hexdocs.pm/logger/Logger.html) and by default uses the `:console` backend. We'll use the [source code]() for `:console` as a template. We start by creating `init` and `terminate` methods:
 
+``` erlang
+defmodule SyslogLogger do
+
+  @behaviour :gen_event
+
+  def init(o) do
+    IO.puts("init received #{inspect o}")
+    {:ok, {}}
+  end
+
+  def terminate(_reason, _state) do
+    :ok
+  end
+
+end
+```
+
+Which, as expected, doesn't do much at all:
+
+``` shell
+iex(26)> Logger.add_backend(SyslogLogger)
+init received SyslogLogger
+{:ok, #PID<0.158.0>}
+iex(27)> Logger.remove_backend(SyslogLogger)
+:ok
+```
+
+We change that to take a port number as a configuration option, and create a UDP connection:
+
+``` erlang
+defmodule SyslogLogger do
+
+  @behaviour :gen_event
+
+  def init({__MODULE__, portnumber}) do
+    IO.puts("init received #{inspect portnumber}")
+    state = %{socket: nil, port: nil}
+    {:ok, init(portnumber, state)}
+  end
+
+  defp init(portnumber, state) do
+    {:ok, socket} = :gen_udp.open(portnumber, [:binary, reuseaddr: true])
+    %{state | port: portnumber, socket: socket}
+  end
+
+  def handle_event(_event, state) do
+    {:ok, state}
+  end
+
+  def terminate(_reason, %{socket: socket} = state) do
+    IO.puts("closing the socket: #{inspect socket}")
+    :gen_udp.close(socket)
+  end
+
+end
+```
+
+Again, not much to see - the meat of the logger is in the `hande_event` call, which we define as follows:
+
+``` erlang
+  def handle_event({level, _gl, {Logger, msg, ts, md}}, state) do
+    ret = :gen_udp.send(state.socket, {127,0,0,1}, state.port, "<14>#{msg}")
+    {:ok, state}
+  end
+```
+
+This does nothing more than send `msg` across to syslog, with a pre-canned loglevel. We confirm this works as expected:
+
+``` erlang
+```
+
+``` shell
+```
+
+# Conclusion
+
+This is a very crude logger that does not even respect the log level - it simply forwards messages to syslog. But it should hopefully highlight the simplicity with which one can plug in their own backends into the `Logger` module.
 
 ## References
-https://github.com/elixir-lang/elixir/blob/master/lib/logger/lib/logger/backends/console.ex
-http://andrealeopardi.com/posts/handling-tcp-connections-in-elixir/
-http://stackoverflow.com/questions/15015450/erlang-gen-udp-sending-packets-to-ip-address
 
+  * https://github.com/elixir-lang/elixir/blob/master/lib/logger/lib/logger/backends/console.ex
+  * http://andrealeopardi.com/posts/handling-tcp-connections-in-elixir/
+  * ttp://stackoverflow.com/questions/15015450/erlang-gen-udp-sending-packets-to-ip-address
+  * http://elixir-lang.org/getting-started/mix-otp/task-and-gen-tcp.html
+  * https://github.com/onkel-dirtus/logger_file_backend
+  * http://reganmian.net/blog/2015/08/26/email-notifications-about-errors-in-elixir/
