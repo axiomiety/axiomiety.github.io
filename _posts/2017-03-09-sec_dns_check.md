@@ -1,6 +1,6 @@
 ---
 layout: post
-title: validating dns cache
+title: validating-dns-cache
 excerpt: "Checking the Windows DNS cache for poisoning."
 categories: [tech]
 tags: [itsec, howto, powershell]
