@@ -3,7 +3,7 @@ layout: post
 title: validating dns cache
 excerpt: "Checking the Windows DNS cache for poisoning."
 categories: [tech]
-tags: [itsec, howto]
+tags: [itsec, howto, powershell]
 comments: false
 ---
 
@@ -146,4 +146,70 @@ IP4Address : 74.125.68.93
 ...
 ~~~
 
+Or in condensed form:
+
+~~~ powershell
+PS C:\Users\axiomiety> Resolve-DnsName www.youtube.com -NoHostsFile -Server 8.8.8.8 -Type A | ForEach-Object {Write-Host $_.IP4Address,$_.NameHost}
+ youtube-ui.l.google.com
+74.125.68.190 
+74.125.68.93 
+74.125.68.136 
+74.125.68.91 
+~~~
+
 Note the use of `-NoHostsFile` - we want to bypass anything locally that may be messing with the 'true' result.
+
+We the above we should now be in a position to write a function which taks a domain name and expected value as an argument, and checks it against the output from `Resolve-DnsName`. Let's get to it.
+
+## The validating function
+
+Our function will take 2 arguments - the entry and its data - and a default alternative DNS to validate the result against.
+
+~~~ powershell
+Function ValidateDNSResults
+{
+    Param($entry, $data, $dns='8.8.8.8')
+    $resolve_out = @()
+    Resolve-DnsName $entry -NoHostsFile -Server $dns | ForEach-Object {$resolve_out += $_.IP4Address; $resolve_out += $_.NameHost}
+    $resolve_out = $resolve_out | ? {$_}  
+    If ($resolve_out -notcontains $data)
+    {
+        $o = $resolve_out -join ','
+        Write-Host "Entry mismatch for $entry - did not find $data in $o" -foregroundcolor Red
+    }
+}
+~~~
+
+Trying it out:
+
+~~~ powershell
+PS C:\Users\axiomiety> ValidateDNSResults 'www.youtube.com' 'foo'
+Entry mismatch for www.youtube.com - did not find foo in youtube-ui.l.google.com,74.125.68.190,74.125.68.91,74.125.68.136,74.125.68.93
+
+PS C:\Users\axiomiety> ValidateDNSResults 'www.youtube.com' 'youtube-ui.l.google.com'
+~~~
+
+Seems to work alright!
+
+## Wiriting it up
+
+With the above in hand it's just a matter of piping the output from `Get-DnsClientCache` accordingly (you can run it for the whole cache, I just filtered on an entry which showed a mismatch).
+
+~~~ powershell
+PS C:\Users\axiomiety> Get-DnsClientCache -Entry 'securepubads.g.doubleclick.net' | ForEach-Object {ValidateDNSResults $_.Entry $_.Data '192.168.1.1'}
+
+PS C:\Users\axiomiety> Get-DnsClientCache -Entry 'securepubads.g.doubleclick.net' | ForEach-Object {ValidateDNSResults $_.Entry $_.Data '8.8.8.8'}
+Entry mismatch for securepubads.g.doubleclick.net - did not find 74.125.68.155 in partnerad.l.doubleclick.net,74.125.200.157,74.125.200.154,74.125.200.156,74.125.200.155
+Entry mismatch for securepubads.g.doubleclick.net - did not find 74.125.68.154 in partnerad.l.doubleclick.net,74.125.200.157,74.125.200.156,74.125.200.155,74.125.200.154
+Entry mismatch for securepubads.g.doubleclick.net - did not find 74.125.68.156 in partnerad.l.doubleclick.net,74.125.200.155,74.125.200.157,74.125.200.156,74.125.200.154
+Entry mismatch for securepubads.g.doubleclick.net - did not find 74.125.68.157 in partnerad.l.doubleclick.net,74.125.200.155,74.125.200.157,74.125.200.156,74.125.200.154
+~~~
+
+Here we can see that resolving `securepubads.g.doubleclick.net` using a local DNS (`192.168.1.1`) returns a different result to Google's own DNS. Saying this is probably nothing to worry about - `74.125.0.0/16` is owned by Google - so anything after `74.125` hits Google's own network. 
+
+## Conclusion
+
+I was actually surprised by the sheer number of different entries. I'm guessing a number of those services are behind some sort of load balancer or using anycast. It'd be great to be able to dig deeper into those and understand why that is the case but I'd need more network-foo than I currently have.
+
+On an unrelated note, Powershell rocks!
+
