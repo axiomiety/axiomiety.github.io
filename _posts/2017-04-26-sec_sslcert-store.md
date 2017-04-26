@@ -2,8 +2,8 @@
 layout: post
 title: sslcert-store
 excerpt: "Looking at local CAs (Certificate of Authority) for SSL."
-categories: [itsec]
-tags: [ssl]
+categories: [tech]
+tags: [ssl,itsec]
 comments: false
 ---
 
