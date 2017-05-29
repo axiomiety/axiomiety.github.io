@@ -9,7 +9,7 @@ comments: false
 
 To follow this post you may need a modicum of C know-how as well as some familiarity with `gdb`. In regards to compile flags, we're using `-g` to include debugging information (which will be used by `gdb`) and `-m32` to compile to 32 bits (I'm using a 64 bits machine and you probably are too) - but 32 bit is easier to understand. 
 
-I'll also be using the `-fno-stack-protector` option which is enabled by default on modern versions of `gdb` and ASLR (Address Space Layout Reandomisation) has been disabled via `sudo echo 0 | tee /proc/sys/kernel/randomize_va_space` and making the stack executable with `-z execstack`.
+I'll also be using the `-fno-stack-protector` option which is enabled by default on modern versions of `gdb` and ASLR (Address Space Layout Randomisation) has been disabled via `sudo echo 0 | tee /proc/sys/kernel/randomize_va_space` and making the stack executable with `-z execstack`.
 
 Note that I am supressing warnings with the `-w` flag - that's intentional and solely for the purpose of this exercise!
 
@@ -319,4 +319,4 @@ Don't forget that your shellcode is still on the stack - and it needs to be exec
   * [CS155](https://crypto.stanford.edu/cs155/papers/formatstring-1.2.pdf) at Standford
   * [printf format string exploitation](https://systemoverlord.com/2014/02/12/printf-format-string-exploitation/) on System Overlord
   * JBremer's post on [format string vulnerabilities](http://jbremer.org/format-string-vulnerabilities/#fmtstr-calc-offsets)
-  * Code Arcana's introduction to [format string explots](http://codearcana.com/posts/2013/05/02/introduction-to-format-string-exploits.html)
+  * Code Arcana's introduction to [format string exploits](http://codearcana.com/posts/2013/05/02/introduction-to-format-string-exploits.html)
