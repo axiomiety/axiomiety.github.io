@@ -6,7 +6,7 @@
 title: heavyberry.com
 email:
 description: heavyberry
-url: # the base hostname & protocol for your site
+url: http://localhost:8080# the base hostname & protocol for your site
 
 
 #
@@ -36,7 +36,7 @@ owner:
   name: axiomiety
   avatar: heavyberry_mc.png
   job: "heavyberry"
-  bio: "s/ anx//:axiom anxiety(at)gmail(dot)com"
+  bio: "axiomiety[REMOVEME](at)gmail(dot)com"
   email:
   disqus-shortname:
   twitter: axiomiety
