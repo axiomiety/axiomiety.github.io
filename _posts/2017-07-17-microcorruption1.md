@@ -104,4 +104,59 @@ With this in mind, the password should be easy to guess. Just remember the syste
 
 This time the lock is attached to a security module - so the password comparison should be hidden from sight - meaning it won't be availble to us in the live memory dump (or in code).
 
+The section of interest in `main` is:
 
+``` shell
+4534:  3e40 1c00      mov #0x1c, r14        # r14 = 0x1c (which is 28 in decimal)
+4538:  3f40 0024      mov #0x2400, r15      # r15 = 0x2400
+453c:  b012 ce45      call  #0x45ce <getsn>
+4538:  3f40 0024      mov #0x2400, r15      # r15 = 0x2400
+453c:  b012 ce45      call  #0x45ce <getsn>
+4540:  3f40 0024      mov #0x2400, r15      # r15 = 0x2400
+4544:  b012 5444      call  #0x4454 <test_password_valid>
+4548:  0f93           tst r15               # set sr, the status register
+454a:  0324           jz  $+0x8             # jump to 4552 if it is 0
+454c:  f240 9500 1024 mov.b #0x95, &0x2410  # [0x2410] = 0x95 - we only move a byte
+4552:  3f40 d344      mov #0x44d3 "Testing if password is valid.", r15
+4556:  b012 de45      call  #0x45de <puts>
+455a:  f290 b000 1024 cmp.b #0xb0, &0x2410  # compare the byte at [0x2410] with 0xb0
+4560:  0720           jne #0x4570 <login+0x50>
+```
+
+It's a little weird. If `test_password_valid` returns 0 (presumably if the password is incorrect), we compare the value at `0x2410` with `0xb0` - and if that matches the login is approved.
+
+The plan is to set that memory address - but how? As per the above our input is stored at `0x2400`. We're told the password should only be 16 characters but who's checking?
+
+The code to for `getsn` is as follows:
+
+``` shell
+45ce:  0e12           push  r14   # the number of bytes we're reading
+45d0:  0f12           push  r15   # the address to store those at
+45d2:  2312           push  #0x2  # for INT 0x02
+45d4:  b012 7a45      call  #0x457a <INT>
+```
+
+The description for `INT 0x02` is in the manual. As per the above, `r14 = 0x1c` which is 28 bytes - despite the instructions stating passwords should have a maximum of 16 letters. This means we can provide more characters and overflow to `0x2410`. All in all that'll be 16 bytes of garbage + `0xb0`.
+
+## Cusco ##
+
+
+``` shell
+    - We have fixed issues with passwords which may be too long.
+    - This lock is attached the the LockIT Pro HSM-1.
+```
+
+It looks like our previous overflow trick might not longer be applicable. But is it really?
+
+``` shell
+4514:  3e40 3000      mov #0x30, r14
+4518:  0f41           mov sp, r15
+451a:  b012 9645      call  #0x4596 <getsn>
+451e:  0f41           mov sp, r15
+4520:  b012 5244      call  #0x4452 <test_password_valid>
+4524:  0f93           tst r15
+4526:  0524           jz  #0x4532 <login+0x32>
+4528:  b012 4644      call  #0x4446 <unlock_door>
+```
+
+We see we allocate `0x30`, or 48 bytes, on the stack to store our input (r15 points to the top of the stack). Let's see what the memory looks like:
