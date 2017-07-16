@@ -1,7 +1,7 @@
 ---
 layout: post
-title: microcorruption-ctf-neworleans-sydney
-excerpt: "Writeup for microcorruption's New Orleans, Syndey levels."
+title: microcorruption-ctf-neworleans-sydney-hanoi-cusco
+excerpt: "Writeup for microcorruption's New Orleans, Syndey, Hanoi and Cusco levels."
 categories: [writeup]
 tags: [itsec, wargame]
 ---
@@ -149,14 +149,35 @@ The description for `INT 0x02` is in the manual. As per the above, `r14 = 0x1c` 
 It looks like our previous overflow trick might not longer be applicable. But is it really?
 
 ``` shell
-4514:  3e40 3000      mov #0x30, r14
-4518:  0f41           mov sp, r15
+4514:  3e40 3000      mov #0x30, r14        # r13 = 48 bytes - how much input we'll read
+4518:  0f41           mov sp, r15           # r15 = sp - where input will be stored
 451a:  b012 9645      call  #0x4596 <getsn>
 451e:  0f41           mov sp, r15
 4520:  b012 5244      call  #0x4452 <test_password_valid>
 4524:  0f93           tst r15
 4526:  0524           jz  #0x4532 <login+0x32>
 4528:  b012 4644      call  #0x4446 <unlock_door>
+452c:  3f40 d144      mov #0x44d1 "Access granted.", r15
+4530:  023c           jmp #0x4536 <login+0x36>
+4532:  3f40 e144      mov #0x44e1 "That password is not correct.", r15
+4536:  b012 a645      call  #0x45a6 <puts>
+453a:  3150 1000      add #0x10, sp
+453e:  3041           ret
 ```
 
-We see we allocate `0x30`, or 48 bytes, on the stack to store our input (r15 points to the top of the stack). Let's see what the memory looks like:
+We see we will read in `0x30` bytes, or 48 bytes, for our input. But if we look at the instructions before `ret`, we see we only pop 16 bytes off the stack.
+
+As per the documentation, `ret` will take the return address off the stack and `pc` will be set to it.
+
+Let's break on `0x451e` and check out the memory with 'password' as our input:
+
+``` shell
+> r sp 16
+   43ee:   7061 7373 776f 7264  password
+   43f6:   0000 0000 0000 0000  ........
+   43fe:   3c44 3140 0044 1542  <D1@.D.B
+```
+
+We see at at `0x43fe` there's `0443c` - which is the address `main` will will return to (`__stop_progExec__`). If we can override that we can control the program flow regardless of the validity of the password.
+
+The return address we'll override with is `0x4528` - the call to `unlock_door` in `main`. Our input will look like this: 16 bytes of garbage + `0x4528`. And voila!
