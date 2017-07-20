@@ -152,7 +152,7 @@ Which assemble to `3f40700f3f500ff10f12b0124c45`. As with Cusco, we just need to
     - This lock is attached the the LockIT Pro HSM-1.
 ```
 
-This looks like a `printf` format exploit! Though after some trial and error, the `printf` implementation is rather limited compared to the C one we're used to. However as guessed, `printf` is passed user input directly - that is, `printf(input)` as opposed to `printf('%s', input)`. This is readily observable with input such as `DD:%x`.
+This looks like a `printf` format exploit! Though after some trial and error, the `printf` implementation is rather limited compared to the C one we're used to. However as guessed, `printf` is passed user input directly - that is, `printf(input)` as opposed to `printf('%s', input)`. This is readily observable with input such as `DD:%x`. We also note it seems we need to have a `%x` before we can use `%n`. Mmm...
 
 
 As a side note, we can't mix hex and ascii in the input. As such we'll need to translate everything into hex.
