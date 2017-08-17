@@ -7,7 +7,7 @@ tags: [js, howto]
 comments: false
 ---
 
-# `nodejs`'s `require`
+# Building a `require` directive
 
 If you have ever used `node.js` you're probably familiar with the `require` function which essentially loads a module into the current namespace. Until recently I was under the impression that was some sort of built-in for the language, a bit like `new` or `Object`. It turns out however that `require` is a 'real' function and something we can build ourselves! 
 
@@ -70,20 +70,19 @@ var foo3 = myRequire('foo3.js');
 console.log(foo3.range(2));
 ```
 
-We're cheating a little by leveraging the `fs` module - in the browser you'd probably use the `FileReader` API. If we were writing an interpreter from scratch that'd probably be part of the built-in functionality.
+Note we're cheating a little by leveraging the `fs` module - in the browser you'd probably use the `FileReader` API. If we were writing an interpreter from scratch that'd probably be part of the built-in functionality (otherwise it's a bit of a chicken and egg problem).
 
 ## Improving
 
-The above wasn't particlularly clever - it loads modules alright, but subsequent calls will load them again. We can address this by exposing a single global variable which will store all our modules and introducing a cache:
+The above wasn't particlularly clever - it loads modules alright, but subsequent calls will load them again. We can address this by exposing a single global variable which will store all our modules and act as a cache:
 
 ``` javascript
-
 function myRequire(path) {
   if (path in myRequire._cache) return myRequire._cache[path];
 
   const moduleCode = fs.readFileSync(path, 'utf8'); // we should handle errors!
   var exports = {};
-  var moduleFunction = new Function("exports", moduleCode); // `exports` will be made available inside `c`
+  var moduleFunction = new Function("exports", moduleCode); // `exports` will be made available inside `moduleCode`
   moduleFunction(exports);
   myRequire._cache[path] = exports;
   return exports;
@@ -91,4 +90,44 @@ function myRequire(path) {
 myRequire._cache = {};
 ```
 
+Wouldn't it be cool if we could reload modules automatically? It turns out we can do just that with a few modifications. We'll introduce a `reload` argument to bypass the cache and leverage `fs.watch` to trigger reloads:
+
+``` javascript
+function myRequire(path, reload=false) {
+
+  var exports = {};
+  if (path in myRequire._cache) {
+    if (reload) exports = myRequire._cache[path];
+    else return myRequire._cache[path];
+  }
+
+  const moduleCode = fs.readFileSync(path, 'utf8'); // we should handle errors!
+  var moduleFunction = new Function("exports", moduleCode); // `exports` will be made available inside `moduleCode`
+  moduleFunction(exports);
+  myRequire._cache[path] = exports;
+
+  fs.watch(path, (et, fname) => { console.log('change detected'); myRequire(path, true);})
+
+  return exports;
+}
+```
+
+Taking it for a spin:
+
+```
+> var f = myRequire('/tmp/foo.js')
+undefined
+> f.x
+4
+// modify /tmp/foo.js and set x equal to 3
+> change detected
+> f.x
+3
+```
+
+This works because `myRequire` returns a reference to the `exports` object. As long as we don't redefine it the caller will point to the updated version. Cool heh?
+
+## Taking it further
+
+Dependency management and lazy loading are beyond the scope of this short post but well worth looking into. I strongly recommend reading chapter 10 of Marijn Haverbeke's excellent [Eloquent JavaScript](http://eloquentjavascript.net/), who does an amazing job at breaking this down.
 
