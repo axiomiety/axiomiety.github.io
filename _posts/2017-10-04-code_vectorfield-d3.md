@@ -13,7 +13,7 @@ comments: false
 
 I was recently following a course on Khan Academy that touched on vector fields. I don't own a copy of Mathematica/Matlab and was wondering if I could draw one in the browser. TL;DR - yes, and it's actually easy!
 
-We'll kick this off by trying to plot the vector field $\vec{F}(x,y) = [-y, x]^{T}$.
+We'll kick this off by trying to plot the vector field $$\vec{F}(x,y) = [-y, x]^{T}$$.
 
 ## Boilerplate
 
@@ -70,14 +70,62 @@ svg.append("g")
 
 Results so far:
 
-![](../../img/d3vield/xyaxis.png)
-
+![](../../img/d3vfield/xyaxis.png)
 
 ## A single vector
 
-## Multiple vectors
+Let's now try to graph a single vector, say for $$(2,-1)$$. The vector for this will be $$(1,2)$$, starting at the origin. To draw it we use the `path` directive. It's not D3 specific (which has an API to draw lines) but part of the [SVG Standard](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
 
-## Scaling
+We need to apply a transform to shift it to its 'correct' position. The original vector is in green and the transformed one in blue.
+
+Instead of the usual arrow denoting the tip of the vector we'll use pinheads - it's not as pretty but a lot simpler to draw and just as informative. This is done by drawing a small circle at the tip of the vector using the `circle` attribute.
+
+~~~ javascript
+// sample vector
+p = {x:2 , y:-1,
+     vx:1, vy:2,
+     magnitude:Math.sqrt(2*2 + 1*1)};
+
+// un-transformed
+svg.append("g")
+   .append("path")
+   .attr("d", "M" + xScale(0) + " " + yScale(0) + " L" + xScale(p.vx) + " " + yScale(p.vy))
+   .attr("stroke", "green")
+   .attr("stroke-width", 2)
+   .attr("fill", "none");
+
+svg.append("g")
+   .append("circle")
+   .attr("r",3)
+   .attr("cx", xScale(p.vx))
+   .attr("cy", yScale(p.vy));
+
+// transformed
+svg.append("g")
+   .append("path")
+   .attr("d", "M" + xScale(0) + " " + yScale(0) + " L" + xScale(p.vx) + " " + yScale(p.vy))
+   .attr("stroke", "blue")
+   .attr("stroke-width", 2)
+   .attr("fill", "none")
+   .attr("transform", "translate(" + (xScale(p.x) - xScale(0)) + "," + (yScale(p.x) - yScale(0)) + ")");
+
+svg.append("g")
+   .append("circle")
+   .attr("r",3)
+   .attr("cx", xScale(p.vx))
+   .attr("cy", yScale(p.vy))
+   .attr("transform", "translate(" + (xScale(p.x) - xScale(0)) + "," + (yScale(p.vy) - yScale(0)) + ")");
+~~~
+
+![](../../img/d3vfield/singlevec.png)
+
+
+
+## Multiple vectors & scaling
+
+Different vectors will have different magnitudes (or length). If we were to display the actual magnitudes we would soon end off-graph. It makes sense to scale each vector down to minimise overlap.
+
+If we are plotting vectors for every 0.5 units we probably want the maximum magnitude to be slightly less than 0.5.
 
 ## Colour scale
 
