@@ -121,16 +121,102 @@ svg.append("g")
 
 
 
-## Multiple vectors & scaling
+## Scaling and multiple vectors
 
 Different vectors will have different magnitudes (or length). If we were to display the actual magnitudes we would soon end off-graph. It makes sense to scale each vector down to minimise overlap.
 
-If we are plotting vectors for every 0.5 units we probably want the maximum magnitude to be slightly less than 0.5.
+Whatever the spacing between points, the maximum magnitude should be less or equal to that. So if we were plotting every unit (e.g. -5, -4, ...) we'd want the magnitude to be less or equal to 1 to avoid any overlap.
+
+Just like we have scales for the x and y axis, we can create another linear scale:
+
+~~~ javascript
+var grid_spacing = 0.5;
+var max_magnitude = data.reduce(function (max_, it) {
+            return max_ > it.magnitude ? max_ : it.magnitude;
+        }, 0);
+
+var vscale = d3.scalePow().domain([0,max_magnitude]).range([0,grid_spacing]);
+~~~
+
+Where `data` is an array of points and `magnitude` represents the length of each individual vector. Note the use of a power scale to scale the length of the vector - this will help us better accentuate the difference between the extremes (though it can just as easily be changed to a linear one with `scaleLinear`).
+
+Computing for every point on our grid then looks like this:
+
+~~~ javascript
+var vfield = function(d) {
+    d.vx = -d.y;
+    d.vy = d.x;
+    d.magnitude = Math.sqrt(d.vx*d.vx + d.vy*d.vy);
+}
+
+var grid_spacing = 0.5
+data = [];
+for (var i=-5; i <= 10; i+= grid_spacing){
+    for (var j=-5; j<=10; j+= grid_spacing) {
+        var pt = {x:i, y:j};
+        vfield(pt);
+        data.push(pt);
+    }
+}
+~~~
+
+Which we can plot accordingly:
+
+~~~ javascript
+data.forEach(function(p)
+{
+    // we first scale down to a unit vector
+    p.vx /= p.magnitude;
+    p.vy /= p.magnitude;
+    // and now scale it to our own scale
+    p.vx *= vscale(p.magnitude);
+    p.vy *= vscale(p.magnitude);
+
+    // vector
+    svg.append("g")
+    .append("path")
+    .attr("d", "M" + xScale(0) + " " + yScale(0) + " L" + xScale(p.vx) + " " + yScale(p.vy))
+    .attr("stroke", "blue"))
+    .attr("stroke-width", 1)
+    .attr("fill", "none")
+    .attr("transform", "translate(" + (xScale(p.x) - xScale(0)) + "," + (yScale(p.y) - yScale(0)) + ")")
+    ;
+    // pinhead
+    svg.append("g")
+    .append("circle")
+    .attr("r",2)
+    .attr("cx", xScale(p.vx))
+    .attr("cy", yScale(p.vy))
+    .attr("transform", "translate(" + (xScale(p.x) - xScale(0)) + "," + (yScale(p.y) - yScale(0)) + ")")
+    ;
+    
+}
+
+~~~
+
+Giving us:
+
+![](../../img/d3vfield/vfield_monocrome.png)
 
 ## Colour scale
 
+We can do one better though. Instead of using a single colour we can use the magnitude on a colour scale.
+
+~~~ javascript
+var colorScale = d3.scaleSequential(d3.interpolateInferno).domain([0,max_magnitude]);
+~~~
+
+And changing the `stroke` attribute to:
+
+~~~ javascript
+.attr("stroke", colorScale(p.magnitude))
+~~~
+
+Giving us our final result:
+
+![](../../img/d3vfield/vfield_colour.png)
 
 ## Taking it further
 
-You can find the above in a self-contained html file [here](github/crashburn). I hadn't really used D3 before so it's quite likely the code above is ugly at best - and there are better ways to do this.
-Animating the flow would be great - it often makes vector fields a little easier to follow.
+You can find the above in a self-contained html file [here](https://github.com/axiomiety/crashburn/blob/master/d3/foo.html). I hadn't really used D3 before so it's quite likely the code above is ugly at best - and there are better ways to do this.
+Animating the flow would be great - it often makes vector fields a little easier to follow. So would adding a legend for the colour scale.
