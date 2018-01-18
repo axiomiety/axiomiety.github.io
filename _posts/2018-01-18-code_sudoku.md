@@ -133,13 +133,13 @@ def isBoardComplete(board):
 ## Algorithm
 
 We won't be particularly clever - the gist of the algorithm is to fill all the empty slots with digits such that the constraints (row, col and chunks) are all satisfied. The steps taken will be are as follows:
-  # while a solution has *not* been found:
-    # pop a board off our list of valid boards
-    # if the board is full (no `None`s) and valid, that's our solution
-    # pick the fullest row (i.e. the one with the least empty cells)
-    # generate all possible rows such that the board remains valid
-    # for each row, create a new board with the new row merged in
-    # add each new board to the list of valid boards
+
+    1. pop a board off our list of valid boards
+    1. if the board is full (no `None`s) and valid, that's our solution
+    1. pick the fullest row (i.e. the one with the least empty cells)
+    1. generate all possible rows such that the board remains valid
+    1. for each row, create a new board with the new row merged in
+    1. add each new board to the list of valid boards
 
 With the helper functions defined above, what's left to define are 2 functions (one to get the fullest row, one to generate valid rows) and the algo itself.
 
