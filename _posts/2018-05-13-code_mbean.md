@@ -79,6 +79,7 @@ public class MyController implements MyControllerMBean {
         running = false;
     }
 }
+~~~
 
 ## The main process
 
@@ -123,11 +124,10 @@ Start up `jvisualvm`. If you don't have your JDK on your path you can naviate to
 
 If there's no 'MBeans' tab available you'll need to download the MBean plugin. You can do find it under the 'Tools -> Plugins' menu. Search for 'mbean':
 
-![mbean_plugin](../../img/jmx_mean/jvisualvm_mbean_pluging.png)
+![mbean_plugin](../../img/jmx_mbean/jvisualvm_mbean_pluging.png)
 
 We can use the `say` method invocation on our bean:
 
-![j
 
 ~~~ shell
 [INFO ] 2018-05-12 18:32:19.081 [main] MainLoader - *yawn* going back to sleep
