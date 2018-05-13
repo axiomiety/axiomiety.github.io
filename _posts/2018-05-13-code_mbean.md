@@ -166,9 +166,13 @@ Similarly to `say`, we can invoke `exit` causes `running` to be set to `false` a
 [INFO ] 2018-05-12 18:36:04.335 [main] MainLoader - shutting down...
 ~~~
 
+## Taking this further
+
+You may have noticed the parameters for `say` were named `p1` and `p2`. That's not exactly descriptive. In order for us to add more meaningful names we'd need to look into [dynamic MBeans](https://docs.oracle.com/cd/E19206-01/816-4178/6madjde4l/index.html), which require a fair chunk of boilerplate code. However there's a really nice post by [Eduard Manas](http://actimem.com/java/jmx-annotations/) showing how to simplify the whole process.
+
 ## References
 
-The project is available [here](https://github.com/axiomiety/crashburn/tree/master/jmxBean).
+The project is available [here](https://github.com/axiomiety/crashburn/tree/master/jmxTest).
 
 * [Standard MBeans](https://docs.oracle.com/javase/tutorial/jmx/mbeans/standard.html)
 * [log4j2 properties file](https://dzone.com/articles/log4j-2-configuration-using-properties-file)
