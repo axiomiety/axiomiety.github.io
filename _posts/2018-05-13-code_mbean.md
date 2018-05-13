@@ -83,7 +83,7 @@ public class MyController implements MyControllerMBean {
 
 ## The main process
 
-Our `MainLoader` is pretty boiler-plate. We start by registering our `MyController` MBean with the `MBeanServer`. We then sleep for 5 seconds whilst before checking whether our controller is still running:
+Our `MainLoader` is pretty boiler-plate. We start by registering our `MyController` MBean with the `MBeanServer`. The one bit that might look out of place is the `ObjectName` class - it's a container that represents the name of an MBean. We then sleep for 5 seconds whilst before checking whether our controller is still running:
 
 ~~~ java
 import org.apache.logging.log4j.LogManager;
@@ -112,6 +112,8 @@ public class MainLoader {
 }
 ~~~
 
+## In action
+
 Kicking this off, we see
 
 ~~~ shell
@@ -122,12 +124,20 @@ Kicking this off, we see
 
 Start up `jvisualvm`. If you don't have your JDK on your path you can naviate to the install's `bin` directory. If you're running everything locally you should see something like that:
 
+![mbean_attached](../../img/jmx_mbean/jvisualvm_mbean_attached.png)
+
 If there's no 'MBeans' tab available you'll need to download the MBean plugin. You can do find it under the 'Tools -> Plugins' menu. Search for 'mbean':
 
-![mbean_plugin](../../img/jmx_mbean/jvisualvm_mbean_pluging.png)
+![mbean_plugin](../../img/jmx_mbean/jvisualvm_mbean_plugin.png)
+
+Once installed navigate to the `MBeans` tab. Our package is called `jmxTest` but you'll likely see a few others. For instance log4j exposes some MBeans by default:
+
+![mbean_overview](../../img/jmx_mbean/jvisualvm_mbean_overview.png)
+
 
 We can use the `say` method invocation on our bean:
 
+![method_invocation](../../img/jmx_mbean/jvisualvm_method_invocation.png)
 
 ~~~ shell
 [INFO ] 2018-05-12 18:32:19.081 [main] MainLoader - *yawn* going back to sleep
@@ -135,13 +145,21 @@ We can use the `say` method invocation on our bean:
 [INFO ] 2018-05-12 18:32:24.082 [main] MainLoader - *yawn* going back to sleep
 ~~~
 
+Note how our IP address was logged.
+
+Remember our `getLogLevel` and `setLogLevel` getters/setters? They show up under "Attributes":
+
+![mbean_property](../../img/jmx_mbean/jvisualvm_mbean_property.png)
+
+If you double-click on the value you can change it directly:
+
 ~~~ shell
 [INFO ] 2018-05-12 18:34:59.252 [main] MainLoader - *yawn* going back to sleep
 [INFO ] 2018-05-12 18:35:03.271 [RMI TCP Connection(5)-192.168.56.1] MyController - LogLevel is now set to INFO
 [INFO ] 2018-05-12 18:35:04.257 [main] MainLoader - *yawn* going back to sleep
 ~~~
 
-
+Similarly to `say`, we can invoke `exit` causes `running` to be set to `false` and the process exits at the next loop iteration:
 
 ~~~ shell
 [INFO ] 2018-05-12 18:35:59.332 [main] MainLoader - *yawn* going back to sleep
@@ -150,7 +168,7 @@ We can use the `say` method invocation on our bean:
 
 ## References
 
-The project is available [here]().
+The project is available [here](https://github.com/axiomiety/crashburn/tree/master/jmxBean).
 
 * [Standard MBeans](https://docs.oracle.com/javase/tutorial/jmx/mbeans/standard.html)
 * [log4j2 properties file](https://dzone.com/articles/log4j-2-configuration-using-properties-file)
