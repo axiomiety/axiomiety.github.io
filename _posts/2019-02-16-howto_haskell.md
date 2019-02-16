@@ -125,7 +125,7 @@ Once done, go back to VSCode. Open up the plugins tool (it's the little square i
 Don't forget to reload/re-launch VSCode for the changes to take effect. And voila!
 
 
-![vscode_haskero](../../img/haskell_devenv/vscode_haserko.png)
+![vscode_haskero](../../img/haskell_devenv/vscode_haskero.png)
 
 ## Taking this further
 
