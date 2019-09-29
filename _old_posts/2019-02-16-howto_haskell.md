@@ -13,7 +13,7 @@ If you're new to Haskell (or want to spruce things up a bit), it's possible to g
 
 ## WSL
 
-Okay so the Win10 part was a bit misleading. I *did* try to get all this set up and entered a number of issues. `stack` worked more or less fine but building `Haskero` became tricky. And all this pollutes your Win10 filesystem for when the dependencies are readily available on Linux  (I'm looking at you, [MSYS](http://www.mingw.org/wiki/MSYS)).
+Okay so the Win10 part was a bit misleading. I *did* try to get all this set up and encountered a number of issues. `stack` worked more or less fine but building `Haskero` became tricky. And all this pollutes your Win10 file-system for when the dependencies are readily available on Linux  (I'm looking at you, [MSYS](http://www.mingw.org/wiki/MSYS)).
 
 I found it much cleaner to use the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). This is easy to install, clobber, mess around with and re-install - by default it will install Ubuntu. Assuming you have this, the rest is relatively straightforward
 
