@@ -191,7 +191,7 @@ PS C:\Users\axiomiety> ValidateDNSResults 'www.youtube.com' 'youtube-ui.l.google
 
 Seems to work alright!
 
-## Wiriting it up
+## Wiring it up
 
 With the above in hand it's just a matter of piping the output from `Get-DnsClientCache` accordingly (you can run it for the whole cache, I just filtered on an entry which showed a mismatch).
 
