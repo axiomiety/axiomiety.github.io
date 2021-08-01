@@ -2,7 +2,7 @@
 layout: post
 title: phabricode-vscode-extension
 excerpt: "Writing a VSCode Extension"
-categories: [writeup]
+categories: [coding]
 tags: [howto]
 ---
 
