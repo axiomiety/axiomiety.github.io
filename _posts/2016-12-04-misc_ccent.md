@@ -79,4 +79,4 @@ How long might this take? From start to finish I would say it took me around 150
 
 ## Final remarks
 
-The CCENT is a challenging exam but not an impossible one. It provides some very sold fundamentals to the world of networking and even though some of the concepts are Cisco-specific, a lot of the ideas are generic enough to be applied elsewhere.
+The CCENT is a challenging exam but not an impossible one. It provides some very solid fundamentals to the world of networking and even though some of the concepts are Cisco-specific, a lot of the ideas are generic enough to be applied elsewhere.
