@@ -121,29 +121,28 @@ We can create a `Limiter` by calling the `NewLimiter` constructor with our rate 
 And each goroutines wait for a token before making a request:
 
 {% highlight golang %}
-			for {
-				select {
-				case <-ctx.Done():
-					return
-				default:
-					if err := limiter.Wait(ctx); err != nil {
-                        // if we get there, waiting would exceed the context's deadline
-                        // so let's assume we're done
-                        break
-					}
-					res, _ := client.Do(req)
-                    countChan <- struct{}{}
-					body, _ := ioutil.ReadAll(res.Body)
-					defer res.Body.Close()
-                    // we completed a request! let the counter know
-					var data map[string]any
-					_ = json.Unmarshal(body, &data)
-					if val, ok := data["message"]; ok {
-						log.Printf("[worker %d] %s", idx, val)
-					}
-				}
-
-			}
+for {
+	select {
+	case <-ctx.Done():
+		return
+	default:
+		if err := limiter.Wait(ctx); err != nil {
+            // if we get there, waiting would exceed the context's deadline
+            // so let's assume we're done
+            break
+		}
+		res, _ := client.Do(req)
+        countChan <- struct{}{}
+		body, _ := ioutil.ReadAll(res.Body)
+		defer res.Body.Close()
+        // we completed a request! let the counter know
+		var data map[string]any
+		_ = json.Unmarshal(body, &data)
+		if val, ok := data["message"]; ok {
+			log.Printf("[worker %d] %s", idx, val)
+		}
+	}
+}
 {% endhighlight %}
 
 
@@ -170,17 +169,17 @@ But wait up - what are those negative numbers? In a nutshell this tells us how m
 We can illustrate by calculating both the time to the next token (which is `limit.Tokens()/<rate per second>` and logging the time we were blocked during the `limiter.Wait` call:
 
 {% highlight golang %}
-                    beforeWait := time.Now()
-					if err := limiter.Wait(ctx); err != nil {
-                        // if we get there, waiting would exceed the context's deadline
-                        // so let's assume we're done
-                        break
-					}
-                    afterWait := time.Now()
-                    waitTime := afterWait.Sub(beforeWait)
-                    if waitTime > 1*time.Second {
-						log.Printf("[worker %d] waited %s for a token", idx, waitTime)
-                    }
+beforeWait := time.Now()
+if err := limiter.Wait(ctx); err != nil {
+    // if we get there, waiting would exceed the context's deadline
+    // so let's assume we're done
+    break
+}
+afterWait := time.Now()
+waitTime := afterWait.Sub(beforeWait)
+if waitTime > 1*time.Second {
+	log.Printf("[worker %d] waited %s for a token", idx, waitTime)
+}
 {% endhighlight %}
 
 And sure enough, some workers will wait quite a bit:
