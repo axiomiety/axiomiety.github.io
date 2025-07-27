@@ -13,6 +13,8 @@ tags: [puzzle]
 
 My first thought looking at [this](https://www.janestreet.com/puzzles/sum-of-squares-index/) was "man, that's a lot of possibilities to try" - specifically, 10^25. The divisibility requirements really restrict the last column/row (e.g. the bottom right cell needs to be both divisible by 10 and 5, which really makes it 0), but all other cells are pretty much up for grabs.
 
+_Note_: there are better approaches to solving this - I got a little fixated on exhaustive search as a foray into `numba`, `numpy` and other optimisations (parallel executors etc...) not shown/discussed here. That'll be a post for another day.
+
 # Prelims
 
 Let's start by writing a few helper functions to make this easier to digest - namely being able to split a number into individual digits, forming what is essentially a matrix (where each entry is a digit), and validating that a grid satisfied the divisability constraints.
